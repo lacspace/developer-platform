@@ -17,9 +17,11 @@ const body = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.config.url),
+  // site.meta()/site.page() already brand each title ("X · Lacspace Developer"),
+  // so no template here — otherwise the brand would be appended twice.
   title: {
     default: "Lacspace Developer Platform — 63 packages, one CLI, real docs",
-    template: "%s · Lacspace Developer",
+    template: "%s",
   },
   description: site.config.description,
   applicationName: "Lacspace Developer",
