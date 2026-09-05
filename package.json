@@ -24,7 +24,7 @@
     "@lacspace/redact": "^1.0.4",
     "@lacspace/robots": "^1.2.1",
     "@lacspace/rss": "^1.2.2",
-    "@lacspace/seo": "^1.6.2",
+    "@lacspace/seo": "^1.7.0",
     "@lacspace/sitemap": "^1.1.1",
     "@lacspace/slugify": "^1.0.4",
     "@lacspace/validate": "^1.0.1",

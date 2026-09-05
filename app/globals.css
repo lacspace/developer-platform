@@ -1618,3 +1618,44 @@ h1, h2, h3, .sec-head h2, .cta-band h2, .brand, .stat b, .hb-body h2 {
 /* snappier, less "funky" motion */
 .nav-menu { transform: translateY(2px); transition: opacity 0.12s ease, transform 0.12s ease; }
 .nav-item:hover .nav-menu, .nav-item:focus-within .nav-menu { transform: none; }
+
+/* ---- Package detail page ---- */
+.pd-back { font-size: 13.5px; color: var(--muted); }
+.pd-back:hover { color: var(--fg); }
+.pd-head { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
+.pd-icon {
+  font-size: 30px; width: 60px; height: 60px; flex: none;
+  display: grid; place-items: center; border-radius: 14px;
+  background: var(--accent-soft); border: 1px solid var(--hairline);
+}
+.pd-name { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: clamp(1.4rem, 4vw, 1.9rem); letter-spacing: -0.02em; }
+.pd-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; align-items: center; }
+.pd-chip {
+  font-size: 12px; color: var(--muted);
+  border: 1px solid var(--hairline); border-radius: 7px; padding: 2px 9px;
+}
+a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
+.pd-desc { font-size: 1.08rem; color: var(--muted); margin: 20px 0 22px; line-height: 1.6; }
+.pd-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.pd-h2 { font-size: 1.15rem; letter-spacing: -0.01em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.pd-count { font-size: 12px; color: var(--faint); border: 1px solid var(--hairline); border-radius: 6px; padding: 1px 7px; font-weight: 400; }
+.pd-exports { display: flex; flex-wrap: wrap; gap: 6px; }
+.pd-exports code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px;
+  color: #e9d5ff; background: var(--panel-2);
+  border: 1px solid var(--hairline); border-radius: 7px; padding: 3px 9px;
+}
+
+/* ---- Install box (PM switch + copy) ---- */
+.ib { border: 1px solid var(--hairline-2); border-radius: 12px; overflow: hidden; background: #0a0a10; max-width: 520px; }
+.ib-tabs { display: flex; border-bottom: 1px solid var(--hairline); background: var(--panel-2); }
+.ib-tabs button {
+  background: none; border: 0; color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px;
+  padding: 9px 14px; cursor: pointer; border-right: 1px solid var(--hairline);
+  transition: color 0.14s, background 0.14s;
+}
+.ib-tabs button.on { color: #fff; background: var(--grad); }
+.ib-tabs button:not(.on):hover { color: var(--fg); }
+.ib-cmd { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+.ib-cmd code { flex: 1; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; color: #e8e8f0; }

@@ -41,7 +41,7 @@ function PkgCard({
           <input type="checkbox" checked={selected} onChange={toggle} />
           <span />
         </label>
-        <a href={`https://www.npmjs.com/package/@lacspace/${p.n}`} target="_blank" rel="noopener" className="pk-name">
+        <a href={`/packages/${p.n}`} className="pk-name">
           @lacspace/{p.n}
         </a>
         <span className="pk-ver">v{p.v}</span>
