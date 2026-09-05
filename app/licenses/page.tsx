@@ -8,7 +8,7 @@ const seo = site.page({
   title: "Licence",
   path: "/licenses",
   description:
-    "Every openly published @lacspace package ships under the Lacspace Free Licence v1.0 — a free, permissive, MIT-equivalent licence. Use it in personal and commercial projects at no cost.",
+    "Every openly published @lacspace package ships under the Lacspace Free Licence v1.0 — a free, permissive licence. Use it in personal and commercial projects at no cost.",
 });
 export const metadata = seo.metadata;
 
@@ -35,7 +35,7 @@ export default function LicensesHub() {
             <p>
               Every package you install from the public <span className="mono">@lacspace</span> scope
               ships under the <strong style={{ color: "var(--fg)" }}>Lacspace Free Licence v1.0</strong> —
-              a permissive, MIT-equivalent licence. Use it in personal and commercial products at no cost;
+              a permissive licence. Use it in personal and commercial products at no cost;
               just keep the notice.
             </p>
           </Reveal>

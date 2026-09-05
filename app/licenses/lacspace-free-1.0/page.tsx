@@ -36,7 +36,7 @@ export default function FreeLicencePage() {
             <p style={{ marginTop: 12 }}>{L.tagline} — {L.summary}</p>
             <div className="chips" style={{ marginTop: 18 }}>
               <span>Free &amp; permissive</span>
-              <span>MIT-equivalent</span>
+              <span>Permissive</span>
               <span className="mono">{L.spdxId}</span>
               <span>Released {L.released}</span>
             </div>
@@ -56,7 +56,7 @@ export default function FreeLicencePage() {
           <Reveal className="sec-head center">
             <div className="eyebrow">In plain language</div>
             <h2>What this licence <span className="grad">actually means</span></h2>
-            <p>The legal text is short and MIT-equivalent. Here it is, in one breath.</p>
+            <p>The legal text is short and permissive. Here it is, in one breath.</p>
           </Reveal>
           <div className="grid">
             {L.plainLanguage.map((p, i) => (

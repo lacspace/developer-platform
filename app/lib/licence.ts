@@ -71,7 +71,7 @@ export const FREE_LICENCE = {
   released: "August 2026",
   tagline: "Free for everyone. Free forever. Under our name.",
   description:
-    "The Lacspace Free Licence v1.0 — a free, permissive, MIT-equivalent licence that governs every openly published @lacspace package. Use it in personal and commercial projects at no cost; the only condition is keeping the notice.",
+    "The Lacspace Free Licence v1.0 — a free, permissive licence that governs every openly published @lacspace package. Use it in personal and commercial projects at no cost; the only condition is keeping the notice.",
   summary:
     "Use, modify, redistribute and sell — personal or commercial — at no cost. Just keep the notice.",
   availabilityNote:

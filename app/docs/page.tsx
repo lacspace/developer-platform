@@ -18,7 +18,7 @@ const SURFACES = [
   { icon: "🧪", title: "Live playground", d: "Run packages in your browser — slugify, money, case, humanize, color, id.", href: "/playground", cta: "Open playground" },
   { icon: "⚖️", title: "Compare", d: "How @lacspace stacks up against zod, dinero, jsonwebtoken and friends.", href: "/compare", cta: "Compare" },
   { icon: "🚀", title: "Scaffold an app", d: "create-lacspace-app writes a finished Next.js app in ~0.12s.", href: "/create-app", cta: "create-lacspace-app" },
-  { icon: "📄", title: "Free Licence", d: "The permissive, MIT-equivalent licence every open package ships under.", href: "/licenses/lacspace-free-1.0", cta: "Read the licence" },
+  { icon: "📄", title: "Free Licence", d: "The permissive licence every open package ships under.", href: "/licenses/lacspace-free-1.0", cta: "Read the licence" },
 ];
 
 const KITS = [
