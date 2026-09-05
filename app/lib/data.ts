@@ -92,7 +92,7 @@ export type Kit = {
   packages: { name: string; desc: string }[];
 };
 
-// Curated ecosystem — the full catalog is 76 packages on npm.
+// Curated ecosystem — the full catalog is 80 packages on npm.
 export const KITS: Kit[] = [
   {
     name: "Security Kit",
@@ -219,6 +219,10 @@ export const KITS: Kit[] = [
       { name: "ledger", desc: "Double-entry book that always balances to zero" },
       { name: "audit-log", desc: "Who did what — before/after diffs, attributed" },
       { name: "courier", desc: "Delivery state machine + Pathao + webhooks" },
+      { name: "order", desc: "Order state machine + numbering + snapshots" },
+      { name: "refund", desc: "Returns / RMA + partial-refund calc + restock" },
+      { name: "shipping", desc: "Checkout rate calc — zones, weight, free-over" },
+      { name: "invoice", desc: "Invoice model + numbering + tax rollup" },
     ],
   },
   {
@@ -240,5 +244,5 @@ export const STATS = {
   pages: "11",
   components: "26",
   templates: "8",
-  packages: "76",
+  packages: "80",
 };

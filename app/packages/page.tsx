@@ -9,7 +9,7 @@ const seo = site.page({
   title: "Packages",
   path: "/packages",
   description:
-    "All 76 @lacspace packages — zero-dependency, isomorphic TypeScript. Search, filter by kit, switch package manager, and build a combined install command. Security, SEO, React, backend, mail, data and more.",
+    "All 80 @lacspace packages — zero-dependency, isomorphic TypeScript. Search, filter by kit, switch package manager, and build a combined install command. Security, SEO, React, backend, mail, data and more.",
 });
 export const metadata = seo.metadata;
 

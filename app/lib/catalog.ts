@@ -1,5 +1,5 @@
-// Full @lacspace package catalog — generated from the monorepo (74 scoped packages).
-// Plus 2 CLIs (create-lacspace-app, create-lacspace-seo) = 76 packages on npm.
+// Full @lacspace package catalog — generated from the monorepo (78 scoped packages).
+// Plus 2 CLIs (create-lacspace-app, create-lacspace-seo) = 80 packages on npm.
 
 export type Pkg = { n: string; v: string; d: string; kw: string[]; deps: number };
 export type Group = { group: string; icon: string; items: Pkg[] };
@@ -985,6 +985,34 @@ export const CATALOG: Group[] = [
         "d": "Courier / last-mile delivery toolkit — canonical delivery state machine, Pathao (Nepal) adapter, and inbound webhook verification + status normalization. Zero-dependency, isomorphic.",
         "kw": ["courier", "logistics", "delivery", "pathao", "nepal", "webhook"],
         "deps": 0
+      },
+      {
+        "n": "order",
+        "v": "1.0.0",
+        "d": "Headless order-lifecycle engine — an immutable order model with a state machine, order-number generation, line-item price snapshotting and timestamped status history. Integer minor units, zero-dependency, isomorphic.",
+        "kw": ["order", "order-management", "ecommerce", "state-machine", "checkout", "fulfillment"],
+        "deps": 0
+      },
+      {
+        "n": "refund",
+        "v": "1.0.0",
+        "d": "Returns / RMA workflow and refund-calculation engine — partial refunds with correct tax apportionment, restocking fees, restock lists and a return state machine. Integer minor units, zero-dependency, isomorphic.",
+        "kw": ["refund", "returns", "rma", "ecommerce", "partial-refund", "restock"],
+        "deps": 0
+      },
+      {
+        "n": "shipping",
+        "v": "1.0.0",
+        "d": "Checkout-time shipping-rate calculator — flat / weight / price / item rate tables by zone, free-shipping thresholds, surcharges and handling, returning sorted method quotes. Integer minor units, zero-dependency, isomorphic.",
+        "kw": ["shipping", "shipping-rates", "ecommerce", "checkout", "free-shipping", "delivery"],
+        "deps": 0
+      },
+      {
+        "n": "invoice",
+        "v": "1.0.0",
+        "d": "Invoice model, numbering and tax-rollup engine — per-line and total calculation, tax grouped by rate, sequential invoice numbers, payment tracking and a render-ready row structure for PDF/XLSX. Integer minor units, zero-dependency, isomorphic.",
+        "kw": ["invoice", "invoicing", "billing", "tax", "accounting", "ecommerce"],
+        "deps": 0
       }
     ]
   },
@@ -1024,4 +1052,4 @@ export const CATALOG: Group[] = [
   }
 ];
 
-export const CATALOG_TOTAL = 76;
+export const CATALOG_TOTAL = 80;

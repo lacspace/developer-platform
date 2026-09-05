@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   // site.meta()/site.page() already brand each title ("X · Lacspace Developer"),
   // so no template here — otherwise the brand would be appended twice.
   title: {
-    default: "Lacspace Developer Platform — 76 packages, one CLI, real docs",
+    default: "Lacspace Developer Platform — 80 packages, one CLI, real docs",
     template: "%s",
   },
   description: site.config.description,
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     type: "website",
     url: site.config.url,
     siteName: "Lacspace Developer",
-    title: "Lacspace Developer Platform — 76 packages, one CLI, real docs",
+    title: "Lacspace Developer Platform — 80 packages, one CLI, real docs",
     description: site.config.description,
     images: [
       { url: "/brand/og-default.png", width: 1200, height: 630, alt: "Lacspace Developer Platform" },

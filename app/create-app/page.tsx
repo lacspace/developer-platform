@@ -154,7 +154,7 @@ export default function CreateAppPage() {
             <div className="stat"><b className="grad">8</b><span>templates</span></div>
             <div className="stat"><b className="grad">0.12s</b><span>to scaffold</span></div>
             <div className="stat"><b className="grad">70</b><span>files each</span></div>
-            <div className="stat"><b className="grad">76</b><span>packages ready</span></div>
+            <div className="stat"><b className="grad">80</b><span>packages ready</span></div>
             <div className="stat"><b className="grad">100%</b><span>TypeScript</span></div>
             <div className="stat"><b className="grad">Free</b><span>licence</span></div>
           </Reveal>

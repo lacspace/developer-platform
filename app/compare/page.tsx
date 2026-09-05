@@ -34,7 +34,7 @@ export default function Compare() {
 
           <Reveal className="stats" style={{ marginTop: 8, marginBottom: 8 }}>
             <div className="stat"><b className="grad">0</b><span>runtime deps</span></div>
-            <div className="stat"><b className="grad">76</b><span>packages</span></div>
+            <div className="stat"><b className="grad">80</b><span>packages</span></div>
             <div className="stat"><b className="grad">ESM+CJS</b><span>dual output</span></div>
             <div className="stat"><b className="grad">100%</b><span>TypeScript</span></div>
             <div className="stat"><b className="grad">Iso</b><span>node · edge · browser</span></div>
@@ -52,7 +52,7 @@ export default function Compare() {
           </Reveal>
 
           <div className="cta" style={{ marginTop: 30, justifyContent: "center" }}>
-            <a className="btn btn-primary" href="/packages">Browse all 76 packages →</a>
+            <a className="btn btn-primary" href="/packages">Browse all 80 packages →</a>
             <a className="btn btn-ghost" href="/playground">Try them live</a>
           </div>
         </section>

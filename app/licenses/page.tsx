@@ -43,7 +43,7 @@ export default function LicensesHub() {
           <Reveal className="stats" style={{ marginTop: 8, marginBottom: 8 }}>
             <div className="stat"><b className="grad">Free</b><span>for any use</span></div>
             <div className="stat"><b className="grad">MIT</b><span>equivalent</span></div>
-            <div className="stat"><b className="grad">76</b><span>packages covered</span></div>
+            <div className="stat"><b className="grad">80</b><span>packages covered</span></div>
             <div className="stat"><b className="grad">1</b><span>condition: keep notice</span></div>
           </Reveal>
 

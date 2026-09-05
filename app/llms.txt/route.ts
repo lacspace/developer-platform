@@ -8,7 +8,7 @@ export function GET() {
     {
       title: "Lacspace Developer Platform",
       summary:
-        "76 zero-dependency, isomorphic TypeScript packages, the create-lacspace-app CLI, and the docs to build with them.",
+        "80 zero-dependency, isomorphic TypeScript packages, the create-lacspace-app CLI, and the docs to build with them.",
       details:
         "All packages are published under the @lacspace npm org, ship dual ESM + CJS with TypeScript types, and are free under the Lacspace Free Licence. Anything cryptographic uses Web Crypto.",
       sections: [
@@ -16,7 +16,7 @@ export function GET() {
           title: "Start here",
           links: [
             { title: "Developer handbook", url: "https://developer.lacspace.com/handbook", notes: "install, use, integrate, upgrade" },
-            { title: "All packages", url: "https://developer.lacspace.com/packages", notes: "the full 76-package catalog" },
+            { title: "All packages", url: "https://developer.lacspace.com/packages", notes: "the full 80-package catalog" },
             { title: "Live templates", url: "https://templates.lacspace.com", notes: "8 finished Next.js apps" },
             { title: "create-lacspace-app", url: "https://www.npmjs.com/package/create-lacspace-app", notes: "scaffold a finished app" },
           ],
