@@ -36,7 +36,7 @@ money(10, "USD").allocate([1, 1, 1])           // split a bill, lose no cent
   },
   {
     id: "scaffold", label: "Scaffold an app", icon: "🚀", label2: "terminal", lang: "bash",
-    code: `# a finished Next.js app, recoloured to your brand, in ~0.15s
+    code: `# a finished Next.js app, recoloured to your brand, in ~0.12s
 npm create lacspace-app@latest my-app -- --template saas --theme lacspace
 
 cd my-app && npm run dev`,

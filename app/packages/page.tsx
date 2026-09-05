@@ -14,7 +14,7 @@ const seo = site.page({
 export const metadata = seo.metadata;
 
 const CLIS = [
-  { n: "create-lacspace-app", d: "Scaffold a finished Next.js app from one of 8 templates in ~0.15s — now with --theme." },
+  { n: "create-lacspace-app", d: "Scaffold a finished Next.js app from one of 8 templates in ~0.12s — now with --theme." },
   { n: "create-lacspace-seo", d: "Drop a complete SEO setup into an existing Next.js App Router app." },
 ];
 

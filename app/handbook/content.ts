@@ -599,7 +599,7 @@ async function getRate(pair: string) {
     label: "Scaffold a whole app",
     icon: "🏗️",
     kit: "Ship",
-    intro: "Don't start from an empty page. create-lacspace-app writes a finished Next.js app in ~0.15s — every page filled, SEO wired, a 26-component UI kit included.",
+    intro: "Don't start from an empty page. create-lacspace-app writes a finished Next.js app in ~0.12s — every page filled, SEO wired, a 26-component UI kit included.",
     recipes: [
       {
         id: "scaffold-cmd",

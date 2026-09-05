@@ -82,7 +82,7 @@ const SURFACES: Surface[] = [
   {
     icon: "🚀",
     title: "Scaffold an App",
-    desc: "create-lacspace-app writes a finished Next.js app in ~0.15s — 8 templates, SEO wired.",
+    desc: "create-lacspace-app writes a finished Next.js app in ~0.12s — 8 templates, SEO wired.",
     href: "/handbook#scaffold",
     cta: "Scaffold now",
   },
@@ -376,7 +376,7 @@ export default function Home() {
                 <span className="mono">create-lacspace-app</span> scaffolds a real
                 Next.js 15 + React 19 + Tailwind v4 app — every page filled, SEO
                 and security headers wired, a 26-component UI kit included — in
-                about 0.15 seconds. Then it&apos;s a normal app you own.
+                about 0.12 seconds. Then it&apos;s a normal app you own.
               </p>
               <div className="chips">
                 <span>--template saas</span>

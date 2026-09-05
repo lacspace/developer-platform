@@ -208,7 +208,7 @@ export const KITS: Kit[] = [
 ];
 
 export const STATS = {
-  scaffold: "~0.15s",
+  scaffold: "~0.12s",
   files: "70+",
   pages: "11",
   components: "26",
