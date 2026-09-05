@@ -1,0 +1,33 @@
+{
+  "name": "lacspace-developer-platform",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@lacspace/case": "^1.0.1",
+    "@lacspace/color": "^1.0.1",
+    "@lacspace/humanize": "^1.0.1",
+    "@lacspace/id": "^1.0.1",
+    "@lacspace/llms-txt": "^1.2.2",
+    "@lacspace/money": "^1.0.1",
+    "@lacspace/og": "^1.0.1",
+    "@lacspace/robots": "^1.2.1",
+    "@lacspace/rss": "^1.2.2",
+    "@lacspace/seo": "^1.6.2",
+    "@lacspace/sitemap": "^1.1.1",
+    "@lacspace/slugify": "^1.0.4",
+    "next": "15.5.25",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.6",
+    "@types/react": "19.1.0",
+    "@types/react-dom": "19.1.0",
+    "typescript": "5.8.2"
+  }
+}
