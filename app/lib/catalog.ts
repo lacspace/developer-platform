@@ -110,42 +110,42 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "llms-txt",
-        "v": "1.2.2",
+        "v": "1.3.0",
         "d": "Generate and parse llms.txt and llms-full.txt (the llmstxt.org standard) — a Markdown map of your site for LLMs. Zero-dependency, isomorphic."
       },
       {
         "n": "og",
-        "v": "1.0.1",
+        "v": "1.1.0",
         "d": "Dynamic Open Graph images — a share-card design system you configure once and call per page. Produces a next/og element tree AND a zero-dependency SVG from the same options, with auto-fitting titles, presets, badges and gradients. Zero-dependency, isomorphic."
       },
       {
         "n": "robots",
-        "v": "1.2.1",
+        "v": "1.3.0",
         "d": "Build and parse robots.txt — typed per-user-agent rules, AI-crawler block presets (GPTBot, ClaudeBot, CCBot, Google-Extended), sitemap refs and Next.js robots.ts output. Zero-dependency, isomorphic."
       },
       {
         "n": "rss",
-        "v": "1.2.2",
+        "v": "1.3.0",
         "d": "Generate RSS 2.0, Atom 1.0 and JSON Feed 1.1 from one set of items — content syndication for blogs and news. Zero-dependency, isomorphic."
       },
       {
         "n": "seo",
-        "v": "1.6.2",
+        "v": "1.7.0",
         "d": "Typed metadata + JSON-LD for modern web apps — schema.org builders (Organization, Article, Product, FAQ, Breadcrumb), a Next.js App Router Metadata helper, the defineSite() SEO Autopilot engine, and an on-page SEO auditor with a CI sitemap crawler that fails the build when SEO regresses (`npx @lacspace/seo audit <url>` / `crawl <site> --min-grade A`). Zero-dependency, isomorphic."
       },
       {
         "n": "site-verify",
-        "v": "1.1.2",
+        "v": "1.2.0",
         "d": "Search-engine site verification — meta tags, Next.js verification metadata and file tokens for Google Search Console, Bing, Yandex, Baidu, Pinterest, Ahrefs, Facebook & more. Zero-dependency, isomorphic."
       },
       {
         "n": "sitemap",
-        "v": "1.1.1",
+        "v": "1.2.0",
         "d": "Generate sitemap.xml, sitemap indexes and Next.js sitemaps — image/video/news extensions, hreflang alternates, auto-split at 50k URLs. Zero-dependency, isomorphic."
       },
       {
         "n": "slugify",
-        "v": "1.0.4",
+        "v": "1.1.0",
         "d": "Turn any text into a clean, SEO-friendly URL slug — transliterates diacritics, collapses separators, and guarantees uniqueness against an existing set. Zero-dependency, isomorphic."
       }
     ]
