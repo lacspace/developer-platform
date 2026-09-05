@@ -2,11 +2,11 @@ const COLS: { title: string; links: { label: string; href: string; external?: bo
   {
     title: "Platform",
     links: [
+      { label: "Documentation", href: "/docs" },
       { label: "All 63 packages", href: "/packages" },
       { label: "Developer handbook", href: "/handbook" },
       { label: "Live playground", href: "/playground" },
-      { label: "Compare", href: "/compare" },
-      { label: "Scaffold an app", href: "/handbook#scaffold" },
+      { label: "Scaffold an app", href: "/create-app" },
       { label: "Live templates", href: "https://templates.lacspace.com", external: true },
     ],
   },
@@ -24,12 +24,12 @@ const COLS: { title: string; links: { label: string; href: string; external?: bo
   {
     title: "Resources",
     links: [
-      { label: "Documentation", href: "https://lacspace.com/docs", external: true },
-      { label: "PDF handbook", href: "https://lacspace.com/docs", external: true },
+      { label: "PDF handbook", href: "/docs/pdf" },
+      { label: "Free Licence", href: "/licenses/lacspace-free-1.0" },
+      { label: "Compare", href: "/compare" },
       { label: "GitHub", href: "https://github.com/lacspace/npm-packages", external: true },
       { label: "npm org", href: "https://www.npmjs.com/org/lacspace", external: true },
       { label: "Articles", href: "https://lacspace.com/articles", external: true },
-      { label: "Upgrade guide", href: "/handbook#upgrading" },
     ],
   },
   {
@@ -39,7 +39,7 @@ const COLS: { title: string; links: { label: string; href: string; external?: bo
       { label: "Products", href: "https://lacspace.com/products", external: true },
       { label: "About", href: "https://lacspace.com/about", external: true },
       { label: "Contact", href: "https://lacspace.com/contact", external: true },
-      { label: "Licence", href: "https://lacspace.com/licenses/lacspace-free-1.0", external: true },
+      { label: "Licence", href: "/licenses/lacspace-free-1.0" },
       { label: "Brand", href: "https://lacspace.com/brand", external: true },
     ],
   },

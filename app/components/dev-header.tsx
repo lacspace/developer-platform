@@ -22,21 +22,22 @@ const MENUS: Menu[] = [
   },
   {
     label: "Docs",
+    href: "/docs",
     items: [
+      { label: "Documentation home", href: "/docs", desc: "Start here" },
       { label: "Developer handbook", href: "/handbook", desc: "Guides & runnable recipes" },
       { label: "Live playground", href: "/playground", desc: "Run any package in your browser" },
       { label: "Compare", href: "/compare", desc: "@lacspace vs the usual deps" },
-      { label: "Scaffold an app", href: "/handbook#scaffold", desc: "create-lacspace-app" },
-      { label: "Integrations", href: "/handbook#integrations", desc: "Next.js · Node · edge · React" },
+      { label: "PDF handbook", href: "/docs/pdf", desc: "Download the full guide" },
       { label: "Upgrade guide", href: "/handbook#upgrading", desc: "Semver & migration" },
     ],
   },
   {
     label: "Resources",
     items: [
+      { label: "Scaffold an app", href: "/create-app", desc: "create-lacspace-app" },
       { label: "Live templates", href: "https://templates.lacspace.com", desc: "8 finished Next.js apps", external: true },
-      { label: "Documentation", href: "https://lacspace.com/docs", desc: "Per-package docs", external: true },
-      { label: "PDF handbook", href: "https://lacspace.com/docs", desc: "Download the full guide", external: true },
+      { label: "Free Licence", href: "/licenses/lacspace-free-1.0", desc: "Permissive, MIT-equivalent" },
       { label: "GitHub", href: "https://github.com/lacspace/npm-packages", desc: "Source & issues", external: true },
       { label: "npm org", href: "https://www.npmjs.com/org/lacspace", desc: "All packages on npm", external: true },
       { label: "lacspace.com", href: "https://lacspace.com", desc: "The company", external: true },
