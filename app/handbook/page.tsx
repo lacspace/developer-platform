@@ -30,7 +30,7 @@ const seo = site.faq(FAQ, {
   title: "Developer Handbook",
   path: "/handbook",
   description:
-    "The interactive guide to the Lacspace ecosystem — search, filter and copy real recipes for secure auth, SEO, backend, money, data, React and resilience across 63 zero-dependency TypeScript packages.",
+    "The interactive guide to the Lacspace ecosystem — search, filter and copy real recipes for secure auth, SEO, backend, money, data, React and resilience across 76 zero-dependency TypeScript packages.",
 });
 export const metadata = seo.metadata;
 

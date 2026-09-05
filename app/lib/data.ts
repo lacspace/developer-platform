@@ -92,7 +92,7 @@ export type Kit = {
   packages: { name: string; desc: string }[];
 };
 
-// Curated ecosystem — the full catalog is 63 packages on npm.
+// Curated ecosystem — the full catalog is 76 packages on npm.
 export const KITS: Kit[] = [
   {
     name: "Security Kit",
@@ -199,10 +199,37 @@ export const KITS: Kit[] = [
       { name: "api", desc: "Isomorphic, zero-dependency HTTP client" },
       { name: "auth", desc: "Login, register, token, refresh flows" },
       { name: "analytics-lite", desc: "Cookieless, privacy-first web analytics" },
-      { name: "xlsx", desc: "Write real .xlsx with zero dependencies" },
+      { name: "xlsx", desc: "Read & write real .xlsx — zero dependencies" },
       { name: "csv", desc: "Correct RFC 4180 CSV parse & stringify" },
       { name: "color", desc: "Parse, convert & manipulate colours" },
       { name: "case", desc: "camelCase ↔ snake_case ↔ kebab-case" },
+    ],
+  },
+  {
+    name: "Commerce & Ledger",
+    icon: "🛒",
+    blurb: "Everything a multi-vendor marketplace repeats — carts, stock, commission, money that never loses a paisa.",
+    packages: [
+      { name: "cart", desc: "Headless cart — lines, quantities, totals" },
+      { name: "inventory", desc: "Reserve & commit stock — throws before oversell" },
+      { name: "commission", desc: "Flat / percent / tiered take-rate + exact splits" },
+      { name: "settlement", desc: "Net, reconcile & list multi-party payouts" },
+      { name: "coupon", desc: "Percent / fixed / free-shipping with caps & limits" },
+      { name: "tax", desc: "VAT / GST in exact integer minor units" },
+      { name: "ledger", desc: "Double-entry book that always balances to zero" },
+      { name: "audit-log", desc: "Who did what — before/after diffs, attributed" },
+      { name: "courier", desc: "Delivery state machine + Pathao + webhooks" },
+    ],
+  },
+  {
+    name: "Nepal Payments",
+    icon: "💳",
+    blurb: "Server-verified Nepali gateways — signatures, redirects and idempotent callbacks against the authoritative order amount.",
+    packages: [
+      { name: "esewa", desc: "eSewa ePay v2 — HMAC-SHA256 sign & verify" },
+      { name: "khalti", desc: "Khalti KPG-2 — initiate & server-side lookup" },
+      { name: "connectips", desc: "Connect IPS — RSA-signed redirect token" },
+      { name: "fonepay", desc: "Fonepay Request-To-Pay — HMAC-SHA512 DV" },
     ],
   },
 ];
@@ -213,5 +240,5 @@ export const STATS = {
   pages: "11",
   components: "26",
   templates: "8",
-  packages: "63",
+  packages: "76",
 };

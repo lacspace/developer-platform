@@ -9,7 +9,7 @@ import { CodeTabs } from "./components/code-tabs";
 import { KITS } from "./lib/data";
 
 const SHORTCUTS = [
-  { icon: "📦", label: "Browse 63 packages", href: "/packages" },
+  { icon: "📦", label: "Browse 76 packages", href: "/packages" },
   { icon: "🧭", label: "Read the handbook", href: "/handbook" },
   { icon: "🧪", label: "Run the playground", href: "/playground" },
   { icon: "🚀", label: "Scaffold an app", href: "/handbook#scaffold" },
@@ -60,7 +60,7 @@ const SURFACES: Surface[] = [
   {
     icon: "📦",
     title: "npm Packages",
-    desc: "All 63 zero-dependency packages — grouped by kit, with versions and one-line docs.",
+    desc: "All 76 zero-dependency packages — grouped by kit, with versions and one-line docs.",
     href: "/packages",
     cta: "Browse packages",
   },
@@ -137,7 +137,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={40}>
             <span className="pill">
-              <span className="live" /> 63 packages · one CLI · real docs
+              <span className="live" /> 76 packages · one CLI · real docs
             </span>
           </Reveal>
           <Reveal delay={60}>
@@ -148,7 +148,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={120}>
             <p className="sub">
-              63 zero-dependency, isomorphic TypeScript packages — the standard
+              76 zero-dependency, isomorphic TypeScript packages — the standard
               library your backend and frontend keep re-inventing — plus a CLI
               that scaffolds a finished Next.js app, and the docs to build with
               all of it.
@@ -157,7 +157,7 @@ export default function Home() {
           <Reveal delay={180}>
             <div className="cta">
               <a className="btn btn-primary" href="/packages">
-                Explore 63 packages →
+                Explore 76 packages →
               </a>
               <a className="btn btn-ghost" href="/handbook">
                 Read the handbook
@@ -290,7 +290,7 @@ export default function Home() {
               A <span className="grad">standard library</span> for the modern web
             </h2>
             <p>
-              Ten kits, sixty-three packages, zero runtime dependencies. Import
+              Twelve kits, seventy-six packages, zero runtime dependencies. Import
               only what you use — every package is isomorphic and tree-shakeable.
             </p>
           </Reveal>
@@ -317,7 +317,7 @@ export default function Home() {
           </div>
           <Reveal className="cta" style={{ marginTop: 30 }}>
             <a className="btn btn-ghost" href="/packages">
-              See all 63 packages →
+              See all 76 packages →
             </a>
           </Reveal>
         </section>
@@ -327,7 +327,7 @@ export default function Home() {
           <Reveal className="sec-head center">
             <div className="eyebrow">Why it&apos;s different</div>
             <h2>A standard library that <span className="grad">respects your app</span></h2>
-            <p>The same four rules hold across all 63 packages.</p>
+            <p>The same four rules hold across all 76 packages.</p>
           </Reveal>
           <div className="why-grid">
             {WHY.map((w, i) => (
@@ -362,7 +362,7 @@ export default function Home() {
             ))}
           </div>
           <Reveal className="cta" style={{ marginTop: 28 }}>
-            <a className="btn btn-ghost" href="/packages">See all 63 packages →</a>
+            <a className="btn btn-ghost" href="/packages">See all 76 packages →</a>
           </Reveal>
         </section>
 

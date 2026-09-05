@@ -867,13 +867,69 @@ export const DETAILS: Record<string, PkgDetail> = {
   ],
   "usage": "import { verify } from \"@lacspace/webhooks\";\n\n// in your route — use the RAW request body, not the parsed JSON\nconst rawBody = await request.text();\nconst r = await verify(rawBody, request.headers.get(\"webhook-signature\"), {\n  secret: process.env.WEBHOOK_SECRET!,\n  toleranceSec: 300, // reject anything older than 5 min (replay protection)\n});\n\nif (!r.valid) return new Response(`rejected: ${r.reason}`, { status: 400 });\n// r.reason ∈ \"no-signature\" | \"bad-format\" | \"bad-signature\" | \"timestamp-out-of-tolerance\""
  },
+ "cart": {
+  "exports": ["createCart", "addItem", "setQty", "removeItem", "findItem", "itemCount", "totals", "clear"],
+  "usage": "import { createCart, addItem, setQty, totals } from \"@lacspace/cart\";\n\nlet cart = createCart({ currency: \"NPR\" });\ncart = addItem(cart, { id: \"sku_1\", name: \"Dhaka Topi\", price: 120000, qty: 1 }); // paisa\ncart = setQty(cart, \"sku_1\", 2);\n\nconst t = totals(cart, { taxRate: 0.13, shipping: 10000 });\n// { subtotal, tax, shipping, discount, total } — all integer minor units, no float drift"
+ },
+ "inventory": {
+  "exports": ["createStock", "reserve", "release", "commit", "restock", "adjust", "available", "isLow", "isOutOfStock", "InventoryError"],
+  "usage": "import { createStock, reserve, commit, available, InventoryError } from \"@lacspace/inventory\";\n\nlet stock = createStock({ onHand: 10 });\nstock = reserve(stock, 2);   // checkout hold — THROWS InventoryError before it oversells\nstock = commit(stock, 2);    // order paid: reserved -> fulfilled\n\navailable(stock);            // 8  (onHand minus still-reserved)"
+ },
+ "commission": {
+  "exports": ["commission", "split"],
+  "usage": "import { commission, split } from \"@lacspace/commission\";\n\n// tiered marketplace take-rate, capped\nconst fee = commission({ type: \"tiered\", cap: 100000, tiers: [\n  { upTo: 500000, rate: 0.10 },\n  { rate: 0.08 },\n] }, 800000);\n\n// pay 3 sellers exactly — no paisa created or lost\nconst shares = split(100000, [{ id: \"a\", weight: 1 }, { id: \"b\", weight: 1 }, { id: \"c\", weight: 1 }]);\n// 33334 | 33333 | 33333"
+ },
+ "settlement": {
+  "exports": ["settle", "netFor", "reconcile", "payouts"],
+  "usage": "import { settle, payouts, reconcile } from \"@lacspace/settlement\";\n\nconst ledger = settle([\n  { account: \"seller_1\", amount: 45000 },\n  { account: \"seller_1\", amount: -500 },   // a refund nets against the payout\n  { account: \"platform\", amount: 5500 },\n]);\n\npayouts(ledger);   // only positive balances, ready to disburse\nreconcile(ledger, { seller_1: 44500 });  // expected vs actual, flags discrepancies"
+ },
+ "coupon": {
+  "exports": ["validateCoupon", "applyCoupon"],
+  "usage": "import { validateCoupon, applyCoupon } from \"@lacspace/coupon\";\n\nconst coupon = { code: \"DASHAIN\", type: \"percent\", value: 15, minSubtotal: 200000, cap: 50000 };\n\nconst check = validateCoupon(coupon, { subtotal: 350000, now: Date.now() });\nif (check.ok) {\n  const { discount, total } = applyCoupon(coupon, 350000); // discount capped at 50000\n}"
+ },
+ "tax": {
+  "exports": ["tax", "addTax", "extractTax", "compound", "RATES"],
+  "usage": "import { addTax, extractTax, RATES } from \"@lacspace/tax\";\n\naddTax(100000, RATES.NP_VAT);      // 113000  — adds 13% VAT (integer paisa)\nextractTax(113000, RATES.NP_VAT);  // { net: 100000, tax: 13000 } — from a VAT-inclusive price\n// RATES also ships IN_GST, EU_VAT, UK_VAT presets"
+ },
+ "ledger": {
+  "exports": ["createLedger", "post", "postMany", "balance", "statement", "trialBalance"],
+  "usage": "import { createLedger, post, balance, trialBalance } from \"@lacspace/ledger\";\n\nlet book = createLedger();\nbook = post(book, { memo: \"Order #1001\", lines: [\n  { account: \"cash\",        debit: 113000 },\n  { account: \"sales\",       credit: 100000 },\n  { account: \"vat_payable\", credit: 13000 },\n] });\n\nbalance(book, \"cash\");   // 113000\ntrialBalance(book);      // every account — always sums to zero"
+ },
+ "audit-log": {
+  "exports": ["auditEvent", "diff", "redactEvent", "formatEvent", "createAuditor", "REDACTED"],
+  "usage": "import { createAuditor } from \"@lacspace/audit-log\";\n\nconst audit = createAuditor({ redact: [\"password\", \"token\"] });\n\nconst evt = audit.record({\n  actor:  { id: \"admin_2\", role: \"admin\" },\n  action: \"product.price.update\",\n  target: \"sku_1\",\n  before: { price: 1200 },\n  after:  { price: 999 },\n});\n// evt.changes -> [{ field: \"price\", from: 1200, to: 999 }] — who did what, attributed"
+ },
+ "courier": {
+  "exports": ["createPathaoAdapter", "transition", "canTransition", "isTerminal", "normalizePathaoStatus", "parsePathaoWebhook", "verifyPathaoWebhook", "verifyWebhookSignature", "DELIVERY_TRANSITIONS", "PATHAO_STATUS_MAP", "CourierError"],
+  "usage": "import { createPathaoAdapter, verifyPathaoWebhook, parsePathaoWebhook } from \"@lacspace/courier\";\n\nconst pathao = createPathaoAdapter({ clientId, clientSecret, username, password, storeId: 42 });\n\nconst shipment = await pathao.createOrder({\n  recipientName: \"Sita\", recipientPhone: \"98xxxxxxxx\",\n  recipientAddress: \"Baneshwor, KTM\", amountToCollect: 250000, itemQuantity: 1,\n});\n\n// inbound webhook -> canonical status, no more manual clicking\nif (verifyPathaoWebhook({ headerSecret: req.headers[\"x-pathao-signature\"], expectedSecret })) {\n  const evt = parsePathaoWebhook(req.body); // { status: \"delivered\", consignmentId, ... }\n}"
+ },
+ "esewa": {
+  "exports": ["signPayment", "buildForm", "verifyResponse", "checkStatus", "ESEWA_TEST_SECRET", "ESEWA_TEST_PRODUCT_CODE"],
+  "usage": "import { buildForm, verifyResponse } from \"@lacspace/esewa\";\n\n// 1) redirect the buyer — POST form.fields to form.action\nconst form = buildForm({ amount: \"1000\", productCode: \"EPAYTEST\", successUrl, failureUrl, secret });\n\n// 2) on return, verify the signed payload against YOUR order amount\nconst res = verifyResponse(base64Data, secret);\n// { verified, status, transactionUuid, totalAmount }"
+ },
+ "khalti": {
+  "exports": ["initiate", "lookup", "KhaltiError"],
+  "usage": "import { initiate, lookup } from \"@lacspace/khalti\";\n\nconst { payment_url, pidx } = await initiate({\n  returnUrl, websiteUrl, amount: 100000, // paisa\n  purchaseOrderId: \"order_1\", purchaseOrderName: \"Colour order\",\n}, { secretKey, env: \"test\" });\n\n// verify server-to-server before fulfilling\nconst status = await lookup(pidx, { secretKey, env: \"test\" }); // \"Completed\" | \"Pending\" | ..."
+ },
+ "connectips": {
+  "exports": ["signToken", "buildForm", "validateTxn", "verifyToken"],
+  "usage": "import { signToken, buildForm, validateTxn } from \"@lacspace/connectips\";\n\n// sign the redirect token with your RSA (PKCS#8) private key\nconst token = await signToken(\n  { merchantId, appId, appName, txnId, txnDate, txnAmount, referenceId, remarks },\n  privateKeyPkcs8Pem,\n);\nconst form = buildForm({ /* merchant fields + token */ }); // POST to Connect IPS\n\n// confirm server-to-server\nconst ok = await validateTxn({ merchantId, appId, referenceId, txnAmount }, credentials);"
+ },
+ "fonepay": {
+  "exports": ["signRequest", "buildRedirect", "verifyResponse"],
+  "usage": "import { buildRedirect, verifyResponse } from \"@lacspace/fonepay\";\n\n// HMAC-SHA512 signed Request-To-Pay redirect\nconst redirect = buildRedirect({ amt: \"1000\", pid: \"order_1\", prn: \"ref_1\", ru: returnUrl, merchantCode }, secret);\n// send the buyer to redirect.url\n\n// on return, verify the response DV\nconst res = await verifyResponse(query, secret); // { verified, status }"
+ },
  "xlsx": {
   "exports": [
    "Workbook",
    "aoaToXlsx",
    "columnLetter",
-   "jsonToXlsx"
+   "jsonToXlsx",
+   "readWorkbook",
+   "xlsxToJson",
+   "sheetToJson",
+   "sheetToAoa"
   ],
-  "usage": "import { jsonToXlsx } from \"@lacspace/xlsx\";\nimport { writeFileSync } from \"node:fs\";\n\nconst bytes = jsonToXlsx([\n  { name: \"Ada Lovelace\", signups: 12, active: true, joined: new Date(\"2026-01-15\") },\n  { name: \"Alan Turing\",  signups: 7,  active: false, joined: new Date(\"2026-02-01\") },\n]);\n\nwriteFileSync(\"users.xlsx\", bytes);                 // Node\n// or serve a download:\nreturn new Response(bytes, {\n  headers: {\n    \"content-type\": \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\n    \"content-disposition\": 'attachment; filename=\"users.xlsx\"',\n  },\n});"
+  "usage": "import { jsonToXlsx } from \"@lacspace/xlsx\";\nimport { writeFileSync } from \"node:fs\";\n\nconst bytes = jsonToXlsx([\n  { name: \"Ada Lovelace\", signups: 12, active: true, joined: new Date(\"2026-01-15\") },\n  { name: \"Alan Turing\",  signups: 7,  active: false, joined: new Date(\"2026-02-01\") },\n]);\n\nwriteFileSync(\"users.xlsx\", bytes);                 // Node\n// or serve a download:\nreturn new Response(bytes, {\n  headers: {\n    \"content-type\": \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\n    \"content-disposition\": 'attachment; filename=\"users.xlsx\"',\n  },\n});\n\n// ...and READ one back — bulk import from an uploaded sheet.\n// Handles real Excel exports (STORE + DEFLATE), shared strings and dates.\nconst rows = await xlsxToJson(bytes);\n// [{ name: \"Ada Lovelace\", signups: 12, active: true, joined: <Date> }, ...]"
  }
 };

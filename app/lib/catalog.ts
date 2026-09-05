@@ -1,5 +1,5 @@
-// Full @lacspace package catalog — generated from the monorepo (61 scoped packages).
-// Plus 2 CLIs (create-lacspace-app, create-lacspace-seo) = 63 packages on npm.
+// Full @lacspace package catalog — generated from the monorepo (74 scoped packages).
+// Plus 2 CLIs (create-lacspace-app, create-lacspace-seo) = 76 packages on npm.
 
 export type Pkg = { n: string; v: string; d: string; kw: string[]; deps: number };
 export type Group = { group: string; icon: string; items: Pkg[] };
@@ -918,7 +918,110 @@ export const CATALOG: Group[] = [
         "deps": 0
       }
     ]
+  },
+  {
+    "group": "Commerce & Ledger",
+    "icon": "🛒",
+    "items": [
+      {
+        "n": "cart",
+        "v": "1.0.0",
+        "d": "Headless, framework-agnostic shopping-cart engine — pure, immutable & serializable. Add/merge lines, set quantities, compute tax/discount/shipping totals in integer minor units. Isomorphic (Node, edge, browser).",
+        "kw": ["cart", "shopping-cart", "ecommerce", "checkout", "totals", "headless"],
+        "deps": 0
+      },
+      {
+        "n": "inventory",
+        "v": "1.0.0",
+        "d": "Stock-tracking engine that prevents overselling — reserve, release, commit & restock over a plain { onHand, reserved } state. Immutable, bring-your-own-store, throws before it oversells. Isomorphic.",
+        "kw": ["inventory", "stock", "reservation", "oversell", "ecommerce", "fulfilment"],
+        "deps": 0
+      },
+      {
+        "n": "commission",
+        "v": "1.0.0",
+        "d": "Commission & payout calculation engine — flat, percentage and marginal-tiered rules with min/cap, plus exact proportional split with remainder distribution. Integer minor units, zero floats. Isomorphic.",
+        "kw": ["commission", "payout", "marketplace", "tiered", "revenue-share", "split"],
+        "deps": 0
+      },
+      {
+        "n": "settlement",
+        "v": "1.0.0",
+        "d": "Settlement, netting & reconciliation for multi-party payouts — net signed ledger entries per account, reconcile expected vs actual, and list payable positive balances. Integer minor units, pure functions. Isomorphic.",
+        "kw": ["settlement", "netting", "reconciliation", "payouts", "multi-party", "fintech"],
+        "deps": 0
+      },
+      {
+        "n": "coupon",
+        "v": "1.0.0",
+        "d": "Discount & coupon engine — percent, fixed and free-shipping codes with validity windows, minimum-subtotal, discount caps and usage limits. Integer minor units, no float drift. Zero-dependency, isomorphic.",
+        "kw": ["coupon", "discount", "promo-code", "voucher", "free-shipping", "checkout"],
+        "deps": 0
+      },
+      {
+        "n": "tax",
+        "v": "1.0.0",
+        "d": "VAT & sales-tax done right — exact integer minor-unit arithmetic (no float cents bugs), add/extract tax, inclusive & exclusive prices, compound taxes, half-up/bankers rounding. Isomorphic.",
+        "kw": ["tax", "vat", "sales-tax", "gst", "tax-inclusive", "rounding"],
+        "deps": 0
+      },
+      {
+        "n": "ledger",
+        "v": "1.0.0",
+        "d": "A tiny double-entry ledger & wallet — balanced transactions, per-account balances and a trial balance that always sums to zero. Integer minor units, immutable ops, crypto-random ids. Isomorphic.",
+        "kw": ["ledger", "double-entry", "accounting", "wallet", "trial-balance", "minor-units"],
+        "deps": 0
+      },
+      {
+        "n": "audit-log",
+        "v": "1.0.0",
+        "d": "Structured audit-trail toolkit — record who did what, when, with before/after diffs, actor attribution and redaction. Build tamper-evident activity logs. Zero-dependency, isomorphic.",
+        "kw": ["audit-log", "audit-trail", "activity-log", "attribution", "compliance", "diff"],
+        "deps": 0
+      },
+      {
+        "n": "courier",
+        "v": "1.0.0",
+        "d": "Courier / last-mile delivery toolkit — canonical delivery state machine, Pathao (Nepal) adapter, and inbound webhook verification + status normalization. Zero-dependency, isomorphic.",
+        "kw": ["courier", "logistics", "delivery", "pathao", "nepal", "webhook"],
+        "deps": 0
+      }
+    ]
+  },
+  {
+    "group": "Nepal Payments",
+    "icon": "💳",
+    "items": [
+      {
+        "n": "esewa",
+        "v": "1.0.0",
+        "d": "eSewa ePay v2 (Nepal) payment gateway toolkit over Web Crypto — HMAC-SHA256 signing, form building, response verification and transaction status checks. Zero-dependency, isomorphic.",
+        "kw": ["nepal", "payment", "esewa", "epay-v2", "hmac-sha256", "web-crypto"],
+        "deps": 0
+      },
+      {
+        "n": "khalti",
+        "v": "1.0.0",
+        "d": "Khalti KPG-2 (ePayment API v2, Nepal) client — initiate payments, look up status, typed errors and Key auth over global fetch. Zero-dependency, isomorphic.",
+        "kw": ["nepal", "payment", "khalti", "kpg-2", "epayment", "fetch"],
+        "deps": 0
+      },
+      {
+        "n": "connectips",
+        "v": "1.0.0",
+        "d": "Connect IPS (Nepal) merchant integration over Web Crypto — sign the redirect transaction token with your RSA private key and validate transactions server-to-server. Zero-dep, isomorphic.",
+        "kw": ["connectips", "nepal", "payment", "nchl", "rsa-sha256", "web-crypto"],
+        "deps": 0
+      },
+      {
+        "n": "fonepay",
+        "v": "1.0.0",
+        "d": "Fonepay (Nepal) merchant redirect / Request-To-Pay over Web Crypto — HMAC-SHA512 sign the request DV and verify the response DV. Zero-dep, isomorphic.",
+        "kw": ["fonepay", "nepal", "payment", "request-to-pay", "hmac-sha512", "web-crypto"],
+        "deps": 0
+      }
+    ]
   }
 ];
 
-export const CATALOG_TOTAL = 63;
+export const CATALOG_TOTAL = 76;

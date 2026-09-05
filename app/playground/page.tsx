@@ -30,14 +30,14 @@ export default function PlaygroundPage() {
             </h2>
             <p>
               An open sandbox: write code against <strong style={{ color: "var(--fg)" }}>any</strong> of
-              the 63 packages — loaded live from a CDN — and run it in your
+              the 76 packages — loaded live from a CDN — and run it in your
               browser. Or poke at the instant demos below. Nothing is sent to a
               server; it all runs on your machine.
             </p>
           </div>
           <Playground />
           <div className="cta" style={{ marginTop: 34, justifyContent: "center" }}>
-            <a className="btn btn-primary" href="/packages">See all 63 packages →</a>
+            <a className="btn btn-primary" href="/packages">See all 76 packages →</a>
             <a className="btn btn-ghost" href="/handbook">Read the handbook</a>
           </div>
         </section>

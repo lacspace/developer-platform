@@ -8,12 +8,12 @@ const seo = site.page({
   title: "Documentation",
   path: "/docs",
   description:
-    "The documentation home for Lacspace — install and scaffold in seconds, then dive into the per-package reference, the developer handbook, a live playground and the Free Licence. 63 zero-dependency packages, one CLI.",
+    "The documentation home for Lacspace — install and scaffold in seconds, then dive into the per-package reference, the developer handbook, a live playground and the Free Licence. 76 zero-dependency packages, one CLI.",
 });
 export const metadata = seo.metadata;
 
 const SURFACES = [
-  { icon: "📦", title: "Package reference", d: "Every one of the 63 packages — API, exports, install and examples.", href: "/packages", cta: "Browse packages" },
+  { icon: "📦", title: "Package reference", d: "Every one of the 76 packages — API, exports, install and examples.", href: "/packages", cta: "Browse packages" },
   { icon: "🧭", title: "Developer handbook", d: "Install, use, upgrade, scaffold and ship — guides with runnable recipes.", href: "/handbook", cta: "Open handbook" },
   { icon: "🧪", title: "Live playground", d: "Run packages in your browser — slugify, money, case, humanize, color, id.", href: "/playground", cta: "Open playground" },
   { icon: "⚖️", title: "Compare", d: "How @lacspace stacks up against zod, dinero, jsonwebtoken and friends.", href: "/compare", cta: "Compare" },
@@ -45,7 +45,7 @@ export default function DocsHub() {
             <h1>Everything you need to <span className="grad">build with Lacspace</span></h1>
             <p>
               Install a package or scaffold a whole app in seconds, then go deep with the per-package
-              reference, the handbook and a live playground. 63 zero-dependency packages, one CLI.
+              reference, the handbook and a live playground. 76 zero-dependency packages, one CLI.
             </p>
           </Reveal>
 

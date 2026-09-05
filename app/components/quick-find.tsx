@@ -27,7 +27,7 @@ export function QuickFind() {
           placeholder="Find a package — jwt, money, seo…"
           aria-label="Find a package"
         />
-        <a className="qf-all" href={`/packages${ql ? "" : ""}`}>Browse all 63 →</a>
+        <a className="qf-all" href={`/packages${ql ? "" : ""}`}>Browse all 76 →</a>
       </div>
       {open && ql && (
         <div className="qf-drop">

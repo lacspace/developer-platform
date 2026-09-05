@@ -10,7 +10,7 @@ const MENUS: Menu[] = [
     label: "Packages",
     href: "/packages",
     items: [
-      { label: "All 63 packages", href: "/packages", desc: "The full catalog" },
+      { label: "All 76 packages", href: "/packages", desc: "The full catalog" },
       { label: "Security Kit", href: "/packages?kit=Security+Kit", desc: "crypto · jwt · otp · passkeys" },
       { label: "SEO Kit", href: "/packages?kit=SEO+Kit", desc: "seo · sitemap · robots · og" },
       { label: "React Kit", href: "/packages?kit=React+Kit", desc: "store · query · theme · hooks" },
@@ -18,6 +18,8 @@ const MENUS: Menu[] = [
       { label: "Backend Kit", href: "/packages?kit=Backend+Kit", desc: "signed-url · pdf · webhooks" },
       { label: "Mail Kit", href: "/packages?kit=Mail+Kit", desc: "mailer · templates · validate" },
       { label: "StockKit", href: "/packages?kit=StockKit", desc: "indicators · market · paper-trade" },
+      { label: "Commerce & Ledger", href: "/packages?kit=Commerce+%26+Ledger", desc: "cart · inventory · commission · tax" },
+      { label: "Nepal Payments", href: "/packages?kit=Nepal+Payments", desc: "esewa · khalti · connectips · fonepay" },
     ],
   },
   {
@@ -37,7 +39,7 @@ const MENUS: Menu[] = [
     items: [
       { label: "Scaffold an app", href: "/create-app", desc: "create-lacspace-app" },
       { label: "Live templates", href: "https://templates.lacspace.com", desc: "8 finished Next.js apps", external: true },
-      { label: "Free Licence", href: "/licenses/lacspace-free-1.0", desc: "Permissive, MIT-equivalent" },
+      { label: "Free Licence", href: "/licenses/lacspace-free-1.0", desc: "Permissive — use, ship, modify" },
       { label: "GitHub", href: "https://github.com/lacspace/npm-packages", desc: "Source & issues", external: true },
       { label: "npm org", href: "https://www.npmjs.com/org/lacspace", desc: "All packages on npm", external: true },
       { label: "lacspace.com", href: "https://lacspace.com", desc: "The company", external: true },

@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Lacspace Developer Platform",
     short_name: "Lacspace Dev",
     description:
-      "63 zero-dependency TypeScript packages, a scaffolding CLI, and the docs to build with them.",
+      "76 zero-dependency TypeScript packages, a scaffolding CLI, and the docs to build with them.",
     start_url: "/",
     display: "standalone",
     background_color: "#0A101C",
