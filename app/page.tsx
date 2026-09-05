@@ -5,7 +5,35 @@ import { Reveal } from "./components/reveal";
 import { CodeBlock } from "./components/code-block";
 import { Counter } from "./components/counter";
 import { QuickFind } from "./components/quick-find";
+import { CodeTabs } from "./components/code-tabs";
 import { KITS } from "./lib/data";
+
+const SHORTCUTS = [
+  { icon: "📦", label: "Browse 63 packages", href: "/packages" },
+  { icon: "🧭", label: "Read the handbook", href: "/handbook" },
+  { icon: "🧪", label: "Run the playground", href: "/playground" },
+  { icon: "🚀", label: "Scaffold an app", href: "/handbook#scaffold" },
+  { icon: "🖥️", label: "Live templates", href: "https://templates.lacspace.com", external: true },
+  { icon: "⚖️", label: "Compare", href: "/compare" },
+];
+
+const WHY = [
+  { img: "/brand/spot-security.png", title: "Zero runtime dependencies", body: "No transitive supply chain to audit. npm view returns an empty dependency object — the only deps are other @lacspace packages." },
+  { img: "/brand/spot-cloud.png", title: "Isomorphic by design", body: "One build runs in Node, the browser and edge runtimes. Cryptography uses Web Crypto, never a hand-rolled reimplementation." },
+  { img: "/brand/spot-automation.png", title: "Typed, dual ESM + CJS", body: "Built with tsup — import and require both work, each with full .d.ts types. TypeScript strict, everywhere." },
+  { img: "/brand/spot-growth.png", title: "Free & permissively licensed", body: "Everything is free under the Lacspace Free Licence. Use it in personal and commercial projects at no cost." },
+];
+
+const POPULAR = [
+  { n: "seo", d: "Typed metadata + schema.org JSON-LD from one config." },
+  { n: "jwt", d: "JWTs with strict expiry/issuer checks over Web Crypto." },
+  { n: "validate", d: "Zod-style typed schema validation, zero-dependency." },
+  { n: "money", d: "Integer minor units — no floating-point cent bugs." },
+  { n: "store", d: "Global React state in ~1KB, no provider." },
+  { n: "query", d: "Data fetching with a shared cache (SWR-lite)." },
+  { n: "crypto", d: "Authenticated AES-256-GCM over Web Crypto." },
+  { n: "slugify", d: "Clean, transliterated, SEO-friendly URL slugs." },
+];
 
 const HOME_LD = graph(
   softwareApp({
@@ -169,6 +197,19 @@ export default function Home() {
               </div>
             </div>
           </Reveal>
+
+          {/* Shortcuts */}
+          <Reveal delay={280}>
+            <div className="shortcuts">
+              {SHORTCUTS.map((s) => (
+                <a key={s.label} href={s.href} {...(s.external ? { target: "_blank", rel: "noopener" } : {})} className="shortcut">
+                  <span aria-hidden className="sc-i">{s.icon}</span>
+                  <span>{s.label}</span>
+                  <span aria-hidden className="sc-arrow">→</span>
+                </a>
+              ))}
+            </div>
+          </Reveal>
         </section>
 
         {/* Surfaces */}
@@ -229,6 +270,18 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Code showcase */}
+        <section className="sec">
+          <Reveal className="sec-head center">
+            <div className="eyebrow">The API</div>
+            <h2>Small, typed, <span className="grad">boring in the best way</span></h2>
+            <p>Real snippets — pick a task and see how little code it takes.</p>
+          </Reveal>
+          <Reveal delay={60} style={{ maxWidth: 780, margin: "0 auto" }}>
+            <CodeTabs />
+          </Reveal>
+        </section>
+
         {/* Ecosystem preview */}
         <section id="ecosystem" className="sec">
           <Reveal className="sec-head center">
@@ -266,6 +319,50 @@ export default function Home() {
             <a className="btn btn-ghost" href="/packages">
               See all 63 packages →
             </a>
+          </Reveal>
+        </section>
+
+        {/* Why different */}
+        <section className="sec">
+          <Reveal className="sec-head center">
+            <div className="eyebrow">Why it&apos;s different</div>
+            <h2>A standard library that <span className="grad">respects your app</span></h2>
+            <p>The same four rules hold across all 63 packages.</p>
+          </Reveal>
+          <div className="why-grid">
+            {WHY.map((w, i) => (
+              <Reveal key={w.title} delay={(i % 2) * 60} className="why-card">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={w.img} alt="" className="why-img" width={72} height={72} />
+                <div>
+                  <h3>{w.title}</h3>
+                  <p>{w.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        {/* Popular packages */}
+        <section className="sec">
+          <Reveal className="sec-head center">
+            <div className="eyebrow">Developer favourites</div>
+            <h2>Start with the <span className="grad">popular ones</span></h2>
+            <p>The packages developers reach for first — one npm install away.</p>
+          </Reveal>
+          <div className="grid">
+            {POPULAR.map((p, i) => (
+              <Reveal key={p.n} delay={(i % 3) * 50} className="kit" style={{ padding: 18 }}>
+                <a href={`https://www.npmjs.com/package/@lacspace/${p.n}`} target="_blank" rel="noopener" style={{ display: "block" }}>
+                  <span className="pk" style={{ fontSize: 14, color: "#e9d5ff" }}>@lacspace/{p.n}</span>
+                  <p style={{ color: "var(--muted)", fontSize: 13, margin: "8px 0 10px" }}>{p.d}</p>
+                  <code className="mono" style={{ fontSize: 12, color: "var(--faint)" }}>npm i @lacspace/{p.n}</code>
+                </a>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="cta" style={{ marginTop: 28 }}>
+            <a className="btn btn-ghost" href="/packages">See all 63 packages →</a>
           </Reveal>
         </section>
 

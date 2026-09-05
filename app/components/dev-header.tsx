@@ -68,12 +68,14 @@ export function DevHeader() {
                 <button className="nav-trigger" aria-haspopup="true">{m.label} <span aria-hidden className="caret">▾</span></button>
               )}
               <div className="nav-menu">
-                {m.items.map((i) => (
-                  <a key={i.label} href={i.href} {...ext(i)} className="nav-menu-a">
-                    <span className="nav-menu-t">{i.label}{i.external && <span aria-hidden className="ext"> ↗</span>}</span>
-                    {i.desc && <span className="nav-menu-d">{i.desc}</span>}
-                  </a>
-                ))}
+                <div className="nav-menu-card">
+                  {m.items.map((i) => (
+                    <a key={i.label} href={i.href} {...ext(i)} className="nav-menu-a">
+                      <span className="nav-menu-t">{i.label}{i.external && <span aria-hidden className="ext"> ↗</span>}</span>
+                      {i.desc && <span className="nav-menu-d">{i.desc}</span>}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           ))}
