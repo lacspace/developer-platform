@@ -103,6 +103,10 @@ export function PackagesApp() {
   const [bundleCopied, copyBundle] = useCopy();
 
   useEffect(() => {
+    try {
+      const k = new URLSearchParams(window.location.search).get("kit");
+      if (k && CATALOG.some((g) => g.group === k)) setKit(k);
+    } catch { /* no-op */ }
     const onKey = (e: KeyboardEvent) => {
       const t = e.target as HTMLElement;
       const typing = t.tagName === "INPUT" || t.tagName === "TEXTAREA";

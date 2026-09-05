@@ -26,12 +26,13 @@ export default function PlaygroundPage() {
           <div className="sec-head center">
             <div className="eyebrow">Live Playground</div>
             <h2>
-              Try the packages <span className="grad">right here</span>
+              Run <span className="grad">any package</span>, right here
             </h2>
             <p>
-              These widgets run the actual npm packages in your browser — no
-              install, no sandbox tricks. Change an input and watch the real
-              output update.
+              An open sandbox: write code against <strong style={{ color: "var(--fg)" }}>any</strong> of
+              the 63 packages — loaded live from a CDN — and run it in your
+              browser. Or poke at the instant demos below. Nothing is sent to a
+              server; it all runs on your machine.
             </p>
           </div>
           <Playground />
