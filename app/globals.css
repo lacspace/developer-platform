@@ -1311,3 +1311,81 @@ h1, h2, h3, .sec-head h2, .cta-band h2, .brand, .stat b, .hb-body h2 {
   .pk-bundle-inner { flex-direction: column; align-items: stretch; }
   .pk-bundle-btns .btn { flex: 1; justify-content: center; }
 }
+
+/* ---- Hero quick-find (typeahead) ---- */
+.qf {
+  position: relative;
+  max-width: 560px;
+  margin: 26px auto 0;
+  text-align: left;
+}
+.qf-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--hairline-2);
+  background: var(--panel-2);
+  border-radius: 13px;
+  padding: 11px 14px;
+}
+.qf-box input {
+  flex: 1;
+  background: none;
+  border: 0;
+  outline: none;
+  color: var(--fg);
+  font-size: 15px;
+  font-family: inherit;
+}
+.qf-box input::placeholder { color: var(--faint); }
+.qf-all {
+  flex: none;
+  font-size: 12.5px;
+  color: var(--accent-to);
+  font-weight: 560;
+  white-space: nowrap;
+}
+.qf-all:hover { text-decoration: underline; text-underline-offset: 3px; }
+.qf-drop {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  background: rgba(10, 16, 28, 0.97);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--hairline-2);
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+.qf-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: baseline;
+  padding: 11px 15px;
+  border-bottom: 1px solid var(--hairline);
+}
+.qf-row:last-child { border-bottom: 0; }
+.qf-row:hover { background: var(--panel-hover); }
+.qf-name {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: #e9d5ff;
+  white-space: nowrap;
+}
+.qf-desc {
+  font-size: 12.5px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.qf-grp { font-size: 11px; color: var(--faint); white-space: nowrap; }
+.qf-empty { padding: 16px; color: var(--muted); font-size: 14px; text-align: center; }
+
+@media (max-width: 560px) {
+  .qf-all { display: none; }
+  .qf-grp { display: none; }
+}

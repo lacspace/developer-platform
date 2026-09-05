@@ -3,6 +3,8 @@ import { DevHeader } from "./components/dev-header";
 import { DevFooter } from "./components/dev-footer";
 import { Reveal } from "./components/reveal";
 import { CodeBlock } from "./components/code-block";
+import { Counter } from "./components/counter";
+import { QuickFind } from "./components/quick-find";
 import { KITS } from "./lib/data";
 
 const HOME_LD = graph(
@@ -135,14 +137,18 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal delay={220}>
+          <Reveal delay={200}>
+            <QuickFind />
+          </Reveal>
+
+          <Reveal delay={240}>
             <div className="stats">
               <div className="stat">
-                <b className="grad">63</b>
+                <b className="grad"><Counter to={63} /></b>
                 <span>packages</span>
               </div>
               <div className="stat">
-                <b className="grad">0</b>
+                <b className="grad"><Counter to={0} /></b>
                 <span>runtime deps</span>
               </div>
               <div className="stat">
@@ -150,11 +156,11 @@ export default function Home() {
                 <span>dual output</span>
               </div>
               <div className="stat">
-                <b className="grad">8</b>
+                <b className="grad"><Counter to={8} /></b>
                 <span>templates</span>
               </div>
               <div className="stat">
-                <b className="grad">100%</b>
+                <b className="grad"><Counter to={100} suffix="%" /></b>
                 <span>TypeScript</span>
               </div>
               <div className="stat">
