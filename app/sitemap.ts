@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { loc: `${BASE}/packages`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/tools`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     ...TOOL_URLS,
+    { loc: `${BASE}/tools/scraper/try`, changefreq: "monthly", priority: 0.7, lastmod: LASTMOD },
     { loc: `${BASE}/docs`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/handbook`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/create-app`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },

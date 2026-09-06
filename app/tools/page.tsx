@@ -98,7 +98,10 @@ export default function ToolsPage() {
                     <div className="tool-name">{t.name} <span className="tool-badge live">Live</span>{t.version && <span className="tool-badge">v{t.version}</span>}</div>
                     <div className="tool-tag">{t.tagline}</div>
                     {t.install && <div className="tool-cmd">{t.install}</div>}
-                    <div className="tool-meta"><span className="tool-open">Open docs &amp; demos →</span></div>
+                    <div className="tool-meta">
+                      <span className="tool-open">Open docs &amp; demos →</span>
+                      {t.tryHref && <span style={{ marginLeft: "auto", color: "#34D399", fontWeight: 600 }}>Try it live ▸</span>}
+                    </div>
                   </div>
                 </a>
               </Reveal>

@@ -36,6 +36,12 @@ export interface Tool {
   about?: string;
   install?: string;
   quickstart?: string;
+  /** Path to an in-browser live tester, when the tool has one. */
+  tryHref?: string;
+  /** True when the tool can't be a hosted live runner (needs a local browser). */
+  localOnly?: boolean;
+  /** Why it's local-only + how to run it (shown as a callout). */
+  localNote?: string;
   features: ToolFeature[];
   examples: ToolExample[];
   useCases: string[];
@@ -58,6 +64,9 @@ export const TOOLS: Tool[] = [
       "lacspace-leads is a complete, keyless lead-generation tool. It sweeps whole cities neighbourhood-by-neighbourhood, verifies emails by MX lookup, normalises phones to E.164, and de-duplicates as it accumulates a master list across runs — everything a real prospecting workflow needs, from the terminal or as a typed library.",
     install: "npx lacspace-leads restaurants --city Kathmandu --area Baneshwor -f xlsx",
     quickstart: "npm i lacspace-leads",
+    localOnly: true,
+    localNote:
+      "lacspace-leads drives a real browser over Google Maps, so it runs on your machine — not as a hosted button here (that would break Google's Terms and can't run in a serverless function). It's one command to try locally, no setup.",
     features: [
       { icon: "🏙️", title: "City sweep", desc: "Comma-separate areas/types and it runs each search, then merges and de-duplicates into one list." },
       { icon: "📮", title: "Verified emails", desc: "Visit each website to find an email, then MX-verify the domain — keep only deliverable contacts." },
@@ -102,6 +111,7 @@ export const TOOLS: Tool[] = [
       "lacspace-scraper ships its own zero-dependency HTML parser and CSS-selector engine, so a fast static engine handles most sites with no browser at all — and an optional real-browser mode renders JavaScript apps when you need it. Extract exactly the fields you want with a selector schema, turn repeating cards into one record each, or let the auto-detectors grab everything a page exposes.",
     install: "npx lacspace-scraper https://example.com --auto -f json",
     quickstart: "npm i lacspace-scraper",
+    tryHref: "/tools/scraper/try",
     features: [
       { icon: "🎯", title: "Selector schema", desc: "Map fields to CSS selectors (text, @attributes, inner HTML, or all matches as an array)." },
       { icon: "🧩", title: "Repeating items", desc: "--item \".card\" yields one record per element — product grids, list rows, search results." },

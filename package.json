@@ -28,6 +28,7 @@
     "@lacspace/sitemap": "^1.1.1",
     "@lacspace/slugify": "^1.0.4",
     "@lacspace/validate": "^1.0.1",
+    "lacspace-scraper": "^0.1.0",
     "next": "15.5.25",
     "react": "19.1.0",
     "react-dom": "19.1.0"

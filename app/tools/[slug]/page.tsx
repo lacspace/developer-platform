@@ -71,6 +71,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
               <span className={"tool-badge " + (isLive ? "live" : "soon")} style={{ padding: "5px 12px", borderRadius: 999, border: "1px solid var(--hairline-2)" }}>
                 {isLive ? `● Live${t.version ? ` · v${t.version}` : ""}` : "○ Coming soon"}
               </span>
+              {t.tryHref && <a className="btn btn-primary" href={t.tryHref}>Try it live ▸</a>}
               {t.links?.map((l) => (
                 <a key={l.label} className="btn btn-ghost" href={l.href} {...(l.external ? { target: "_blank", rel: "noopener" } : {})}>{l.label}{l.external ? " ↗" : ""}</a>
               ))}
@@ -90,6 +91,17 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
             <h2>{isLive ? "Everything, in one command" : "What we're building"}</h2>
             <p>{t.about ?? t.summary}</p>
           </Reveal>
+          {t.localOnly && t.localNote && (
+            <Reveal style={{ maxWidth: 720, margin: "18px auto 0" }}>
+              <div style={{ border: "1px solid var(--hairline-2)", background: "var(--panel)", borderRadius: 14, padding: "16px 18px", display: "flex", gap: 12 }}>
+                <span aria-hidden style={{ fontSize: 20, lineHeight: 1 }}>💻</span>
+                <div>
+                  <strong style={{ color: "var(--fg)", fontSize: 14 }}>Runs locally, not as a hosted button</strong>
+                  <p style={{ color: "var(--muted)", fontSize: 13.5, margin: "5px 0 0", lineHeight: 1.55 }}>{t.localNote}</p>
+                </div>
+              </div>
+            </Reveal>
+          )}
         </section>
 
         {/* Features */}
