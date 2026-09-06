@@ -920,7 +920,7 @@ export const DETAILS: Record<string, PkgDetail> = {
   "usage": "import { createInvoice, recordPayment, invoiceNumber } from \"@lacspace/invoice\";\n\nlet inv = createInvoice({\n  number: invoiceNumber(123),         // \"INV-2026-000123\"\n  currency: \"NPR\",\n  seller: { name: \"Lacspace\", taxId: \"PAN123\" },\n  buyer:  { name: \"Sita Rai\" },\n  lines: [{ description: \"Dhaka Topi\", qty: 2, unitPrice: 120000, taxRate: 0.13 }],\n});\n// inv.taxSummary groups tax by rate; inv.totals.balanceDue in integer paisa\ninv = recordPayment(inv, 271200);     // status -> \"paid\", balanceDue -> 0"
  },
  "esewa": {
-  "exports": ["signPayment", "buildForm", "verifyResponse", "checkStatus", "ESEWA_TEST_SECRET", "ESEWA_TEST_PRODUCT_CODE"],
+  "exports": ["signPayment", "buildForm", "verifyResponse", "checkStatus", "paisaToRupees", "ESEWA_TEST_SECRET", "ESEWA_TEST_PRODUCT_CODE"],
   "usage": "import { buildForm, verifyResponse } from \"@lacspace/esewa\";\n\n// 1) redirect the buyer — POST form.fields to form.action\nconst form = buildForm({ amount: \"1000\", productCode: \"EPAYTEST\", successUrl, failureUrl, secret });\n\n// 2) on return, verify the signed payload against YOUR order amount\nconst res = verifyResponse(base64Data, secret);\n// { verified, status, transactionUuid, totalAmount }"
  },
  "khalti": {

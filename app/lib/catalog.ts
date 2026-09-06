@@ -1022,7 +1022,7 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "esewa",
-        "v": "1.0.0",
+        "v": "1.1.0",
         "d": "eSewa ePay v2 (Nepal) payment gateway toolkit over Web Crypto — HMAC-SHA256 signing, form building, response verification and transaction status checks. Zero-dependency, isomorphic.",
         "kw": ["nepal", "payment", "esewa", "epay-v2", "hmac-sha256", "web-crypto"],
         "deps": 0
