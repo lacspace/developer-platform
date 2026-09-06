@@ -51,7 +51,7 @@ export const TOOLS: Tool[] = [
     icon: "📍",
     grad: "#2DD4BF,#3B82F6",
     status: "live",
-    version: "1.4.0",
+    version: "1.5.0",
     summary:
       "Name a city, area and business type — it drives a real browser over Google Maps and collects each listing's name, phone, website, rating, address, email and social links, then exports to JSON, NDJSON, CSV or Excel. No paid Places API.",
     about:
@@ -65,13 +65,15 @@ export const TOOLS: Tool[] = [
       { icon: "📞", title: "E.164 phones", desc: "Normalise every phone to +CC… with one flag — CRM-ready out of the box." },
       { icon: "🧭", title: "Radius search", desc: "Centre on a coordinate and keep only what's within range, sorted nearest-first." },
       { icon: "📚", title: "Master list", desc: "--append merges each run into your file and de-duplicates, so daily runs build one clean database." },
-      { icon: "🎛️", title: "Deep controls", desc: "Presets, filters, sort, proxy, retries, jitter, concurrency, field selection and progress callbacks." },
+      { icon: "🗂️", title: "Saved campaigns", desc: "Describe repeatable searches + shared options in one --config JSON file; run them on a schedule." },
+      { icon: "🎛️", title: "Deep controls", desc: "Presets, filters (incl. has-contact / name-exclude), sort, proxy, retries, jitter, concurrency and callbacks." },
       { icon: "🔄", title: "Any format", desc: "JSON, NDJSON, CSV or Excel — plus a built-in converter between all four, both ways." },
     ],
     examples: [
       { label: "Sweep a whole city, best-reviewed first", code: `npx lacspace-leads cafes --city Kathmandu \\\n  --area "Thamel,Baneshwor,Patan" \\\n  --country NP --sort reviews --desc -f xlsx`, note: "Runs three searches, merges + de-duplicates, normalises phones to +977…, sorts by reviews." },
       { label: "Outreach list, deliverable emails only", code: `npx lacspace-leads "dental clinic" --city Pokhara \\\n  --preset outreach --verify-emails --has-valid-email -f csv`, note: "Keeps only leads whose email passed an MX check." },
       { label: "Everything within 1.5 km of a point", code: `npx lacspace-leads salons \\\n  --near "27.7172,85.3240" --radius 1.5km -f csv`, note: "Adds a distanceKm column, sorted nearest-first." },
+      { label: "Run a saved campaign", code: `# campaign.json → { "searches":[…], "country":"NP",\n#   "verifyEmails":true, "out":"master.xlsx", "append":true }\nnpx lacspace-leads --config campaign.json`, note: "Repeatable multi-search runs — pair with cron or CI for weekly sweeps." },
       { label: "Use it as a library", code: `import { searchLeads, serialize } from "lacspace-leads";\n\nconst leads = await searchLeads({\n  city: "Kathmandu", type: "restaurants", limit: 40,\n  enrich: true, country: "NP", headless: true,\n});\nconst { data } = serialize(leads, "csv");` },
     ],
     useCases: [
