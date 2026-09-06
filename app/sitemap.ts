@@ -33,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { loc: `${BASE}/handbook`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/create-app`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/compare`, changefreq: "monthly", priority: 0.7, lastmod: LASTMOD },
+    { loc: `${BASE}/faq`, changefreq: "monthly", priority: 0.7, lastmod: LASTMOD },
     { loc: `${BASE}/playground`, changefreq: "monthly", priority: 0.7, lastmod: LASTMOD },
     { loc: `${BASE}/licenses`, changefreq: "monthly", priority: 0.6, lastmod: LASTMOD },
     { loc: `${BASE}/licenses/lacspace-free-1.0`, changefreq: "monthly", priority: 0.6, lastmod: LASTMOD },

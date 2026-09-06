@@ -29,6 +29,7 @@ const COLS: { title: string; links: { label: string; href: string; external?: bo
     links: [
       { label: "PDF handbook", href: "/docs/pdf" },
       { label: "Free Licence", href: "/licenses/lacspace-free-1.0" },
+      { label: "FAQ", href: "/faq" },
       { label: "Compare", href: "/compare" },
       { label: "GitHub", href: "https://github.com/lacspace/npm-packages", external: true },
       { label: "npm org", href: "https://www.npmjs.com/org/lacspace", external: true },

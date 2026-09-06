@@ -51,6 +51,7 @@ const MENUS: Menu[] = [
       { label: "Scaffold an app", href: "/create-app", desc: "create-lacspace-app" },
       { label: "Live templates", href: "https://templates.lacspace.com", desc: "8 finished Next.js apps", external: true },
       { label: "Free Licence", href: "/licenses/lacspace-free-1.0", desc: "Permissive — use, ship, modify" },
+      { label: "FAQ", href: "/faq", desc: "Answers about packages & tools" },
       { label: "GitHub", href: "https://github.com/lacspace/npm-packages", desc: "Source & issues", external: true },
       { label: "npm org", href: "https://www.npmjs.com/org/lacspace", desc: "All packages on npm", external: true },
       { label: "lacspace.com", href: "https://lacspace.com", desc: "The company", external: true },
