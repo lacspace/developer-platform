@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CATALOG } from "../lib/catalog";
+import { CATALOG, CATALOG_TOTAL } from "../lib/catalog";
 
 const ALL = CATALOG.flatMap((g) => g.items.map((p) => ({ ...p, group: g.group })));
 
@@ -18,7 +18,7 @@ export function QuickFind() {
   return (
     <div className="qf">
       <div className="qf-box">
-        <span aria-hidden>🔍</span>
+        <span aria-hidden className="qf-ic">🔍</span>
         <input
           value={q}
           onChange={(e) => { setQ(e.target.value); setOpen(true); }}
@@ -27,20 +27,25 @@ export function QuickFind() {
           placeholder="Find a package — jwt, money, seo…"
           aria-label="Find a package"
         />
-        <a className="qf-all" href={`/packages${ql ? "" : ""}`}>Browse all 80 →</a>
+        <a className="qf-all" href="/packages">Browse all {CATALOG_TOTAL} →</a>
       </div>
       {open && ql && (
         <div className="qf-drop">
           {results.length === 0 ? (
-            <div className="qf-empty">No package matches “{q}”.</div>
+            <div className="qf-empty">
+              No package matches “{q}”. <a href="/packages">Browse all {CATALOG_TOTAL} →</a>
+            </div>
           ) : (
-            results.map((p) => (
-              <a key={p.n} href={`https://www.npmjs.com/package/@lacspace/${p.n}`} target="_blank" rel="noopener" className="qf-row">
-                <span className="qf-name">@lacspace/{p.n}</span>
-                <span className="qf-desc">{p.d}</span>
-                <span className="qf-grp">{p.group}</span>
-              </a>
-            ))
+            <>
+              {results.map((p) => (
+                <a key={p.n} href={`/packages/${p.n}`} className="qf-row">
+                  <span className="qf-name">@lacspace/{p.n}</span>
+                  <span className="qf-desc">{p.d}</span>
+                  <span className="qf-grp">{p.group}</span>
+                </a>
+              ))}
+              <a className="qf-more" href="/packages">See all matching packages →</a>
+            </>
           )}
         </div>
       )}

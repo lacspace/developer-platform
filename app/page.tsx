@@ -7,9 +7,14 @@ import { Counter } from "./components/counter";
 import { QuickFind } from "./components/quick-find";
 import { CodeTabs } from "./components/code-tabs";
 import { KITS } from "./lib/data";
+import { CATALOG, CATALOG_TOTAL } from "./lib/catalog";
+
+// Single source of truth for headline counts, so the page never disagrees with itself.
+const PKG = CATALOG_TOTAL;
+const KIT_COUNT = CATALOG.length;
 
 const SHORTCUTS = [
-  { icon: "📦", label: "Browse 80 packages", href: "/packages" },
+  { icon: "📦", label: `Browse ${PKG} packages`, href: "/packages" },
   { icon: "🧭", label: "Read the handbook", href: "/handbook" },
   { icon: "🧪", label: "Run the playground", href: "/playground" },
   { icon: "🚀", label: "Scaffold an app", href: "/handbook#scaffold" },
@@ -60,7 +65,7 @@ const SURFACES: Surface[] = [
   {
     icon: "📦",
     title: "npm Packages",
-    desc: "All 80 zero-dependency packages — grouped by kit, with versions and one-line docs.",
+    desc: `All ${PKG} zero-dependency packages — grouped by kit, with versions and one-line docs.`,
     href: "/packages",
     cta: "Browse packages",
   },
@@ -137,7 +142,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={40}>
             <span className="pill">
-              <span className="live" /> 80 packages · one CLI · real docs
+              <span className="live" /> {PKG} packages · one CLI · real docs
             </span>
           </Reveal>
           <Reveal delay={60}>
@@ -148,7 +153,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={120}>
             <p className="sub">
-              80 zero-dependency, isomorphic TypeScript packages — the standard
+              {PKG} zero-dependency, isomorphic TypeScript packages — the standard
               library your backend and frontend keep re-inventing — plus a CLI
               that scaffolds a finished Next.js app, and the docs to build with
               all of it.
@@ -157,7 +162,7 @@ export default function Home() {
           <Reveal delay={180}>
             <div className="cta">
               <a className="btn btn-primary" href="/packages">
-                Explore 80 packages →
+                Explore {PKG} packages →
               </a>
               <a className="btn btn-ghost" href="/handbook">
                 Read the handbook
@@ -172,7 +177,7 @@ export default function Home() {
           <Reveal delay={240}>
             <div className="stats">
               <div className="stat">
-                <b className="grad"><Counter to={63} /></b>
+                <b className="grad"><Counter to={PKG} /></b>
                 <span>packages</span>
               </div>
               <div className="stat">
@@ -290,7 +295,7 @@ export default function Home() {
               A <span className="grad">standard library</span> for the modern web
             </h2>
             <p>
-              Twelve kits, eighty packages, zero runtime dependencies. Import
+              {KIT_COUNT} kits, {PKG} packages, zero runtime dependencies. Import
               only what you use — every package is isomorphic and tree-shakeable.
             </p>
           </Reveal>
@@ -317,7 +322,7 @@ export default function Home() {
           </div>
           <Reveal className="cta" style={{ marginTop: 30 }}>
             <a className="btn btn-ghost" href="/packages">
-              See all 80 packages →
+              See all {PKG} packages →
             </a>
           </Reveal>
         </section>
@@ -327,7 +332,7 @@ export default function Home() {
           <Reveal className="sec-head center">
             <div className="eyebrow">Why it&apos;s different</div>
             <h2>A standard library that <span className="grad">respects your app</span></h2>
-            <p>The same four rules hold across all 80 packages.</p>
+            <p>The same four rules hold across all {PKG} packages.</p>
           </Reveal>
           <div className="why-grid">
             {WHY.map((w, i) => (
@@ -362,7 +367,7 @@ export default function Home() {
             ))}
           </div>
           <Reveal className="cta" style={{ marginTop: 28 }}>
-            <a className="btn btn-ghost" href="/packages">See all 80 packages →</a>
+            <a className="btn btn-ghost" href="/packages">See all {PKG} packages →</a>
           </Reveal>
         </section>
 

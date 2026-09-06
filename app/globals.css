@@ -1659,3 +1659,103 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
 .ib-tabs button:not(.on):hover { color: var(--fg); }
 .ib-cmd { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
 .ib-cmd code { flex: 1; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; color: #e8e8f0; }
+
+/* =========================================================
+   Responsive & professional-polish pass (mobile-first)
+   Later in the cascade → wins ties over the base rules above.
+   ========================================================= */
+
+/* --- Accessible focus rings on search inputs --- */
+.qf-box:focus-within,
+.hb-search:focus-within {
+  border-color: var(--accent-mid);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.qf-ic { font-size: 15px; opacity: 0.8; flex: none; }
+
+/* --- QuickFind: on-site typeahead polish --- */
+.qf-more {
+  display: block;
+  padding: 11px 15px;
+  font-size: 12.5px;
+  font-weight: 560;
+  color: var(--accent-to);
+  border-top: 1px solid var(--hairline);
+  background: var(--panel);
+}
+.qf-more:hover { background: var(--panel-hover); }
+.qf-empty { display: flex; flex-direction: column; gap: 8px; }
+.qf-empty a { color: var(--accent-to); font-weight: 560; }
+
+/* --- Filter chips scroll cleanly (no visible scrollbar) --- */
+.hb-chips { scrollbar-width: none; }
+.hb-chips::-webkit-scrollbar { display: none; }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 900px) {
+  .wrap { padding: 0 20px; }
+  .sec { padding: 64px 0 0; }
+  .cta-band { margin-top: 72px; padding: 44px 24px; }
+  .kits,
+  .why-grid,
+  .grid,
+  .pk-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+
+/* ---------- Phone ---------- */
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+
+  .hero { padding: 54px 0 20px; }
+  .hero-mark { width: 72px; height: 72px; margin-bottom: 16px; }
+  .sub { margin-top: 18px; }
+  .cta { margin-top: 26px; gap: 10px; }
+  .shortcuts { margin-top: 30px; gap: 8px; }
+  .shortcut { padding: 8px 14px; font-size: 13px; }
+
+  .sec { padding: 52px 0 0; }
+  .sec-head { margin-bottom: 22px; }
+
+  .stats { gap: 8px; margin-top: 38px; }
+  .stat { padding: 14px 8px; border-radius: 12px; }
+  .stat b { font-size: 1.3rem; }
+  .stat span { font-size: 11px; }
+
+  .cta-band { margin-top: 56px; padding: 34px 18px; border-radius: 18px; }
+
+  /* One clean column for every card grid on phones */
+  .kits,
+  .why-grid,
+  .grid,
+  .pk-grid { grid-template-columns: 1fr; gap: 12px; }
+  .kit,
+  .why-card { padding: 18px; }
+
+  /* Buttons in a hero CTA go full width so they're thumb-friendly */
+  .cta .btn { flex: 1 1 100%; }
+
+  /* --- Packages filter bar: professional stacked layout --- */
+  .hb-controls { gap: 10px; padding: 10px 0; }
+  .hb-search { min-width: 100%; order: -1; }        /* search on its own top row */
+  .hb-pm { display: flex; width: 100%; }            /* PM switch: full-width, equal cells */
+  .hb-pm button { flex: 1; text-align: center; }
+  .pk-sort { width: 100%; }                         /* sort: its own full-width row */
+
+  /* Kit chips become a horizontal, edge-to-edge scroll strip */
+  .hb-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -16px 6px;
+    padding: 2px 16px 6px;
+  }
+  .hb-chip { flex: none; }
+  .hb-count { flex: none; padding-right: 16px; }
+}
+
+/* ---------- Small phone ---------- */
+@media (max-width: 380px) {
+  h1 { font-size: 2.15rem; }
+  .btn { padding: 11px 16px; font-size: 14px; }
+  .hb-pm button { padding: 8px 9px; }
+}
