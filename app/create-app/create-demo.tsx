@@ -92,7 +92,7 @@ export function CreateDemo() {
             <span className={`cd-status ${built ? "on" : ""}`}>{built ? "● live" : "…"}</span>
           </div>
           <div className="cd-app" style={{ opacity: built ? 1 : 0.45 }}>
-            <div className="cd-hero" style={{ background: `linear-gradient(135deg, ${t.from}, ${t.to})` }}>
+            <div className="cd-hero" style={{ background: "var(--panel-2)", borderBottom: "1px solid var(--hairline)" }}>
               <span className="cd-h1" />
               <span className="cd-h2" />
               <span className="cd-btn" />

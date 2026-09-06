@@ -107,7 +107,6 @@ const DEMO_CSS = `
 .ca-tpl .bd .k{display:block;margin-top:6px;font-family:ui-monospace,monospace;font-size:12px;color:var(--accent-mid)}
 `;
 
-const GRADS = ["#60A5FA,#6366F1", "#6366F1,#8B5CF6", "#2DD4BF,#34D399", "#8B5CF6,#EC4899", "#3B82F6,#60A5FA", "#34D399,#2DD4BF", "#FBBF24,#FB7185", "#FB7185,#FBBF24", "#0D9488,#6366F1"];
 
 export default function CreateAppPage() {
   return (
@@ -209,8 +208,8 @@ real  0.12s   ·   run 2: 0.12s   run 3: 0.12s   run 4: 0.12s   run 5: 0.12s`} /
             {TEMPLATES.map((t, i) => (
               <Reveal key={t.key} delay={(i % 4) * 40}>
                 <a className="ca-tpl" href={`https://templates.lacspace.com/${t.key}`} target="_blank" rel="noopener">
-                  <div className="sw" style={{ background: `linear-gradient(135deg, ${GRADS[i]})` }}>
-                    <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "rgba(255,255,255,.92)", fontSize: 22 }}>Aa</span>
+                  <div className="sw" style={{ background: "var(--panel-2)", border: "1px solid var(--hairline)" }}>
+                    <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--accent)", fontSize: 22 }}>Aa</span>
                   </div>
                   <div className="bd">
                     <b>{t.name}{t.key === "marketplace" && <span style={{ marginLeft: 6, fontSize: 10, fontWeight: 700, color: "#0d9488", verticalAlign: "middle" }}>NEW</span>}</b>

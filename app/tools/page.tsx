@@ -36,8 +36,7 @@ const CSS = `
 @media(max-width:760px){.tools-grid{grid-template-columns:1fr}}
 .tool-card{border:1px solid var(--hairline);border-radius:18px;overflow:hidden;background:var(--panel);display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .2s,border-color .2s,background .2s}
 .tool-card:hover{transform:translateY(-3px);border-color:var(--accent-mid);background:var(--panel-2)}
-.tool-sw{height:96px;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative}
-.tool-sw::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.28))}
+.tool-sw{height:72px;display:flex;align-items:center;justify-content:flex-start;padding:0 20px;font-size:26px;background:var(--panel-2);border-bottom:1px solid var(--hairline)}
 .tool-bd{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
 .tool-name{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;font-weight:650;color:var(--fg);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .tool-badge{font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:2px 8px;border:1px solid var(--hairline-2);color:var(--faint)}
@@ -93,7 +92,7 @@ export default function ToolsPage() {
             {TOOLS_LIVE.map((t, i) => (
               <Reveal key={t.slug} delay={(i % 2) * 60}>
                 <a className="tool-card" href={`/tools/${t.slug}`}>
-                  <div className="tool-sw" style={{ background: `linear-gradient(135deg, ${t.grad})` }} aria-hidden>{t.icon}</div>
+                  <div className="tool-sw" aria-hidden>{t.icon}</div>
                   <div className="tool-bd">
                     <div className="tool-name">{t.name} <span className="tool-badge live">Live</span>{t.version && <span className="tool-badge">v{t.version}</span>}</div>
                     <div className="tool-tag">{t.tagline}</div>
@@ -121,7 +120,7 @@ export default function ToolsPage() {
             {TOOLS_SOON.map((t, i) => (
               <Reveal key={t.slug} delay={(i % 2) * 60}>
                 <a className="tool-card" href={`/tools/${t.slug}`} style={{ opacity: 0.92 }}>
-                  <div className="tool-sw" style={{ background: `linear-gradient(135deg, ${t.grad})`, filter: "saturate(0.85)" }} aria-hidden>{t.icon}</div>
+                  <div className="tool-sw" aria-hidden>{t.icon}</div>
                   <div className="tool-bd">
                     <div className="tool-name">{t.name} <span className="tool-badge soon">Soon</span></div>
                     <div className="tool-tag">{t.tagline}</div>
