@@ -62,16 +62,16 @@ export default function ToolsPage() {
       <main className="wrap">
         {/* Hero */}
         <section className="hero">
-          <Reveal><span className="pill"><span className="live" /> {TOOLS_LIVE.length} live · {TOOLS_SOON.length} coming soon · all free</span></Reveal>
+          <Reveal><span className="pill"><span className="live" /> {TOOLS_LIVE.length} tools live{TOOLS_SOON.length ? ` · ${TOOLS_SOON.length} coming soon` : ""} · all free</span></Reveal>
           <Reveal delay={60}>
             <h1>Developer <span className="grad">Tools</span></h1>
           </Reveal>
           <Reveal delay={120}>
             <p className="sub">
-              Standalone, open-source tools that do one job well — a Google&nbsp;Maps
-              lead finder and a website scraper today, with more on the way. Each is a
-              CLI <em>and</em> a typed library, needs no API keys, and exports to JSON,
-              CSV or Excel.
+              Standalone, open-source tools that each do one job well — find leads,
+              scrape sites, monitor changes, enrich companies and extract from PDFs.
+              Every one is a CLI <em>and</em> a typed library, needs no API keys, and
+              exports to JSON, CSV or Excel.
             </p>
           </Reveal>
           <Reveal delay={180}>
@@ -110,6 +110,7 @@ export default function ToolsPage() {
         </section>
 
         {/* Coming soon */}
+        {TOOLS_SOON.length > 0 && (
         <section className="sec">
           <Reveal className="sec-head center">
             <div className="eyebrow">On the roadmap</div>
@@ -131,6 +132,7 @@ export default function ToolsPage() {
             ))}
           </div>
         </section>
+        )}
 
         {/* Why */}
         <section className="sec">
