@@ -1002,7 +1002,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "shipping",
-        "v": "1.0.0",
+        "v": "1.1.0",
         "d": "Checkout-time shipping-rate calculator — flat / weight / price / item rate tables by zone, free-shipping thresholds, surcharges and handling, returning sorted method quotes. Integer minor units, zero-dependency, isomorphic.",
         "kw": ["shipping", "shipping-rates", "ecommerce", "checkout", "free-shipping", "delivery"],
         "deps": 0
