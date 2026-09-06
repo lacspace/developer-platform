@@ -974,9 +974,9 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "audit-log",
-        "v": "1.0.1",
-        "d": "Structured audit-trail toolkit — record who did what, when, with before/after diffs, actor attribution and redaction. Build tamper-evident activity logs. Zero-dependency, isomorphic.",
-        "kw": ["audit-log", "audit-trail", "activity-log", "attribution", "compliance", "diff"],
+        "v": "1.1.0",
+        "d": "Structured audit-trail toolkit — who did what, when, with before/after diffs, actor attribution and field-level redaction, plus a tamper-evident SHA-256 hash chain that proves the log was never altered. Zero-dependency, isomorphic.",
+        "kw": ["audit-log", "audit-trail", "tamper-evident", "hash-chain", "compliance", "diff"],
         "deps": 0
       },
       {

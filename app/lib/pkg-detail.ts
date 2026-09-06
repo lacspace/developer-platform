@@ -896,8 +896,8 @@ export const DETAILS: Record<string, PkgDetail> = {
   "usage": "import { createLedger, post, balance, trialBalance } from \"@lacspace/ledger\";\n\nlet book = createLedger();\nbook = post(book, { memo: \"Order #1001\", lines: [\n  { account: \"cash\",        debit: 113000 },\n  { account: \"sales\",       credit: 100000 },\n  { account: \"vat_payable\", credit: 13000 },\n] });\n\nbalance(book, \"cash\");   // 113000\ntrialBalance(book);      // every account — always sums to zero"
  },
  "audit-log": {
-  "exports": ["auditEvent", "diff", "redactEvent", "formatEvent", "createAuditor", "REDACTED"],
-  "usage": "import { createAuditor } from \"@lacspace/audit-log\";\n\nconst audit = createAuditor({ redact: [\"password\", \"token\"] });\n\nconst evt = audit.record({\n  actor:  { id: \"admin_2\", role: \"admin\" },\n  action: \"product.price.update\",\n  target: \"sku_1\",\n  before: { price: 1200 },\n  after:  { price: 999 },\n});\n// evt.changes -> [{ field: \"price\", from: 1200, to: 999 }] — who did what, attributed"
+  "exports": ["auditEvent", "diff", "redactEvent", "formatEvent", "createAuditor", "REDACTED", "createSealedLog", "sealEvent", "appendToChain", "createChain", "verifyChain", "GENESIS_HASH", "AuditError"],
+  "usage": "import { auditEvent, createSealedLog, diff } from \"@lacspace/audit-log\";\n\n// who did what, with a before/after diff and redaction\nconst evt = auditEvent({\n  actor:  { id: \"admin_2\", type: \"admin\" },\n  action: \"product.price.update\",\n  target: { type: \"product\", id: \"sku_1\" },\n  changes: diff({ price: 1200 }, { price: 999 }),\n});\n\n// seal it into a tamper-evident SHA-256 hash chain\nconst log = createSealedLog();\nawait log.append(evt);\nawait log.verify();   // { valid: true, length: 1 }\n// edit any stored entry and re-verify -> { valid: false, brokenAt, reason } — proof it was altered"
  },
  "courier": {
   "exports": ["createPathaoAdapter", "transition", "canTransition", "isTerminal", "normalizePathaoStatus", "parsePathaoWebhook", "verifyPathaoWebhook", "verifyWebhookSignature", "DELIVERY_TRANSITIONS", "PATHAO_STATUS_MAP", "CourierError"],
