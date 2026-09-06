@@ -925,28 +925,28 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "cart",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Headless, framework-agnostic shopping-cart engine — pure, immutable & serializable. Add/merge lines, set quantities, compute tax/discount/shipping totals in integer minor units. Isomorphic (Node, edge, browser).",
         "kw": ["cart", "shopping-cart", "ecommerce", "checkout", "totals", "headless"],
         "deps": 0
       },
       {
         "n": "inventory",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Stock-tracking engine that prevents overselling — reserve, release, commit & restock over a plain { onHand, reserved } state. Immutable, bring-your-own-store, throws before it oversells. Isomorphic.",
         "kw": ["inventory", "stock", "reservation", "oversell", "ecommerce", "fulfilment"],
         "deps": 0
       },
       {
         "n": "commission",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Commission & payout calculation engine — flat, percentage and marginal-tiered rules with min/cap, plus exact proportional split with remainder distribution. Integer minor units, zero floats. Isomorphic.",
         "kw": ["commission", "payout", "marketplace", "tiered", "revenue-share", "split"],
         "deps": 0
       },
       {
         "n": "settlement",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Settlement, netting & reconciliation for multi-party payouts — net signed ledger entries per account, reconcile expected vs actual, and list payable positive balances. Integer minor units, pure functions. Isomorphic.",
         "kw": ["settlement", "netting", "reconciliation", "payouts", "multi-party", "fintech"],
         "deps": 0
@@ -974,14 +974,14 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "audit-log",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Structured audit-trail toolkit — record who did what, when, with before/after diffs, actor attribution and redaction. Build tamper-evident activity logs. Zero-dependency, isomorphic.",
         "kw": ["audit-log", "audit-trail", "activity-log", "attribution", "compliance", "diff"],
         "deps": 0
       },
       {
         "n": "courier",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Courier / last-mile delivery toolkit — canonical delivery state machine, Pathao (Nepal) adapter, and inbound webhook verification + status normalization. Zero-dependency, isomorphic.",
         "kw": ["courier", "logistics", "delivery", "pathao", "nepal", "webhook"],
         "deps": 0
@@ -995,7 +995,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "refund",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Returns / RMA workflow and refund-calculation engine — partial refunds with correct tax apportionment, restocking fees, restock lists and a return state machine. Integer minor units, zero-dependency, isomorphic.",
         "kw": ["refund", "returns", "rma", "ecommerce", "partial-refund", "restock"],
         "deps": 0
@@ -1009,7 +1009,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "invoice",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Invoice model, numbering and tax-rollup engine — per-line and total calculation, tax grouped by rate, sequential invoice numbers, payment tracking and a render-ready row structure for PDF/XLSX. Integer minor units, zero-dependency, isomorphic.",
         "kw": ["invoice", "invoicing", "billing", "tax", "accounting", "ecommerce"],
         "deps": 0
