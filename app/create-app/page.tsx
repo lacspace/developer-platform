@@ -9,7 +9,7 @@ const seo = site.page({
   title: "create-lacspace-app",
   path: "/create-app",
   description:
-    "create-lacspace-app scaffolds a finished Next.js 15 app in ~0.12s — 8 production-ready templates, SEO, security headers, sitemap, robots and a dynamic OG image wired from the first render. Not a blank page: a finished one.",
+    "create-lacspace-app scaffolds a finished Next.js 15 app in ~0.12s — 9 production-ready templates, SEO, security headers, sitemap, robots and a dynamic OG image wired from the first render. Not a blank page: a finished one.",
 });
 export const metadata = seo.metadata;
 
@@ -22,6 +22,7 @@ const TEMPLATES = [
   { key: "docs", name: "Docs", desc: "Sidebar + on-this-page" },
   { key: "dashboard", name: "Dashboard", desc: "Sidebar + stat cards" },
   { key: "restaurant", name: "Restaurant", desc: "Menu + reservations" },
+  { key: "marketplace", name: "Marketplace", desc: "Cart, checkout & payments" },
 ];
 
 const WIRED = [
@@ -37,7 +38,7 @@ const WIRED = [
 
 const STEPS = [
   { n: "01", t: "Run one command", d: "npm create lacspace-app@latest — no config files, no setup wizard." },
-  { n: "02", t: "Choose a template", d: "Eight production-ready templates — portfolio to dashboard." },
+  { n: "02", t: "Choose a template", d: "Nine production-ready templates — portfolio to dashboard." },
   { n: "03", t: "Start building", d: "cd in, npm run dev, and you’re live — SEO and headers already wired." },
 ];
 
@@ -45,7 +46,7 @@ const CMP = [
   { m: "Scaffold time (5 runs)", a: "0.24s", b: "0.12s", hot: true },
   { m: "Files produced", a: "18", b: "70", hot: true },
   { m: "Pages (finished)", a: "1 blank", b: "11", hot: true },
-  { m: "Templates", a: "1", b: "8", hot: true },
+  { m: "Templates", a: "1", b: "9", hot: true },
   { m: "SEO + JSON-LD", a: "✗", b: "✓", hot: false },
   { m: "Dynamic OG images", a: "✗", b: "✓", hot: false },
   { m: "sitemap + robots", a: "✗", b: "✓", hot: false },
@@ -106,7 +107,7 @@ const DEMO_CSS = `
 .ca-tpl .bd .k{display:block;margin-top:6px;font-family:ui-monospace,monospace;font-size:12px;color:var(--accent-mid)}
 `;
 
-const GRADS = ["#60A5FA,#6366F1", "#6366F1,#8B5CF6", "#2DD4BF,#34D399", "#8B5CF6,#EC4899", "#3B82F6,#60A5FA", "#34D399,#2DD4BF", "#FBBF24,#FB7185", "#FB7185,#FBBF24"];
+const GRADS = ["#60A5FA,#6366F1", "#6366F1,#8B5CF6", "#2DD4BF,#34D399", "#8B5CF6,#EC4899", "#3B82F6,#60A5FA", "#34D399,#2DD4BF", "#FBBF24,#FB7185", "#FB7185,#FBBF24", "#0D9488,#6366F1"];
 
 export default function CreateAppPage() {
   return (
@@ -120,7 +121,7 @@ export default function CreateAppPage() {
       <main className="wrap">
         {/* Hero */}
         <section className="hero">
-          <Reveal><span className="pill"><span className="live" /> Open source · 8 templates · 0.12s scaffold</span></Reveal>
+          <Reveal><span className="pill"><span className="live" /> Open source · 9 templates · 0.12s scaffold</span></Reveal>
           <Reveal delay={60}>
             <h1>One command.<br /><span className="grad">A finished Next.js app.</span></h1>
           </Reveal>
@@ -151,7 +152,7 @@ export default function CreateAppPage() {
         {/* Stat band */}
         <section className="sec" style={{ paddingTop: 0 }}>
           <Reveal className="stats">
-            <div className="stat"><b className="grad">8</b><span>templates</span></div>
+            <div className="stat"><b className="grad">9</b><span>templates</span></div>
             <div className="stat"><b className="grad">0.12s</b><span>to scaffold</span></div>
             <div className="stat"><b className="grad">70</b><span>files each</span></div>
             <div className="stat"><b className="grad">80</b><span>packages ready</span></div>
@@ -207,12 +208,12 @@ real  0.12s   ·   run 2: 0.12s   run 3: 0.12s   run 4: 0.12s   run 5: 0.12s`} /
           <div className="ca-tpls">
             {TEMPLATES.map((t, i) => (
               <Reveal key={t.key} delay={(i % 4) * 40}>
-                <a className="ca-tpl" href={`https://templates.lacspace.com/${t.key}`} target="_blank" rel="noopener">
+                <a className="ca-tpl" href={t.key === "marketplace" ? "https://www.npmjs.com/package/create-lacspace-app" : `https://templates.lacspace.com/${t.key}`} target="_blank" rel="noopener">
                   <div className="sw" style={{ background: `linear-gradient(135deg, ${GRADS[i]})` }}>
                     <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "rgba(255,255,255,.92)", fontSize: 22 }}>Aa</span>
                   </div>
                   <div className="bd">
-                    <b>{t.name}</b>
+                    <b>{t.name}{t.key === "marketplace" && <span style={{ marginLeft: 6, fontSize: 10, fontWeight: 700, color: "#0d9488", verticalAlign: "middle" }}>NEW</span>}</b>
                     <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 3 }}>{t.desc}</div>
                     <span className="k">--template {t.key}</span>
                   </div>
