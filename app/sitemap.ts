@@ -1,9 +1,17 @@
 import type { MetadataRoute } from "next";
 import { toNextSitemap } from "@lacspace/sitemap";
 import { CATALOG } from "./lib/catalog";
+import { TOOLS } from "./lib/tools";
 
 const BASE = "https://developer.lacspace.com";
-const LASTMOD = new Date("2026-09-05");
+const LASTMOD = new Date("2026-09-06");
+
+const TOOL_URLS = TOOLS.map((t) => ({
+  loc: `${BASE}/tools/${t.slug}`,
+  changefreq: "weekly" as const,
+  priority: t.status === "live" ? 0.8 : 0.5,
+  lastmod: LASTMOD,
+}));
 
 const PKG_URLS = CATALOG.flatMap((g) =>
   g.items.map((p) => ({
@@ -18,6 +26,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return toNextSitemap([
     { loc: `${BASE}/`, changefreq: "weekly", priority: 1.0, lastmod: LASTMOD },
     { loc: `${BASE}/packages`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
+    { loc: `${BASE}/tools`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
+    ...TOOL_URLS,
     { loc: `${BASE}/docs`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/handbook`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/create-app`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },

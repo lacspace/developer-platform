@@ -35,6 +35,15 @@ const MENUS: Menu[] = [
     ],
   },
   {
+    label: "Tools",
+    href: "/tools",
+    items: [
+      { label: "All developer tools", href: "/tools", desc: "Free, keyless CLIs + libraries" },
+      { label: "lacspace-leads", href: "/tools/leads", desc: "Google Maps lead finder" },
+      { label: "lacspace-scraper", href: "/tools/scraper", desc: "Scrape any website → JSON/CSV/Excel" },
+    ],
+  },
+  {
     label: "Resources",
     items: [
       { label: "Scaffold an app", href: "/create-app", desc: "create-lacspace-app" },
