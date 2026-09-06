@@ -31,6 +31,7 @@ export const KIT_ORDER = [
   "SEO",
   "Backend",
   "Data",
+  "Commerce",
   "React",
   "Resilience",
   "Ship",
@@ -489,6 +490,262 @@ const bytes = jsonToXlsx([
 ]);
 
 const rows = parse<{ id: string; qty: string }>(csvText);`,
+      },
+    ],
+  },
+  {
+    id: "commerce",
+    label: "Commerce & payments",
+    icon: "🛒",
+    kit: "Commerce",
+    intro:
+      "A whole marketplace backend, composed from small pieces — cart, order, tax, shipping, invoice, payouts and Nepal's payment gateways. Every amount is an integer in minor units (paisa / cents), so there are no floating-point money bugs, and the order and delivery flows are explicit state machines.",
+    recipes: [
+      {
+        id: "checkout",
+        title: "Build a marketplace checkout",
+        blurb:
+          "Cart → shipping quote → an immutable order with snapshotted line prices. Each package does one thing; they compose into a checkout.",
+        label: "checkout.ts",
+        lang: "ts",
+        pkgs: ["cart", "shipping", "order", "tax"],
+        code: `import { createCart, addItem } from "@lacspace/cart";
+import { quoteShipping } from "@lacspace/shipping";
+import { createOrder, orderNumber } from "@lacspace/order";
+
+// 1. Cart — prices in paisa (integer minor units, never floats)
+let cart = createCart({ currency: "NPR" });
+cart = addItem(cart, { id: "NP-1", name: "Dhaka Topi", price: 120000, qty: 2 });
+
+// 2. Cheapest shipping method for the destination + basket
+const methods = [
+  { id: "std", label: "Standard", strategy: "weight", freeOver: 500000,
+    bands: [{ min: 0, max: 1000, cost: 8000 }, { min: 1000, cost: 12000 }] },
+];
+const [ship] = quoteShipping(methods, { weight: 500, subtotal: 240000 });
+
+// 3. Freeze it into an immutable order — line prices are snapshotted here,
+//    so a later catalog price change never mutates a placed order.
+let order = createOrder({
+  number: orderNumber(1042),          // "ORD-20260906-1042"
+  currency: "NPR",
+  customer: { id: "cus_1", name: "Sita" },
+  lines: cart.items.map((i) => ({
+    id: i.id, sku: i.id, name: i.name, unitPrice: i.price, qty: i.qty, taxRate: 0.13,
+  })),
+  shipping: ship.cost,
+});
+// order.totals -> { subtotal, discount, tax, shipping, total } — all paisa`,
+        note: "Tax is per-line via @lacspace/tax rates (RATES.NP_VAT = 0.13); @lacspace/coupon plugs in the same way for discounts.",
+        playground: true,
+      },
+      {
+        id: "order-lifecycle",
+        title: "Track an order through its lifecycle",
+        blurb:
+          "A validated state machine — illegal jumps throw, and every step is appended to a timestamped history you can show the customer or an auditor.",
+        label: "lifecycle.ts",
+        lang: "ts",
+        pkgs: ["order"],
+        code: `import { createOrder, transition, canRefund } from "@lacspace/order";
+
+let order = createOrder({ number: "ORD-1042", currency: "NPR", lines });
+
+order = transition(order, "placed");
+order = transition(order, "paid",       { note: "eSewa ref 9x..." });
+order = transition(order, "processing");
+order = transition(order, "shipped",    { note: "Pathao CN-88" });
+order = transition(order, "delivered");
+// transition(order, "pending") would throw OrderError — the flow is enforced
+
+order.history;      // [{ status: "placed", at }, { status: "paid", at, note }, ...]
+canRefund(order);   // true — still refundable until "completed"`,
+      },
+      {
+        id: "stock-and-refund",
+        title: "Reserve stock, then handle a return",
+        blurb:
+          "Reserve at checkout (it throws before it ever oversells), then compute a partial refund with tax apportioned and get the exact list to restock.",
+        label: "returns.ts",
+        lang: "ts",
+        pkgs: ["inventory", "refund"],
+        code: `import { createStock, reserve, commit, restock } from "@lacspace/inventory";
+import { createReturn, refundAmount, restockItems } from "@lacspace/refund";
+
+// Oversell-proof: reserve holds stock, commit ships it
+let stock = createStock({ onHand: 10 });
+stock = reserve(stock, 2);   // throws InventoryError rather than going negative
+stock = commit(stock, 2);    // on payment
+
+// A customer returns 1 of the 2 units
+const rma = createReturn({ orderId: "ORD-1042", items: [
+  { lineId: "l1", sku: "NP-1", qty: 1, unitPrice: 120000, taxRate: 0.13, restock: true },
+] });
+
+const money = refundAmount(rma.items, { restockingPct: 0.10 });
+// { subtotal: 120000, tax: 15600, restockingFee: 12000, shipping: 0, total: 123600 }
+
+for (const { sku, qty } of restockItems(rma.items)) {
+  stock = restock(stock, qty);   // put returned units back
+}`,
+      },
+      {
+        id: "payouts",
+        title: "Split a multi-vendor payout",
+        blurb:
+          "One commission resolver, netting per seller, and a double-entry ledger that always balances — the money side of a marketplace, exactly.",
+        label: "payouts.ts",
+        lang: "ts",
+        pkgs: ["commission", "settlement", "ledger"],
+        code: `import { commission } from "@lacspace/commission";
+import { settle, payouts } from "@lacspace/settlement";
+import { createLedger, post, trialBalance } from "@lacspace/ledger";
+
+// Platform take-rate on a 2,400 order (8%)
+const fee = commission({ type: "percent", rate: 0.08 }, 240000);   // 19200 paisa
+
+// Net each account, then list who is owed a payout
+const ledger = settle([
+  { account: "seller_1", amount: 240000 - fee },
+  { account: "platform", amount: fee },
+]);
+payouts(ledger);   // [{ account: "seller_1", amount: 220800 }, { account: "platform", amount: 19200 }]
+
+// Mirror it into a double-entry book that always sums to zero
+let book = createLedger();
+book = post(book, { memo: "Order #1042", lines: [
+  { account: "cash",   debit: 240000 },
+  { account: "sales",  credit: 220800 },
+  { account: "fees",   credit: 19200 },
+] });
+trialBalance(book);   // balances to 0`,
+      },
+      {
+        id: "invoice",
+        title: "Issue an invoice",
+        blurb:
+          "Build the invoice model — per-line and total maths, tax grouped by rate, a sequential number — then hand the rows to @lacspace/pdf or @lacspace/xlsx to render.",
+        label: "invoice.ts",
+        lang: "ts",
+        pkgs: ["invoice"],
+        code: `import { createInvoice, invoiceNumber, recordPayment, renderRows } from "@lacspace/invoice";
+
+let inv = createInvoice({
+  number: invoiceNumber(123),          // "INV-2026-000123"
+  currency: "NPR",
+  seller: { name: "Lacspace", taxId: "PAN123" },
+  buyer:  { name: "Sita Rai" },
+  lines: [{ description: "Dhaka Topi", qty: 2, unitPrice: 120000, taxRate: 0.13 }],
+});
+
+inv.taxSummary;         // [{ rate: 0.13, net: 240000, tax: 31200 }]
+inv = recordPayment(inv, 271200);      // status -> "paid", balanceDue -> 0
+
+const { columns, rows } = renderRows(inv);  // ready for @lacspace/pdf or @lacspace/xlsx`,
+      },
+      {
+        id: "pay-esewa",
+        title: "Take an eSewa payment",
+        blurb:
+          "Build the signed redirect form, then verify the signature AND the amount against your own order — never trust the redirect alone.",
+        label: "esewa.ts",
+        lang: "ts",
+        pkgs: ["esewa"],
+        code: `import { buildForm, verifyResponse } from "@lacspace/esewa";
+
+// 1. Server-side: build the signed form and auto-POST it to eSewa
+const form = buildForm({
+  amount: "2400",                       // rupees
+  productCode: "EPAYTEST",
+  successUrl: "https://shop.np/esewa/success",
+  failureUrl: "https://shop.np/esewa/failure",
+  secret: process.env.ESEWA_SECRET!,
+});
+// render form.action + form.fields as an auto-submitting <form>
+
+// 2. On return: verify signature + amount against the authoritative order
+const res = verifyResponse(base64Data, process.env.ESEWA_SECRET!);
+if (res.verified && res.totalAmount === "2400") {
+  // safe to mark the order paid
+}`,
+        note: "eSewa ePay v2 signs with HMAC-SHA256 over Web Crypto — the same code runs on Node, edge and the browser.",
+      },
+      {
+        id: "pay-khalti",
+        title: "Take a Khalti payment",
+        blurb:
+          "Initiate a payment (amount in paisa), redirect, then confirm server-to-server with a lookup before you fulfil.",
+        label: "khalti.ts",
+        lang: "ts",
+        pkgs: ["khalti"],
+        code: `import { initiate, lookup } from "@lacspace/khalti";
+
+const opts = { secretKey: process.env.KHALTI_SECRET!, env: "test" as const };
+
+// 1. Start the payment — amount in paisa
+const { payment_url, pidx } = await initiate({
+  returnUrl: "https://shop.np/khalti/return",
+  websiteUrl: "https://shop.np",
+  amount: 240000,
+  purchaseOrderId: "ORD-1042",
+  purchaseOrderName: "Colour order",
+}, opts);
+// redirect the buyer to payment_url
+
+// 2. Confirm before fulfilling — the redirect alone is not proof of payment
+const status = await lookup(pidx, opts);   // "Completed" | "Pending" | "Refunded" | ...`,
+      },
+      {
+        id: "pay-connectips-fonepay",
+        title: "Connect IPS & Fonepay",
+        blurb:
+          "The bank-rail gateways: Connect IPS signs its token with your RSA key; Fonepay signs the request DV with HMAC-SHA512.",
+        label: "bank-rails.ts",
+        lang: "ts",
+        pkgs: ["connectips", "fonepay"],
+        code: `import { signToken, buildForm } from "@lacspace/connectips";
+import { buildRedirect, verifyResponse } from "@lacspace/fonepay";
+
+// Connect IPS — sign the transaction token with your RSA (PKCS#8) private key
+const token = await signToken(
+  { merchantId, appId, appName, txnId: "ORD-1042", txnDate, txnAmount: "2400", referenceId, remarks },
+  process.env.CONNECTIPS_PRIVATE_KEY!,   // PKCS#8 PEM
+);
+const cipsForm = buildForm({ /* merchant fields */ });   // POST to Connect IPS
+
+// Fonepay — HMAC-SHA512 signed redirect; verify the response DV on return
+const fp = buildRedirect(
+  { amt: "2400", pid: "ORD-1042", prn: "ref_1", ru: returnUrl, merchantCode },
+  process.env.FONEPAY_SECRET!,
+);
+const ok = await verifyResponse(query, process.env.FONEPAY_SECRET!);`,
+      },
+      {
+        id: "courier-webhook",
+        title: "Automate delivery status",
+        blurb:
+          "Verify an inbound Pathao webhook, normalize it to a canonical status, and advance the order — no more manual admin clicking.",
+        label: "app/api/pathao/route.ts",
+        lang: "ts",
+        pkgs: ["courier", "order"],
+        code: `import { verifyPathaoWebhook, parsePathaoWebhook } from "@lacspace/courier";
+
+export async function POST(req: Request) {
+  const secret = req.headers.get("x-pathao-signature");
+  if (!verifyPathaoWebhook({ headerSecret: secret, expectedSecret: process.env.PATHAO_WEBHOOK_SECRET! })) {
+    return new Response("unauthorized", { status: 401 });
+  }
+
+  const evt = parsePathaoWebhook(await req.text());
+  // evt.status is canonical: "picked_up" | "in_transit" | "delivered" | "returned" | ...
+  // look up evt.merchantOrderId and transition your @lacspace/order accordingly
+
+  return new Response("ok", { status: 200 });
+}`,
+        faqs: [
+          { q: "Do the payment packages hold my secret keys?", a: "No. You pass secrets in per call (or from your own env). The packages never store, log or transmit them anywhere except the gateway's own endpoint over HTTPS." },
+          { q: "Are these tied to Colour Nepal or any one store?", a: "No — they're generic gateway toolkits. They handle the signing, form-building and server-side verification every Nepali merchant integration needs, against your own order amount." },
+        ],
       },
     ],
   },
