@@ -208,7 +208,7 @@ real  0.12s   ·   run 2: 0.12s   run 3: 0.12s   run 4: 0.12s   run 5: 0.12s`} /
           <div className="ca-tpls">
             {TEMPLATES.map((t, i) => (
               <Reveal key={t.key} delay={(i % 4) * 40}>
-                <a className="ca-tpl" href={t.key === "marketplace" ? "https://www.npmjs.com/package/create-lacspace-app" : `https://templates.lacspace.com/${t.key}`} target="_blank" rel="noopener">
+                <a className="ca-tpl" href={`https://templates.lacspace.com/${t.key}`} target="_blank" rel="noopener">
                   <div className="sw" style={{ background: `linear-gradient(135deg, ${GRADS[i]})` }}>
                     <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "rgba(255,255,255,.92)", fontSize: 22 }}>Aa</span>
                   </div>
