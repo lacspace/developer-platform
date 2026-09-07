@@ -627,8 +627,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "markdown",
-        "v": "1.0.3",
-        "d": "A small, safe Markdown → HTML renderer — headings with anchor ids, nested & task lists, fenced code, blockquotes, GFM tables, images and links. HTML in the source is escaped. Includes extractHeadings() for a table of contents. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "A small, safe Markdown → HTML renderer — headings with anchor ids, nested & task lists, fenced code, GFM tables, strikethrough and autolinks. HTML in the source is escaped by default. Plus YAML frontmatter parsing, a nested table of contents, plain-text excerpts and an HTML sanitizer. Zero-dependency, isomorphic.",
         "kw": [
           "markdown",
           "md",
@@ -641,8 +641,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "money",
-        "v": "1.0.3",
-        "d": "Money done right — integer minor units (no floating-point cent bugs), currency-safe arithmetic, remainder-preserving allocation/split, and localized formatting via Intl. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Money done right — integer minor units (no floating-point cent bugs), currency-safe arithmetic, remainder-preserving allocation/split, explicit rounding modes (incl. banker's), Intl and Intl-free formatting, string parsing, and injected-rate conversion. Zero-dependency, isomorphic.",
         "kw": [
           "money",
           "currency",
@@ -875,8 +875,8 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "csv",
-        "v": "1.1.2",
-        "d": "Correct, RFC 4180 CSV parsing & stringifying — quoted fields, escaped quotes, newlines in cells, CRLF, custom delimiters and typed row objects. Zero-dependency, isomorphic.",
+        "v": "1.2.0",
+        "d": "Correct, RFC 4180 CSV parsing & stringifying — quoted fields, escaped quotes, newlines in cells, CRLF, custom dialects (delimiter/quote/escape/comment), TSV & BOM, plus opt-in type coercion, column mapping and a chunked/streaming parser. Zero-dependency, isomorphic.",
         "kw": [
           "csv",
           "csv-parser",
@@ -889,8 +889,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "xlsx",
-        "v": "1.1.1",
-        "d": "Write real Excel (.xlsx) files with zero dependencies and no headless browser — objects or arrays to a workbook, correct types (string/number/boolean/Date), bold headers, column widths, multiple sheets. Isomorphic (Node, edge, browser).",
+        "v": "1.2.0",
+        "d": "Read & write real Excel (.xlsx) with zero dependencies and no headless browser — objects or arrays to a workbook, typed cells (string/number/boolean/Date), per-column number formats, bold headers, column widths, multiple sheets, and built-in CSV↔XLSX conversion. Isomorphic (Node, edge, browser).",
         "kw": [
           "xlsx",
           "excel",
