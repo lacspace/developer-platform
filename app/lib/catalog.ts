@@ -115,8 +115,8 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "apikey",
-        "v": "1.2.2",
-        "d": "Issue & verify API keys the right way — prefixed high-entropy keys, store only the SHA-256 hash, constant-time verify, last-4 display. Isomorphic over Web Crypto.",
+        "v": "1.3.0",
+        "d": "Issue & verify API keys the right way — prefixed high-entropy keys, store only the SHA-256 hash, constant-time verify, plus a storage-agnostic record toolkit: public fingerprints, hierarchical scopes, expiry, key rotation with a grace window, and revocation. Isomorphic over Web Crypto.",
         "kw": [
           "api-key",
           "apikey",
@@ -129,8 +129,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "crypto",
-        "v": "1.1.4",
-        "d": "Safe, boring cryptography over Web Crypto — authenticated AES-256-GCM, PBKDF2 key derivation, SHA-256, HMAC, secure random and constant-time compare. Isomorphic (Node, edge, browser, RN).",
+        "v": "1.2.0",
+        "d": "Safe, boring cryptography over Web Crypto — authenticated AES-256-GCM, PBKDF2/HKDF key derivation, SHA-256/384/512, HMAC, timing-safe compare and unbiased secure random (tokens, UUIDs, integers). Isomorphic (Node, edge, browser, RN).",
         "kw": [
           "crypto",
           "aes",
@@ -273,8 +273,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "webauthn",
-        "v": "1.1.2",
-        "d": "Passkeys / biometric (FaceID, fingerprint, security keys) — browser ceremony helpers + server challenge, options and assertion verification (ES256/RS256) over Web Crypto. Zero-dependency, isomorphic.",
+        "v": "1.2.0",
+        "d": "Passkeys / biometric (FaceID, fingerprint, security keys) — browser ceremony helpers + server-side ES256/RS256/Ed25519 verification over Web Crypto, with passkey-sync backup flags, AAGUID, UV/resident-key policy and transports. Zero-dependency, isomorphic.",
         "kw": [
           "webauthn",
           "passkey",
@@ -717,8 +717,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "signed-url",
-        "v": "1.0.3",
-        "d": "HMAC-signed, expiring URLs & tokens over Web Crypto — secure download links, magic-login links, unsubscribe links and one-time-action tokens. Tamper-proof, timing-safe, zero-config. Isomorphic (Node, edge, browser).",
+        "v": "1.1.0",
+        "d": "HMAC-signed, expiring URLs & tokens over Web Crypto — secure download links, magic-login links, unsubscribe and one-time-action tokens — now with key rotation, method/IP/path binding, single-use nonces, signed claims and clock tolerance. Tamper-proof, timing-safe. Isomorphic (Node, edge, browser).",
         "kw": [
           "signed-url",
           "signed-token",
