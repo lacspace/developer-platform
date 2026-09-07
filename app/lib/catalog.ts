@@ -1,5 +1,5 @@
-// Full @lacspace package catalog — generated from the monorepo (78 scoped packages).
-// Plus 2 CLIs (create-lacspace-app, create-lacspace-seo) = 80 packages on npm.
+// Full @lacspace package catalog — generated from the monorepo (85 scoped packages).
+// Plus 2 CLIs (create-lacspace-app, create-lacspace-seo) = 87 packages on npm.
 
 export type Pkg = { n: string; v: string; d: string; kw: string[]; deps: number };
 export type Group = { group: string; icon: string; items: Pkg[] };
@@ -1049,7 +1049,62 @@ export const CATALOG: Group[] = [
         "deps": 0
       }
     ]
+  },
+  {
+    "group": "AI Kit",
+    "icon": "🤖",
+    "items": [
+      {
+        "n": "ai",
+        "v": "1.0.0",
+        "d": "A tiny, provider-agnostic LLM chat client over fetch — one chat()/stream() API for OpenAI, Anthropic, Google Gemini and any OpenAI-compatible endpoint (Groq, Together, OpenRouter, Ollama). Bring your own key, no SDK, isomorphic.",
+        "kw": ["ai", "llm", "chat", "openai", "anthropic", "claude", "gemini", "groq", "openrouter", "ollama"],
+        "deps": 0
+      },
+      {
+        "n": "prompt",
+        "v": "1.0.0",
+        "d": "A tiny, typed prompt-engineering toolkit — build, compose and render LLM prompts and chat messages with real type safety. Variable names are inferred from the template string, so .render() is type-checked. Zero-dependency, isomorphic.",
+        "kw": ["ai", "llm", "prompt", "prompt-engineering", "prompt-template", "chat-messages", "few-shot", "template", "type-inference", "typescript"],
+        "deps": 0
+      },
+      {
+        "n": "tokenizer",
+        "v": "1.0.0",
+        "d": "A fast token estimator, LLM cost calculator and context-budget manager — good-enough GPT/Claude/Gemini token counts without the 3 MB tiktoken/wasm. Zero-dependency, isomorphic and fully typed.",
+        "kw": ["tokenizer", "token-counter", "token-estimate", "llm", "ai", "prompt-engineering", "openai", "claude", "gpt", "cost-calculator"],
+        "deps": 0
+      },
+      {
+        "n": "json-repair",
+        "v": "1.0.0",
+        "d": "Extract and repair JSON from messy LLM output — strip code fences and prose, fix trailing commas, single quotes, unquoted keys and Python literals, and close truncated objects. Zero-dependency, isomorphic, typed.",
+        "kw": ["json-repair", "json-parse", "extract-json", "llm", "ai", "openai", "prompt-engineering", "structured-output", "streaming-json", "partial-json"],
+        "deps": 0
+      },
+      {
+        "n": "chunk",
+        "v": "1.0.0",
+        "d": "A tiny text splitter for RAG and long-context prompts — recursive character, Markdown, code, sentence and paragraph chunking with overlap and a pluggable token-aware lengthFn. Zero-dependency, isomorphic.",
+        "kw": ["chunk", "text-splitter", "chunking", "rag", "retrieval", "embeddings", "recursive-character-text-splitter", "markdown-splitter", "code-splitter", "ai"],
+        "deps": 0
+      },
+      {
+        "n": "stream",
+        "v": "1.0.0",
+        "d": "A zero-dependency, isomorphic parser for Server-Sent Events and streaming LLM responses — turn a fetch body into a clean async iterator of text and tool-call deltas, normalized across OpenAI and Anthropic. No SDK, keyless.",
+        "kw": ["sse", "server-sent-events", "eventsource", "streaming", "llm", "openai", "anthropic", "chat-completion", "tool-calls", "async-iterator"],
+        "deps": 0
+      },
+      {
+        "n": "ai-tools",
+        "v": "1.0.0",
+        "d": "Define LLM function-calling / tool-use tools once and use them with any provider — generate the OpenAI, Anthropic or Google tool spec AND get a runtime dispatcher that validates arguments and calls your handler. Zero-dependency, keyless.",
+        "kw": ["ai", "llm", "function-calling", "tool-use", "tool-calling", "agents", "openai", "anthropic", "gemini", "json-schema"],
+        "deps": 0
+      }
+    ]
   }
 ];
 
-export const CATALOG_TOTAL = 80;
+export const CATALOG_TOTAL = 87;
