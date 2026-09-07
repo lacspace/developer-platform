@@ -259,8 +259,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "redact",
-        "v": "1.0.6",
-        "d": "Redact secrets & PII from strings and objects before logging — masks sensitive keys and patterns (JWTs, API keys, emails, cards, IPs). Safe AWS/Mongo logs. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Redact secrets & PII from logs — masks by sensitive key and by pattern (Luhn-checked cards, SSNs, JWTs, IBANs, IPs, AWS/GitHub/Slack/Stripe keys, private keys). Cycle-safe deep object redaction with partial masking, custom patterns and a never-throw guarantee. Zero-dependency, isomorphic.",
         "kw": [
           "redact",
           "mask",
@@ -557,8 +557,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "env",
-        "v": "1.0.6",
-        "d": "Typed, validated environment variables — declare a schema, validate process.env at boot, get a typed frozen object or a clear fail-fast error. A zero-dependency t3-env / envalid alternative.",
+        "v": "1.1.0",
+        "d": "Typed, validated environment variables — declare a schema, validate at boot, get a typed frozen object or one clear aggregated error. Coercers for ports, URLs, durations, byte sizes, lists & enums, ${VAR} expansion, secret-redacted errors and non-throwing safe-parse. A zero-dependency t3-env / envalid alternative.",
         "kw": [
           "env",
           "environment-variables",
@@ -571,8 +571,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "flags",
-        "v": "1.0.4",
-        "d": "Feature flags & A/B experiments with no SaaS and no infrastructure — deterministic bucketing (same user always gets the same result), targeting rules, percentage rollouts and weighted variants. Synchronous, zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Feature flags & A/B experiments with no SaaS and no infrastructure — deterministic percentage rollouts, targeting segments, weighted variants, kill switches and per-user QA overrides, with an explain() that tells you why each flag resolved. Synchronous, zero-dependency, isomorphic.",
         "kw": [
           "feature-flags",
           "feature-toggle",
@@ -669,8 +669,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "validate",
-        "v": "1.0.3",
-        "d": "A tiny, typed schema validator — the ergonomics of zod (parse/safeParse, object/array/enum/union, coercion, type inference) in a zero-dependency, isomorphic package. Great for forms, API bodies, env and query strings.",
+        "v": "1.1.0",
+        "d": "A tiny, typed schema validator with Zod-style ergonomics — parse/safeParse, objects/arrays/tuples, unions & discriminated unions, records/maps/sets, recursive (lazy) schemas, coercion, refinements/transforms/pipes, and nested form-error formatting, all fully type-inferred. Zero-dependency, isomorphic.",
         "kw": [
           "validation",
           "schema",
