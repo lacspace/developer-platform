@@ -57,18 +57,19 @@ const CSS = `
 .faq-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0 8px}
 .faq-nav a{font-size:13px;color:var(--muted);border:1px solid var(--hairline);background:var(--panel);border-radius:999px;padding:7px 14px;transition:color .15s,border-color .15s,background .15s}
 .faq-nav a:hover{color:var(--fg);border-color:var(--accent);background:var(--panel-2)}
-.faq-group{margin-top:44px;scroll-margin-top:84px}
-.faq-group h2{font-size:clamp(1.3rem,3vw,1.7rem);letter-spacing:-.02em;margin-bottom:14px}
-.faq-list{display:flex;flex-direction:column;gap:10px}
-.faq-item{border:1px solid var(--hairline);border-radius:14px;background:var(--panel);overflow:hidden;transition:border-color .15s,background .15s}
-.faq-item[open]{border-color:var(--accent-soft);background:var(--panel-2)}
-.faq-item summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:flex-start;gap:12px;font-weight:560;font-size:15.5px;color:var(--fg)}
-.faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary:hover{color:#fff}
-.faq-q-ic{flex:none;width:20px;height:20px;border-radius:6px;border:1px solid var(--hairline-2);color:var(--accent);display:grid;place-items:center;font-size:14px;line-height:1;transition:transform .2s,background .2s,color .2s;margin-top:1px}
-.faq-item[open] .faq-q-ic{transform:rotate(45deg);background:var(--accent);color:#0a0e17;border-color:transparent}
-.faq-item .faq-body{padding:0 18px 18px 50px}
-.faq-item .faq-body p{color:var(--muted);font-size:14.5px;line-height:1.65;margin:0}
+.faq-group{margin-top:52px;scroll-margin-top:84px}
+.faq-group > h2{font-size:clamp(1.3rem,3vw,1.7rem);letter-spacing:-.02em;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.faq-group > h2 .faq-count{font-size:12px;font-weight:500;color:var(--muted);border:1px solid var(--hairline);border-radius:999px;padding:2px 9px}
+.faq-group > .faq-rule{height:1px;background:var(--hairline);margin:14px 0 6px}
+.faq-list{display:flex;flex-direction:column}
+.faq-item{padding:22px 0;border-bottom:1px solid var(--hairline);scroll-margin-top:84px}
+.faq-item:last-child{border-bottom:none}
+.faq-item h3{font-size:16.5px;font-weight:600;letter-spacing:-.01em;color:var(--fg);margin:0 0 8px;line-height:1.4}
+.faq-item h3 a.faq-anchor{color:inherit;display:inline-flex;align-items:baseline;gap:8px}
+.faq-item h3 a.faq-anchor .faq-hash{color:var(--accent);opacity:0;font-weight:500;transition:opacity .15s}
+.faq-item:hover h3 a.faq-anchor .faq-hash,.faq-item:target h3 a.faq-anchor .faq-hash{opacity:.9}
+.faq-item:target h3{color:var(--accent)}
+.faq-item .faq-body p{color:var(--muted);font-size:15px;line-height:1.72;margin:0;max-width:74ch}
 .faq-code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;background:#0A0E18;border:1px solid var(--hairline);border-radius:6px;padding:1px 6px;color:#e8e8f0;white-space:nowrap}
 `;
 
@@ -109,19 +110,30 @@ export default function FaqPage() {
         <section className="sec" style={{ paddingTop: 8 }}>
           {FAQ_GROUPS.map((g) => (
             <div key={g.category} id={slugify(g.category)} className="faq-group">
-              <Reveal><h2>{g.category}</h2></Reveal>
+              <Reveal>
+                <h2>
+                  {g.category}
+                  <span className="faq-count">{g.items.length}</span>
+                </h2>
+              </Reveal>
+              <div className="faq-rule" />
               <div className="faq-list">
-                {g.items.map((f) => (
-                  <Reveal key={f.q}>
-                    <details className="faq-item">
-                      <summary>
-                        <span className="faq-q-ic" aria-hidden>+</span>
-                        <span>{f.q}</span>
-                      </summary>
-                      <div className="faq-body"><Answer text={f.a} /></div>
-                    </details>
-                  </Reveal>
-                ))}
+                {g.items.map((f) => {
+                  const id = slugify(f.q);
+                  return (
+                    <Reveal key={f.q}>
+                      <article className="faq-item" id={id}>
+                        <h3>
+                          <a className="faq-anchor" href={`#${id}`}>
+                            <span>{f.q}</span>
+                            <span className="faq-hash" aria-hidden>#</span>
+                          </a>
+                        </h3>
+                        <div className="faq-body"><Answer text={f.a} /></div>
+                      </article>
+                    </Reveal>
+                  );
+                })}
               </div>
             </div>
           ))}
