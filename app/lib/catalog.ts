@@ -11,8 +11,8 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "analytics",
-        "v": "2.0.7",
-        "d": "Event tracking for Lacspace platforms — batching and an offline queue.",
+        "v": "2.1.0",
+        "d": "Event tracking for Lacspace platforms — a spec-style track/identify/page/group/alias client with batching, an offline retry queue, consent + Do-Not-Track gating, and pluggable middleware. Every transport, clock and timer is injectable, so it never touches the network by default.",
         "kw": [
           "lacspace",
           "analytics",
@@ -293,8 +293,8 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "llms-txt",
-        "v": "1.3.2",
-        "d": "Generate and parse llms.txt and llms-full.txt (the llmstxt.org standard) — a Markdown map of your site for LLMs. Zero-dependency, isomorphic.",
+        "v": "1.4.0",
+        "d": "Generate, parse, and validate llms.txt / llms-full.txt (the llmstxt.org standard) — build both from your sitemap, routes, or a page list, with ## Optional blocks. A Markdown map of your site for LLMs. Zero-dependency, isomorphic.",
         "kw": [
           "llms-txt",
           "llms-full-txt",
@@ -335,8 +335,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "rss",
-        "v": "1.3.2",
-        "d": "Generate RSS 2.0, Atom 1.0 and JSON Feed 1.1 from one set of items — content syndication for blogs and news. Zero-dependency, isomorphic.",
+        "v": "1.4.0",
+        "d": "Generate RSS 2.0, Atom 1.0 and JSON Feed 1.1 from one item set — with podcast (iTunes) tags, enclosures, media, rich channel metadata and a one-call feeds() builder. Zero-dependency, isomorphic.",
         "kw": [
           "rss",
           "atom",
@@ -363,8 +363,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "site-verify",
-        "v": "1.2.2",
-        "d": "Search-engine site verification — meta tags, Next.js verification metadata and file tokens for Google Search Console, Bing, Yandex, Baidu, Pinterest, Ahrefs, Facebook & more. Zero-dependency, isomorphic.",
+        "v": "1.3.0",
+        "d": "Search-engine site verification — meta tags, DNS TXT records, upload files, Next.js verification metadata, batch emit, and tag parsing for Google Search Console, Bing, Yandex, Baidu, Pinterest, Ahrefs, Facebook & more. Zero-dependency, isomorphic.",
         "kw": [
           "site-verification",
           "google-search-console",
