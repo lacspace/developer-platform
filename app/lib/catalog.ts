@@ -957,22 +957,22 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "commission",
-        "v": "1.0.2",
-        "d": "Commission & payout calculation engine — flat, percentage and marginal-tiered rules with min/cap, plus exact proportional split with remainder distribution. Integer minor units, zero floats. Isomorphic.",
+        "v": "1.1.0",
+        "d": "Commission & payout engine — flat/percent/marginal-tier/progressive-slab rules with caps & floors, composite and per-category rates, tax-on-commission (inclusive/exclusive), explicit rounding modes, and a marketplace split (platform + seller + affiliate) whose lines conserve the gross exactly. Integer minor units, zero floats. Isomorphic.",
         "kw": ["commission", "payout", "marketplace", "tiered", "revenue-share", "split"],
         "deps": 0
       },
       {
         "n": "settlement",
-        "v": "1.0.2",
-        "d": "Settlement, netting & reconciliation for multi-party payouts — net signed ledger entries per account, reconcile expected vs actual, and list payable positive balances. Integer minor units, pure functions. Isomorphic.",
+        "v": "1.1.0",
+        "d": "Settlement, netting & reconciliation for marketplace payouts — batch-settle transactions per payee, deduct commission/fees/tax, hold rolling reserves, schedule payout dates (skipping weekends & holidays) and build statements. Integer minor units, pure functions. Isomorphic.",
         "kw": ["settlement", "netting", "reconciliation", "payouts", "multi-party", "fintech"],
         "deps": 0
       },
       {
         "n": "coupon",
-        "v": "1.0.1",
-        "d": "Discount & coupon engine — percent, fixed and free-shipping codes with validity windows, minimum-subtotal, discount caps and usage limits. Integer minor units, no float drift. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Discount & coupon engine — percent, fixed, free-shipping, BOGO and tiered codes, with validity windows, total/per-user limits, first-order and product/category scope, a currency guard, safe coupon stacking and CSPRNG code generation. Integer minor units, no float drift. Zero-dependency, isomorphic.",
         "kw": ["coupon", "discount", "promo-code", "voucher", "free-shipping", "checkout"],
         "deps": 0
       },
@@ -1013,8 +1013,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "refund",
-        "v": "1.0.2",
-        "d": "Returns / RMA workflow and refund-calculation engine — partial refunds with correct tax apportionment, restocking fees, restock lists and a return state machine. Integer minor units, zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Returns / RMA workflow and refund engine — line-level partial refunds with proportional tax & shipping, restocking fees, a reason-code policy check (injectable clock), multi-tender split refunds, restock lists and a return state machine. Remainder-safe integer minor units, zero-dependency, isomorphic.",
         "kw": ["refund", "returns", "rma", "ecommerce", "partial-refund", "restock"],
         "deps": 0
       },
