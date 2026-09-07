@@ -813,8 +813,8 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "indicators",
-        "v": "1.1.4",
-        "d": "Streaming technical indicators (RSI, MACD, EMA, Bollinger, ATR, Supertrend, ADX, VWAP) with O(1) incremental updates for live price feeds. Zero-dependency.",
+        "v": "1.2.0",
+        "d": "30+ streaming technical indicators (RSI, MACD, EMA, Bollinger, ATR, Supertrend, ADX, VWAP, Ichimoku, Parabolic SAR, StochRSI, CCI, MFI, Keltner, Donchian, OBV, CMF and more) with O(1) incremental next() updates for live price feeds, plus batch helpers. Zero-dependency.",
         "kw": [
           "technical-indicators",
           "trading",
@@ -827,8 +827,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "market",
-        "v": "1.1.5",
-        "d": "Stock-market money math — P&L, returns, CAGR, XIRR, tick-size rounding, circuit limits, position sizing and an Indian brokerage & charges calculator (STT, GST, SEBI, stamp). Zero-dependency.",
+        "v": "1.2.0",
+        "d": "Stock-market money math — P&L, returns, CAGR, XIRR, tick/lot rounding, circuit limits, position sizing and an Indian brokerage & charges calculator (STT, GST, SEBI, stamp), plus OHLCV candle resampling & gap detection, VWAP, corporate-action adjusted-close and beta/log-returns. Zero-dependency.",
         "kw": [
           "stock-market",
           "trading",
@@ -841,8 +841,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "market-clock",
-        "v": "1.0.7",
-        "d": "Holiday-aware, timezone-correct trading clock — is NSE/BSE open now, next open/close, pre-open, holidays. Bring your own exchange spec. Zero-dependency.",
+        "v": "1.1.0",
+        "d": "Holiday-aware, timezone-correct trading clock — is NSE/BSE/NYSE/LSE open now, which session segment (pre-open/regular/post), next open/close, half-days and the next N sessions. Built-in presets for 8 exchanges (DST-correct) or bring your own spec. Zero-dependency.",
         "kw": [
           "market-hours",
           "trading-hours",
@@ -855,8 +855,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "paper-trade",
-        "v": "1.1.5",
-        "d": "Headless paper-trading engine — virtual wallet, market/limit/stop orders that fill against live prices, positions, holdings and live P&L. The simulator core behind StockYatra. Zero-dependency.",
+        "v": "1.2.0",
+        "d": "Headless paper-trading engine — a virtual wallet with market, limit, stop, stop-limit and trailing-stop orders (plus DAY/GTC/IOC/FOK time-in-force) that fill against live price ticks, average-cost positions with realized & unrealized P&L, pluggable commission + slippage models, and equity-curve/drawdown analytics. The simulator core behind StockYatra. Zero-dependency.",
         "kw": [
           "paper-trading",
           "trading-simulator",
