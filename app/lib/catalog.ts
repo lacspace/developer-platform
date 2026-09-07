@@ -751,8 +751,8 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "email-templates",
-        "v": "1.0.7",
-        "d": "Compose bulletproof, responsive, dark-mode-aware HTML emails from simple blocks — buttons, OTP codes, invoices — with ready-made OTP/welcome/alert/invoice templates. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Compose bulletproof, responsive, dark-mode HTML emails from simple blocks, plus 13 ready-made transactional templates (OTP, verify, password-reset, magic-link, receipt, order, shipping, invitation, digest, announcement). Ships plaintext generation, preheaders and {{var}} i18n interpolation. Zero-dependency, isomorphic.",
         "kw": [
           "email-template",
           "html-email",
@@ -765,8 +765,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "email-validate",
-        "v": "1.0.7",
-        "d": "Smart email validation — syntax, disposable/temp-mail detection, role & free-provider flags, Gmail normalization and 'did you mean?' typo suggestions. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Smart, network-free email validation — RFC-5322 syntax (incl. quoted local parts & IP-literal domains), disposable/temp-mail & role-account detection, free-provider flags, Gmail normalization and 'did you mean?' typo suggestions. Zero-dependency, isomorphic.",
         "kw": [
           "email-validation",
           "email-validator",
@@ -779,8 +779,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "email-verify",
-        "v": "1.0.7",
-        "d": "Best-effort email deliverability checks for Node — syntax + disposable, MX record lookup and an optional SMTP RCPT probe (no mail sent). Zero npm dependencies.",
+        "v": "1.1.0",
+        "d": "Best-effort email deliverability for Node — syntax + disposable/role, MX lookup with priority ranking, an optional SMTP RCPT probe (no mail sent), catch-all detection, a 0-100 confidence score, and de-duped batch verification. All DNS/SMTP injectable; zero npm dependencies.",
         "kw": [
           "email-verification",
           "email-verify",
@@ -793,8 +793,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "mailer",
-        "v": "1.1.1",
-        "d": "A tiny zero-dependency SMTP client for Node backends — send email over raw net/tls with STARTTLS, AUTH, attachments and provider presets (Hostinger, Gmail, Outlook, Zoho…). One-line setup.",
+        "v": "1.2.0",
+        "d": "A tiny zero-dependency SMTP client for Node — send email over raw net/tls with STARTTLS & AUTH, plus a fluent MIME builder (inline images, attachments, alternatives), RFC 5322 address + RFC 2047 helpers, batch send with retry, and no-network test transports. Provider presets (Hostinger, Gmail, Outlook, Zoho…) make setup one line.",
         "kw": [
           "smtp",
           "email",
