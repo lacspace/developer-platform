@@ -1040,29 +1040,29 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "esewa",
-        "v": "1.1.1",
-        "d": "eSewa ePay v2 (Nepal) payment gateway toolkit over Web Crypto — HMAC-SHA256 signing, form building, response verification and transaction status checks. Zero-dependency, isomorphic.",
+        "v": "1.2.0",
+        "d": "eSewa ePay v2 (Nepal) payment toolkit over Web Crypto — HMAC-SHA256 signing, checkout-form building, response verify/decode, amount validation, CSPRNG transaction ids, and transaction-status request/parse. Zero-dependency, isomorphic.",
         "kw": ["nepal", "payment", "esewa", "epay-v2", "hmac-sha256", "web-crypto"],
         "deps": 0
       },
       {
         "n": "khalti",
-        "v": "1.0.1",
-        "d": "Khalti KPG-2 (ePayment API v2, Nepal) client — initiate payments, look up status, typed errors and Key auth over global fetch. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Khalti KPG-2 (ePayment API v2, Nepal) client — initiate payments and look up status over injectable fetch, plus pure helpers: request builders, paisa amount validation, callback verification, sandbox/production presets and a CSPRNG order-id generator. Zero-dependency, isomorphic.",
         "kw": ["nepal", "payment", "khalti", "kpg-2", "epayment", "fetch"],
         "deps": 0
       },
       {
         "n": "connectips",
-        "v": "1.0.1",
-        "d": "Connect IPS (Nepal) merchant integration over Web Crypto — sign the redirect transaction token with your RSA private key and validate transactions server-to-server. Zero-dep, isomorphic.",
+        "v": "1.1.0",
+        "d": "Connect IPS (Nepal) merchant integration over Web Crypto — RSA-SHA256-sign the redirect token, build or send the validate-txn request, verify signatures, and validate/inspect the canonical message fields offline. Zero-dep, isomorphic.",
         "kw": ["connectips", "nepal", "payment", "nchl", "rsa-sha256", "web-crypto"],
         "deps": 0
       },
       {
         "n": "fonepay",
-        "v": "1.0.1",
-        "d": "Fonepay (Nepal) merchant redirect / Request-To-Pay over Web Crypto — HMAC-SHA512 sign the request DV and verify the response DV. Zero-dep, isomorphic.",
+        "v": "1.1.0",
+        "d": "Fonepay (Nepal) Request-To-Pay over Web Crypto — HMAC-SHA512 sign the request DV and verify the response DV, now with request validation, a CSPRNG PRN generator, auto-submit form + dynamic-QR builders and sandbox/live presets. Zero-dep, isomorphic.",
         "kw": ["fonepay", "nepal", "payment", "request-to-pay", "hmac-sha512", "web-crypto"],
         "deps": 0
       }
