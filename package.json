@@ -32,6 +32,7 @@
     "lacspace-http": "^0.1.0",
     "lacspace-json": "^0.1.0",
     "lacspace-qr": "^0.1.0",
+    "lacspace-schema": "^0.1.0",
     "lacspace-scraper": "^0.1.0",
     "lacspace-svg": "^0.1.0",
     "next": "15.5.25",
