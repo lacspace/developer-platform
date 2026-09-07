@@ -157,15 +157,21 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "jwt",
-        "v": "1.3.2",
-        "d": "JSON Web Tokens (HS256/384/512) with strict expiry/issuer/audience checks + secure random & CSRF tokens. Isomorphic over Web Crypto — Node, edge, browser.",
+        "v": "1.4.0",
+        "d": "JSON Web Tokens over Web Crypto — HS/RS/ES/EdDSA signing, JWK/JWKS with kid-based key rotation, and strict expiry/issuer/audience/subject/jti checks. Plus refresh-token rotation and CSRF tokens. Isomorphic — Node, edge, browser.",
         "kw": [
           "jwt",
           "jsonwebtoken",
           "hs256",
           "token",
           "auth",
-          "csrf"
+          "csrf",
+          "eddsa",
+          "ed25519",
+          "jwk",
+          "jwks",
+          "key-rotation",
+          "oidc"
         ],
         "deps": 1
       },
@@ -185,43 +191,55 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "mfa",
-        "v": "1.1.4",
-        "d": "Orchestrate multi-factor auth — combine password + TOTP + passkeys into 2FA/3FA step-up flows with NIST assurance levels (AAL). Zero-dependency (bar @lacspace/otp), isomorphic.",
+        "v": "1.2.0",
+        "d": "Orchestrate multi-factor auth — combine password + TOTP + passkeys into 2FA/3FA step-up flows with NIST assurance levels (AAL), now with factor enrollment flows, failed-attempt lockout, trusted-device tokens and recovery codes. Isomorphic (bar @lacspace/otp).",
         "kw": [
           "mfa",
           "2fa",
           "3fa",
           "multi-factor",
           "step-up-auth",
-          "aal"
+          "aal",
+          "enrollment",
+          "lockout",
+          "trusted-device",
+          "recovery-codes"
         ],
         "deps": 2
       },
       {
         "n": "otp",
-        "v": "1.1.4",
-        "d": "TOTP & HOTP two-factor auth, Google Authenticator compatible — generate secrets, compute/verify codes and build otpauth:// QR URIs. Built on Web Crypto: runs on Node, edge and browser. Zero-dependency, isomorphic.",
+        "v": "1.2.0",
+        "d": "TOTP & HOTP two-factor auth, Google Authenticator compatible — generate secrets, compute/verify codes, parse and build otpauth:// QR URIs, and issue single-use recovery codes. Built on Web Crypto: Node, edge and browser. Zero-dependency, isomorphic.",
         "kw": [
           "otp",
           "totp",
           "hotp",
           "2fa",
           "two-factor",
-          "authenticator"
+          "authenticator",
+          "otpauth-uri",
+          "recovery-codes",
+          "base32"
         ],
         "deps": 0
       },
       {
         "n": "password",
-        "v": "1.0.6",
-        "d": "Password hashing & verification — PBKDF2-HMAC-SHA256 (OWASP iterations) with a portable PHC string + a strength estimator. Isomorphic over Web Crypto.",
+        "v": "1.1.0",
+        "d": "Password hashing & verification — PBKDF2-HMAC-SHA256 (OWASP iterations, portable PHC string) plus a zxcvbn-style strength estimator, k-anonymity breach check, a configurable policy evaluator, and CSPRNG passphrase/password generators. Isomorphic over Web Crypto.",
         "kw": [
           "password",
           "hash",
           "pbkdf2",
           "password-hashing",
           "verify",
-          "phc"
+          "phc",
+          "breach-check",
+          "haveibeenpwned",
+          "password-strength",
+          "passphrase",
+          "password-policy"
         ],
         "deps": 1
       },
