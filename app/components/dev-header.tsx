@@ -38,7 +38,7 @@ const MENUS: Menu[] = [
     label: "Tools",
     href: "/tools",
     items: [
-      { label: "All developer tools", href: "/tools", desc: "12 free, keyless CLIs + libraries" },
+      { label: "All developer tools", href: "/tools", desc: "16 free, keyless CLIs + libraries" },
       { label: "lacspace-scraper", href: "/tools/scraper", desc: "Scrape any website → JSON/CSV/Excel" },
       { label: "lacspace-sql", href: "/tools/sql", desc: "SQL over CSV/JSON/Excel files" },
       { label: "lacspace-inspect", href: "/tools/inspect", desc: "Website audit, graded A–F" },

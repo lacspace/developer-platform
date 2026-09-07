@@ -90,7 +90,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
     items: [
       {
         q: "What developer tools does Lacspace offer?",
-        a: "Twelve free, keyless tools: lacspace-leads (Google Maps lead finder), lacspace-scraper (website scraper), lacspace-monitor (change & uptime monitor), lacspace-enrich (company & contact enrichment), lacspace-extract (PDF/DOCX/HTML extraction), lacspace-sql (SQL over data files), lacspace-inspect (site audit), lacspace-cron (cron toolkit), lacspace-dotenv (.env toolkit), lacspace-webhook (webhook receiver), lacspace-har (HAR analyser) and lacspace-icon (favicon/PWA generator).",
+        a: "Sixteen free, keyless tools: lacspace-leads (Google Maps lead finder), lacspace-scraper (website scraper), lacspace-monitor (change & uptime monitor), lacspace-enrich (company & contact enrichment), lacspace-extract (PDF/DOCX/HTML extraction), lacspace-sql (SQL over data files), lacspace-inspect (site audit), lacspace-cron (cron toolkit), lacspace-dotenv (.env toolkit), lacspace-webhook (webhook receiver), lacspace-har (HAR analyser), lacspace-icon (favicon/PWA generator), lacspace-http (terminal API client & .http runner), lacspace-fake (fake/seed data generator), lacspace-deps (dependency & licence auditor) and lacspace-json (jq-style query, convert, validate & merge).",
       },
       {
         q: "How do I run a tool without installing it?",
