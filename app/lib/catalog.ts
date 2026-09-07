@@ -950,8 +950,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "inventory",
-        "v": "1.0.2",
-        "d": "Stock-tracking engine that prevents overselling — reserve, release, commit & restock over a plain { onHand, reserved } state. Immutable, bring-your-own-store, throws before it oversells. Isomorphic.",
+        "v": "1.1.0",
+        "d": "Headless stock engine that prevents overselling — reserve/commit/restock over plain { onHand, reserved } state, plus multi-location transfers, reorder points, lot/expiry FIFO-FEFO allocation, and an append-only movements ledger with low-stock & expiring-soon reports. Immutable, bring-your-own-store, isomorphic.",
         "kw": ["inventory", "stock", "reservation", "oversell", "ecommerce", "fulfilment"],
         "deps": 0
       },
@@ -985,8 +985,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "ledger",
-        "v": "1.0.1",
-        "d": "A tiny double-entry ledger & wallet — balanced transactions, per-account balances and a trial balance that always sums to zero. Integer minor units, immutable ops, crypto-random ids. Isomorphic.",
+        "v": "1.1.0",
+        "d": "A tiny double-entry ledger & wallet in integer minor units — balanced journal entries, a chart of accounts with correct normal balances, trial balance, Balance Sheet & Income Statement, period close and idempotent posting. Immutable, zero-dep, isomorphic.",
         "kw": ["ledger", "double-entry", "accounting", "wallet", "trial-balance", "minor-units"],
         "deps": 0
       },
@@ -999,8 +999,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "courier",
-        "v": "1.0.2",
-        "d": "Courier / last-mile delivery toolkit — canonical delivery state machine, Pathao (Nepal) adapter, and inbound webhook verification + status normalization. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Courier / last-mile delivery toolkit — a canonical delivery state machine, tracking-number validation with carrier detection (UPS/FedEx/USPS/DHL + regional, check digits), tracking-event timelines, business-day ETA/SLA, tracking-URL building, a Pathao (Nepal) adapter, and inbound webhook verification + status normalization. Zero-dependency, isomorphic.",
         "kw": ["courier", "logistics", "delivery", "pathao", "nepal", "webhook"],
         "deps": 0
       },
@@ -1020,8 +1020,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "shipping",
-        "v": "1.1.1",
-        "d": "Checkout-time shipping-rate calculator — flat / weight / price / item rate tables by zone, free-shipping thresholds, surcharges and handling, returning sorted method quotes. Integer minor units, zero-dependency, isomorphic.",
+        "v": "1.2.0",
+        "d": "Checkout-time shipping-rate calculator — zone rate tables, weight-break brackets, dimensional/volumetric weight, flat/price/item strategies, free & discounted thresholds, surcharges + handling breakdowns, and sorted multi-method quotes with ETA. Integer minor units, zero-dependency, isomorphic.",
         "kw": ["shipping", "shipping-rates", "ecommerce", "checkout", "free-shipping", "delivery"],
         "deps": 0
       },
