@@ -1,4 +1,4 @@
-// Full @lacspace package catalog — generated from the monorepo (89 scoped packages).
+// Full @lacspace package catalog — generated from the monorepo (93 scoped packages).
 // Plus 2 CLIs (create-lacspace-app, create-lacspace-seo) = 87 packages on npm.
 
 export type Pkg = { n: string; v: string; d: string; kw: string[]; deps: number };
@@ -1138,7 +1138,41 @@ export const CATALOG: Group[] = [
         "deps": 0
       }
     ]
+  },
+  {
+    "group": "Dates & Time",
+    "icon": "🕒",
+    "items": [
+      {
+        "n": "datetime",
+        "v": "1.0.0",
+        "d": "An immutable date-time toolkit — arithmetic, start/end of unit, diff & breakdown, comparison, token format/parse and ISO — a tiny date-fns/dayjs with no dependencies. Zero-dependency, isomorphic.",
+        "kw": ["date", "time", "datetime", "date-fns", "dayjs", "moment", "immutable", "format", "parse", "diff"],
+        "deps": 0
+      },
+      {
+        "n": "duration",
+        "v": "1.0.0",
+        "d": "A Duration type — parse, build, normalize and do arithmetic on ISO-8601 time spans, calendar-honest about months & years (never silently assumes a 30-day month). Pairs with @lacspace/humanize for display. Zero-dependency, isomorphic.",
+        "kw": ["duration", "iso8601", "parse-duration", "time-span", "period", "date-math", "temporal", "immutable", "typescript", "isomorphic"],
+        "deps": 0
+      },
+      {
+        "n": "timezone",
+        "v": "1.0.0",
+        "d": "An IANA timezone toolkit built on Intl — DST-correct offsets, wall-clock parts, zoned↔UTC conversion and DST detection, with no bundled tz database so it stays tiny and always current. Zero-dependency, isomorphic.",
+        "kw": ["timezone", "iana", "intl", "dst", "utc-offset", "zoned-time", "wall-clock", "convert-timezone", "typescript", "isomorphic"],
+        "deps": 0
+      },
+      {
+        "n": "interval",
+        "v": "1.0.0",
+        "d": "Time ranges, date iteration and business-day math — overlaps, merge, free/busy invert, eachDay/Week/Month, and add/subtract business days with weekend & holiday config. Zero-dependency, isomorphic.",
+        "kw": ["interval", "date-range", "time-range", "overlap", "merge-intervals", "free-busy", "date-iteration", "business-days", "typescript", "isomorphic"],
+        "deps": 0
+      }
+    ]
   }
 ];
 
-export const CATALOG_TOTAL = 91;
+export const CATALOG_TOTAL = 95;

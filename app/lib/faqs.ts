@@ -20,7 +20,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
     items: [
       {
         q: "What is the Lacspace developer platform?",
-        a: "It's a free ecosystem for JavaScript and TypeScript developers: a library of more than 89 zero-dependency `@lacspace` packages, a set of standalone command-line tools, and `create-lacspace-app` — a CLI that scaffolds a finished Next.js app. Everything is documented at developer.lacspace.com and published openly to npm.",
+        a: "It's a free ecosystem for JavaScript and TypeScript developers: a library of more than 93 zero-dependency `@lacspace` packages, a set of standalone command-line tools, and `create-lacspace-app` — a CLI that scaffolds a finished Next.js app. Everything is documented at developer.lacspace.com and published openly to npm.",
       },
       {
         q: "Are the Lacspace packages and tools really free?",
@@ -57,7 +57,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
     items: [
       {
         q: "How many @lacspace packages are there and what do they cover?",
-        a: "There are more than 89 packages, grouped into kits: Core, Security, SEO, React, App & Utils, Backend, Data, Commerce & Ledger, Stock, Mail, Web, the AI Kit, the Testing Kit and regional payments. Between them they cover authentication, JWTs, crypto, validation, forms, SEO metadata, sitemaps, Open Graph images, money, dates, CSV/Excel, caching, rate-limiting, LLM chat and streaming, prompt engineering, token counting, RAG chunking, assertions, mocking, test fixtures and snapshots, and much more.",
+        a: "There are more than 93 packages, grouped into kits: Core, Security, SEO, React, App & Utils, Backend, Data, Commerce & Ledger, Stock, Mail, Web, the AI Kit, the Testing Kit, the Dates & Time kit and regional payments. Between them they cover authentication, JWTs, crypto, validation, forms, SEO metadata, sitemaps, Open Graph images, money, dates, CSV/Excel, caching, rate-limiting, LLM chat and streaming, prompt engineering, token counting, RAG chunking, assertions, mocking, test fixtures and snapshots, and much more.",
       },
       {
         q: "How do I install an @lacspace package?",
