@@ -943,8 +943,8 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "cart",
-        "v": "1.0.2",
-        "d": "Headless, framework-agnostic shopping-cart engine — pure, immutable & serializable. Add/merge lines, set quantities, compute tax/discount/shipping totals in integer minor units. Isomorphic (Node, edge, browser).",
+        "v": "1.1.0",
+        "d": "Headless, framework-agnostic shopping-cart engine — pure, immutable & serializable. Line-item options/add-ons, line & cart discounts (%/fixed), injectable tax hooks (inclusive/exclusive), a full totals breakdown, plus serialize/hydrate/merge — all in integer minor units. Isomorphic (Node, edge, browser).",
         "kw": ["cart", "shopping-cart", "ecommerce", "checkout", "totals", "headless"],
         "deps": 0
       },
@@ -978,8 +978,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "tax",
-        "v": "1.0.1",
-        "d": "VAT & sales-tax done right — exact integer minor-unit arithmetic (no float cents bugs), add/extract tax, inclusive & exclusive prices, compound taxes, half-up/bankers rounding. Isomorphic.",
+        "v": "1.1.0",
+        "d": "VAT & sales-tax done right — exact integer minor-unit arithmetic (no float cents bugs), add/extract tax (inclusive & exclusive), multiple & compound taxes with a labelled breakdown, category rate tables, reverse charge, and line-level vs invoice-level rounding. Isomorphic.",
         "kw": ["tax", "vat", "sales-tax", "gst", "tax-inclusive", "rounding"],
         "deps": 0
       },
@@ -1006,8 +1006,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "order",
-        "v": "1.0.1",
-        "d": "Headless order-lifecycle engine — an immutable order model with a state machine, order-number generation, line-item price snapshotting and timestamped status history. Integer minor units, zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Headless order-lifecycle engine — an immutable order model with a state machine, order-number generation, partial fulfillment tracking, refund tracking, on-demand totals recompute and a typed audit-trail timeline. Integer minor units, zero-dependency, isomorphic.",
         "kw": ["order", "order-management", "ecommerce", "state-machine", "checkout", "fulfillment"],
         "deps": 0
       },
@@ -1027,8 +1027,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "invoice",
-        "v": "1.0.2",
-        "d": "Invoice model, numbering and tax-rollup engine — per-line and total calculation, tax grouped by rate, sequential invoice numbers, payment tracking and a render-ready row structure for PDF/XLSX. Integer minor units, zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Invoice model, numbering and tax-rollup engine — per-line and total calculation, tax grouped by rate, sequential invoice numbers, a status lifecycle, partial payments, credit notes and a render-ready row structure for PDF/XLSX. Integer minor units, zero-dependency, isomorphic.",
         "kw": ["invoice", "invoicing", "billing", "tax", "accounting", "ecommerce"],
         "deps": 0
       }
