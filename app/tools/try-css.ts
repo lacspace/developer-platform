@@ -42,4 +42,12 @@ export const TRY_CSS = `
 .pt-meta{display:flex;gap:16px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--hairline);background:var(--panel-2);font-size:12.5px;color:var(--muted)}
 .pt-meta b{color:var(--fg)}
 .pt-note{margin-top:18px;font-size:12.5px;color:var(--faint);line-height:1.6;text-align:center;max-width:680px;margin-left:auto;margin-right:auto}
+.pt-color{width:44px;height:38px;padding:2px;background:var(--panel-2);border:1px solid var(--hairline-2);border-radius:9px;cursor:pointer}
+.pt-qr-wrap{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+@media(max-width:760px){.pt-qr-wrap{grid-template-columns:1fr}}
+.pt-qr-preview{border:1px solid var(--hairline-2);border-radius:14px;background:var(--panel);padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;position:sticky;top:80px}
+.pt-qr-img{width:260px;height:260px}
+.pt-qr-img svg{width:100%;height:100%;display:block;border-radius:8px}
+.pt-qr-meta{margin-top:12px;font-size:12.5px;color:var(--muted);font-family:ui-monospace,Menlo,monospace}
+.pt-qr-placeholder{color:var(--faint);font-size:13px}
 `;
