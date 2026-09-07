@@ -1,4 +1,4 @@
-// Full @lacspace package catalog — generated from the monorepo (85 scoped packages).
+// Full @lacspace package catalog — generated from the monorepo (89 scoped packages).
 // Plus 2 CLIs (create-lacspace-app, create-lacspace-seo) = 87 packages on npm.
 
 export type Pkg = { n: string; v: string; d: string; kw: string[]; deps: number };
@@ -1104,7 +1104,41 @@ export const CATALOG: Group[] = [
         "deps": 0
       }
     ]
+  },
+  {
+    "group": "Testing Kit",
+    "icon": "🧪",
+    "items": [
+      {
+        "n": "expect",
+        "v": "1.0.0",
+        "d": "A fluent assertion library that runs anywhere — deep-equal, async resolves/rejects, toThrow, asymmetric matchers (any/objectContaining/…) and expect.extend custom matchers. Throws a descriptive error, so it plugs into any runner or the browser. Zero-dependency, isomorphic.",
+        "kw": ["expect", "assert", "assertion", "matchers", "deep-equal", "testing", "unit-testing", "vitest", "jest", "typescript"],
+        "deps": 0
+      },
+      {
+        "n": "spy",
+        "v": "1.0.0",
+        "d": "Spies, stubs, mocks and deterministic fake timers for any test runner or the browser — record calls, program returns/throws/resolves with once-queues, spyOn with call-through, and tick a fake clock. Zero-dependency, isomorphic.",
+        "kw": ["spy", "stub", "mock", "mocking", "test-double", "fake-timers", "sinon", "vitest", "jest", "testing"],
+        "deps": 0
+      },
+      {
+        "n": "fixtures",
+        "v": "1.0.0",
+        "d": "Typed, deterministic test-data factories — define a factory once, then build realistic objects with sequences, traits, associations and transient params. Seed it and the same data comes out every run. Zero-dependency, isomorphic.",
+        "kw": ["fixtures", "factory", "test-data", "factory-bot", "seed", "deterministic", "mock-data", "testing", "typescript", "isomorphic"],
+        "deps": 0
+      },
+      {
+        "n": "snapshot",
+        "v": "1.0.0",
+        "d": "Snapshot testing without a framework — a stable, deterministic value serializer (sorted keys, circular-safe, pluggable) plus inline and file (.snap) matchers. Isomorphic core, with a node subpath for filesystem snapshots. Zero-dependency.",
+        "kw": ["snapshot", "snapshot-testing", "serialize", "pretty-format", "stable-stringify", "inline-snapshot", "toMatchSnapshot", "deterministic", "testing", "typescript"],
+        "deps": 0
+      }
+    ]
   }
 ];
 
-export const CATALOG_TOTAL = 87;
+export const CATALOG_TOTAL = 91;
