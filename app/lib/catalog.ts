@@ -425,8 +425,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "hotkeys",
-        "v": "1.0.3",
-        "d": "Ergonomic keyboard shortcuts for React — combos (mod+k), key sequences (g then d), scopes, and pretty display formatting (⌘K). SSR-safe, respects form fields, zero-dependency, fully typed.",
+        "v": "1.1.0",
+        "d": "Ergonomic keyboard shortcuts for React — mod+k combos, g-then-d sequences, named scopes and ⌘K formatting, built on a pure, React-free matching core you can reuse anywhere. SSR-safe, respects form fields, zero-dependency, fully typed.",
         "kw": [
           "react",
           "hotkeys",
@@ -453,8 +453,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "store",
-        "v": "1.1.2",
-        "d": "Minimal global state for React in ~1KB — create a store, use selectors, no provider. Built on useSyncExternalStore with a persist middleware and shallow equality. Zero-dependency, SSR-safe, fully typed.",
+        "v": "1.2.0",
+        "d": "Minimal global state for React in ~1KB — create a store, select slices, no provider. A React-free vanilla core adds persist/logger middleware, memoized computed values, subscribe-with-selector and slice composition. Zero-dependency, SSR-safe, fully typed.",
         "kw": [
           "react",
           "state-management",
@@ -495,8 +495,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "virtual",
-        "v": "1.0.3",
-        "d": "Headless list virtualization for React — render only the rows in view, with fixed or dynamically-measured sizes, overscan, and scroll-to-index. useVirtualizer in ~2KB. Zero-dependency, SSR-safe, fully typed.",
+        "v": "1.1.0",
+        "d": "Headless list virtualization for React — render only the rows in view, with fixed or dynamically-measured sizes, overscan, sticky/pinned headers, horizontal lists and scroll-to-index. Ships a pure, React-free math core you can run anywhere. Zero-dependency, SSR-safe, fully typed.",
         "kw": [
           "react",
           "virtualization",
@@ -585,8 +585,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "form",
-        "v": "1.0.3",
-        "d": "End-to-end form handling for the server — turn FormData into typed, validated data with a honeypot + timing spam guard, and get back your data or per-field errors ready to re-render. Shaped for Next.js Server Actions. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "End-to-end form handling — turn FormData into typed, validated, spam-guarded data on the server (Next.js Server Actions), and manage interactive form state on the client (values/errors/touched/dirty, sync+async validation, nested paths, field arrays). One framework-free, zero-dependency package.",
         "kw": [
           "form",
           "form-handling",
