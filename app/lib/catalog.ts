@@ -143,8 +143,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "headers",
-        "v": "1.1.4",
-        "d": "Secure HTTP headers & a typed Content-Security-Policy builder — HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy. Framework-agnostic + Next.js. Zero-dependency, isomorphic.",
+        "v": "1.2.0",
+        "d": "Secure HTTP headers & a typed Content-Security-Policy builder — HSTS, CSP nonces & hashes, a typed Permissions-Policy, COOP/COEP/CORP cross-origin isolation, Reporting-Endpoints and report-only, plus ready-made strict and API presets. Framework-agnostic + Next.js. Zero-dependency, isomorphic.",
         "kw": [
           "security-headers",
           "csp",
@@ -599,8 +599,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "humanize",
-        "v": "1.0.3",
-        "d": "Turn machine values into human-readable text — bytes, durations, relative time, ordinals, plurals, compact numbers and grammatical lists. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Turn machine values into human-readable text — bytes, durations, relative time, ordinals, plurals, compact numbers, grammatical lists, number-to-words, Roman numerals and SI units. Zero-dependency, isomorphic — one typed package instead of a pile of tiny formatting libs.",
         "kw": [
           "humanize",
           "pretty-bytes",
@@ -731,8 +731,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "webhooks",
-        "v": "1.0.3",
-        "d": "The webhook toolkit for both directions — sign & deliver outgoing webhooks with retries, and verify incoming ones (timing-safe, replay-protected) with Stripe / GitHub / Shopify presets. Plus event ids & idempotency. One internal dependency (@lacspace/crypto), isomorphic.",
+        "v": "1.1.0",
+        "d": "The webhook toolkit for both directions — sign & deliver outgoing webhooks with retries/backoff, verify incoming ones (timing-safe, replay-protected) with Stripe / GitHub / Shopify presets, plus typed event envelopes, exactly-once idempotency and pure endpoint routing. One internal dependency (@lacspace/crypto), isomorphic.",
         "kw": [
           "webhook",
           "webhooks",
@@ -992,8 +992,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "audit-log",
-        "v": "1.1.1",
-        "d": "Structured audit-trail toolkit — who did what, when, with before/after diffs, actor attribution and field-level redaction, plus a tamper-evident SHA-256 hash chain that proves the log was never altered. Zero-dependency, isomorphic.",
+        "v": "1.2.0",
+        "d": "Structured audit-trail toolkit — who did what, when, with before/after diffs, actor attribution and field-level redaction; seal events into a tamper-evident SHA-256 hash chain (with retention pruning + verifiable checkpoints); and query, filter and export the trail to NDJSON/JSON. Zero-dependency, isomorphic.",
         "kw": ["audit-log", "audit-trail", "tamper-evident", "hash-chain", "compliance", "diff"],
         "deps": 0
       },
