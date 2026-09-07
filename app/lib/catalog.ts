@@ -391,8 +391,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "slugify",
-        "v": "1.1.2",
-        "d": "Turn any text into a clean, SEO-friendly URL slug — transliterates diacritics, collapses separators, and guarantees uniqueness against an existing set. Zero-dependency, isomorphic.",
+        "v": "1.2.0",
+        "d": "Turn any text into a clean, SEO-friendly URL slug — transliterates diacritics/Cyrillic/Greek, expands symbols, truncates on word boundaries, and guarantees uniqueness with a stateful slugger(). Validate with isSlug, plus strict/locale options. Zero-dependency, isomorphic.",
         "kw": [
           "slugify",
           "slug",
@@ -529,8 +529,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "case",
-        "v": "1.0.3",
-        "d": "Convert strings between cases — camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, Sentence case. Handles acronyms & numbers. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Convert strings between cases — camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title/Sentence/Header/Capital Case and more, with a unicode-aware word splitter, an opt-in acronym registry, and is<Case> detectors. Zero-dependency, isomorphic.",
         "kw": [
           "case",
           "camelcase",
@@ -543,8 +543,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "color",
-        "v": "1.0.3",
-        "d": "Parse, convert, manipulate and check colours — hex/rgb/hsl, lighten/darken/mix/alpha, and WCAG contrast for accessible palettes. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Parse, convert, manipulate and check colours — hex/rgb/hsl/hsv/oklch plus 148 CSS names, lighten/darken/mix/invert/complement, tints/shades & colour-wheel harmonies, and WCAG contrast for accessible UIs. Zero-dependency, isomorphic.",
         "kw": [
           "color",
           "colour",
@@ -613,8 +613,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "id",
-        "v": "1.0.3",
-        "d": "Unique IDs done right — UUID v4, time-sortable UUID v7, Nano-ID-style and short URL-safe codes. Cryptographically random (Web Crypto), zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Every ID kind you need — UUID v4/v7, ULID, cuid2, Snowflake, Nano-ID, base62/base58 and Stripe-style prefixed ids. Custom alphabets with unbiased sampling, time-sortable ids with decodeTime. Cryptographically random (Web Crypto), zero-dependency, isomorphic.",
         "kw": [
           "uuid",
           "uuidv4",
