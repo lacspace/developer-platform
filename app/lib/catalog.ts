@@ -177,8 +177,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "lock",
-        "v": "1.0.6",
-        "d": "Account lockout & brute-force protection (server lock) — N-strikes, exponential backoff, self-resetting window, pluggable store. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Account lockout & brute-force protection (server lock) — N-strikes with exponential or progressive/tiered backoff, per-account + per-IP composite locking, allow/deny lists, and a CAPTCHA step-up threshold before hard lockout. Pluggable store, zero-dependency, isomorphic.",
         "kw": [
           "account-lockout",
           "brute-force",
@@ -245,8 +245,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "rate-limit",
-        "v": "1.1.4",
-        "d": "Framework-agnostic rate limiting — fixed-window, sliding-window and token-bucket over a pluggable store, with standard RateLimit-* headers. For API routes, middleware and edge. Zero-dependency, isomorphic.",
+        "v": "1.2.0",
+        "d": "Framework-agnostic rate limiting — five algorithms (fixed, sliding-window log & weighted counter, token bucket, leaky bucket) over a pluggable store, with cost-weighted requests, composite and per-route limiters, and standard IETF RateLimit-* + legacy X-RateLimit-* headers. For API routes, middleware and edge. Zero-dependency, isomorphic.",
         "kw": [
           "rate-limit",
           "rate-limiter",
@@ -515,8 +515,8 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "cache",
-        "v": "1.0.3",
-        "d": "A tiny in-memory cache — LRU eviction, per-entry TTL and stale-while-revalidate, plus wrap()/memoize() to cache any async function with in-flight de-duplication. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "A tiny in-memory cache — LRU/LFU eviction, per-entry TTL, stale-while-revalidate, tag invalidation and hit/miss stats, plus wrap()/getOrSet()/memoize() to cache any async function with single-flight de-duplication. Zero-dependency, isomorphic.",
         "kw": [
           "cache",
           "lru",
@@ -689,8 +689,8 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "idempotency",
-        "v": "1.0.3",
-        "d": "Make any operation exactly-once with an idempotency key — replay stored results on retries, safe under concurrency, with optional request fingerprinting. Framework-agnostic, pluggable store, zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Make any operation exactly-once with an idempotency key — fingerprint the request (reject key-reuse with a different body), replay the stored response on retries, lock in-flight duplicates, and sweep expired records. Framework-agnostic, pluggable store, zero-dependency, isomorphic.",
         "kw": [
           "idempotency",
           "idempotency-key",
