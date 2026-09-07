@@ -307,8 +307,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "og",
-        "v": "1.1.2",
-        "d": "Dynamic Open Graph images — a share-card design system you configure once and call per page. Produces a next/og element tree AND a zero-dependency SVG from the same options, with auto-fitting titles, presets, badges and gradients. Zero-dependency, isomorphic.",
+        "v": "1.2.0",
+        "d": "Dynamic Open Graph images — a share-card design system you configure once and call per page. Produces a next/og element tree AND a zero-dependency SVG from the same options, with 7 templates (article, product, quote, event, split, minimal), named gradient & surface presets, image/avatar embedding and auto-fitting multi-line titles. Zero-dependency, isomorphic.",
         "kw": [
           "og-image",
           "open-graph",
@@ -321,8 +321,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "robots",
-        "v": "1.3.2",
-        "d": "Build and parse robots.txt — typed per-user-agent rules, AI-crawler block presets (GPTBot, ClaudeBot, CCBot, Google-Extended), sitemap refs and Next.js robots.ts output. Zero-dependency, isomorphic.",
+        "v": "1.4.0",
+        "d": "Build and parse robots.txt — typed per-user-agent rules, crawl-delay & clean-param, sitemap refs, a parser + longest-match isAllowed(), and one-liners to block/allow AI crawlers per-agent from a 21-bot catalog (GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot…). Next.js robots.ts output. Zero-dependency, isomorphic.",
         "kw": [
           "robots-txt",
           "robots",
@@ -349,8 +349,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "seo",
-        "v": "1.7.2",
-        "d": "Typed metadata + JSON-LD for modern web apps — schema.org builders (Organization, Article, Product, FAQ, Breadcrumb), a Next.js App Router Metadata helper, the defineSite() SEO Autopilot engine, and an on-page SEO auditor with a CI sitemap crawler that fails the build when SEO regresses (`npx @lacspace/seo audit <url>` / `crawl <site> --min-grade A`). Zero-dependency, isomorphic.",
+        "v": "1.8.0",
+        "d": "Typed metadata + JSON-LD for modern web apps — schema.org builders (Organization, Article, Product, FAQ, Breadcrumb, Event, Dataset, Book, Podcast), robots directives, richer Open Graph & Twitter cards, canonical + hreflang alternates, a Next.js App Router Metadata helper, the defineSite() SEO Autopilot engine, and an on-page SEO auditor with a CI sitemap crawler (`npx @lacspace/seo audit <url>` / `crawl <site> --min-grade A`). Zero-dependency, isomorphic.",
         "kw": [
           "seo",
           "json-ld",
@@ -377,8 +377,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "sitemap",
-        "v": "1.2.2",
-        "d": "Generate sitemap.xml, sitemap indexes and Next.js sitemaps — image/video/news extensions, hreflang alternates, auto-split at 50k URLs. Zero-dependency, isomorphic.",
+        "v": "1.3.0",
+        "d": "Generate sitemap.xml, sitemap indexes and Next.js sitemaps — image/video/news extensions, hreflang alternates, auto-split at 50k URLs, plus priority/changefreq/lastmod validators and a URL-count guard. Zero-dependency, isomorphic.",
         "kw": [
           "sitemap",
           "sitemap-xml",
