@@ -13,6 +13,14 @@ const TOOL_URLS = TOOLS.map((t) => ({
   lastmod: LASTMOD,
 }));
 
+// Live in-browser testers, derived from any tool that declares a tryHref.
+const TRY_URLS = TOOLS.filter((t) => t.tryHref).map((t) => ({
+  loc: `${BASE}${t.tryHref}`,
+  changefreq: "monthly" as const,
+  priority: 0.7,
+  lastmod: LASTMOD,
+}));
+
 const PKG_URLS = CATALOG.flatMap((g) =>
   g.items.map((p) => ({
     loc: `${BASE}/packages/${p.n}`,
@@ -28,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { loc: `${BASE}/packages`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/tools`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     ...TOOL_URLS,
-    { loc: `${BASE}/tools/scraper/try`, changefreq: "monthly", priority: 0.7, lastmod: LASTMOD },
+    ...TRY_URLS,
     { loc: `${BASE}/docs`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/handbook`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/create-app`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },

@@ -558,6 +558,7 @@ export const TOOLS: Tool[] = [
       "lacspace-http does two jobs from one binary. Ad-hoc, it sends an HTTP request and pretty-prints the JSON with status, timing and size — with bearer/basic auth, query params, JSON/form bodies, redirect and size caps, and a --curl printer that masks secrets. As a runner, it parses the well-known .http format (the VS Code REST Client / JetBrains one), resolves {{variables}} from env files and captured values, chains a token from one response into the next, and checks @assert conditions on status, JSON body, headers and timing. Everything is built on the global fetch and Node built-ins — no dependencies, no account, no telemetry.",
     install: "npx lacspace-http https://httpbin.org/get",
     quickstart: "npm i lacspace-http",
+    tryHref: "/tools/http/try",
     features: [
       { icon: "⚡", title: "Ad-hoc requests", desc: "GET/POST/… with headers, query, JSON (-j k=v, k:=raw), forms, bearer & basic auth." },
       { icon: "📄", title: ".http / .rest runner", desc: "Run a whole file of named requests in order, or one via --name." },
@@ -600,6 +601,7 @@ export const TOOLS: Tool[] = [
       "lacspace-fake turns a tiny schema into realistic test data — names, emails, phones, addresses, prices, timestamps, UUIDs and 60+ more generators — and prints it in whatever shape your workflow needs, including escaped SQL inserts that seed a database in one command. Every value is drawn from a seeded mulberry32 PRNG, so a fixed seed produces byte-identical output on every machine, ideal for reproducible fixtures and CI. It runs fully offline with no API key, no account and no telemetry, and it speaks a Nepal locale out of the box.",
     install: "npx lacspace-fake",
     quickstart: "npm i lacspace-fake",
+    tryHref: "/tools/fake/try",
     features: [
       { icon: "🧬", title: "Schema-driven rows", desc: "Inline --fields string or a JSON schema file with nested objects and arrays." },
       { icon: "🌱", title: "Deterministic --seed", desc: "Same seed, byte-identical output, forever." },
@@ -686,6 +688,7 @@ export const TOOLS: Tool[] = [
       "lacspace-json gives you the 80% of jq you actually use — paths, select, map, sort_by, group_by, aggregates — plus first-class format conversion, JSON Schema validation, structural diff and deep merge, all behind one small binary with no dependencies. The query engine is a hand-written tokenizer→evaluator (no eval) and every object built from input is guarded against prototype pollution. Everything runs locally: no key, no account, no network, no telemetry.",
     install: "npx lacspace-json",
     quickstart: "npm i lacspace-json",
+    tryHref: "/tools/json/try",
     features: [
       { icon: "🔎", title: "Safe jq-style query", desc: "paths, pipes, select, map, sort_by, group_by, aggregates; no eval." },
       { icon: "🔄", title: "5-format convert", desc: "JSON ⇄ YAML ⇄ TOML ⇄ CSV ⇄ NDJSON with auto-detection." },
