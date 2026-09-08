@@ -64,6 +64,14 @@ function craft() {
 }
 const { birth, edges } = craft();
 
+// Phase 4 ignites from the centre node (7); clip-path/ignite origin in globals.css
+// is 67.5% 57% = NODES[7] / 281.25. Idle loop travels one wire at a time, rotating
+// across a spread of 6 connections (staggered so ~1 shows every ~5s → reads random).
+const CENTER = NODES[7]!;
+const IDLE_EDGES: readonly [number, number][] = [
+  [0, 1], [2, 4], [3, 5], [6, 8], [7, 9], [9, 11],
+];
+
 export function LogoBuild() {
   return (
     <div className="logobuild" role="img" aria-label="Lacspace">
@@ -112,10 +120,27 @@ export function LogoBuild() {
             </g>
           ))}
         </g>
+        {/* Phase 4 — IGNITION: the centre node bursts as the last wire sparks */}
+        <circle className="lb-ignite" cx={CENTER[0]} cy={CENTER[1]} r={5.2} />
       </svg>
-      {/* Phase 4 — the real logo blooms in (final frame is pixel-identical) */}
+      {/* Phase 4 — RIPPLE FILL: the real logo reveals from the centre node */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="lb-final" src="/icon.svg" alt="" width={281} height={281} />
+      {/* Phase 4 — SHIMMER: one diagonal sweep, masked to the mark's silhouette */}
+      <div className="lb-shimmer" aria-hidden="true" />
+      {/* IDLE — a glowing dot travels one connection at a time */}
+      <svg className="lb-idle" viewBox="0 0 281.25 281.25" aria-hidden="true">
+        {IDLE_EDGES.map(([a, b], i) => (
+          <line
+            key={`i${i}`}
+            className="lb-idlepulse"
+            x1={NODES[a]![0]} y1={NODES[a]![1]}
+            x2={NODES[b]![0]} y2={NODES[b]![1]}
+            pathLength={1}
+            style={{ "--d": `${4000 + i * 5000}ms` } as React.CSSProperties}
+          />
+        ))}
+      </svg>
     </div>
   );
 }

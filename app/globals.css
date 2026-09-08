@@ -1809,19 +1809,72 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   transform-origin: center;
   animation: lb-node 500ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards var(--d, 0ms);
 }
+/* Phase 4 — IGNITION: the centre node bursts as the final wire sparks */
+.lb-ignite {
+  fill: rgba(214, 251, 255, 0.9);
+  opacity: 0;
+  transform: scale(0.4);
+  transform-box: fill-box;
+  transform-origin: center;
+  filter: drop-shadow(0 0 6px rgba(140, 230, 255, 0.9));
+  animation: lb-ignite 640ms cubic-bezier(0.3, 0.7, 0.3, 1) 2680ms forwards;
+}
 .lb-final {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  opacity: 0;
-  transform: scale(0.92);
   transform-origin: center;
   filter: drop-shadow(0 18px 54px rgba(37, 121, 255, 0.32));
   z-index: 1;
-  animation: lb-fill 720ms cubic-bezier(0.2, 0.85, 0.2, 1) 2900ms forwards,
-    lb-breathe 2.6s ease-in-out 3700ms infinite;
+  /* RIPPLE FILL: the fill grows out of the centre node (67.5% 57% = NODES[7]) */
+  clip-path: circle(0% at 67.5% 57%);
+  animation: lb-ripple 620ms cubic-bezier(0.22, 0.61, 0.36, 1) 2820ms forwards,
+    lb-breathe 2.6s ease-in-out 3900ms infinite;
+}
+/* Phase 4 — SHIMMER: one diagonal sweep, masked to the mark so it rides the face */
+.lb-shimmer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-mask: url(/icon.svg) center / contain no-repeat;
+  mask: url(/icon.svg) center / contain no-repeat;
+  opacity: 0;
+  animation: lb-shim-fade 520ms ease 3450ms forwards;
+}
+.lb-shimmer::before {
+  content: "";
+  position: absolute;
+  top: -25%;
+  left: 0;
+  width: 55%;
+  height: 150%;
+  background: linear-gradient(115deg, transparent, rgba(214, 251, 255, 0.6), transparent);
+  transform: translateX(-140%) skewX(-12deg);
+  animation: lb-shim-move 520ms ease-in-out 3450ms forwards;
+}
+/* IDLE — a subtle glowing dot travels one wire at a time (rotates across 6) */
+.lb-idle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  z-index: 4;
+  pointer-events: none;
+}
+.lb-idlepulse {
+  stroke: #d6fbff;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 0.08 1;
+  stroke-dashoffset: 0.08;
+  opacity: 0;
+  filter: drop-shadow(0 0 2px rgba(120, 226, 255, 0.85));
+  animation: lb-idlepulse 30s linear infinite var(--d, 4s);
 }
 @keyframes lb-node {
   from { opacity: 0; transform: scale(0); }
@@ -1844,10 +1897,23 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   100% { stroke-dashoffset: -1; opacity: 0; }
 }
 @keyframes lb-craftout { to { opacity: 0; } }
-@keyframes lb-fill {
-  from { opacity: 0; transform: scale(0.92); }
-  60% { opacity: 1; }
-  to { opacity: 1; transform: scale(1); }
+@keyframes lb-ignite {
+  0% { opacity: 0; transform: scale(0.4); }
+  28% { opacity: 1; transform: scale(1.15); }
+  100% { opacity: 0; transform: scale(2.9); }
+}
+@keyframes lb-ripple {
+  from { clip-path: circle(0% at 67.5% 57%); }
+  to { clip-path: circle(105% at 67.5% 57%); }
+}
+@keyframes lb-shim-move { to { transform: translateX(320%) skewX(-12deg); } }
+@keyframes lb-shim-fade { 0% { opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes lb-idlepulse {
+  0% { stroke-dashoffset: 0.08; opacity: 0; }
+  0.3% { opacity: 0.6; }
+  2.4% { opacity: 0.6; }
+  2.7% { stroke-dashoffset: -1; opacity: 0; }
+  100% { stroke-dashoffset: -1; opacity: 0; }
 }
 @keyframes lb-breathe { 50% { transform: scale(0.975); } }
 @keyframes lb-halo { 50% { transform: scale(1.06); opacity: 0.82; } }
@@ -1860,9 +1926,9 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
 /* No motion: skip the build, show the resolved colour logo immediately. */
 @media (prefers-reduced-motion: reduce) {
   .lb-craft { animation: none; opacity: 0; }
-  .lb-outline, .lb-edge, .lb-pulse, .lb-glow, .lb-node { animation: none; }
-  .lb-pulse, .lb-glow { opacity: 0; }
-  .lb-final { animation: none; opacity: 1; transform: none; }
+  .lb-outline, .lb-edge, .lb-pulse, .lb-glow, .lb-node, .lb-ignite { animation: none; }
+  .lb-pulse, .lb-glow, .lb-ignite, .lb-shimmer, .lb-idlepulse { animation: none; opacity: 0; }
+  .lb-final { animation: none; opacity: 1; transform: none; clip-path: none; }
   .logobuild::before { animation: none; }
 }
 
