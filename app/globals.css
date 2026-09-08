@@ -1803,7 +1803,7 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   overflow: visible;
   z-index: 2;
   filter: drop-shadow(0 0 3px rgba(11, 185, 217, 0.5));
-  animation: lb-craftout 620ms ease 3000ms forwards;
+  animation: lb-craftout 620ms ease var(--craftout-delay, 4100ms) forwards;
 }
 .lb-outline {
   fill: none;
@@ -1814,7 +1814,8 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   opacity: 0;
-  animation: lb-draw 1050ms cubic-bezier(0.65, 0, 0.35, 1) 650ms forwards;
+  /* slow easeInOut: starts slow, accelerates through the middle, eases the finish */
+  animation: lb-draw var(--outline-dur, 1650ms) cubic-bezier(0.65, 0, 0.35, 1) var(--outline-delay, 550ms) forwards;
 }
 .lb-edge {
   stroke: url(#lbg);
@@ -1823,7 +1824,7 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   opacity: 0;
-  animation: lb-draw 300ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards var(--d, 0ms);
+  animation: lb-draw var(--line-dur, 460ms) cubic-bezier(0.22, 0.61, 0.36, 1) forwards var(--d, 0ms);
 }
 /* the travelling signal: a short bright dash that runs source -> target */
 .lb-pulse {
@@ -1834,7 +1835,7 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   stroke-dashoffset: 0.15;
   opacity: 0;
   filter: drop-shadow(0 0 2.4px rgba(120, 226, 255, 0.9));
-  animation: lb-signal 440ms cubic-bezier(0.5, 0, 0.5, 1) forwards var(--d, 0ms);
+  animation: lb-signal var(--spark-dur, 440ms) cubic-bezier(0.5, 0, 0.5, 1) forwards var(--d, 0ms);
 }
 .lb-glow {
   fill: rgba(96, 190, 255, 0.55);
@@ -1842,7 +1843,7 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   transform: scale(0.2);
   transform-box: fill-box;
   transform-origin: center;
-  animation: lb-glow 900ms ease-out forwards var(--d, 0ms);
+  animation: lb-glow 820ms ease-out forwards var(--d, 0ms);
 }
 .lb-node {
   fill: url(#lbg);
@@ -1850,7 +1851,8 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   transform: scale(0);
   transform-box: fill-box;
   transform-origin: center;
-  animation: lb-node 500ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards var(--d, 0ms);
+  /* softer spring — gentle settle, no harsh bounce */
+  animation: lb-node var(--dot-dur, 360ms) cubic-bezier(0.34, 1.35, 0.64, 1) forwards var(--d, 0ms);
 }
 /* Phase 4 — IGNITION: the centre node bursts as the final wire sparks */
 .lb-ignite {
@@ -1860,7 +1862,7 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   transform-box: fill-box;
   transform-origin: center;
   filter: drop-shadow(0 0 6px rgba(140, 230, 255, 0.9));
-  animation: lb-ignite 640ms cubic-bezier(0.3, 0.7, 0.3, 1) 2680ms forwards;
+  animation: lb-ignite var(--ignite-dur, 640ms) cubic-bezier(0.3, 0.7, 0.3, 1) var(--ignite-delay, 3560ms) forwards;
 }
 .lb-final {
   position: absolute;
@@ -1873,8 +1875,8 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   z-index: 1;
   /* RIPPLE FILL: the fill grows out of the centre node (67.5% 57% = NODES[7]) */
   clip-path: circle(0% at 67.5% 57%);
-  animation: lb-ripple 620ms cubic-bezier(0.22, 0.61, 0.36, 1) 2820ms forwards,
-    lb-breathe 2.6s ease-in-out 3900ms infinite;
+  animation: lb-ripple var(--ripple-dur, 620ms) cubic-bezier(0.22, 0.61, 0.36, 1) var(--ripple-delay, 3700ms) forwards,
+    lb-breathe 2.6s ease-in-out var(--breathe-delay, 4440ms) infinite;
 }
 /* Phase 4 — SHIMMER: one diagonal sweep, masked to the mark so it rides the face */
 .lb-shimmer {
@@ -1886,7 +1888,7 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   -webkit-mask: url(/icon.svg) center / contain no-repeat;
   mask: url(/icon.svg) center / contain no-repeat;
   opacity: 0;
-  animation: lb-shim-fade 520ms ease 3450ms forwards;
+  animation: lb-shim-fade 520ms ease var(--shimmer-delay, 4280ms) forwards;
 }
 .lb-shimmer::before {
   content: "";
@@ -1897,7 +1899,7 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   height: 150%;
   background: linear-gradient(115deg, transparent, rgba(214, 251, 255, 0.6), transparent);
   transform: translateX(-140%) skewX(-12deg);
-  animation: lb-shim-move 520ms ease-in-out 3450ms forwards;
+  animation: lb-shim-move 520ms ease-in-out var(--shimmer-delay, 4280ms) forwards;
 }
 /* IDLE — a subtle glowing dot travels one wire at a time (rotates across 6) */
 .lb-idle {

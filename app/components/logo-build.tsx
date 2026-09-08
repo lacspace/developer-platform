@@ -35,9 +35,25 @@ const EDGES_RAW: readonly [number, number][] = [
   [5, 7], [6, 7], [6, 8], [7, 9], [8, 9], [9, 11], [10, 11],
 ];
 
-// --- timeline (ms) --- (durations/easing live in globals.css; these place elements)
-const DOT_STEP = 52;
-const CONN_START = 1650, CONN_STEP = 66;
+// ============================================================================
+// Intro timing (ms) — tune everything here. The component feeds these to the CSS
+// as custom properties, so these constants are the single source of truth.
+// ============================================================================
+const DOT_STAGGER = 90;        // gap between each dot popping in (never random)
+const DOT_DURATION = 360;      // each dot's soft-spring pop
+const DOTS_PAUSE = 200;        // beat after the last dot, before wiring begins
+const OUTLINE_DELAY = 550;     // outer profile begins drawing (overlaps the dots)
+const OUTLINE_DURATION = 1650; // slow easeInOut draw of the head profile
+const LINE_DURATION = 460;     // each connection draws this long (easeOut)
+const LINE_STEP = 100;         // next line starts this long after the previous
+                               //   (compressed cascade to hold the <4.5s budget;
+                               //    raise toward ~0.6*LINE_DURATION for more air)
+const SPARK_DURATION = 440;    // the signal pulse that fires when a line lands
+const PRE_IGNITE_PAUSE = 150;  // beat before the ignition / fill phase
+const IGNITE_DURATION = 640;
+const RIPPLE_AFTER_IGNITE = 140;
+const RIPPLE_DURATION = 620;
+const IDLE_STEP = 5000;        // idle spark cadence (one wire at a time)
 
 // Build the "birth order" (BFS from the crown) + orient/sort edges so the network
 // grows outward and each wire lights up right as its far node arrives.
@@ -72,9 +88,38 @@ const IDLE_EDGES: readonly [number, number][] = [
   [0, 1], [2, 4], [3, 5], [6, 8], [7, 9], [9, 11],
 ];
 
+// --- derived timeline ---
+const N_DOTS = NODES.length;          // 12
+const N_EDGES = EDGES_RAW.length;     // 15
+const DOTS_END = (N_DOTS - 1) * DOT_STAGGER + DOT_DURATION;
+const CONN_START = DOTS_END + DOTS_PAUSE;
+const CONN_END = CONN_START + (N_EDGES - 1) * LINE_STEP + LINE_DURATION;
+const IGNITE_DELAY = CONN_END + PRE_IGNITE_PAUSE;
+const RIPPLE_DELAY = IGNITE_DELAY + RIPPLE_AFTER_IGNITE;
+const CRAFTOUT_DELAY = RIPPLE_DELAY + 200;
+const SHIMMER_DELAY = RIPPLE_DELAY + RIPPLE_DURATION - 40;
+const BREATHE_DELAY = RIPPLE_DELAY + RIPPLE_DURATION + 120;
+const IDLE_BASE = RIPPLE_DELAY + RIPPLE_DURATION + 700;
+const edgeDelay = (i: number) => CONN_START + i * LINE_STEP;
+
+const rootVars = {
+  "--dot-dur": `${DOT_DURATION}ms`,
+  "--outline-delay": `${OUTLINE_DELAY}ms`,
+  "--outline-dur": `${OUTLINE_DURATION}ms`,
+  "--line-dur": `${LINE_DURATION}ms`,
+  "--spark-dur": `${SPARK_DURATION}ms`,
+  "--ignite-delay": `${IGNITE_DELAY}ms`,
+  "--ignite-dur": `${IGNITE_DURATION}ms`,
+  "--ripple-delay": `${RIPPLE_DELAY}ms`,
+  "--ripple-dur": `${RIPPLE_DURATION}ms`,
+  "--craftout-delay": `${CRAFTOUT_DELAY}ms`,
+  "--shimmer-delay": `${SHIMMER_DELAY}ms`,
+  "--breathe-delay": `${BREATHE_DELAY}ms`,
+} as React.CSSProperties;
+
 export function LogoBuild() {
   return (
-    <div className="logobuild" role="img" aria-label="Lacspace">
+    <div className="logobuild" role="img" aria-label="Lacspace" style={rootVars}>
       <svg className="lb-craft" viewBox="0 0 281.25 281.25" aria-hidden="true">
         <defs>
           <linearGradient id="lbg" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -94,11 +139,11 @@ export function LogoBuild() {
               x1={NODES[a]![0]} y1={NODES[a]![1]}
               x2={NODES[b]![0]} y2={NODES[b]![1]}
               pathLength={1}
-              style={{ "--d": `${CONN_START + i * CONN_STEP}ms` } as React.CSSProperties}
+              style={{ "--d": `${edgeDelay(i)}ms` } as React.CSSProperties}
             />
           ))}
         </g>
-        {/* Phase 3 — a signal pulse travels each wire as it connects */}
+        {/* Phase 3 — a signal pulse that fires when each wire lands */}
         <g className="lb-pulses">
           {edges.map(([a, b], i) => (
             <line
@@ -107,14 +152,14 @@ export function LogoBuild() {
               x1={NODES[a]![0]} y1={NODES[a]![1]}
               x2={NODES[b]![0]} y2={NODES[b]![1]}
               pathLength={1}
-              style={{ "--d": `${CONN_START + i * CONN_STEP}ms` } as React.CSSProperties}
+              style={{ "--d": `${edgeDelay(i) + LINE_DURATION}ms` } as React.CSSProperties}
             />
           ))}
         </g>
         {/* Phase 1 — the 12 nodes appear in BFS order (crown -> neck) */}
         <g className="lb-nodes">
           {NODES.map(([x, y], i) => (
-            <g key={`n${i}`} style={{ "--d": `${birth[i]! * DOT_STEP}ms` } as React.CSSProperties}>
+            <g key={`n${i}`} style={{ "--d": `${birth[i]! * DOT_STAGGER}ms` } as React.CSSProperties}>
               <circle className="lb-glow" cx={x} cy={y} r={7.2} />
               <circle className="lb-node" cx={x} cy={y} r={3.7} />
             </g>
@@ -137,7 +182,7 @@ export function LogoBuild() {
             x1={NODES[a]![0]} y1={NODES[a]![1]}
             x2={NODES[b]![0]} y2={NODES[b]![1]}
             pathLength={1}
-            style={{ "--d": `${4000 + i * 5000}ms` } as React.CSSProperties}
+            style={{ "--d": `${IDLE_BASE + i * IDLE_STEP}ms` } as React.CSSProperties}
           />
         ))}
       </svg>
