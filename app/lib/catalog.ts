@@ -1167,6 +1167,61 @@ export const CATALOG: Group[] = [
     ]
   },
   {
+    "group": "AI App Kit",
+    "icon": "🧠",
+    "items": [
+      {
+        "n": "embeddings",
+        "v": "1.0.0",
+        "d": "A tiny, provider-agnostic, keyless embeddings client plus pure vector math (cosine, dot, euclidean, mean-pool, top-k) — the entry point of the RAG stack. Calls OpenAI-compatible, Ollama, Google and Cohere endpoints through an injectable fetch.",
+        "kw": ["embeddings", "vector", "cosine-similarity", "rag", "semantic-search", "openai", "ollama", "cohere", "vector-database", "keyless", "isomorphic", "zero-dependency"],
+        "deps": 0
+      },
+      {
+        "n": "vector",
+        "v": "1.0.0",
+        "d": "A tiny in-memory vector store for RAG and semantic search — upsert embeddings, run brute-force k-NN queries with cosine/dot/euclidean metrics, metadata filtering and JSON persistence. Zero dependencies.",
+        "kw": ["vector-store", "embeddings", "semantic-search", "similarity-search", "knn", "cosine-similarity", "rag", "retrieval", "in-memory", "ai", "zero-dependency", "isomorphic"],
+        "deps": 0
+      },
+      {
+        "n": "rag",
+        "v": "1.0.0",
+        "d": "The glue of a RAG pipeline — index documents and retrieve + assemble prompt context by composing an injected embedder, vector store and splitter, with zero hard dependencies.",
+        "kw": ["rag", "retrieval-augmented-generation", "embeddings", "vector-search", "semantic-search", "context-assembly", "prompt-engineering", "chunking", "ai", "llm", "keyless", "zero-dependency"],
+        "deps": 0
+      },
+      {
+        "n": "agent",
+        "v": "1.0.0",
+        "d": "A tiny, keyless tool-calling / ReAct agent loop — inject any chat model and any tools as duck-typed interfaces and it drives the reason→act→observe loop with a full trace, maxSteps guard and error recovery.",
+        "kw": ["agent", "ai-agent", "tool-calling", "react-agent", "agent-loop", "llm", "provider-agnostic", "keyless", "orchestration", "tool-use", "zero-dependency", "isomorphic"],
+        "deps": 0
+      },
+      {
+        "n": "memory",
+        "v": "1.0.0",
+        "d": "Keyless, zero-dependency conversation memory for LLM chat apps — track history, keep it inside a token/message budget with a sliding window, and optionally summarize old turns via an injected summarizer.",
+        "kw": ["memory", "conversation-memory", "chat-history", "context-window", "token-budget", "sliding-window", "summarization", "llm", "chatbot", "agent", "keyless", "zero-dependency"],
+        "deps": 0
+      },
+      {
+        "n": "eval",
+        "v": "1.0.0",
+        "d": "Keyless, zero-dependency toolkit for evaluating LLM outputs — deterministic scorers (contains, regex, JSON-schema, Levenshtein, cosine, keyword coverage, JSONPath) plus an optional LLM-as-judge whose model you inject, with batch runs and pass-rate reports.",
+        "kw": ["eval", "llm-as-judge", "evaluation", "scorer", "ai", "llm", "rubric", "grading", "cosine-similarity", "json-schema", "pass-rate", "regression-testing"],
+        "deps": 0
+      },
+      {
+        "n": "providers",
+        "v": "1.0.0",
+        "d": "A keyless registry of connection presets for LLM & embedding endpoints — point @lacspace/ai or @lacspace/embeddings at a free or local model (Ollama, Groq, OpenRouter, Google AI Studio…) in one line.",
+        "kw": ["ai", "llm", "providers", "presets", "free-llm", "ollama", "openrouter", "groq", "openai-compatible", "keyless", "embeddings", "endpoints"],
+        "deps": 0
+      }
+    ]
+  },
+  {
     "group": "Testing Kit",
     "icon": "🧪",
     "items": [
@@ -1236,4 +1291,4 @@ export const CATALOG: Group[] = [
   }
 ];
 
-export const CATALOG_TOTAL = 95;
+export const CATALOG_TOTAL = 102;

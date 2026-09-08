@@ -8,7 +8,7 @@ export const FEED: FeedOptions = {
   title: "Lacspace Packages",
   link: BASE,
   description:
-    "The @lacspace ecosystem — 95 zero-dependency, isomorphic TypeScript packages.",
+    "The @lacspace ecosystem — 102 zero-dependency, isomorphic TypeScript packages.",
   feedUrl: `${BASE}/rss.xml`,
   language: "en",
   updated: UPDATED,
