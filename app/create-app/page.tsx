@@ -9,7 +9,7 @@ const seo = site.page({
   title: "create-lacspace-app",
   path: "/create-app",
   description:
-    "create-lacspace-app scaffolds a finished Next.js 15 app in ~0.12s — 9 production-ready templates, SEO, security headers, sitemap, robots and a dynamic OG image wired from the first render. Not a blank page: a finished one.",
+    "create-lacspace-app scaffolds a finished Next.js 15 app in ~0.12s — 9 production-ready templates, SEO, security headers, sitemap, robots and a dynamic OG image wired from the first render, plus composable feature add-ons: layer on a streaming AI chat or chat-with-your-docs RAG with --with ai-chat,rag — free & keyless on local Ollama. Not a blank page: a finished one.",
 });
 export const metadata = seo.metadata;
 
@@ -38,8 +38,8 @@ const WIRED = [
 
 const STEPS = [
   { n: "01", t: "Run one command", d: "npm create lacspace-app@latest — no config files, no setup wizard." },
-  { n: "02", t: "Choose a template", d: "Nine production-ready templates — portfolio to dashboard." },
-  { n: "03", t: "Start building", d: "cd in, npm run dev, and you’re live — SEO and headers already wired." },
+  { n: "02", t: "Pick a template + add-ons", d: "Nine templates, plus --with ai-chat / rag to layer on a streaming AI chat or chat-with-your-docs — free & keyless." },
+  { n: "03", t: "Start building", d: "cd in, npm run dev, and you’re live — SEO, headers and (optionally) a working AI already wired." },
 ];
 
 const CMP = [
@@ -47,6 +47,7 @@ const CMP = [
   { m: "Files produced", a: "18", b: "70", hot: true },
   { m: "Pages (finished)", a: "1 blank", b: "11", hot: true },
   { m: "Templates", a: "1", b: "9", hot: true },
+  { m: "AI chat / RAG add-on", a: "✗", b: "✓", hot: true },
   { m: "SEO + JSON-LD", a: "✗", b: "✓", hot: false },
   { m: "Dynamic OG images", a: "✗", b: "✓", hot: false },
   { m: "sitemap + robots", a: "✗", b: "✓", hot: false },
@@ -54,11 +55,12 @@ const CMP = [
 ];
 
 const FAQ = [
-  { q: "How is this different from create-next-app?", a: "create-next-app gives you a blank starter. create-lacspace-app gives you a finished-looking app — a polished template already wired with SEO, security headers, a sitemap, robots.txt, a dynamic OG image and a working contact form." },
+  { q: "How is this different from create-next-app?", a: "create-next-app gives you a blank starter. create-lacspace-app gives you a finished-looking app — a polished template already wired with SEO, security headers, a sitemap, robots.txt, a dynamic OG image and a working contact form — and then lets you layer on real features with one flag, including a streaming AI chat or chat-with-your-docs RAG that runs free and keyless on local Ollama." },
   { q: "Is it free?", a: "Yes — free and open under the Lacspace Free Licence. The app you generate is entirely yours, including for commercial use." },
   { q: "Which stack does it use?", a: "Next.js 15 with the App Router, Tailwind CSS v4 and TypeScript. Every generated app builds cleanly out of the box." },
   { q: "Do the blog and docs templates really work?", a: "Yes. The blog template turns content/posts/*.md into statically-generated pages with Article JSON-LD and sitemap entries (via @lacspace/markdown); the docs template is a full Markdown docs site with an auto-generated sidebar, on-this-page TOC and prev/next." },
-  { q: "Can I add more later?", a: "Yes — npx create-lacspace-app add pricing faq testimonials drops prewired, themed sections into any page, and installs the UI kit automatically if it’s missing." },
+  { q: "Can I add more later?", a: "Yes — npx create-lacspace-app add pricing faq testimonials drops prewired, themed sections into any page, and add ai-chat or rag drops a whole feature (routes, UI and wiring) into an existing project. The UI kit installs automatically if it’s missing." },
+  { q: "Does the AI cost anything?", a: "No. The ai-chat and rag add-ons default to local Ollama — free, keyless and private (nothing leaves your machine). Install Ollama, pull a model, and it just works; or set LACSPACE_AI_* to point at any hosted OpenAI-compatible model instead. It’s built on the zero-dependency @lacspace AI packages, so the code is yours to read and own." },
 ];
 
 const DEMO_CSS = `
@@ -120,7 +122,7 @@ export default function CreateAppPage() {
       <main className="wrap">
         {/* Hero */}
         <section className="hero">
-          <Reveal><span className="pill"><span className="live" /> Open source · 9 templates · 0.12s scaffold</span></Reveal>
+          <Reveal><span className="pill"><span className="live" /> Open source · 9 templates · AI add-ons · 0.12s scaffold</span></Reveal>
           <Reveal delay={60}>
             <h1>One command.<br /><span className="grad">A finished Next.js app.</span></h1>
           </Reveal>
