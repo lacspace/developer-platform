@@ -25,15 +25,18 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "analytics-lite",
-        "v": "1.0.3",
-        "d": "Privacy-first, cookieless web analytics — page views and custom events sent to your own endpoint. No cookies, no localStorage IDs, no cross-site tracking, no consent banner. Respects Do-Not-Track, auto-tracks SPA navigation, uses sendBeacon. Zero-dependency, isomorphic.",
+        "v": "1.1.0",
+        "d": "Privacy-first, cookieless web analytics — page views and custom events sent to your own endpoint. No cookies, no localStorage IDs, no cross-site tracking, no consent banner. Respects Do-Not-Track, auto-tracks SPA navigation, uses sendBeacon. Now with a batching LiteClient, a sendBeacon-first transport, UTM parsing, DNT/consent helpers and a CSPRNG id. Zero-dependency, isomorphic.",
         "kw": [
           "analytics",
           "web-analytics",
           "privacy",
           "cookieless",
           "gdpr",
-          "no-cookies"
+          "no-cookies",
+          "utm",
+          "sendbeacon",
+          "do-not-track"
         ],
         "deps": 0
       },
@@ -703,15 +706,19 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "pdf",
-        "v": "1.0.3",
-        "d": "Generate real PDFs — invoices, receipts & documents — with zero dependencies and no headless browser. Accurate text layout, auto page-breaks, batteries-included invoice() & receipt() generators. Isomorphic (Node, edge, browser).",
+        "v": "1.1.0",
+        "d": "Generate real PDFs — invoices, receipts & documents — with zero dependencies and no headless browser. Accurate text layout, auto page-breaks and batteries-included invoice() & receipt() generators, now with tables, JPEG/raw images, page sizes & landscape, Times/Courier fonts, page numbers, bookmarks and Info metadata. Isomorphic (Node, edge, browser).",
         "kw": [
           "pdf",
           "pdf-generator",
           "invoice",
           "invoice-pdf",
           "receipt",
-          "pdf-invoice"
+          "pdf-invoice",
+          "pdf-table",
+          "pdf-image",
+          "page-numbers",
+          "pdf-bookmarks"
         ],
         "deps": 0
       },
@@ -909,29 +916,32 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "nepali-date",
-        "v": "1.1.3",
-        "d": "Bikram Sambat (BS) ↔ Gregorian (AD) date conversion — zero-dependency, isomorphic, with Nepali formatting.",
+        "v": "1.2.0",
+        "d": "Bikram Sambat (BS) ↔ Gregorian (AD) date conversion — zero-dependency, isomorphic, with token formatting (Nepali digits & names), BS date arithmetic, parsing, calendar-month and fiscal-year helpers.",
         "kw": [
           "nepali-date",
           "bikram-sambat",
           "bs-date",
           "nepali-calendar",
           "bs-ad-converter",
+          "fiscal-year",
           "nepal"
         ],
         "deps": 0
       },
       {
         "n": "nepali-utils",
-        "v": "1.1.4",
-        "d": "Everyday Nepal helpers — NPR currency formatting, Devanagari numerals, amount-in-words, validators, provinces. Zero-dependency.",
+        "v": "1.2.0",
+        "d": "Everyday Nepal helpers — NPR currency formatting (integer-paisa parse/format), Devanagari numerals, amount-in-words (Nepali & Roman), validators (vehicle plate, citizenship), provinces & district lookup. Zero-dependency.",
         "kw": [
           "nepal",
           "nepali",
           "npr",
           "currency",
           "devanagari",
-          "amount-in-words"
+          "amount-in-words",
+          "paisa",
+          "provinces"
         ],
         "deps": 0
       }
