@@ -42,71 +42,90 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "api",
-        "v": "2.1.4",
-        "d": "Lightweight, zero-dependency, isomorphic TypeScript HTTP client for Lacspace APIs.",
+        "v": "2.2.0",
+        "d": "Lightweight, zero-dependency, isomorphic TypeScript HTTP client for Lacspace APIs — retries with backoff, interceptors, timeouts/abort, page- & cursor-pagination, plus dependency-free query-string, URL/path, header-merge, form-body and typed-error helpers.",
         "kw": [
           "lacspace",
           "api",
           "http-client",
           "fetch",
           "isomorphic",
-          "typescript"
+          "typescript",
+          "query-string",
+          "url-join",
+          "cursor-pagination",
+          "form-urlencoded"
         ],
         "deps": 0
       },
       {
         "n": "auth",
-        "v": "2.1.4",
-        "d": "Authentication flows (login, register, token, refresh) for Lacspace APIs.",
+        "v": "2.2.0",
+        "d": "Authentication flows (login, register, token, refresh) for Lacspace APIs — now with PKCE/OIDC helpers, JWT expiry math, scope/role checks and proactive token refresh.",
         "kw": [
           "lacspace",
           "auth",
           "authentication",
           "login",
           "jwt",
-          "typescript"
+          "typescript",
+          "pkce",
+          "oauth",
+          "oidc",
+          "rbac"
         ],
         "deps": 1
       },
       {
         "n": "next",
-        "v": "1.1.4",
-        "d": "Next.js App Router integration for the Lacspace SDK — authenticated server client from cookies, Route Handler & Server Action wrappers, cookie helpers and a middleware auth guard.",
+        "v": "1.2.0",
+        "d": "Next.js App Router integration for the Lacspace SDK — authenticated server client from cookies, Route Handler/Server Action wrappers, CSRF + middleware auth guard, plus edge-safe pure helpers for cookies, Cache-Control, route matching, open-redirect-safe redirects and bearer tokens.",
         "kw": [
           "nextjs",
           "next",
           "app-router",
           "server-components",
           "server-actions",
-          "middleware"
+          "middleware",
+          "edge-runtime",
+          "cache-control",
+          "path-matcher",
+          "open-redirect"
         ],
         "deps": 1
       },
       {
         "n": "react",
-        "v": "1.1.2",
-        "d": "React hooks and provider for the Lacspace SDK — useAuth, useQuery, useLacspace.",
+        "v": "1.2.0",
+        "d": "React hooks and provider for the Lacspace SDK — useAuth, useQuery, useMutation, useAuthStatus and useLacspace, all sharing one authenticated client, over a pure DOM-free core (async state machine, retry/backoff, polling) you can unit-test anywhere.",
         "kw": [
           "lacspace",
           "react",
           "hooks",
           "sdk",
           "useauth",
-          "typescript"
+          "typescript",
+          "usemutation",
+          "useauthstatus",
+          "exponential-backoff"
         ],
         "deps": 1
       },
       {
         "n": "sdk",
-        "v": "2.1.2",
-        "d": "High-level TypeScript SDK for Lacspace — api, auth, analytics and e-commerce in one client.",
+        "v": "2.2.0",
+        "d": "High-level TypeScript SDK for Lacspace — api, auth, analytics and e-commerce sharing one connection and token. Now with named environment presets, a config merger, correlation/idempotency ids, health probes, typed error normalization and transport-agnostic pagination.",
         "kw": [
           "lacspace",
           "sdk",
           "ecommerce",
           "auth",
           "analytics",
-          "typescript"
+          "typescript",
+          "correlation-id",
+          "idempotency-key",
+          "health-check",
+          "environment-config"
         ],
         "deps": 3
       }
