@@ -144,7 +144,7 @@ export default function Home() {
             </Reveal>
             <Reveal delay={60}>
               <h1>
-                The Lacspace <br />
+                Lacspace <br />
                 <span className="grad">Developer Platform</span>
               </h1>
             </Reveal>
