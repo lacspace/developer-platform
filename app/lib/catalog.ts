@@ -1380,9 +1380,45 @@ export const CATALOG: Group[] = [
           "web-crypto"
         ],
         "deps": 0
+      },
+      {
+        "n": "sse",
+        "v": "1.0.0",
+        "d": "Real-time updates over Server-Sent Events with zero dependencies — a channel/room hub that fans messages to many clients, a Web-standard stream (Next.js/Deno/Bun/edge) AND a Node/Express handler, plus a typed browser client and a React useSSE hook. No WebSocket server, no vendor.",
+        "kw": [
+          "sse",
+          "server-sent-events",
+          "eventsource",
+          "real-time",
+          "streaming",
+          "pub-sub",
+          "usesse",
+          "react",
+          "edge",
+          "framework-agnostic"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "consent",
+        "v": "1.0.0",
+        "d": "GDPR-friendly cookie consent with zero dependencies — a framework-agnostic store (analytics/marketing/preferences), a drop-in vanilla banner, and a React binding (<ConsentBanner/> + useConsent). Cookie-persisted so your server can gate too, plus whenConsent() script-gating.",
+        "kw": [
+          "cookie-consent",
+          "consent",
+          "gdpr",
+          "ccpa",
+          "cookie-banner",
+          "privacy",
+          "consent-management",
+          "useconsent",
+          "react",
+          "framework-agnostic"
+        ],
+        "deps": 0
       }
     ]
   }
 ];
 
-export const CATALOG_TOTAL = 108;
+export const CATALOG_TOTAL = 110;
