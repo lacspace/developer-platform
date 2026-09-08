@@ -1728,8 +1728,13 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
 }
 
 /* ---- Hero: the mark crafts itself, then the logo fills in (LogoBuild) ---- */
-/* 4 phases: dots (0-0.8s) -> outer profile (0.8-1.8s) -> connectors (1.8-2.6s)
-   -> real /icon.svg fills in (2.85s) + idle breathe. Plays once on mount. */
+/* 4 phases, plays once on mount (~3.4s), then idles:
+   1 DOTS   (0-0.95s)  12 nodes pop in BFS order, crown -> neck, each with a glow.
+   2 OUTLINE(0.65-1.7s) the head profile draws itself.
+   3 WIRES  (1.65-2.9s) every connector draws parent -> child, a signal pulse
+                        travelling along it as it lights up.
+   4 BLOOM  (2.9-3.4s)  the network cross-fades into the real /icon.svg, then breathes.
+   Calibrated to the real mark; only transform/opacity/stroke-dashoffset animate. */
 .logobuild {
   position: relative;
   width: min(340px, 74vw);
@@ -1754,8 +1759,8 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   height: 100%;
   overflow: visible;
   z-index: 2;
-  filter: drop-shadow(0 0 3px rgba(11, 185, 217, 0.55));
-  animation: lb-craftout 650ms ease 2950ms forwards;
+  filter: drop-shadow(0 0 3px rgba(11, 185, 217, 0.5));
+  animation: lb-craftout 620ms ease 3000ms forwards;
 }
 .lb-outline {
   fill: none;
@@ -1766,7 +1771,7 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   opacity: 0;
-  animation: lb-draw 1000ms ease-in-out 800ms forwards;
+  animation: lb-draw 1050ms cubic-bezier(0.65, 0, 0.35, 1) 650ms forwards;
 }
 .lb-edge {
   stroke: url(#lbg);
@@ -1775,7 +1780,26 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   opacity: 0;
-  animation: lb-draw 320ms ease-out forwards var(--d, 0ms);
+  animation: lb-draw 300ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards var(--d, 0ms);
+}
+/* the travelling signal: a short bright dash that runs source -> target */
+.lb-pulse {
+  stroke: #d6fbff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 0.15 1;
+  stroke-dashoffset: 0.15;
+  opacity: 0;
+  filter: drop-shadow(0 0 2.4px rgba(120, 226, 255, 0.9));
+  animation: lb-signal 440ms cubic-bezier(0.5, 0, 0.5, 1) forwards var(--d, 0ms);
+}
+.lb-glow {
+  fill: rgba(96, 190, 255, 0.55);
+  opacity: 0;
+  transform: scale(0.2);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lb-glow 900ms ease-out forwards var(--d, 0ms);
 }
 .lb-node {
   fill: url(#lbg);
@@ -1783,7 +1807,7 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   transform: scale(0);
   transform-box: fill-box;
   transform-origin: center;
-  animation: lb-node 460ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards var(--d, 0ms);
+  animation: lb-node 500ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards var(--d, 0ms);
 }
 .lb-final {
   position: absolute;
@@ -1792,25 +1816,37 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   height: 100%;
   object-fit: contain;
   opacity: 0;
-  transform: scale(0.9);
+  transform: scale(0.92);
   transform-origin: center;
   filter: drop-shadow(0 18px 54px rgba(37, 121, 255, 0.32));
   z-index: 1;
-  animation: lb-fill 750ms cubic-bezier(0.2, 0.85, 0.2, 1) 2850ms forwards,
-    lb-breathe 2.6s ease-in-out 3650ms infinite;
+  animation: lb-fill 720ms cubic-bezier(0.2, 0.85, 0.2, 1) 2900ms forwards,
+    lb-breathe 2.6s ease-in-out 3700ms infinite;
 }
 @keyframes lb-node {
   from { opacity: 0; transform: scale(0); }
   70% { opacity: 1; }
   to { opacity: 1; transform: scale(1); }
 }
+@keyframes lb-glow {
+  0% { opacity: 0; transform: scale(0.2); }
+  35% { opacity: 0.9; }
+  100% { opacity: 0; transform: scale(1.5); }
+}
 @keyframes lb-draw {
   from { stroke-dashoffset: 1; opacity: 1; }
   to { stroke-dashoffset: 0; opacity: 1; }
 }
+@keyframes lb-signal {
+  0% { stroke-dashoffset: 0.15; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { stroke-dashoffset: -1; opacity: 0; }
+}
 @keyframes lb-craftout { to { opacity: 0; } }
 @keyframes lb-fill {
-  from { opacity: 0; transform: scale(0.9); }
+  from { opacity: 0; transform: scale(0.92); }
+  60% { opacity: 1; }
   to { opacity: 1; transform: scale(1); }
 }
 @keyframes lb-breathe { 50% { transform: scale(0.975); } }
@@ -1824,7 +1860,8 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
 /* No motion: skip the build, show the resolved colour logo immediately. */
 @media (prefers-reduced-motion: reduce) {
   .lb-craft { animation: none; opacity: 0; }
-  .lb-outline, .lb-edge, .lb-node { animation: none; }
+  .lb-outline, .lb-edge, .lb-pulse, .lb-glow, .lb-node { animation: none; }
+  .lb-pulse, .lb-glow { opacity: 0; }
   .lb-final { animation: none; opacity: 1; transform: none; }
   .logobuild::before { animation: none; }
 }
