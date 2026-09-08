@@ -136,23 +136,28 @@ export default function Home() {
       <DevHeader />
 
       <main className="wrap">
-        {/* Hero */}
+        {/* Hero — first screen shows only the mark + the name; the rest is below the fold */}
         <section className="hero">
+          <div className="hero-first">
+            <Reveal>
+              <LogoBuild />
+            </Reveal>
+            <Reveal delay={60}>
+              <h1>
+                The Lacspace <br />
+                <span className="grad">Developer Platform</span>
+              </h1>
+            </Reveal>
+            <a className="scrollcue" href="#start" aria-label="Scroll down">
+              <span>scroll</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </a>
+          </div>
+
+          <div className="hero-rest" id="start">
           <Reveal>
-            <LogoBuild />
-          </Reveal>
-          <Reveal delay={40}>
-            <span className="pill">
-              <span className="live" /> {PKG} packages · one CLI · real docs
-            </span>
-          </Reveal>
-          <Reveal delay={60}>
-            <h1>
-              The Lacspace <br />
-              <span className="grad">Developer Platform</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={120}>
             <p className="sub">
               {PKG} zero-dependency, isomorphic TypeScript packages — the standard
               library your backend and frontend keep re-inventing — plus a CLI
@@ -160,10 +165,10 @@ export default function Home() {
               all of it.
             </p>
           </Reveal>
-          <Reveal delay={150}>
+          <Reveal delay={80}>
             <HeroCommand />
           </Reveal>
-          <Reveal delay={180}>
+          <Reveal delay={120}>
             <div className="cta">
               <a className="btn btn-primary" href="/packages">
                 Explore {PKG} packages →
@@ -174,11 +179,11 @@ export default function Home() {
             </div>
           </Reveal>
 
-          <Reveal delay={200}>
+          <Reveal delay={160}>
             <QuickFind />
           </Reveal>
 
-          <Reveal delay={240}>
+          <Reveal delay={200}>
             <div className="stats">
               <div className="stat">
                 <b className="grad"><Counter to={PKG} /></b>
@@ -219,6 +224,7 @@ export default function Home() {
               ))}
             </div>
           </Reveal>
+          </div>
         </section>
 
         {/* Surfaces */}
