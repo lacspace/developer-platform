@@ -1302,7 +1302,87 @@ export const CATALOG: Group[] = [
         "deps": 0
       }
     ]
+  },
+  {
+    "group": "Web Engagement Kit",
+    "icon": "🔔",
+    "items": [
+      {
+        "n": "web-push",
+        "v": "1.0.1",
+        "d": "Send browser push notifications with zero dependencies and no vendor — pure Web Crypto (VAPID + RFC 8291 aes128gcm). No Firebase/FCM. Ships an `npx @lacspace/web-push` VAPID keygen CLI. Isomorphic: Node, Deno, Bun, Cloudflare Workers and Vercel Edge.",
+        "kw": [
+          "web-push",
+          "push-notifications",
+          "vapid",
+          "web-crypto",
+          "rfc8291",
+          "aes128gcm",
+          "service-worker",
+          "no-firebase",
+          "isomorphic",
+          "edge",
+          "deno",
+          "bun"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "pwa",
+        "v": "1.0.0",
+        "d": "Turn any site into an installable, offline-capable, push-ready PWA — generate a production service worker (offline caching + web-push handlers) and a web app manifest, plus browser helpers to register it and drive the install prompt. Framework-agnostic. Zero-dependency, isomorphic.",
+        "kw": [
+          "pwa",
+          "service-worker",
+          "web-app-manifest",
+          "offline",
+          "installable",
+          "add-to-home-screen",
+          "workbox-alternative",
+          "push",
+          "cache",
+          "framework-agnostic"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "notify",
+        "v": "1.0.0",
+        "d": "Beautiful in-app toast notifications with zero dependencies — a framework-agnostic store, a drop-in vanilla DOM renderer, and a React binding (<Toaster/> + useToast). Promise toasts, actions, positions and accessible live regions. React optional. Zero-dependency, isomorphic.",
+        "kw": [
+          "toast",
+          "notifications",
+          "toaster",
+          "react-toast",
+          "in-app-notifications",
+          "usetoast",
+          "promise-toast",
+          "accessible",
+          "framework-agnostic",
+          "sonner-alternative"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "captcha",
+        "v": "1.0.0",
+        "d": "A keyless, privacy-friendly proof-of-work CAPTCHA with zero dependencies — no Google, no Cloudflare, no account, no tracking. Stateless HMAC-signed challenges (ALTCHA-style) verified with one server secret. Isomorphic core + a drop-in browser widget.",
+        "kw": [
+          "captcha",
+          "proof-of-work",
+          "altcha",
+          "privacy",
+          "keyless",
+          "hmac",
+          "bot-protection",
+          "no-recaptcha",
+          "spam-protection",
+          "web-crypto"
+        ],
+        "deps": 0
+      }
+    ]
   }
 ];
 
-export const CATALOG_TOTAL = 104;
+export const CATALOG_TOTAL = 108;
