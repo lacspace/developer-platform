@@ -414,15 +414,19 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "hooks",
-        "v": "1.0.3",
-        "d": "Essential, SSR-safe React hooks — useLocalStorage, useDebounce, useMediaQuery, useOnClickOutside, useCopyToClipboard and 20+ more. Zero-dependency, fully typed, isomorphic.",
+        "v": "1.1.0",
+        "d": "Essential, SSR-safe React hooks — useLocalStorage, useDebounce, useMediaQuery, useOnClickOutside plus new usePagination, useStep, useHistory (undo/redo), useList and useBreakpoint. 35+ hooks built on pure, DOM-free helpers. Zero-dependency, fully typed, isomorphic.",
         "kw": [
           "react",
           "react-hooks",
           "hooks",
           "uselocalstorage",
           "usedebounce",
-          "usemediaquery"
+          "usemediaquery",
+          "usepagination",
+          "usehistory",
+          "undo-redo",
+          "usebreakpoint"
         ],
         "deps": 0
       },
@@ -442,15 +446,19 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "query",
-        "v": "1.0.3",
-        "d": "Tiny data fetching for React with a shared cache, request de-duplication, stale-while-revalidate, focus/reconnect revalidation, and mutations. useQuery + useMutation in ~2KB. Zero-dependency, SSR-safe, fully typed.",
+        "v": "1.1.0",
+        "d": "Tiny data fetching for React — useQuery + useMutation in ~2KB over a shared, deduped, stale-while-revalidate cache. Now with a pure, framework-agnostic core: query invalidation with structural key matching, cache inspection/subscriptions, retry/backoff and GC. Zero-dependency, SSR-safe, fully typed.",
         "kw": [
           "react",
           "data-fetching",
           "usequery",
           "usemutation",
           "swr",
-          "react-query"
+          "react-query",
+          "query-invalidation",
+          "retry",
+          "backoff",
+          "prefetch"
         ],
         "deps": 0
       },
@@ -470,29 +478,35 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "theme",
-        "v": "1.0.4",
-        "d": "SSR-safe dark / light / system theme for React — a tiny ThemeProvider, a useTheme hook, and a no-flash inline script. Persists to storage, follows the OS, toggles a class or data-attribute. Zero-dependency, framework-agnostic, fully typed.",
+        "v": "1.1.0",
+        "d": "SSR-safe dark / light / system theming for React — a tiny ThemeProvider, useTheme hook and no-flash inline script. Now ships a pure, framework-agnostic core: theme resolution, CSS-variable & stylesheet generation from design tokens, WCAG contrast helpers and an injectable-storage theme controller. Zero-dependency, fully typed.",
         "kw": [
           "react",
           "theme",
           "dark-mode",
           "light-mode",
           "next-themes",
-          "usetheme"
+          "usetheme",
+          "css-variables",
+          "design-tokens",
+          "wcag-contrast"
         ],
         "deps": 0
       },
       {
         "n": "ui",
-        "v": "1.0.3",
-        "d": "A tiny, dependency-free React kit that makes a page feel alive — scroll reveals, animated counters, gradient text, tilt cards, marquees, a typewriter and a ⌘K command palette. No animation library, no CSS import. Respects prefers-reduced-motion; Tailwind-friendly.",
+        "v": "1.1.0",
+        "d": "A tiny, dependency-free React kit that makes a page feel alive — scroll reveals, animated counters, gradient text, tilt cards, marquees, a typewriter and a ⌘K command palette — plus framework-agnostic helpers (easings, a variant class builder, tilt/gradient math, command filter & scorer). No animation library, no CSS import. Respects prefers-reduced-motion; Tailwind-friendly.",
         "kw": [
           "react",
           "react-components",
           "animation",
           "scroll-reveal",
           "count-up",
-          "gradient-text"
+          "gradient-text",
+          "easing-functions",
+          "fuzzy-search",
+          "command-palette"
         ],
         "deps": 0
       },
