@@ -1825,12 +1825,14 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
 @media (max-width: 640px) {
   .wrap { padding: 0 16px; }
 
-  /* Mobile hero: sit the mark + title noticeably higher (was vertically centred
-     in 100svh, which left a big blank on top). Vertical spacing only. */
+  /* Mobile hero: centre the mark + title in the space below the sticky nav —
+     balanced whitespace, nothing from the next section peeking in. The old
+     ~73px top padding is dropped so it reads as truly centred, not pushed down. */
   .hero-first {
-    justify-content: flex-start;
-    padding-top: clamp(24px, 6vh, 44px);
-    padding-bottom: 24px;
+    min-height: calc(100svh - 60px);
+    justify-content: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
     gap: 18px;
   }
   .hero-rest { padding-bottom: 20px; }
