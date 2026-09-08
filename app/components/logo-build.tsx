@@ -117,9 +117,22 @@ const rootVars = {
   "--breathe-delay": `${BREATHE_DELAY}ms`,
 } as React.CSSProperties;
 
-export function LogoBuild() {
+export function LogoBuild({
+  size,
+  className = "",
+}: {
+  /** px size for a fixed instance (e.g. the nav); omit to use the CSS width (hero) */
+  size?: number;
+  className?: string;
+} = {}) {
+  const sizeStyle = size ? { width: size, height: size } : {};
   return (
-    <div className="logobuild" role="img" aria-label="Lacspace" style={rootVars}>
+    <div
+      className={`logobuild ${className}`.trim()}
+      role="img"
+      aria-label="Lacspace"
+      style={{ ...rootVars, ...sizeStyle }}
+    >
       <svg className="lb-craft" viewBox="0 0 281.25 281.25" aria-hidden="true">
         <defs>
           <linearGradient id="lbg" x1="0%" y1="0%" x2="100%" y2="100%">

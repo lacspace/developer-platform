@@ -1104,6 +1104,32 @@ h1, h2, h3, .sec-head h2, .cta-band h2, .brand, .stat b, .hb-body h2 {
   flex: none;
   object-fit: contain;
 }
+/* animated crafting mark in the nav — fixed 26px, no halo, no stray margin */
+.logobuild.navmark {
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  flex: none;
+}
+.logobuild.navmark::before { display: none; }
+.logobuild.navmark .lb-final { filter: none; }
+/* "Devs" — a small terminal flourish: accent mono + a blinking caret */
+.brand-devs {
+  color: var(--accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+.brand-devs::after {
+  content: "_";
+  margin-left: 1px;
+  color: var(--accent);
+  animation: devs-caret 1.1s step-end infinite;
+}
+@keyframes devs-caret { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .brand-devs::after { animation: none; }
+}
 .hero-mark {
   width: 92px;
   height: 92px;

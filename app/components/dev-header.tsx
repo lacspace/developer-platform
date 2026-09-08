@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { LogoBuild } from "./logo-build";
 
 type Item = { label: string; href: string; desc?: string; external?: boolean };
 type Menu = { label: string; href?: string; items: Item[] };
@@ -66,7 +67,18 @@ function ext(i: Item) {
 
 export function DevHeader() {
   const [open, setOpen] = useState(false);
+  const [tick, setTick] = useState(0);
   const pathname = usePathname();
+
+  // Loop the crafting mark in the nav: re-mount it every ~9s to replay the build.
+  useEffect(() => {
+    const reduce =
+      typeof matchMedia !== "undefined" &&
+      matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const id = setInterval(() => setTick((t) => t + 1), 9000);
+    return () => clearInterval(id);
+  }, []);
 
   // Close the drawer whenever the route changes.
   useEffect(() => {
@@ -93,9 +105,8 @@ export function DevHeader() {
       <header className="nav">
       <div className="wrap nav-inner">
         <a className="brand" href="/" onClick={() => setOpen(false)}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="brand-mark" src="/brand/mark.png" alt="Lacspace" width={26} height={26} />
-          <span>Lacspace <span className="brand-sub">Developer</span></span>
+          <LogoBuild key={tick} size={26} className="navmark" />
+          <span>Lacspace <span className="brand-sub brand-devs">Devs</span></span>
         </a>
 
         <nav className="nav-links nav-drop">
