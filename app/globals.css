@@ -177,22 +177,130 @@ a {
 .burger span[data-open="true"]:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
+/* Mobile drawer: fixed, self-scrolling, slides in from the right. Backdrop dims
+   + blurs the page; body scroll is locked while open (JS). Root cause fix — the
+   menu no longer grows the sticky header past the viewport. */
+.mm-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(3, 6, 12, 0.55);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.mm-backdrop[data-open] {
+  opacity: 1;
+  visibility: visible;
+}
 .mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 60;
   display: flex;
   flex-direction: column;
-  padding: 8px 24px 20px;
-  gap: 4px;
+  width: min(86vw, 340px);
+  height: 100dvh;
+  background: var(--bg);
+  border-left: 1px solid var(--hairline);
+  box-shadow: -20px 0 60px rgba(0, 0, 0, 0.45);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1), visibility 0.25s ease;
+}
+.mobile-menu[data-open] {
+  transform: translateX(0);
+  visibility: visible;
+}
+.mm-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
   border-bottom: 1px solid var(--hairline);
-  background: rgba(7, 11, 20, 0.96);
+  flex: 0 0 auto;
+}
+.mm-title {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.mm-close {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.mm-close:hover {
+  color: var(--fg);
+  background: var(--panel);
+}
+.mm-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding: 6px 18px calc(24px + env(safe-area-inset-bottom));
+}
+.mm-group {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+.mm-group:last-of-type {
+  border-bottom: 0;
+}
+.mm-h {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 8px 4px 4px;
 }
 .mobile-menu a {
-  padding: 12px 4px;
+  display: block;
+  padding: 11px 4px;
   color: var(--muted);
-  border-bottom: 1px solid var(--hairline);
   font-size: 15px;
 }
-.mobile-menu a:last-child {
-  border-bottom: 0;
+.mobile-menu a:hover {
+  color: var(--fg);
+}
+.mm-cta {
+  margin-top: 14px;
+  text-align: center;
+  color: var(--accent) !important;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  font-weight: 600;
+}
+/* staggered fade-in for the links (only while opening; instant on close) */
+.mm-scroll .mm-h,
+.mobile-menu a {
+  opacity: 0;
+  transform: translateX(14px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition-delay: 0s;
+}
+.mobile-menu[data-open] .mm-h,
+.mobile-menu[data-open] a {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--i, 0) * 18ms);
+}
+@media (min-width: 761px) {
+  .mm-backdrop, .mobile-menu { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mm-backdrop, .mobile-menu,
+  .mm-scroll .mm-h, .mobile-menu a { transition: none; }
 }
 
 /* ---- Buttons / pills / code inline ---- */
@@ -630,6 +738,11 @@ h1 {
   gap: 40px;
   align-items: center;
 }
+/* let the code column shrink so its own overflow-x scrolls, instead of the wide
+   code forcing page-wide horizontal overflow (grid/flex min-width:auto fix) */
+.split > * {
+  min-width: 0;
+}
 .split .copy h3 {
   font-size: clamp(1.5rem, 3.4vw, 2rem);
   letter-spacing: -0.02em;
@@ -660,6 +773,8 @@ h1 {
   border-radius: 14px;
   overflow: hidden;
   background: #0a0a10;
+  max-width: 100%;
+  min-width: 0;
 }
 .codebar {
   display: flex;
@@ -1515,13 +1630,6 @@ h1, h2, h3, .sec-head h2, .cta-band h2, .brand, .stat b, .hb-body h2 {
 .nav-menu-t { display: block; font-size: 14px; font-weight: 560; color: var(--fg); }
 .nav-menu-t .ext { color: var(--faint); font-size: 11px; }
 .nav-menu-d { display: block; font-size: 12.5px; color: var(--faint); margin-top: 1px; }
-.mm-group { padding: 8px 0; border-bottom: 1px solid var(--hairline); }
-.mm-group:last-child { border-bottom: 0; }
-.mm-h {
-  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--faint); padding: 4px 4px 6px;
-}
-.mobile-menu .mm-group a { border-bottom: 0; padding: 9px 12px; }
 
 /* ---- Footer (5-col + badges) ---- */
 .foot-grid5 { grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; }
@@ -1717,6 +1825,14 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
 @media (max-width: 640px) {
   .wrap { padding: 0 16px; }
 
+  /* Mobile hero: sit the mark + title noticeably higher (was vertically centred
+     in 100svh, which left a big blank on top). Vertical spacing only. */
+  .hero-first {
+    justify-content: flex-start;
+    padding-top: clamp(24px, 6vh, 44px);
+    padding-bottom: 24px;
+    gap: 18px;
+  }
   .hero-rest { padding-bottom: 20px; }
   .sub { margin-top: 18px; }
   .cta { margin-top: 26px; gap: 10px; }

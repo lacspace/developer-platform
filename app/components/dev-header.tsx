@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 type Item = { label: string; href: string; desc?: string; external?: boolean };
 type Menu = { label: string; href?: string; items: Item[] };
@@ -65,8 +66,31 @@ function ext(i: Item) {
 
 export function DevHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close the drawer whenever the route changes.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // Lock body scroll + close on Escape while the drawer is open.
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
   return (
-    <header className="nav">
+    <>
+      <header className="nav">
       <div className="wrap nav-inner">
         <a className="brand" href="/" onClick={() => setOpen(false)}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -101,21 +125,63 @@ export function DevHeader() {
           <span data-open={open} /><span data-open={open} /><span data-open={open} />
         </button>
       </div>
+      </header>
 
-      {open && (
-        <div className="mobile-menu">
-          {MENUS.map((m) => (
-            <div key={m.label} className="mm-group">
-              <div className="mm-h">{m.label}</div>
-              {m.items.map((i) => (
-                <a key={i.label} href={i.href} onClick={() => setOpen(false)} {...ext(i)}>
-                  {i.label}{i.external && <span aria-hidden> ↗</span>}
-                </a>
-              ))}
-            </div>
-          ))}
+      {/* Backdrop — tap to close */}
+      <div
+        className="mm-backdrop"
+        data-open={open || undefined}
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* Slide-in drawer (always in the DOM so it can animate both ways) */}
+      <aside className="mobile-menu" data-open={open || undefined} aria-hidden={!open}>
+        <div className="mm-top">
+          <span className="mm-title">Menu</span>
+          <button className="mm-close" aria-label="Close menu" onClick={() => setOpen(false)}>
+            ✕
+          </button>
         </div>
-      )}
-    </header>
+        <nav className="mm-scroll">
+          {(() => {
+            let k = 0;
+            const nx = () => {
+              const v = k;
+              k += 1;
+              return v;
+            };
+            return (
+              <>
+                {MENUS.map((m) => (
+                  <div key={m.label} className="mm-group">
+                    <div className="mm-h" style={{ "--i": nx() } as React.CSSProperties}>{m.label}</div>
+                    {m.items.map((i) => (
+                      <a
+                        key={i.label}
+                        href={i.href}
+                        onClick={() => setOpen(false)}
+                        style={{ "--i": nx() } as React.CSSProperties}
+                        {...ext(i)}
+                      >
+                        {i.label}{i.external && <span aria-hidden> ↗</span>}
+                      </a>
+                    ))}
+                  </div>
+                ))}
+                <a
+                  className="mm-cta"
+                  href="/playground"
+                  onClick={() => setOpen(false)}
+                  style={{ "--i": nx() } as React.CSSProperties}
+                >
+                  Playground ▸
+                </a>
+              </>
+            );
+          })()}
+        </nav>
+      </aside>
+    </>
   );
 }
