@@ -1117,51 +1117,51 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "ai",
-        "v": "1.0.0",
-        "d": "A tiny, provider-agnostic LLM chat client over fetch — one chat()/stream() API for OpenAI, Anthropic, Google Gemini and any OpenAI-compatible endpoint (Groq, Together, OpenRouter, Ollama). Bring your own key, no SDK, isomorphic.",
-        "kw": ["ai", "llm", "chat", "openai", "anthropic", "claude", "gemini", "groq", "openrouter", "ollama"],
+        "v": "1.1.0",
+        "d": "A tiny, provider-agnostic LLM chat client over fetch — one chat()/stream() API for OpenAI, Anthropic, Google Gemini and any OpenAI-compatible endpoint (Groq, Together, OpenRouter, Ollama). Now with typed message builders, retry/backoff + timeout, usage/cost accounting and JSON-output parsing. Bring your own key, no SDK, isomorphic.",
+        "kw": ["ai", "llm", "chat", "openai", "anthropic", "claude", "gemini", "groq", "openrouter", "ollama", "retry", "cost-estimation", "structured-output"],
         "deps": 0
       },
       {
         "n": "prompt",
-        "v": "1.0.0",
-        "d": "A tiny, typed prompt-engineering toolkit — build, compose and render LLM prompts and chat messages with real type safety. Variable names are inferred from the template string, so .render() is type-checked. Zero-dependency, isomorphic.",
-        "kw": ["ai", "llm", "prompt", "prompt-engineering", "prompt-template", "chat-messages", "few-shot", "template", "type-inference", "typescript"],
+        "v": "1.1.0",
+        "d": "A tiny, typed prompt-engineering toolkit — build, compose and render LLM prompts and chat messages with real type safety (variable names inferred from the template). Now with a versioned prompt registry, prompt-injection guards, JSON/enum output-format instructions and pure token-budget trimming. Zero-dependency, isomorphic.",
+        "kw": ["ai", "llm", "prompt", "prompt-engineering", "prompt-template", "chat-messages", "few-shot", "prompt-registry", "prompt-injection", "token-budget", "typescript"],
         "deps": 0
       },
       {
         "n": "tokenizer",
-        "v": "1.0.0",
-        "d": "A fast token estimator, LLM cost calculator and context-budget manager — good-enough GPT/Claude/Gemini token counts without the 3 MB tiktoken/wasm. Zero-dependency, isomorphic and fully typed.",
-        "kw": ["tokenizer", "token-counter", "token-estimate", "llm", "ai", "prompt-engineering", "openai", "claude", "gpt", "cost-calculator"],
+        "v": "1.1.0",
+        "d": "A fast token estimator, LLM cost calculator and context-budget manager — good-enough GPT/Claude/Gemini token counts without the 3 MB tiktoken/wasm. Now with context-window usage checks, batch estimation and cross-model cost comparison across an expanded model table. Zero-dependency, isomorphic and fully typed.",
+        "kw": ["tokenizer", "token-counter", "token-estimate", "llm", "ai", "prompt-engineering", "openai", "claude", "gpt", "cost-calculator", "cost-comparison", "context-window"],
         "deps": 0
       },
       {
         "n": "json-repair",
-        "v": "1.0.0",
-        "d": "Extract and repair JSON from messy LLM output — strip code fences and prose, fix trailing commas, single quotes, unquoted keys and Python literals, and close truncated objects. Zero-dependency, isomorphic, typed.",
-        "kw": ["json-repair", "json-parse", "extract-json", "llm", "ai", "openai", "prompt-engineering", "structured-output", "streaming-json", "partial-json"],
+        "v": "1.1.0",
+        "d": "Extract and repair JSON from messy LLM output — strip code fences and prose, pull out every embedded JSON value, repair with typed diagnostics, and fix trailing commas, single quotes, unquoted keys, Python literals and truncated objects. Zero-dependency, isomorphic, typed.",
+        "kw": ["json-repair", "json-parse", "extract-json", "llm", "ai", "openai", "prompt-engineering", "structured-output", "streaming-json", "partial-json", "json-diagnostics"],
         "deps": 0
       },
       {
         "n": "chunk",
-        "v": "1.0.0",
-        "d": "A tiny text splitter for RAG and long-context prompts — recursive character, Markdown, code, sentence and paragraph chunking with overlap and a pluggable token-aware lengthFn. Zero-dependency, isomorphic.",
-        "kw": ["chunk", "text-splitter", "chunking", "rag", "retrieval", "embeddings", "recursive-character-text-splitter", "markdown-splitter", "code-splitter", "ai"],
+        "v": "1.1.0",
+        "d": "A tiny text splitter for RAG and long-context prompts — recursive character, Markdown, code, sentence and paragraph chunking with overlap and a pluggable token-aware lengthFn. Now batch-chunks whole corpora (per-chunk docId + metadata), merges tiny fragments and ships a dependency-free approximate token counter. Zero-dependency, isomorphic.",
+        "kw": ["chunk", "text-splitter", "chunking", "rag", "retrieval", "embeddings", "recursive-character-text-splitter", "markdown-splitter", "code-splitter", "ai", "document-chunking", "vector-database"],
         "deps": 0
       },
       {
         "n": "stream",
-        "v": "1.0.0",
-        "d": "A zero-dependency, isomorphic parser for Server-Sent Events and streaming LLM responses — turn a fetch body into a clean async iterator of text and tool-call deltas, normalized across OpenAI and Anthropic. No SDK, keyless.",
-        "kw": ["sse", "server-sent-events", "eventsource", "streaming", "llm", "openai", "anthropic", "chat-completion", "tool-calls", "async-iterator"],
+        "v": "1.1.0",
+        "d": "A zero-dependency, isomorphic parser for Server-Sent Events, NDJSON and streaming LLM responses — a unified async iterator of text and tool-call deltas across OpenAI and Anthropic, plus map/filter/tee transforms, ReadableStream adapters and AbortSignal cancellation. No SDK, keyless.",
+        "kw": ["sse", "server-sent-events", "eventsource", "streaming", "llm", "openai", "anthropic", "chat-completion", "tool-calls", "async-iterator", "ndjson", "stream-transform"],
         "deps": 0
       },
       {
         "n": "ai-tools",
-        "v": "1.0.0",
-        "d": "Define LLM function-calling / tool-use tools once and use them with any provider — generate the OpenAI, Anthropic or Google tool spec AND get a runtime dispatcher that validates arguments and calls your handler. Zero-dependency, keyless.",
-        "kw": ["ai", "llm", "function-calling", "tool-use", "tool-calling", "agents", "openai", "anthropic", "gemini", "json-schema"],
+        "v": "1.1.0",
+        "d": "Define LLM function-calling / tool-use tools once and use them with any provider — generate the OpenAI, Anthropic or Google tool spec, parse tool calls out of any response, validate/coerce the model's arguments (with an opt-in strict validator), dispatch to your handler and format results back into messages. Zero-dependency, keyless.",
+        "kw": ["ai", "llm", "function-calling", "tool-use", "tool-calling", "agents", "openai", "anthropic", "gemini", "json-schema", "tool-call-parsing", "argument-validation"],
         "deps": 0
       }
     ]
