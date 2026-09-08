@@ -1218,6 +1218,20 @@ export const CATALOG: Group[] = [
         "d": "A keyless registry of connection presets for LLM & embedding endpoints — point @lacspace/ai or @lacspace/embeddings at a free or local model (Ollama, Groq, OpenRouter, Google AI Studio…) in one line.",
         "kw": ["ai", "llm", "providers", "presets", "free-llm", "ollama", "openrouter", "groq", "openai-compatible", "keyless", "embeddings", "endpoints"],
         "deps": 0
+      },
+      {
+        "n": "rerank",
+        "v": "1.0.0",
+        "d": "Rerank retrieved RAG documents for precision — BM25, TF-IDF, Reciprocal Rank Fusion, hybrid vector+lexical blending and MMR diversity, plus an injectable cross-encoder/LLM scorer. Zero-dependency, keyless, isomorphic.",
+        "kw": ["rerank", "bm25", "reciprocal-rank-fusion", "mmr", "hybrid-search", "rag", "retrieval", "semantic-search", "cross-encoder", "tf-idf", "vector-search", "llm"],
+        "deps": 0
+      },
+      {
+        "n": "moderation",
+        "v": "1.0.0",
+        "d": "Keyless content-safety guardrails for AI apps — detect & redact PII, flag toxic content, catch prompt-injection, and validate LLM output before you show or store it. Zero-dependency and isomorphic.",
+        "kw": ["moderation", "content-safety", "guardrails", "pii-detection", "redaction", "prompt-injection", "llm-safety", "ai-safety", "output-validation", "toxicity", "keyless", "zero-dependency"],
+        "deps": 0
       }
     ]
   },
@@ -1291,4 +1305,4 @@ export const CATALOG: Group[] = [
   }
 ];
 
-export const CATALOG_TOTAL = 102;
+export const CATALOG_TOTAL = 104;

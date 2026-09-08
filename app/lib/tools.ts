@@ -1163,6 +1163,50 @@ export const TOOLS: Tool[] = [
     ],
     keywords: ["license", "licence", "spdx", "license-header", "license-generator", "third-party-notices", "license-check", "compliance", "attribution", "ci", "license-detection", "license-compatibility", "copyleft", "spdx-detect", "license-fix"],
   },
+  {
+    slug: "rag",
+    name: "lacspace-rag",
+    tagline: "Keyless local RAG in one CLI — index a folder, then ask grounded questions.",
+    icon: "🧠",
+    grad: "#8B5CF6,#3B82F6",
+    status: "live",
+    version: "0.1.0",
+    summary:
+      "Point it at a folder of docs or code, and it chunks, embeds and indexes everything locally — then you query for the most relevant passages or ask a question and get an answer grounded in your files, with sources cited. Free by default with Ollama (no API key, runs on your machine); OpenAI-compatible endpoints work too.",
+    about:
+      "lacspace-rag is a batteries-included retrieval-augmented-generation pipeline in a single zero-dependency command. `index` walks your text and code files, splits them into overlapping chunks, embeds each one and saves a plain-JSON index; `query` returns the top matching passages with scores and source paths; `ask` retrieves the best context, builds a grounded prompt and calls a chat model, printing the answer plus the sources it used. It defaults to a fully free, local Ollama setup so you can run RAG over private files with nothing leaving your machine — or point --provider/--base-url/--model at any OpenAI-compatible endpoint. It's the CLI companion to the @lacspace AI App Kit (embeddings/vector/rag/agent).",
+    install: "npx lacspace-rag index ./docs && npx lacspace-rag ask \"how do I deploy?\"",
+    quickstart: "npm i -g lacspace-rag",
+    localOnly: true,
+    localNote:
+      "lacspace-rag talks to a local model server (Ollama by default) and reads your files, so it runs on your machine, not as a hosted button here. Install Ollama, then `ollama pull nomic-embed-text` and `ollama pull llama3.2` — that's the whole setup, no API key.",
+    features: [
+      { icon: "🗂️", title: "Index any folder", desc: "Recursively reads text + code files (skips node_modules/.git/binaries), chunks with overlap and embeds each one." },
+      { icon: "🆓", title: "Free by default", desc: "Uses local Ollama out of the box — no API key, nothing leaves your machine. OpenAI-compatible too." },
+      { icon: "🔎", title: "Grounded answers", desc: "`ask` retrieves the best passages, builds a grounded prompt and cites the source files in its answer." },
+      { icon: "🎯", title: "Just the passages", desc: "`query` returns the top-k matching chunks with cosine scores and source paths — no model call needed." },
+      { icon: "🧩", title: "Any provider", desc: "--provider / --base-url / --model / --embed-model point it at Ollama, OpenAI, or any compatible endpoint." },
+      { icon: "📦", title: "Zero dependencies", desc: "Self-contained CLI + library; the index is a plain JSON file you can inspect, move or commit." },
+    ],
+    examples: [
+      { label: "Index a docs folder (free, local)", code: `npx lacspace-rag index ./docs`, note: "Chunks + embeds every file via Ollama and writes ./.lacspace-rag/index.json." },
+      { label: "Ask a grounded question", code: `npx lacspace-rag ask "how do refunds work?" -k 5`, note: "Retrieves the 5 best chunks, answers from them, and lists the sources." },
+      { label: "Just retrieve passages", code: `npx lacspace-rag query "rate limiting" --json`, note: "Prints the top matching chunks with scores + paths as JSON." },
+      { label: "Use an OpenAI-compatible endpoint", code: `npx lacspace-rag ask "summarise the API" \\\n  --provider openai --model gpt-4o-mini --api-key $OPENAI_API_KEY`, note: "Swap in any hosted model with one flag." },
+      { label: "Use it as a library", code: `import { chunkText, embed, search, buildPrompt } from "lacspace-rag";`, note: "The retrieval core is exported for your own scripts (inject fetch for tests)." },
+    ],
+    useCases: [
+      "Chat with your own docs, notes or a codebase — privately and for free",
+      "Add grounded Q&A to a project without a vector database or an API key",
+      "Prototype a RAG pipeline locally before wiring the @lacspace AI App Kit into an app",
+      "Search a large folder for the passages most relevant to a question",
+    ],
+    links: [
+      { label: "npm", href: "https://www.npmjs.com/package/lacspace-rag", external: true },
+      { label: "Source", href: "https://github.com/lacspace/npm-packages/tree/main/lacspace-rag", external: true },
+    ],
+    keywords: ["rag", "ai", "llm", "embeddings", "ollama", "cli", "retrieval", "chat", "semantic-search", "vector-search", "local-first", "keyless", "grounded", "zero-dependency"],
+  },
 ];
 
 export const TOOLS_LIVE = TOOLS.filter((t) => t.status === "live");
