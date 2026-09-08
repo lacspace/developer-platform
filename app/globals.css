@@ -1726,3 +1726,105 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   .btn { padding: 11px 16px; font-size: 14px; }
   .hb-pm button { padding: 8px 9px; }
 }
+
+/* ---- Hero: the mark crafts itself, then the logo fills in (LogoBuild) ---- */
+/* 4 phases: dots (0-0.8s) -> outer profile (0.8-1.8s) -> connectors (1.8-2.6s)
+   -> real /icon.svg fills in (2.85s) + idle breathe. Plays once on mount. */
+.logobuild {
+  position: relative;
+  width: min(340px, 74vw);
+  aspect-ratio: 1;
+  margin: 0 auto 20px;
+}
+/* super-hero halo behind the mark */
+.logobuild::before {
+  content: "";
+  position: absolute;
+  inset: -16%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.3), rgba(124, 58, 237, 0.12) 46%, transparent 70%);
+  filter: blur(12px);
+  z-index: 0;
+  animation: lb-halo 6s ease-in-out infinite;
+}
+.lb-craft {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  z-index: 2;
+  filter: drop-shadow(0 0 3px rgba(11, 185, 217, 0.55));
+  animation: lb-craftout 650ms ease 2950ms forwards;
+}
+.lb-outline {
+  fill: none;
+  stroke: url(#lbg);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation: lb-draw 1000ms ease-in-out 800ms forwards;
+}
+.lb-edge {
+  stroke: url(#lbg);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
+  animation: lb-draw 320ms ease-out forwards var(--d, 0ms);
+}
+.lb-node {
+  fill: url(#lbg);
+  opacity: 0;
+  transform: scale(0);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: lb-node 460ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards var(--d, 0ms);
+}
+.lb-final {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.9);
+  transform-origin: center;
+  filter: drop-shadow(0 18px 54px rgba(37, 121, 255, 0.32));
+  z-index: 1;
+  animation: lb-fill 750ms cubic-bezier(0.2, 0.85, 0.2, 1) 2850ms forwards,
+    lb-breathe 2.6s ease-in-out 3650ms infinite;
+}
+@keyframes lb-node {
+  from { opacity: 0; transform: scale(0); }
+  70% { opacity: 1; }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes lb-draw {
+  from { stroke-dashoffset: 1; opacity: 1; }
+  to { stroke-dashoffset: 0; opacity: 1; }
+}
+@keyframes lb-craftout { to { opacity: 0; } }
+@keyframes lb-fill {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes lb-breathe { 50% { transform: scale(0.975); } }
+@keyframes lb-halo { 50% { transform: scale(1.06); opacity: 0.82; } }
+@media (min-width: 900px) {
+  .logobuild { width: 384px; }
+}
+@media (max-width: 640px) {
+  .logobuild { width: min(250px, 66vw); margin-bottom: 14px; }
+}
+/* No motion: skip the build, show the resolved colour logo immediately. */
+@media (prefers-reduced-motion: reduce) {
+  .lb-craft { animation: none; opacity: 0; }
+  .lb-outline, .lb-edge, .lb-node { animation: none; }
+  .lb-final { animation: none; opacity: 1; transform: none; }
+  .logobuild::before { animation: none; }
+}
