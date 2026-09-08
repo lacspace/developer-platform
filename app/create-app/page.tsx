@@ -9,7 +9,7 @@ const seo = site.page({
   title: "create-lacspace-app",
   path: "/create-app",
   description:
-    "create-lacspace-app scaffolds a finished Next.js 15 app in ~0.12s — 9 production-ready templates, SEO, security headers, sitemap, robots and a dynamic OG image wired from the first render, plus a catalog of 8 composable add-ons: AI chat, chat-with-your-docs RAG, content, search, auth, analytics, payments and email — added with --with, keyless and free-first, and the backend ones auto-upgrade you to full-stack. Not a blank page: a finished one.",
+    "create-lacspace-app scaffolds a finished Next.js 15 app in ~0.12s — 9 production-ready templates, SEO, security headers, sitemap, robots and a dynamic OG image wired from the first render, plus a catalog of 11 composable add-ons: AI chat, chat-with-your-docs RAG, content, search, auth, analytics, payments, email, i18n, quality gates and uploads — added with --with, keyless and free-first, and the backend ones auto-upgrade you to full-stack. Not a blank page: a finished one.",
 });
 export const metadata = seo.metadata;
 
@@ -45,11 +45,14 @@ const ADDONS = [
   { icon: "📈", key: "analytics", name: "analytics", d: "Privacy-first, cookieless web analytics: tracker + MongoDB collector + dashboard.", fs: true },
   { icon: "💳", key: "payments", name: "payments", d: "Checkout wired to eSewa & Khalti: orders and integer-safe money. The signed eSewa flow works end-to-end in TEST with no credentials; Khalti activates with a secret.", fs: true },
   { icon: "✉️", key: "email", name: "email", d: "Transactional email: a ready mail service, beautiful templates and address validation. Logs to the console until you add SMTP, then delivers for real.", fs: true },
+  { icon: "🌐", key: "i18n", name: "i18n", d: "Multi-language UI: a tiny dependency-free t() translator + a language switcher, with English + Nepali locales and an i18n:check lint script." },
+  { icon: "🧪", key: "quality", name: "quality", d: "One-command quality gates from the Lacspace dev-tools — bundle-size budget, dependency audit and fake fixtures — plus a ready GitHub Actions CI workflow." },
+  { icon: "📤", key: "uploads", name: "uploads", d: "Authenticated file uploads stored in MongoDB, served via signed, expiring URLs — no S3 required.", fs: true },
 ];
 
 const STEPS = [
   { n: "01", t: "Run one command", d: "npm create lacspace-app@latest — no config files, no setup wizard." },
-  { n: "02", t: "Pick a template + add-ons", d: "Nine templates. Choose static (frontend only) or --fullstack — frontend plus a real Node/Express/MongoDB/Redis backend. Then layer on any of 8 add-ons with --with ai-chat,rag,content,search,auth-pages,analytics,payments,email — AI, content, search, auth, analytics, payments and email, all keyless and free-first. The backend ones auto-upgrade a static project to full-stack." },
+  { n: "02", t: "Pick a template + add-ons", d: "Nine templates. Choose static (frontend only) or --fullstack — frontend plus a real Node/Express/MongoDB/Redis backend. Then layer on any of 11 add-ons with --with ai-chat,rag,content,search,auth-pages,analytics,payments,email,i18n,quality,uploads — AI, content, search, auth, analytics, payments, email, i18n, quality gates and uploads, all keyless and free-first. The backend ones auto-upgrade a static project to full-stack." },
   { n: "03", t: "Start building", d: "cd in, npm run dev, and you’re live — SEO, headers and (optionally) a working AI already wired." },
 ];
 
@@ -58,7 +61,7 @@ const CMP = [
   { m: "Files produced", a: "18", b: "70", hot: true },
   { m: "Pages (finished)", a: "1 blank", b: "11", hot: true },
   { m: "Templates", a: "1", b: "9", hot: true },
-  { m: "Prebuilt add-on catalog", a: "✗", b: "8: AI, auth, payments, email, analytics, search, content", hot: true },
+  { m: "Prebuilt add-on catalog", a: "✗", b: "11: AI, auth, payments, email, analytics, search, content, i18n, quality, uploads", hot: true },
   { m: "Backend included", a: "—", b: "Express + MongoDB + Redis + JWT + CRUD, optional", hot: true },
   { m: "SEO + JSON-LD", a: "✗", b: "✓", hot: false },
   { m: "Dynamic OG images", a: "✗", b: "✓", hot: false },
@@ -74,7 +77,7 @@ const FAQ = [
   { q: "Do I need Docker or Redis for the full-stack app?", a: "No. Redis is optional — with no REDIS_URL the API falls back to an in-memory cache automatically, so it runs with zero infrastructure. MongoDB can be a local Docker container (a root docker-compose.yml with Mongo + Redis is included) or a free Atlas cluster. It's keyless and free-first, and every generated file carries plain \"how this works\" teaching comments." },
   { q: "Do the blog and docs templates really work?", a: "Yes. The blog template turns content/posts/*.md into statically-generated pages with Article JSON-LD and sitemap entries (via @lacspace/markdown); the docs template is a full Markdown docs site with an auto-generated sidebar, on-this-page TOC and prev/next." },
   { q: "Can I add more later?", a: "Yes — npx create-lacspace-app add pricing faq testimonials drops prewired, themed sections into any page, and add ai-chat or rag drops a whole feature (routes, UI and wiring) into an existing project. The UI kit installs automatically if it’s missing." },
-  { q: "What add-ons are included?", a: "Eight, each requested with --with <key>, in the interactive picker, or add <key> later: ai-chat (a streaming AI chat on local Ollama), rag (chat with your Markdown docs, grounded with sources), content (a /updates Markdown section + RSS + llms.txt), search (instant keyless BM25 full-text search over your Markdown — no key, no service), auth-pages (profile editing, password change and TOTP 2FA on the built-in login), analytics (privacy-first, cookieless web analytics with a MongoDB collector and dashboard), payments (checkout wired to eSewa & Khalti with integer-safe money) and email (transactional email with ready templates that logs to the console until you add SMTP). Everything is keyless and free-first; the backend ones — auth-pages, analytics, payments and email — contribute real Express routes and models via a route manifest and auto-upgrade a static project to full-stack." },
+  { q: "What add-ons are included?", a: "Eleven, each requested with --with <key>, in the interactive picker, or add <key> later: ai-chat (a streaming AI chat on local Ollama), rag (chat with your Markdown docs, grounded with sources), content (a /updates Markdown section + RSS + llms.txt), search (instant keyless BM25 full-text search over your Markdown — no key, no service), auth-pages (profile editing, password change and TOTP 2FA on the built-in login), analytics (privacy-first, cookieless web analytics with a MongoDB collector and dashboard), payments (checkout wired to eSewa & Khalti with integer-safe money), email (transactional email with ready templates that logs to the console until you add SMTP), i18n (a dependency-free t() translator and language switcher with English + Nepali locales), quality (one-command quality gates — bundle-size budget, dependency audit and fake fixtures — plus a GitHub Actions CI workflow) and uploads (authenticated file uploads stored in MongoDB, served via signed, expiring URLs — no S3). Everything is keyless and free-first; the backend ones — auth-pages, analytics, payments, email and uploads — contribute real Express routes and models via a route manifest and auto-upgrade a static project to full-stack, while i18n and quality are frontend/tooling add-ons." },
   { q: "Can I scaffold a whole product at once?", a: "Yes — a recipe bundles a template, full-stack mode and a set of add-ons into one command. npx create-lacspace-app my-app --recipe ai-saas gives you a SaaS with accounts, payments, a streaming AI chat and analytics; other recipes are store (e-commerce + eSewa/Khalti checkout + email + analytics), blog (content + search), docs-ai (RAG + search) and internal-tool (dashboard + auth + analytics + email). Explicit --template, --with and --fullstack flags still merge on top." },
   { q: "Does the AI cost anything?", a: "No. The ai-chat and rag add-ons default to local Ollama — free, keyless and private (nothing leaves your machine). Install Ollama, pull a model, and it just works; or set LACSPACE_AI_* to point at any hosted OpenAI-compatible model instead. It’s built on the zero-dependency @lacspace AI packages, so the code is yours to read and own." },
 ];
@@ -138,7 +141,7 @@ export default function CreateAppPage() {
       <main className="wrap">
         {/* Hero */}
         <section className="hero">
-          <Reveal><span className="pill"><span className="live" /> Open source · 9 templates · 8 add-ons · full-stack mode · 0.12s scaffold</span></Reveal>
+          <Reveal><span className="pill"><span className="live" /> Open source · 9 templates · 11 add-ons · full-stack mode · 0.12s scaffold</span></Reveal>
           <Reveal delay={60}>
             <h1>One command.<br /><span className="grad">A finished Next.js app.</span></h1>
           </Reveal>
@@ -263,7 +266,7 @@ real  0.12s   ·   run 2: 0.12s   run 3: 0.12s   run 4: 0.12s   run 5: 0.12s`} /
         <section className="sec">
           <Reveal className="sec-head center">
             <div className="eyebrow">A catalog, not a checkbox</div>
-            <h2>Eight add-ons, <span className="grad">one flag each</span></h2>
+            <h2>Eleven add-ons, <span className="grad">one flag each</span></h2>
             <p>Request any of these with <span className="mono">--with &lt;key&gt;</span>, tick them in the interactive picker, or <span className="mono">add &lt;key&gt;</span> to an existing project. All keyless and free-first — and the full-stack ones contribute real Express routes and models to the generated backend, auto-upgrading a static project to full-stack.</p>
           </Reveal>
           <div className="kits">
