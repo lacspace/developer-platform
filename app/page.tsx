@@ -1,5 +1,7 @@
 import { softwareApp, graph, breadcrumb } from "@lacspace/seo";
 import { DevHeader } from "./components/dev-header";
+import { LogoBuild } from "./components/logo-build";
+import { HeroCommand } from "./components/hero-command";
 import { DevFooter } from "./components/dev-footer";
 import { Reveal } from "./components/reveal";
 import { CodeBlock } from "./components/code-block";
@@ -137,8 +139,7 @@ export default function Home() {
         {/* Hero */}
         <section className="hero">
           <Reveal>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="hero-mark" src="/brand/mark.png" alt="Lacspace" width={96} height={96} />
+            <LogoBuild />
           </Reveal>
           <Reveal delay={40}>
             <span className="pill">
@@ -158,6 +159,9 @@ export default function Home() {
               that scaffolds a finished Next.js app, and the docs to build with
               all of it.
             </p>
+          </Reveal>
+          <Reveal delay={150}>
+            <HeroCommand />
           </Reveal>
           <Reveal delay={180}>
             <div className="cta">
