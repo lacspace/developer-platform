@@ -1172,30 +1172,30 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "expect",
-        "v": "1.0.0",
-        "d": "A fluent assertion library that runs anywhere — deep-equal, async resolves/rejects, toThrow, asymmetric matchers (any/objectContaining/…) and expect.extend custom matchers. Throws a descriptive error, so it plugs into any runner or the browser. Zero-dependency, isomorphic.",
-        "kw": ["expect", "assert", "assertion", "matchers", "deep-equal", "testing", "unit-testing", "vitest", "jest", "typescript"],
+        "v": "1.1.0",
+        "d": "A fluent assertion library that runs anywhere — deep-equal, async resolves/rejects, toThrow, asymmetric matchers (any/objectContaining/…), expect.extend custom matchers, and 15 more built-ins (toBeOneOf/toBeWithin/toBeSorted/toIncludeSameMembers/type guards). Plugs into any runner or the browser. Zero-dependency, isomorphic.",
+        "kw": ["expect", "assert", "assertion", "matchers", "deep-equal", "testing", "unit-testing", "vitest", "jest", "typescript", "jest-extended", "type-matchers"],
         "deps": 0
       },
       {
         "n": "spy",
-        "v": "1.0.0",
-        "d": "Spies, stubs, mocks and deterministic fake timers for any test runner or the browser — record calls, program returns/throws/resolves with once-queues, spyOn with call-through, and tick a fake clock. Zero-dependency, isomorphic.",
-        "kw": ["spy", "stub", "mock", "mocking", "test-double", "fake-timers", "sinon", "vitest", "jest", "testing"],
+        "v": "1.1.0",
+        "d": "Spies, stubs, mocks and deterministic fake timers for any test runner or the browser — record calls, program returns/throws/resolves with once-queues, spyOn with call-through, and now argument matchers (any/objectContaining/…), richer call-inspection and resetAll. Zero-dependency, isomorphic.",
+        "kw": ["spy", "stub", "mock", "mocking", "test-double", "fake-timers", "sinon", "vitest", "jest", "testing", "argument-matchers", "call-inspection"],
         "deps": 0
       },
       {
         "n": "fixtures",
-        "v": "1.0.0",
-        "d": "Typed, deterministic test-data factories — define a factory once, then build realistic objects with sequences, traits, associations and transient params. Seed it and the same data comes out every run. Zero-dependency, isomorphic.",
-        "kw": ["fixtures", "factory", "test-data", "factory-bot", "seed", "deterministic", "mock-data", "testing", "typescript", "isomorphic"],
+        "v": "1.1.0",
+        "d": "Typed, deterministic test-data factories — define a factory once, then build realistic objects with sequences, traits, associations and transient params. Now with a seeded fake-data generator (names/emails/dates), async builds and cleanup hooks. Seed it and the same data comes out every run. Zero-dependency, isomorphic.",
+        "kw": ["fixtures", "factory", "test-data", "factory-bot", "seed", "deterministic", "mock-data", "testing", "typescript", "isomorphic", "fake-data", "faker-alternative"],
         "deps": 0
       },
       {
         "n": "snapshot",
-        "v": "1.0.0",
-        "d": "Snapshot testing without a framework — a stable, deterministic value serializer (sorted keys, circular-safe, pluggable) plus inline and file (.snap) matchers. Isomorphic core, with a node subpath for filesystem snapshots. Zero-dependency.",
-        "kw": ["snapshot", "snapshot-testing", "serialize", "pretty-format", "stable-stringify", "inline-snapshot", "toMatchSnapshot", "deterministic", "testing", "typescript"],
+        "v": "1.1.0",
+        "d": "Snapshot testing without a framework — a stable, deterministic value serializer (sorted keys, circular-safe, pluggable) plus inline and file (.snap) matchers, now with property matchers, volatile-value redaction and obsolete-snapshot detection. Isomorphic core, with a node subpath for filesystem snapshots. Zero-dependency.",
+        "kw": ["snapshot", "snapshot-testing", "serialize", "pretty-format", "stable-stringify", "inline-snapshot", "toMatchSnapshot", "deterministic", "testing", "typescript", "property-matchers", "redaction"],
         "deps": 0
       }
     ]
@@ -1206,30 +1206,30 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "datetime",
-        "v": "1.0.0",
-        "d": "An immutable date-time toolkit — arithmetic, start/end of unit, diff & breakdown, comparison, token format/parse and ISO — a tiny date-fns/dayjs with no dependencies. Zero-dependency, isomorphic.",
-        "kw": ["date", "time", "datetime", "date-fns", "dayjs", "moment", "immutable", "format", "parse", "diff"],
+        "v": "1.1.0",
+        "d": "An immutable date-time toolkit — arithmetic, start/end of unit, diff & breakdown, comparison, token format/parse and ISO, now with relative-time (\"3 hours ago\"), business-day math with injectable holidays and a month calendar-grid builder — a tiny date-fns/dayjs with no dependencies. Zero-dependency, isomorphic.",
+        "kw": ["date", "time", "datetime", "date-fns", "dayjs", "moment", "immutable", "format", "parse", "diff", "relative-time", "business-days"],
         "deps": 0
       },
       {
         "n": "duration",
-        "v": "1.0.0",
-        "d": "A Duration type — parse, build, normalize and do arithmetic on ISO-8601 time spans, calendar-honest about months & years (never silently assumes a 30-day month). Pairs with @lacspace/humanize for display. Zero-dependency, isomorphic.",
-        "kw": ["duration", "iso8601", "parse-duration", "time-span", "period", "date-math", "temporal", "immutable", "typescript", "isomorphic"],
+        "v": "1.1.0",
+        "d": "A Duration type — parse, build, normalize and do arithmetic on ISO-8601 time spans, calendar-honest about months & years (never silently assumes a 30-day month). Now with an optional humanizer, HH:MM:SS clock format/parse and clamp/sum/rebalance helpers. Zero-dependency, isomorphic.",
+        "kw": ["duration", "iso8601", "parse-duration", "time-span", "period", "date-math", "temporal", "immutable", "typescript", "isomorphic", "humanize-duration", "hh-mm-ss"],
         "deps": 0
       },
       {
         "n": "timezone",
-        "v": "1.0.0",
-        "d": "An IANA timezone toolkit built on Intl — DST-correct offsets, wall-clock parts, zoned↔UTC conversion and DST detection, with no bundled tz database so it stays tiny and always current. Zero-dependency, isomorphic.",
-        "kw": ["timezone", "iana", "intl", "dst", "utc-offset", "zoned-time", "wall-clock", "convert-timezone", "typescript", "isomorphic"],
+        "v": "1.1.0",
+        "d": "An IANA timezone toolkit built on Intl — DST-correct offsets, wall-clock parts, zoned↔UTC conversion and DST detection, now with zoned string/abbreviation formatting, zone-vs-zone comparison and forward/backward/range transition scanning. No bundled tz database, so it stays tiny and always current. Zero-dependency, isomorphic.",
+        "kw": ["timezone", "iana", "intl", "dst", "utc-offset", "zoned-time", "wall-clock", "convert-timezone", "typescript", "isomorphic", "dst-transitions", "compare-timezones"],
         "deps": 0
       },
       {
         "n": "interval",
-        "v": "1.0.0",
-        "d": "Time ranges, date iteration and business-day math — overlaps, merge, free/busy invert, eachDay/Week/Month, and add/subtract business days with weekend & holiday config. Zero-dependency, isomorphic.",
-        "kw": ["interval", "date-range", "time-range", "overlap", "merge-intervals", "free-busy", "date-iteration", "business-days", "typescript", "isomorphic"],
+        "v": "1.1.0",
+        "d": "Time ranges, date iteration and business-day math — overlaps, merge, free/busy invert, eachDay/Week/Month and business-day add/subtract, now with coverage/utilization, gaps, total covered duration, peak concurrency and interval algebra (contains/shift/expand). Zero-dependency, isomorphic.",
+        "kw": ["interval", "date-range", "time-range", "overlap", "merge-intervals", "free-busy", "date-iteration", "business-days", "typescript", "isomorphic", "coverage", "max-concurrency"],
         "deps": 0
       }
     ]
