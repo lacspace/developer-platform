@@ -7,7 +7,7 @@ const seo = site.page({
   title: "Live Playground",
   path: "/playground",
   description:
-    "Run @lacspace packages live in your browser — slugify, money, case, humanize, color and id. Type an input, see the real output. Zero setup.",
+    "Run @lacspace packages live in your browser — generate logos and images with no AI, or try slugify, money, validate, jwt, color, crypto and more. Type an input, see the real output. Zero setup, nothing uploaded.",
 });
 export const metadata = seo.metadata;
 

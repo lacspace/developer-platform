@@ -34,7 +34,12 @@ const STARTERS: Record<string, string> = {
   id: `const { uuidv7, nanoid, shortId } = await use("id");\nreturn { uuidv7: uuidv7(), nanoid: nanoid(), shortId: shortId() };`,
   color: `const { toRgb, lighten, darken } = await use("color");\nreturn { rgb: toRgb("#3b82f6"), lighter: lighten("#3b82f6", 0.2), darker: darken("#3b82f6", 0.2) };`,
   markdown: `const { markdownToHtml } = await use("markdown");\nreturn markdownToHtml("# Hi\\n\\n- **bold** and \\\`code\\\`");`,
+  logo: `// Generate a real logo from a name + keywords — no AI.\nconst { generateLogo } = await use("logo");\nconst { svg, engine, palette, icon } = generateLogo({\n  name: "Orbit Labs",\n  keywords: "ai, network, fast, startup",\n});\nconsole.log("engine:", engine, "| palette:", palette.name, "| icon:", icon);\nreturn svg.slice(0, 90) + "…  (a full <svg> — see it live in the Studio)";`,
+  image: `// Draw a background and hit an exact file-size budget.\nconst { gradient, encode, fit, formatBytes } = await use("image");\nconst bg = gradient(600, 315, { angle: 60, stops: [\n  { offset: 0, color: "#22d3ee" }, { offset: 1, color: "#7c3aed" },\n]}).pattern("dots", { size: 28 });\nconsole.log("PNG:", formatBytes((await encode(bg, { format: "png" })).size));\nconst small = await fit(bg, { format: "jpeg", maxSize: "20kb" });\nreturn "JPEG fit \\u2264 20kb \\u2192 " + formatBytes(small.size) + " @ q" + small.quality;`,
 };
+
+// Popular examples shown as one-tap chips (leads with the new no-AI generators).
+const EXAMPLES = ["logo", "image", "slugify", "money", "validate", "jwt", "color", "crypto"];
 
 const DEFAULT = `// Import any @lacspace package — loaded live from a CDN, no install.
 // Write code, hit Run. Use console.log(...) or return a value.
@@ -50,6 +55,7 @@ export function Repl() {
   const [out, setOut] = useState("");
   const [running, setRunning] = useState(false);
   const [ok, setOk] = useState(false);
+  const [picked, setPicked] = useState("");
   const taRef = useRef<HTMLTextAreaElement>(null);
 
   const pkgOptions = useMemo(() => ALL_PKGS, []);
@@ -99,6 +105,7 @@ export function Repl() {
     if (!pkg) return;
     const snippet = STARTERS[pkg] ?? `const m = await use("${pkg}");\nconsole.log("exports:", Object.keys(m));\nreturn m;`;
     setCode(snippet);
+    setPicked(pkg);
     setOut("");
     taRef.current?.focus();
   };
@@ -107,13 +114,21 @@ export function Repl() {
     <div className="repl">
       <div className="repl-bar">
         <span className="repl-title">▶ Run any package</span>
-        <select className="pk-sort repl-pick" defaultValue="" onChange={(e) => { loadStarter(e.target.value); e.currentTarget.value = ""; }} aria-label="Load a package example">
+        <select className="pk-sort repl-pick" value={picked} onChange={(e) => loadStarter(e.target.value)} aria-label="Load a package example">
           <option value="">Load an example…</option>
           {pkgOptions.map((p) => <option key={p} value={p}>@lacspace/{p}</option>)}
         </select>
         <button className="btn btn-primary repl-run" onClick={run} disabled={running}>
           {running ? "Running…" : "Run ▸"} <span className="repl-kbd">⌘⏎</span>
         </button>
+      </div>
+      <div className="repl-ex">
+        <span className="repl-ex-lbl">Try:</span>
+        {EXAMPLES.map((p) => (
+          <button key={p} className={"repl-ex-chip" + (picked === p ? " on" : "")} onClick={() => loadStarter(p)}>
+            {p}
+          </button>
+        ))}
       </div>
       <div className="repl-grid">
         <div className="repl-editor">

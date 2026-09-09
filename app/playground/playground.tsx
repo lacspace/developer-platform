@@ -15,6 +15,7 @@ import { hash as pwHash, strength as pwStrength } from "@lacspace/password";
 import { markdownToHtml } from "@lacspace/markdown";
 import { redactString } from "@lacspace/redact";
 import { parse as csvParse } from "@lacspace/csv";
+import { generateLogo } from "@lacspace/logo";
 import { Repl } from "./repl";
 
 function safe<T>(fn: () => T, fb = "—"): T | string {
@@ -138,8 +139,40 @@ function Csv() {
     <Row k="parsed" v={rows} /></>);
 }
 
+function LogoDemo() {
+  const [name, setName] = useState("Kopi House");
+  const [kw, setKw] = useState("coffee, cozy, warm");
+  const [seed, setSeed] = useState(1);
+  let svg = ""; let meta = "";
+  try { const r = generateLogo({ name: name || "Brand", keywords: kw, seed, background: "surface" }); svg = r.svg; meta = `${r.engine} · ${r.palette.name}${r.icon ? " · " + r.icon : ""}`; } catch {}
+  return (<>
+    <div style={{ display: "flex", gap: 8 }}>
+      <input style={{ ...inp, flex: 2 }} value={name} onChange={(e) => setName(e.target.value)} aria-label="brand name" placeholder="Brand name" />
+      <button className="btn btn-ghost" style={{ flex: "none" }} onClick={() => setSeed((s) => s + 1)} aria-label="shuffle" title="Shuffle">🎲</button>
+    </div>
+    <input style={{ ...inp, marginTop: 8 }} value={kw} onChange={(e) => setKw(e.target.value)} aria-label="keywords" placeholder="keywords — e.g. coffee, cozy, warm" />
+    <div className="pg-logo" dangerouslySetInnerHTML={{ __html: svg }} />
+    <Row k="picked" v={meta} />
+    <a className="mono" style={{ fontSize: 12, color: "var(--faint)", display: "block", marginTop: 4 }} href="/tools/studio/try">Open the full Studio → 12 concepts, download SVG</a>
+  </>);
+}
+function ImageDemo() {
+  const [c1, setC1] = useState("#22d3ee"); const [c2, setC2] = useState("#7c3aed");
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="pgg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c1}"/><stop offset="1" stop-color="${c2}"/></linearGradient><pattern id="pgd" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="2.4" fill="rgba(255,255,255,0.18)"/></pattern></defs><rect width="600" height="300" fill="url(#pgg)"/><rect width="600" height="300" fill="url(#pgd)"/></svg>`;
+  return (<>
+    <div style={{ display: "flex", gap: 8 }}>
+      <label style={{ flex: 1 }}><span className="mono" style={{ fontSize: 11, color: "var(--faint)" }}>Color A</span><input type="color" value={c1} onChange={(e) => setC1(e.target.value)} style={{ width: "100%", height: 34, border: "1px solid var(--hairline-2)", borderRadius: 8, background: "none", cursor: "pointer" }} aria-label="color A" /></label>
+      <label style={{ flex: 1 }}><span className="mono" style={{ fontSize: 11, color: "var(--faint)" }}>Color B</span><input type="color" value={c2} onChange={(e) => setC2(e.target.value)} style={{ width: "100%", height: 34, border: "1px solid var(--hairline-2)", borderRadius: 8, background: "none", cursor: "pointer" }} aria-label="color B" /></label>
+    </div>
+    <div className="pg-bg" dangerouslySetInnerHTML={{ __html: svg }} />
+    <a className="mono" style={{ fontSize: 12, color: "var(--faint)", display: "block", marginTop: 4 }} href="/tools/studio/try">Export to PNG/JPG at a size budget → Studio</a>
+  </>);
+}
+
 type Demo = { id: string; title: string; icon: string; pkg: string; kit: string; Comp: () => React.JSX.Element };
 const DEMOS: Demo[] = [
+  { id: "logo", title: "logo", icon: "🅛", pkg: "logo", kit: "Media", Comp: LogoDemo },
+  { id: "image", title: "image", icon: "🖼️", pkg: "image", kit: "Media", Comp: ImageDemo },
   { id: "slugify", title: "slugify", icon: "🔗", pkg: "slugify", kit: "Text", Comp: Slugify },
   { id: "case", title: "case", icon: "🔤", pkg: "case", kit: "Text", Comp: Case },
   { id: "markdown", title: "markdown", icon: "📝", pkg: "markdown", kit: "Text", Comp: Markdown },
@@ -155,7 +188,7 @@ const DEMOS: Demo[] = [
   { id: "otp", title: "otp", icon: "🔑", pkg: "otp", kit: "Security", Comp: Otp },
   { id: "password", title: "password", icon: "🛡️", pkg: "password", kit: "Security", Comp: Password },
 ];
-const KITS = ["Text", "Data", "Security"];
+const KITS = ["Media", "Text", "Data", "Security"];
 
 export function Playground() {
   const [q, setQ] = useState(""); const [kit, setKit] = useState("All");
@@ -165,7 +198,16 @@ export function Playground() {
     <>
       <Repl />
 
-      <div className="sec-head center" style={{ marginTop: 56, marginBottom: 18 }}>
+      <a href="/tools/studio/try" className="pg-studio">
+        <span className="pg-studio-ic" aria-hidden>🎨</span>
+        <span className="pg-studio-txt">
+          <strong>New — Logo &amp; Image Studio</strong>
+          <span>Turn a name + keywords into real SVG logos, or generate branded backgrounds. No AI.</span>
+        </span>
+        <span className="pg-studio-cta">Open Studio →</span>
+      </a>
+
+      <div className="sec-head center" style={{ marginTop: 48, marginBottom: 18 }}>
         <div className="eyebrow">Instant demos</div>
         <h2>Or poke at the popular ones</h2>
         <p>Real packages running in your browser — change an input, watch the output.</p>
@@ -185,7 +227,7 @@ export function Playground() {
         <span className="hb-count">{shown.length} demos</span>
       </div>
 
-      <div className="kits" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))" }}>
+      <div className="kits" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))" }}>
         {shown.map((d) => (
           <div className="kit" key={d.id}>
             <div className="kit-head">
