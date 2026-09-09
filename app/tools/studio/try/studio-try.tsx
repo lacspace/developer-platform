@@ -48,13 +48,13 @@ const slug = (s: string) => s.replace(/\s+/g, "-").toLowerCase().replace(/[^a-z0
 const CRC_TABLE = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
 function crc32(b: Uint8Array) { let c = 0xffffffff; for (let i = 0; i < b.length; i++) c = CRC_TABLE[(c ^ b[i]!) & 0xff]! ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; }
 function concatBytes(arr: Uint8Array[]) { let n = 0; for (const a of arr) n += a.length; const out = new Uint8Array(n); let o = 0; for (const a of arr) { out.set(a, o); o += a.length; } return out; }
-function makeZip(files: { name: string; text: string }[]): Blob {
+function makeZip(files: { name: string; text?: string; bytes?: Uint8Array }[]): Blob {
   const enc = new TextEncoder();
   const u16 = (n: number) => new Uint8Array([n & 255, (n >> 8) & 255]);
   const u32 = (n: number) => new Uint8Array([n & 255, (n >> 8) & 255, (n >> 16) & 255, (n >> 24) & 255]);
   const locals: Uint8Array[] = []; const central: Uint8Array[] = []; let offset = 0;
   for (const f of files) {
-    const name = enc.encode(f.name); const data = enc.encode(f.text); const crc = crc32(data);
+    const name = enc.encode(f.name); const data = f.bytes ?? enc.encode(f.text ?? ""); const crc = crc32(data);
     const lh = concatBytes([u32(0x04034b50), u16(20), u16(0), u16(0), u16(0), u16(0), u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0), name, data]);
     locals.push(lh);
     central.push(concatBytes([u32(0x02014b50), u16(20), u16(20), u16(0), u16(0), u16(0), u16(0), u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(offset), name]));
@@ -103,19 +103,46 @@ function LogoStudio() {
   const [animate, setAnimate] = useState(false);
   const [animKey, setAnimKey] = useState(0);
 
+  const [zipping, setZipping] = useState(false);
   async function downloadKitZip(kit: ReturnType<typeof generateBrandKit>) {
-    const files = [
-      { name: "logo-primary.svg", text: kit.primary.svg },
-      { name: "logo-stacked.svg", text: kit.stacked.svg },
-      { name: "logo-mark.svg", text: kit.mark.svg },
-      { name: "logo-wordmark.svg", text: kit.wordmark.svg },
-      { name: "logo-mono.svg", text: kit.mono.svg },
-      { name: "favicon.svg", text: kit.favicon.svg },
-      { name: "brand.css", text: kit.css },
-      { name: "colors.json", text: JSON.stringify(kit.colors, null, 2) },
-      { name: "README.txt", text: `${kit.name} brand kit — generated with @lacspace/logo (no AI).\nPalette: ${kit.palette.name}\nType: ${kit.font.display} / ${kit.font.body}\n` },
-    ];
-    downloadBlob(await makeZip(files).arrayBuffer(), "application/zip", `${slug(kit.name)}-brand-kit.zip`);
+    setZipping(true);
+    try {
+      const bytesOf = async (svg: string, min: number) => {
+        const b = await svgToPngBlob(svg, min);
+        return b ? new Uint8Array(await b.arrayBuffer()) : undefined;
+      };
+      // Rasterize each lockup to PNG (square marks at 1024, wide lockups at 1600).
+      const [pPrimary, pStacked, pMark, pWordmark, pMono, pMark512, pMark256] = await Promise.all([
+        bytesOf(kit.primary.svg, 1600),
+        bytesOf(kit.stacked.svg, 1024),
+        bytesOf(kit.mark.svg, 1024),
+        bytesOf(kit.wordmark.svg, 1600),
+        bytesOf(kit.mono.svg, 1024),
+        bytesOf(kit.mark.svg, 512),
+        bytesOf(kit.mark.svg, 256),
+      ]);
+      const files: { name: string; text?: string; bytes?: Uint8Array }[] = [
+        { name: "svg/logo-primary.svg", text: kit.primary.svg },
+        { name: "svg/logo-stacked.svg", text: kit.stacked.svg },
+        { name: "svg/logo-mark.svg", text: kit.mark.svg },
+        { name: "svg/logo-wordmark.svg", text: kit.wordmark.svg },
+        { name: "svg/logo-mono.svg", text: kit.mono.svg },
+        { name: "svg/favicon.svg", text: kit.favicon.svg },
+        { name: "png/logo-primary.png", bytes: pPrimary },
+        { name: "png/logo-stacked.png", bytes: pStacked },
+        { name: "png/logo-mark.png", bytes: pMark },
+        { name: "png/logo-wordmark.png", bytes: pWordmark },
+        { name: "png/logo-mono.png", bytes: pMono },
+        { name: "png/icon-512.png", bytes: pMark512 },
+        { name: "png/icon-256.png", bytes: pMark256 },
+        { name: "brand.css", text: kit.css },
+        { name: "colors.json", text: JSON.stringify(kit.colors, null, 2) },
+        { name: "README.txt", text: `${kit.name} brand kit — generated with @lacspace/logo (no AI).\n\nPalette: ${kit.palette.name}\nType: ${kit.font.display} / ${kit.font.body}\n\nsvg/  — scalable vector lockups + favicon\npng/  — transparent PNG rasters (1600px lockups, 1024/512/256 icons)\nbrand.css / colors.json — palette tokens\n` },
+      ].filter((f) => f.text !== undefined || f.bytes);
+      downloadBlob(await makeZip(files).arrayBuffer(), "application/zip", `${slug(kit.name)}-brand-kit.zip`);
+    } finally {
+      setZipping(false);
+    }
   }
 
   const brief: LogoBrief = useMemo(() => {
@@ -203,7 +230,7 @@ function LogoStudio() {
         <>
           <div className="pt-out-bar" style={{ marginTop: 16 }}>
             <span className="pt-ok">Brand kit for “{kit.name}”</span>
-            <button className="btn btn-primary" style={{ padding: "5px 12px", fontSize: 13 }} onClick={() => downloadKitZip(kit)}>⬇ Download all (.zip)</button>
+            <button className="btn btn-primary" style={{ padding: "5px 12px", fontSize: 13 }} disabled={zipping} onClick={() => downloadKitZip(kit)}>{zipping ? "Packaging…" : "⬇ Download all (SVG + PNG .zip)"}</button>
           </div>
           <div className="st-kit">
             {([["Primary", kit.primary], ["Stacked", kit.stacked], ["Mark", kit.mark], ["Wordmark", kit.wordmark], ["Mono", kit.mono]] as const).map(([label, r]) => (
