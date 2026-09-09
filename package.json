@@ -15,6 +15,7 @@
     "@lacspace/csv": "^1.1.0",
     "@lacspace/humanize": "^1.0.1",
     "@lacspace/id": "^1.0.1",
+    "@lacspace/image": "^1.1.0",
     "@lacspace/jwt": "^1.3.0",
     "@lacspace/llms-txt": "^1.2.2",
     "@lacspace/logo": "^1.3.0",
@@ -39,7 +40,8 @@
     "lacspace-svg": "^0.1.0",
     "next": "15.5.25",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "@types/node": "20.17.6",
