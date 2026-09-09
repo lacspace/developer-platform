@@ -1459,9 +1459,28 @@ export const CATALOG: Group[] = [
           "no-ai"
         ],
         "deps": 0
+      },
+      {
+        "n": "brand",
+        "v": "1.0.0",
+        "d": "The official Lacspace mark, colours and animations — for everyone to use. Render the self-contained SVG logo and the signature self-crafting reveal anywhere (zero-dep, isomorphic), make Lacspace installable as a favicon / PWA app-icon in one call, and reach the pixel-exact master artwork + Lottie motion bundled inside. Free to reference Lacspace under the Brand Usage Licence — don't alter the mark. Includes React bindings.",
+        "kw": [
+          "lacspace",
+          "brand",
+          "logo",
+          "brand-assets",
+          "logo-animation",
+          "animated-svg",
+          "lottie",
+          "favicon",
+          "app-icon",
+          "pwa-icon",
+          "react"
+        ],
+        "deps": 0
       }
     ]
   }
 ];
 
-export const CATALOG_TOTAL = 112;
+export const CATALOG_TOTAL = 113;

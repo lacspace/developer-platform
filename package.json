@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@lacspace/brand": "^1.0.0",
     "@lacspace/case": "^1.0.1",
     "@lacspace/color": "^1.0.1",
     "@lacspace/crypto": "^1.1.2",

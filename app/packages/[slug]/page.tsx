@@ -82,6 +82,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
           <div className="pd-actions">
             <a className="btn btn-primary" href={`https://www.npmjs.com/package/@lacspace/${p.n}`} target="_blank" rel="noopener">View on npm ↗</a>
             {STUDIO.has(p.n) && <a className="btn btn-ghost" href="/tools/studio/try">Try it live →</a>}
+            {p.n === "brand" && <a className="btn btn-ghost" href="/tools/brand/try">Open Brand Center →</a>}
             {DEMOABLE.has(p.n) && <a className="btn btn-ghost" href="/playground">Try in the playground →</a>}
             <a className="btn btn-ghost" href="https://github.com/lacspace/npm-packages" target="_blank" rel="noopener">GitHub ↗</a>
           </div>

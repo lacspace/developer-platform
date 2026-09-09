@@ -32,6 +32,25 @@ export const DETAILS: Record<string, PkgDetail> = {
   ],
   "usage": "import { gradient, encode, fit, formatBytes } from \"@lacspace/image\";\n\nconst bg = gradient(1200, 630, {\n  angle: 90,\n  stops: [{ offset: 0, color: \"#22d3ee\" }, { offset: 1, color: \"#6366f1\" }],\n}).pattern(\"dots\", { size: 32 });\n\n// Export in any format\nconst png = await encode(bg, { format: \"png\" });\n\n// …or hit an exact file-size budget\nconst small = await fit(bg, { format: \"jpeg\", maxSize: \"120kb\" });\nconsole.log(formatBytes(small.size), \"at q\", small.quality);"
  },
+ "brand": {
+  "exports": [
+   "mark",
+   "iconTile",
+   "craftMark",
+   "pulseMark",
+   "floatMark",
+   "revealMark",
+   "shimmerMark",
+   "installable",
+   "faviconDataUri",
+   "webManifest",
+   "brandCss",
+   "COLORS",
+   "GUIDELINES",
+   "ASSETS"
+  ],
+  "usage": "import { mark, craftMark, installable, brandCss } from \"@lacspace/brand\";\n\n// The Lacspace mark, self-contained — no fonts, no deps\nlogoEl.innerHTML = mark({ size: 256, variant: \"fullcolor\" });\n\n// The signature self-crafting hero animation (pure CSS, zero JS)\nheroEl.innerHTML = craftMark({ size: 320 });\n\n// Make Lacspace installable as a favicon / PWA app-icon\nconst { headLinks, manifest, dataUri } = installable({ base: \"/brand/\", name: \"Lacspace\" });\n\n// Palette as CSS variables\ndocument.head.insertAdjacentHTML(\"beforeend\", `<style>${brandCss()}</style>`);"
+ },
  "analytics": {
   "exports": [
    "LacspaceAnalytics",
