@@ -52,7 +52,7 @@ export default function Compare() {
           </Reveal>
 
           <div className="cta" style={{ marginTop: 30, justifyContent: "center" }}>
-            <a className="btn btn-primary" href="/packages">Browse all 117 packages →</a>
+            <a className="btn btn-primary" href="/packages">Browse all 119 packages →</a>
             <a className="btn btn-ghost" href="/playground">Try them live</a>
           </div>
         </section>

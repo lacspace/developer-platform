@@ -1044,5 +1044,23 @@ export const DETAILS: Record<string, PkgDetail> = {
    "QueueClearedError"
   ],
   "usage": "import { createQueue } from \"@lacspace/queue\";\n\n// run at most 2 tasks at once\nconst queue = createQueue({ concurrency: 2 });\n\nconst results = await Promise.all(\n  urls.map((u) => queue.add(() => fetch(u).then((r) => r.json()))),\n);\n\n// higher priority jumps the line; a rejected task never stalls the queue\nqueue.add(fetchCritical, { priority: 10 });\n\nconsole.log(queue.pending, queue.size); // running, waiting\nawait queue.onIdle(); // resolves when fully drained"
+ },
+ "scheduler": {
+  "exports": [
+   "createScheduler",
+   "parseDuration",
+   "nextCronRun",
+   "matchesCron"
+  ],
+  "usage": "import { createScheduler } from \"@lacspace/scheduler\";\n\nconst jobs = createScheduler({\n  onError: (err, name) => console.error(`job ${name} failed`, err),\n});\n\n// every 30 seconds (duration strings or ms)\njobs.every(\"30s\", () => refreshCache());\n\n// standard 5-field cron — 09:00 on weekdays\njobs.cron(\"0 9 * * 1-5\", () => sendDigest());\n\n// one-shots\njobs.after(\"5m\", () => cleanupTemp());\njobs.at(new Date(\"2026-12-31T23:59:00\"), () => rollOver());\n\n// overlap:false (default) means an async job never runs over itself\njobs.every(\"1m\", syncOrders, { overlap: false });\njobs.stop(); // pause everything"
+ },
+ "machine": {
+  "exports": [
+   "createMachine",
+   "assign",
+   "interpret",
+   "createActor"
+  ],
+  "usage": "import { createMachine, assign, interpret } from \"@lacspace/machine\";\n\nconst toggle = createMachine<{ count: number }, { type: \"TOGGLE\" }>({\n  initial: \"inactive\",\n  context: { count: 0 },\n  states: {\n    inactive: { on: { TOGGLE: { target: \"active\", actions: assign((c) => ({ count: c.count + 1 })) } } },\n    active: { on: { TOGGLE: \"inactive\" } },\n  },\n});\n\n// pure — great for reducers/tests\nconst next = toggle.transition(toggle.initialState, { type: \"TOGGLE\" });\nnext.value;         // \"active\"\nnext.context.count; // 1\n\n// or run it as a live actor\nconst actor = interpret(toggle).start();\nactor.subscribe((s) => console.log(s.value));\nactor.send({ type: \"TOGGLE\" });"
  }
 };

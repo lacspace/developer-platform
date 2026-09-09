@@ -1483,7 +1483,7 @@ export const CATALOG: Group[] = [
   },
   {
     "group": "Core Runtime Kit",
-    "icon": "⚙️",
+    "icon": "🧰",
     "items": [
       {
         "n": "logger",
@@ -1557,9 +1557,45 @@ export const CATALOG: Group[] = [
           "zero-dependency"
         ],
         "deps": 0
+      },
+      {
+        "n": "scheduler",
+        "v": "1.0.0",
+        "d": "An in-process job scheduler that actually runs your callbacks — on a recurring interval, a standard 5-field cron schedule, or at a specific time. A self-rescheduling, drift-corrected timer (never setInterval), overlap protection so an async job never runs over itself, jitter, maxRuns and error isolation. Clock and timers are injectable, so it's fully testable without real time. Zero-dependency, isomorphic.",
+        "kw": [
+          "scheduler",
+          "job-scheduler",
+          "cron",
+          "cron-job",
+          "task-scheduler",
+          "node-cron-alternative",
+          "recurring-tasks",
+          "setinterval-alternative",
+          "in-process",
+          "zero-dependency"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "machine",
+        "v": "1.0.0",
+        "d": "A tiny, fully type-safe finite state machine — declare states, events, guarded transitions, entry/exit/transition actions and a typed context. A pure transition() function plus an interpret() actor with send/subscribe/matches. Context updates are immutable via assign(). A lightweight xstate alternative for the 90% case. Zero-dependency, isomorphic.",
+        "kw": [
+          "state-machine",
+          "fsm",
+          "finite-state-machine",
+          "statechart",
+          "xstate-alternative",
+          "transitions",
+          "actor",
+          "guards",
+          "type-safe",
+          "zero-dependency"
+        ],
+        "deps": 0
       }
     ]
   }
 ];
 
-export const CATALOG_TOTAL = 117;
+export const CATALOG_TOTAL = 119;

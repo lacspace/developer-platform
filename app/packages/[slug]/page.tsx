@@ -125,7 +125,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
           )}
 
           <div className="cta" style={{ marginTop: 40, justifyContent: "center" }}>
-            <a className="btn btn-ghost" href="/packages">← Browse all 117 packages</a>
+            <a className="btn btn-ghost" href="/packages">← Browse all 119 packages</a>
             <a className="btn btn-ghost" href="/handbook">Read the handbook</a>
           </div>
         </section>

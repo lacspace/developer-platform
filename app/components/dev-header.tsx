@@ -12,8 +12,8 @@ const MENUS: Menu[] = [
     label: "Packages",
     href: "/packages",
     items: [
-      { label: "All 117 packages", href: "/packages", desc: "The full catalog" },
-      { label: "Core Runtime Kit", href: "/packages?kit=Core+Runtime+Kit", desc: "logger · result · events · queue" },
+      { label: "All 119 packages", href: "/packages", desc: "The full catalog" },
+      { label: "Core Runtime Kit", href: "/packages?kit=Core+Runtime+Kit", desc: "logger · result · events · queue · scheduler · machine" },
       { label: "Security Kit", href: "/packages?kit=Security+Kit", desc: "crypto · jwt · otp · passkeys" },
       { label: "SEO Kit", href: "/packages?kit=SEO+Kit", desc: "seo · sitemap · robots · og" },
       { label: "React Kit", href: "/packages?kit=React+Kit", desc: "store · query · theme · hooks" },
