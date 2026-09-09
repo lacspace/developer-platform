@@ -1462,7 +1462,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "brand",
-        "v": "1.0.1",
+        "v": "1.1.0",
         "d": "The official Lacspace mark, colours and animations — for everyone to use. Render the self-contained SVG logo and the signature self-crafting reveal anywhere (zero-dep, isomorphic), make Lacspace installable as a favicon / PWA app-icon in one call, and reach the pixel-exact master artwork + Lottie motion bundled inside. Free to reference Lacspace under the Brand Usage Licence — don't alter the mark. Includes React bindings.",
         "kw": [
           "lacspace",

@@ -19,7 +19,7 @@ type Tab = "mark" | "motion" | "install" | "colors";
 type Bg = "transparent" | "ink" | "off-white";
 
 const VARIANTS: MarkVariant[] = ["fullcolor", "white", "black", "mono", "violet", "orange", "blue", "cyan"];
-const STYLES: MarkStyle[] = ["filled", "line", "glyph"];
+const STYLES: MarkStyle[] = ["filled", "network", "line", "glyph"];
 const ANIMS = [
   { k: "craft", label: "✨ Self-craft" },
   { k: "pulse", label: "Pulse" },
