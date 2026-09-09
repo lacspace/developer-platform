@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { generateLogo, generateLogoSet, generateBrandKit, PALETTES, FONTS, ICONS, type LogoBrief } from "@lacspace/logo";
+import { generateLogo, generateLogoSet, generateBrandKit, animateLogo, PALETTES, FONTS, ICONS, type LogoBrief } from "@lacspace/logo";
 
 /* ─────────────────────────────  helpers  ───────────────────────────── */
 
@@ -44,6 +44,31 @@ async function downloadPng(svg: string, filename: string) {
 }
 const slug = (s: string) => s.replace(/\s+/g, "-").toLowerCase().replace(/[^a-z0-9-]/g, "") || "logo";
 
+/** Minimal, dependency-free ZIP (STORE method) — bundles small text files client-side. */
+const CRC_TABLE = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(b: Uint8Array) { let c = 0xffffffff; for (let i = 0; i < b.length; i++) c = CRC_TABLE[(c ^ b[i]!) & 0xff]! ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; }
+function concatBytes(arr: Uint8Array[]) { let n = 0; for (const a of arr) n += a.length; const out = new Uint8Array(n); let o = 0; for (const a of arr) { out.set(a, o); o += a.length; } return out; }
+function makeZip(files: { name: string; text: string }[]): Blob {
+  const enc = new TextEncoder();
+  const u16 = (n: number) => new Uint8Array([n & 255, (n >> 8) & 255]);
+  const u32 = (n: number) => new Uint8Array([n & 255, (n >> 8) & 255, (n >> 16) & 255, (n >> 24) & 255]);
+  const locals: Uint8Array[] = []; const central: Uint8Array[] = []; let offset = 0;
+  for (const f of files) {
+    const name = enc.encode(f.name); const data = enc.encode(f.text); const crc = crc32(data);
+    const lh = concatBytes([u32(0x04034b50), u16(20), u16(0), u16(0), u16(0), u16(0), u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0), name, data]);
+    locals.push(lh);
+    central.push(concatBytes([u32(0x02014b50), u16(20), u16(20), u16(0), u16(0), u16(0), u16(0), u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(offset), name]));
+    offset += lh.length;
+  }
+  const cd = concatBytes(central);
+  const eocd = concatBytes([u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length), u32(cd.length), u32(offset), u16(0)]);
+  return new Blob([concatBytes(locals), cd, eocd], { type: "application/zip" });
+}
+
+/** Symmetric identicon → data-URI PNG via canvas (mirrors @lacspace/image identicon). */
+function fnv(s: string) { let h = 2166136261 >>> 0; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function mulberry(seed: number) { let s = seed >>> 0 || 1; return () => { s |= 0; s = (s + 0x6d2b79f5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+
 /* ─────────────────────────────  Logo studio  ───────────────────────────── */
 
 const PRESETS = [
@@ -75,6 +100,23 @@ function LogoStudio() {
   const [pick, setPick] = useState(0);
   const [mode, setMode] = useState<"concepts" | "brandkit">("concepts");
   const [copied, setCopied] = useState(false);
+  const [animate, setAnimate] = useState(false);
+  const [animKey, setAnimKey] = useState(0);
+
+  async function downloadKitZip(kit: ReturnType<typeof generateBrandKit>) {
+    const files = [
+      { name: "logo-primary.svg", text: kit.primary.svg },
+      { name: "logo-stacked.svg", text: kit.stacked.svg },
+      { name: "logo-mark.svg", text: kit.mark.svg },
+      { name: "logo-wordmark.svg", text: kit.wordmark.svg },
+      { name: "logo-mono.svg", text: kit.mono.svg },
+      { name: "favicon.svg", text: kit.favicon.svg },
+      { name: "brand.css", text: kit.css },
+      { name: "colors.json", text: JSON.stringify(kit.colors, null, 2) },
+      { name: "README.txt", text: `${kit.name} brand kit — generated with @lacspace/logo (no AI).\nPalette: ${kit.palette.name}\nType: ${kit.font.display} / ${kit.font.body}\n` },
+    ];
+    downloadBlob(await makeZip(files).arrayBuffer(), "application/zip", `${slug(kit.name)}-brand-kit.zip`);
+  }
 
   const brief: LogoBrief = useMemo(() => {
     const b: LogoBrief = { name: name || "Brand", keywords, background, seed };
@@ -129,7 +171,7 @@ function LogoStudio() {
       {mode === "concepts" && main && (
         <>
           <div className="st-stage">
-            <div className="st-stage-art" dangerouslySetInnerHTML={{ __html: main.svg }} />
+            <div className="st-stage-art" key={animate ? `a${animKey}` : "s"} dangerouslySetInnerHTML={{ __html: animate ? animateLogo(main, { loop: false }) : main.svg }} />
             <div className="st-stage-meta">
               <div className="st-badges">
                 <span className="pt-ok">{main.engine}</span><span className="pt-dim">{main.layout}</span>
@@ -137,7 +179,9 @@ function LogoStudio() {
               </div>
               <p className="pt-note" style={{ marginTop: 8 }}>{main.interpreted.notes.join(" · ")}</p>
               <div className="pt-run-row" style={{ marginTop: 12, gap: 8, flexWrap: "wrap" }}>
-                <button className="btn btn-primary" onClick={() => downloadBlob(main.svg, "image/svg+xml", `${slug(name)}-logo.svg`)}>SVG ↓</button>
+                <button className={"btn " + (animate ? "btn-primary" : "btn-ghost")} onClick={() => { setAnimate((a) => !a); setAnimKey((k) => k + 1); }}>{animate ? "✨ Animated" : "✨ Animate"}</button>
+                {animate && <button className="btn btn-ghost" onClick={() => setAnimKey((k) => k + 1)}>↻ Replay</button>}
+                <button className="btn btn-primary" onClick={() => downloadBlob(animate ? animateLogo(main, { loop: true }) : main.svg, "image/svg+xml", `${slug(name)}-logo${animate ? "-animated" : ""}.svg`)}>SVG ↓</button>
                 <button className="btn btn-ghost" onClick={() => downloadPng(main.svg, `${slug(name)}-logo.png`)}>PNG ↓</button>
               </div>
             </div>
@@ -158,7 +202,8 @@ function LogoStudio() {
       {mode === "brandkit" && kit && (
         <>
           <div className="pt-out-bar" style={{ marginTop: 16 }}>
-            <span className="pt-ok">Brand kit for “{kit.name}”</span><span className="pt-dim">one brief → a whole identity</span>
+            <span className="pt-ok">Brand kit for “{kit.name}”</span>
+            <button className="btn btn-primary" style={{ padding: "5px 12px", fontSize: 13 }} onClick={() => downloadKitZip(kit)}>⬇ Download all (.zip)</button>
           </div>
           <div className="st-kit">
             {([["Primary", kit.primary], ["Stacked", kit.stacked], ["Mark", kit.mark], ["Wordmark", kit.wordmark], ["Mono", kit.mono]] as const).map(([label, r]) => (
@@ -287,17 +332,85 @@ function BackgroundStudio() {
   );
 }
 
+/* ──────────────────────────────  Avatar studio  ───────────────────────────── */
+
+function hslCss(h: number, s: number, l: number) { return `hsl(${((h % 360) + 360) % 360} ${Math.round(s * 100)}% ${Math.round(l * 100)}%)`; }
+function avatarInitials(seed: string) {
+  const base = seed.includes("@") ? seed.split("@")[0]! : seed;
+  const words = base.replace(/[^\p{L}\p{N}]+/gu, " ").trim().split(/\s+/).filter(Boolean);
+  if (!words.length) return "•";
+  return (words.length === 1 ? words[0]!.slice(0, 2) : words[0]![0]! + words[1]![0]!).toUpperCase();
+}
+
+const AV_STYLES = ["identicon", "initials", "gradient"] as const;
+
+function AvatarStudio() {
+  const cv = useRef<HTMLCanvasElement>(null);
+  const [seed, setSeed] = useState("ada@lacspace.com");
+  const [style, setStyle] = useState<(typeof AV_STYLES)[number]>("identicon");
+  const size = 320;
+  const h = fnv(seed);
+  const hue = h % 360;
+
+  const initialsSvg = useMemo(() => {
+    const ini = avatarInitials(seed);
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><defs><linearGradient id="av" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${hslCss(hue, 0.62, 0.55)}"/><stop offset="1" stop-color="${hslCss(hue + 40, 0.6, 0.42)}"/></linearGradient></defs><rect width="${size}" height="${size}" rx="${size * 0.22}" fill="url(#av)"/><text x="50%" y="52%" font-family="'Space Grotesk',system-ui,sans-serif" font-weight="700" font-size="${size * 0.4}" fill="#fff" text-anchor="middle" dominant-baseline="central">${ini}</text></svg>`;
+  }, [seed, hue]);
+  const gradientSvg = useMemo(() => {
+    const rand = mulberry(h);
+    const ang = Math.floor(rand() * 360);
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><defs><linearGradient id="avg" gradientTransform="rotate(${ang} .5 .5)"><stop offset="0" stop-color="${hslCss(hue, 0.7, 0.55)}"/><stop offset=".5" stop-color="${hslCss(hue + 50, 0.65, 0.5)}"/><stop offset="1" stop-color="${hslCss(hue + 100, 0.6, 0.45)}"/></linearGradient></defs><rect width="${size}" height="${size}" rx="${size * 0.22}" fill="url(#avg)"/></svg>`;
+  }, [h, hue]);
+
+  useEffect(() => {
+    if (style !== "identicon" || !cv.current) return;
+    const c = cv.current; c.width = size; c.height = size;
+    const ctx = c.getContext("2d")!; const rand = mulberry(h);
+    ctx.fillStyle = "#0f1117"; ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = hslCss(hue, 0.62, 0.58);
+    const grid = 5, pad = size * 0.12, cell = (size - pad * 2) / grid, half = Math.ceil(grid / 2);
+    for (let col = 0; col < half; col++) for (let row = 0; row < grid; row++) if (rand() > 0.5) { const mir = grid - 1 - col; ctx.fillRect(pad + col * cell, pad + row * cell, Math.ceil(cell), Math.ceil(cell)); if (mir !== col) ctx.fillRect(pad + mir * cell, pad + row * cell, Math.ceil(cell), Math.ceil(cell)); }
+  }, [style, seed, h, hue]);
+
+  async function dl() {
+    if (style === "identicon") { cv.current?.toBlob(async (b) => { if (b) downloadBlob(await b.arrayBuffer(), "image/png", `avatar-${slug(seed)}.png`); }, "image/png"); return; }
+    downloadBlob(style === "initials" ? initialsSvg : gradientSvg, "image/svg+xml", `avatar-${slug(seed)}.svg`);
+  }
+
+  return (
+    <div className="pt">
+      <div className="st-controls">
+        <label className="st-field"><span className="pt-lbl">Name, email, username or any seed</span>
+          <input className="pt-input" value={seed} onChange={(e) => setSeed(e.target.value)} placeholder="ada@lacspace.com" /></label>
+        <label className="st-field"><span className="pt-lbl">Style</span>
+          <select className="pt-select" value={style} onChange={(e) => setStyle(e.target.value as typeof style)}>{AV_STYLES.map((s) => <option key={s} value={s}>{s}</option>)}</select></label>
+      </div>
+      <div className="st-stage" style={{ gridTemplateColumns: "1fr" }}>
+        <div className="st-stage-art">
+          {style === "identicon" ? <canvas ref={cv} style={{ width: 200, height: 200, borderRadius: 16, imageRendering: "pixelated" }} /> : <div dangerouslySetInnerHTML={{ __html: style === "initials" ? initialsSvg : gradientSvg }} style={{ width: 200 }} />}
+        </div>
+      </div>
+      <div className="pt-run-row" style={{ marginTop: 14, gap: 8, flexWrap: "wrap" }}>
+        <button className="btn btn-primary" onClick={dl}>Download {style === "identicon" ? "PNG" : "SVG"} ↓</button>
+        <span className="pt-dim" style={{ alignSelf: "center" }}>deterministic — same seed, same avatar</span>
+      </div>
+      <p className="pt-note">Powered by @lacspace/image (<span className="mono">identicon</span>) — generate avatars/placeholders for every user, no uploads, no AI.</p>
+    </div>
+  );
+}
+
 /* ───────────────────────────────  Shell  ──────────────────────────────── */
 
 export function StudioTry() {
-  const [tab, setTab] = useState<"logo" | "bg">("logo");
+  const [tab, setTab] = useState<"logo" | "bg" | "avatar">("logo");
   return (
     <div>
       <div className="pt-modes">
         <button className={`pt-mode ${tab === "logo" ? "on" : ""}`} onClick={() => setTab("logo")}>🅛 Logo &amp; brand</button>
+        <button className={`pt-mode ${tab === "avatar" ? "on" : ""}`} onClick={() => setTab("avatar")}>👤 Avatar</button>
         <button className={`pt-mode ${tab === "bg" ? "on" : ""}`} onClick={() => setTab("bg")}>🖼 Background</button>
       </div>
-      {tab === "logo" ? <LogoStudio /> : <BackgroundStudio />}
+      {tab === "logo" ? <LogoStudio /> : tab === "avatar" ? <AvatarStudio /> : <BackgroundStudio />}
     </div>
   );
 }
