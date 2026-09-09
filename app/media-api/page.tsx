@@ -40,12 +40,14 @@ const CSS = `
 .ma-demo-lbl{font-size:11px;color:var(--faint);text-align:center;margin-top:8px;font-family:ui-monospace,Menlo,monospace}
 .ma-tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:16px;margin-top:20px}
 .ma-tier{border:1px solid var(--hairline-2);border-radius:16px;padding:22px;background:var(--panel)}
+.ma-tier.pro{border-color:var(--accent);position:relative}
 .ma-tier h3{font-size:1.15rem}
 .ma-tier .price{font-size:1.6rem;font-weight:700;margin:6px 0 2px;letter-spacing:-0.02em}
 .ma-tier .price small{font-size:.9rem;color:var(--faint);font-weight:400}
 .ma-tier ul{list-style:none;padding:0;margin:14px 0 0;font-size:13.5px;color:var(--muted)}
 .ma-tier li{padding:5px 0;padding-left:22px;position:relative}
 .ma-tier li::before{content:"→";position:absolute;left:0;color:var(--accent)}
+.ma-soon{position:absolute;top:16px;right:16px;font-size:11px;color:var(--accent);border:1px solid var(--accent);border-radius:999px;padding:2px 9px}
 `;
 
 function Endpoint({ verb, path, desc, params, curl, demo, demoLabel }: {
@@ -143,17 +145,11 @@ export default function MediaApiPage() {
         </section>
 
         <section className="sec">
-          <Reveal><h2 className="pd-h2">Free — hosted or self-hosted</h2></Reveal>
-          <Reveal delay={30}>
-            <p className="pt-note" style={{ marginTop: 4, marginBottom: 4 }}>
-              No paid tier and no API key to start. Use it hosted, or run the exact same engine yourself —
-              same code, same open licence, no strings.
-            </p>
-          </Reveal>
+          <Reveal><h2 className="pd-h2">Free today · Pro soon</h2></Reveal>
           <div className="ma-tiers">
             <Reveal className="ma-tier">
-              <h3>Hosted</h3>
-              <div className="price">Free</div>
+              <h3>Free</h3>
+              <div className="price">$0</div>
               <ul>
                 <li>60 requests / minute</li>
                 <li>Logos as SVG &amp; PNG</li>
@@ -162,7 +158,19 @@ export default function MediaApiPage() {
                 <li>No key required to start</li>
               </ul>
             </Reveal>
-            <Reveal className="ma-tier" delay={80}>
+            <Reveal className="ma-tier pro" delay={60}>
+              <span className="ma-soon">Soon</span>
+              <h3>Pro</h3>
+              <div className="price">TBD<small> / mo</small></div>
+              <ul>
+                <li>Much higher limits + API keys</li>
+                <li>Premium curated packs (500+ icons, pro palettes)</li>
+                <li>Remove attribution</li>
+                <li>Signed cache-CDN render URLs</li>
+                <li>Priority support</li>
+              </ul>
+            </Reveal>
+            <Reveal className="ma-tier" delay={120}>
               <h3>Self-host</h3>
               <div className="price">Free</div>
               <ul>
