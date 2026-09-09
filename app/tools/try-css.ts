@@ -69,4 +69,20 @@ export const TRY_CSS = `
 .st-cell svg{max-width:100%;max-height:78px;height:auto}
 .st-canvas-wrap{border:1px solid var(--hairline-2);border-radius:14px;background:var(--panel);padding:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .st-canvas{max-width:100%;height:auto;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.st-kit{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr));gap:14px;margin-top:14px}
+.st-kit-cell{margin:0;border:1px solid var(--hairline-2);border-radius:12px;overflow:hidden;background:var(--panel)}
+.st-kit-art{display:flex;align-items:center;justify-content:center;gap:10px;min-height:120px;padding:16px;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.03),transparent)}
+.st-kit-art svg{max-width:100%;max-height:96px;height:auto}
+.st-fav{gap:14px}
+.st-kit-cell figcaption{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-top:1px solid var(--hairline);font-size:12.5px;color:var(--muted)}
+.st-kit-dl{display:flex;gap:6px}
+.st-kit-dl button{font-size:11px;font-family:ui-monospace,Menlo,monospace;color:var(--accent);background:none;border:1px solid var(--hairline-2);border-radius:6px;padding:2px 8px;cursor:pointer}
+.st-kit-dl button:hover{border-color:var(--accent)}
+.st-swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,120px),1fr));gap:10px;margin-top:16px}
+.st-swatch{display:flex;flex-direction:column;gap:4px;border:1px solid var(--hairline-2);border-radius:10px;padding:8px;background:var(--panel)}
+.st-swatch>span{height:40px;border-radius:6px;border:1px solid var(--hairline)}
+.st-swatch b{font-size:11px;color:var(--muted);text-transform:capitalize}
+.st-swatch code{font-size:11px;color:var(--faint);font-family:ui-monospace,Menlo,monospace}
+.st-copy{margin-top:16px;border:1px solid var(--hairline-2);border-radius:12px;overflow:hidden}
+.st-copy pre{margin:0;padding:14px;font-size:12.5px;color:#a7f3d0;overflow-x:auto}
 `;
