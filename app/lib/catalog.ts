@@ -1480,7 +1480,86 @@ export const CATALOG: Group[] = [
         "deps": 0
       }
     ]
+  },
+  {
+    "group": "Core Runtime Kit",
+    "icon": "⚙️",
+    "items": [
+      {
+        "n": "logger",
+        "v": "1.0.0",
+        "d": "A tiny structured logger for Node and the browser — leveled JSON logging, child loggers, field redaction and pluggable transports (JSON, pretty, in-memory). A log below the active level costs almost nothing: the record is never even built. Errors serialise automatically; secrets get redacted before they leave the logger. Zero-dependency, isomorphic.",
+        "kw": [
+          "logger",
+          "logging",
+          "structured-logging",
+          "json-logger",
+          "child-logger",
+          "redaction",
+          "pino-alternative",
+          "winston-alternative",
+          "observability",
+          "isomorphic",
+          "zero-dependency"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "result",
+        "v": "1.0.0",
+        "d": "Typed, functional error handling — Result<T,E> (Ok/Err) and Option<T> (Some/None) so functions return errors as values instead of throwing. Constructors, guards, map/andThen/match, unwrap variants, trySync/tryAsync to wrap throwing code, and an all() combinator that short-circuits on the first error. Tree-shakeable, zero-dependency, isomorphic.",
+        "kw": [
+          "result-type",
+          "option-type",
+          "either",
+          "neverthrow-alternative",
+          "ts-results",
+          "functional",
+          "error-handling",
+          "railway-oriented",
+          "type-safe",
+          "zero-dependency"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "events",
+        "v": "1.0.0",
+        "d": "A fully type-safe event emitter / tiny pub-sub for Node and the browser. Declare an events map (name → payload type) and get compile-time-checked on/emit. A throwing listener never blocks the others (errors are isolated), adding or removing listeners mid-emit is safe, and once/waitFor/onAny round it out. Comparable to mitt or nanoevents but strongly typed. Zero-dependency, isomorphic.",
+        "kw": [
+          "event-emitter",
+          "eventemitter",
+          "pubsub",
+          "typed-events",
+          "type-safe",
+          "mitt-alternative",
+          "nanoevents-alternative",
+          "observer",
+          "isomorphic",
+          "zero-dependency"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "queue",
+        "v": "1.0.0",
+        "d": "An in-memory async task queue with a concurrency limit — run up to N async tasks at once and await individual results or the whole drain. Priority ordering, pause/start, clear, onIdle/onEmpty draining, and per-task abort via AbortSignal. A rejected task never stalls the queue. Comparable to p-queue/p-limit but tiny and dependency-free. Isomorphic.",
+        "kw": [
+          "queue",
+          "task-queue",
+          "job-queue",
+          "concurrency",
+          "concurrency-limit",
+          "p-queue-alternative",
+          "p-limit-alternative",
+          "async-queue",
+          "priority-queue",
+          "zero-dependency"
+        ],
+        "deps": 0
+      }
+    ]
   }
 ];
 
-export const CATALOG_TOTAL = 113;
+export const CATALOG_TOTAL = 117;

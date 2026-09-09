@@ -92,8 +92,19 @@ export type Kit = {
   packages: { name: string; desc: string }[];
 };
 
-// Curated ecosystem — the full catalog is 112 packages on npm.
+// Curated ecosystem — the full catalog is 117 packages on npm.
 export const KITS: Kit[] = [
+  {
+    name: "Core Runtime Kit",
+    icon: "⚙️",
+    blurb: "The foundational primitives every app reaches for — logging, typed errors, events, concurrency.",
+    packages: [
+      { name: "logger", desc: "Structured leveled logging with redaction & transports" },
+      { name: "result", desc: "Typed error handling — Result / Option, no throwing" },
+      { name: "events", desc: "Fully type-safe emitter / pub-sub, errors isolated" },
+      { name: "queue", desc: "Async task queue with a concurrency limit & priority" },
+    ],
+  },
   {
     name: "Security Kit",
     icon: "🛡️",

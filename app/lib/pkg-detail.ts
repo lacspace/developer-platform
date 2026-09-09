@@ -997,5 +997,52 @@ export const DETAILS: Record<string, PkgDetail> = {
    "sheetToAoa"
   ],
   "usage": "import { jsonToXlsx } from \"@lacspace/xlsx\";\nimport { writeFileSync } from \"node:fs\";\n\nconst bytes = jsonToXlsx([\n  { name: \"Ada Lovelace\", signups: 12, active: true, joined: new Date(\"2026-01-15\") },\n  { name: \"Alan Turing\",  signups: 7,  active: false, joined: new Date(\"2026-02-01\") },\n]);\n\nwriteFileSync(\"users.xlsx\", bytes);                 // Node\n// or serve a download:\nreturn new Response(bytes, {\n  headers: {\n    \"content-type\": \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\n    \"content-disposition\": 'attachment; filename=\"users.xlsx\"',\n  },\n});\n\n// ...and READ one back — bulk import from an uploaded sheet.\n// Handles real Excel exports (STORE + DEFLATE), shared strings and dates.\nconst rows = await xlsxToJson(bytes);\n// [{ name: \"Ada Lovelace\", signups: 12, active: true, joined: <Date> }, ...]"
+ },
+ "logger": {
+  "exports": [
+   "createLogger",
+   "jsonConsole",
+   "prettyConsole",
+   "memory",
+   "serializeError",
+   "toObject",
+   "LEVELS"
+  ],
+  "usage": "import { createLogger } from \"@lacspace/logger\";\n\nconst log = createLogger({\n  level: \"info\",\n  bindings: { service: \"api\" },   // added to every line\n  redact: [\"password\", \"*.token\"], // secrets never reach the logs\n});\n\nlog.info(\"server started\", { port: 3000 });\n// {\"level\":\"info\",\"time\":1700000000000,\"msg\":\"server started\",\"service\":\"api\",\"port\":3000}\n\n// a per-request child logger inherits bindings + transports\nconst reqLog = log.child({ reqId: \"abc123\" });\nreqLog.warn(\"slow query\", { ms: 1200 });\n\n// a log below the active level costs nothing — the record is never built\nlog.debug(\"skipped\");"
+ },
+ "result": {
+  "exports": [
+   "ok",
+   "err",
+   "some",
+   "none",
+   "fromNullable",
+   "isOk",
+   "isErr",
+   "map",
+   "andThen",
+   "unwrap",
+   "unwrapOr",
+   "match",
+   "trySync",
+   "tryAsync",
+   "okOr",
+   "all"
+  ],
+  "usage": "import { trySync, match, all, ok, err } from \"@lacspace/result\";\n\n// wrap throwing code — errors become values, not exceptions\nconst parsed = trySync(() => JSON.parse(input)); // Result<any, Error>\n\nconst message = match(parsed, {\n  ok: (v) => `parsed: ${JSON.stringify(v)}`,\n  err: (e) => `bad json: ${e.message}`,\n});\n\n// chain fallible steps; the first Err short-circuits\nconst combined = all([ok(1), ok(2), ok(3)]); // Ok([1, 2, 3])\nconst stopped = all([ok(1), err(\"nope\"), ok(3)]); // Err(\"nope\")\n\n// async, too\nconst res = await tryAsync(() => fetch(url).then((r) => r.json()));"
+ },
+ "events": {
+  "exports": [
+   "createEmitter"
+  ],
+  "usage": "import { createEmitter } from \"@lacspace/events\";\n\n// declare the events map — on/emit are now compile-time checked\ntype Events = { login: { userId: string }; logout: void };\nconst bus = createEmitter<Events>();\n\nconst off = bus.on(\"login\", ({ userId }) => console.log(\"welcome\", userId));\nbus.emit(\"login\", { userId: \"u_1\" }); // ✓ payload type enforced\noff(); // unsubscribe\n\nbus.once(\"logout\", () => console.log(\"bye\"));\nconst next = await bus.waitFor(\"login\"); // resolves on the next emit\n\n// a throwing listener never blocks the others — errors are isolated"
+ },
+ "queue": {
+  "exports": [
+   "createQueue",
+   "AbortError",
+   "QueueClearedError"
+  ],
+  "usage": "import { createQueue } from \"@lacspace/queue\";\n\n// run at most 2 tasks at once\nconst queue = createQueue({ concurrency: 2 });\n\nconst results = await Promise.all(\n  urls.map((u) => queue.add(() => fetch(u).then((r) => r.json()))),\n);\n\n// higher priority jumps the line; a rejected task never stalls the queue\nqueue.add(fetchCritical, { priority: 10 });\n\nconsole.log(queue.pending, queue.size); // running, waiting\nawait queue.onIdle(); // resolves when fully drained"
  }
 };
