@@ -50,4 +50,23 @@ export const TRY_CSS = `
 .pt-qr-img svg{width:100%;height:100%;display:block;border-radius:8px}
 .pt-qr-meta{margin-top:12px;font-size:12.5px;color:var(--muted);font-family:ui-monospace,Menlo,monospace}
 .pt-qr-placeholder{color:var(--faint);font-size:13px}
+/* studio (logo + background) */
+.st-controls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:640px){.st-controls{grid-template-columns:1fr}}
+.st-field{display:flex;flex-direction:column;gap:6px}
+.st-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.st-chip{border:1px solid var(--hairline-2);background:var(--panel);color:var(--muted);border-radius:999px;padding:6px 12px;font-size:12.5px;cursor:pointer;transition:all .15s}
+.st-chip:hover{border-color:var(--accent);color:var(--text)}
+.st-stage{display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:center;margin-top:18px;border:1px solid var(--hairline-2);border-radius:16px;background:var(--panel);padding:22px}
+@media(max-width:760px){.st-stage{grid-template-columns:1fr}}
+.st-stage-art{display:flex;align-items:center;justify-content:center;min-height:220px;background:radial-gradient(circle at 50% 40%,rgba(255,255,255,.03),transparent);border-radius:12px;padding:16px}
+.st-stage-art svg{max-width:100%;max-height:230px;height:auto}
+.st-badges{display:flex;flex-wrap:wrap;gap:8px}
+.st-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:14px}
+.st-cell{border:1px solid var(--hairline-2);background:var(--panel);border-radius:12px;padding:12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;min-height:96px}
+.st-cell:hover{border-color:var(--accent)}
+.st-cell.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.st-cell svg{max-width:100%;max-height:78px;height:auto}
+.st-canvas-wrap{border:1px solid var(--hairline-2);border-radius:14px;background:var(--panel);padding:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.st-canvas{max-width:100%;height:auto;border-radius:8px;box-shadow:0 8px 30px rgba(0,0,0,.35)}
 `;

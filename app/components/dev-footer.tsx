@@ -3,7 +3,7 @@ const COLS: { title: string; links: { label: string; href: string; external?: bo
     title: "Platform",
     links: [
       { label: "Documentation", href: "/docs" },
-      { label: "All 110 packages", href: "/packages" },
+      { label: "All 112 packages", href: "/packages" },
       { label: "Developer tools", href: "/tools" },
       { label: "Developer handbook", href: "/handbook" },
       { label: "Live playground", href: "/playground" },
@@ -61,7 +61,7 @@ export function DevFooter() {
               <img className="brand-mark" src="/brand/mark.png" alt="Lacspace" width={26} height={26} />
               <span>Lacspace Developer</span>
             </div>
-            <p>110 zero-dependency, isomorphic TypeScript packages, a scaffolding CLI, and the docs to build with them.</p>
+            <p>112 zero-dependency, isomorphic TypeScript packages, a scaffolding CLI, and the docs to build with them.</p>
             <div className="foot-badges">
               <span>Isomorphic</span><span>ESM + CJS</span><span>TypeScript</span><span>0 deps</span>
             </div>

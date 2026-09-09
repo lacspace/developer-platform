@@ -16,6 +16,7 @@
     "@lacspace/id": "^1.0.1",
     "@lacspace/jwt": "^1.3.0",
     "@lacspace/llms-txt": "^1.2.2",
+    "@lacspace/logo": "^1.0.0",
     "@lacspace/markdown": "^1.0.1",
     "@lacspace/money": "^1.0.1",
     "@lacspace/og": "^1.0.1",

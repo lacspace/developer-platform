@@ -9,7 +9,7 @@ export const site = defineSite({
   name: "Lacspace Developer",
   url: "https://developer.lacspace.com",
   description:
-    "110 zero-dependency, isomorphic TypeScript packages, the create-lacspace-app CLI, and the docs to build with them.",
+    "112 zero-dependency, isomorphic TypeScript packages, the create-lacspace-app CLI, and the docs to build with them.",
   logo: "https://developer.lacspace.com/icon-512.png",
   twitter: "lacspace",
   ogImage: "/og",

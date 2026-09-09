@@ -1,6 +1,37 @@
 // Generated from the monorepo — per-package exports + a usage example.
 export type PkgDetail = { exports: string[]; usage: string };
 export const DETAILS: Record<string, PkgDetail> = {
+ "logo": {
+  "exports": [
+   "generateLogo",
+   "generateLogoSet",
+   "suggest",
+   "tokenize",
+   "initials",
+   "PALETTES",
+   "FONTS",
+   "ICONS",
+   "MOODS"
+  ],
+  "usage": "import { generateLogo, generateLogoSet } from \"@lacspace/logo\";\n\n// One brief → an on-brand SVG logo (no AI)\nconst { svg, palette, icon } = generateLogo({\n  name: \"Kopi House\",\n  keywords: \"coffee, cozy, artisanal, warm\",\n});\n// svg → a complete <svg> string (☕ mark, warm amber palette, emblem)\n\n// 12 reproducible concepts to choose from\nconst concepts = generateLogoSet({ name: \"Orbit Labs\", keywords: \"ai, network, fast\" });\n\n// Force any choice\ngenerateLogo({ name: \"Aurelia\", palette: \"royal-gold\", engine: \"emblem\", icon: \"crown\" });"
+ },
+ "image": {
+  "exports": [
+   "Surface",
+   "gradient",
+   "radial",
+   "pattern",
+   "encode",
+   "fit",
+   "encodePng",
+   "encodeJpeg",
+   "rasterizeSvg",
+   "parseSize",
+   "formatBytes",
+   "parseColor"
+  ],
+  "usage": "import { gradient, encode, fit, formatBytes } from \"@lacspace/image\";\n\nconst bg = gradient(1200, 630, {\n  angle: 90,\n  stops: [{ offset: 0, color: \"#22d3ee\" }, { offset: 1, color: \"#6366f1\" }],\n}).pattern(\"dots\", { size: 32 });\n\n// Export in any format\nconst png = await encode(bg, { format: \"png\" });\n\n// …or hit an exact file-size budget\nconst small = await fit(bg, { format: \"jpeg\", maxSize: \"120kb\" });\nconsole.log(formatBytes(small.size), \"at q\", small.quality);"
+ },
  "analytics": {
   "exports": [
    "LacspaceAnalytics",

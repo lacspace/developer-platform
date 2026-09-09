@@ -1418,7 +1418,50 @@ export const CATALOG: Group[] = [
         "deps": 0
       }
     ]
+  },
+  {
+    "group": "Media Kit",
+    "icon": "🎨",
+    "items": [
+      {
+        "n": "logo",
+        "v": "1.0.0",
+        "d": "Generate real logos and brand marks without AI. A name + a few keywords becomes an on-brand SVG logo — monogram, icon lockup, geometric mark or emblem — chosen deterministically from a curated JSON brain of palettes, fonts, icons and shapes. Seeded variations, five engines, and generateLogoSet for 12 reproducible concepts. Rasterize via @lacspace/image.",
+        "kw": [
+          "logo",
+          "logo-generator",
+          "logo-maker",
+          "brand",
+          "monogram",
+          "emblem",
+          "svg-logo",
+          "generative",
+          "no-ai",
+          "favicon"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "image",
+        "v": "1.0.0",
+        "d": "Generate images without AI — draw gradients, patterns and placeholders, resize and crop, then export to PNG, JPEG, WebP or SVG with an exact file-size budget (KB/MB). Zero-dependency and isomorphic: native Canvas in the browser, pure-JS PNG (zlib) and baseline JPEG encoders in Node, plus a fit() that binary-searches quality to hit a size ceiling.",
+        "kw": [
+          "image",
+          "image-generator",
+          "png",
+          "jpeg",
+          "webp",
+          "svg",
+          "resize-image",
+          "target-file-size",
+          "gradient",
+          "canvas",
+          "no-ai"
+        ],
+        "deps": 0
+      }
+    ]
   }
 ];
 
-export const CATALOG_TOTAL = 110;
+export const CATALOG_TOTAL = 112;

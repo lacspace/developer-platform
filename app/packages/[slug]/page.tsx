@@ -13,6 +13,7 @@ const FLAT = CATALOG.flatMap((g) => g.items.map((p) => ({ ...p, group: g.group, 
 const find = (slug: string) => FLAT.find((p) => p.n === slug);
 
 const DEMOABLE = new Set(["slugify", "money", "case", "humanize", "color", "id", "validate", "crypto", "jwt", "otp", "password", "markdown", "redact", "csv"]);
+const STUDIO = new Set(["logo", "image"]); // live Logo & Image Studio playground
 
 export function generateStaticParams() {
   return FLAT.map((p) => ({ slug: p.n }));
@@ -80,6 +81,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
 
           <div className="pd-actions">
             <a className="btn btn-primary" href={`https://www.npmjs.com/package/@lacspace/${p.n}`} target="_blank" rel="noopener">View on npm ↗</a>
+            {STUDIO.has(p.n) && <a className="btn btn-ghost" href="/tools/studio/try">Try it live →</a>}
             {DEMOABLE.has(p.n) && <a className="btn btn-ghost" href="/playground">Try in the playground →</a>}
             <a className="btn btn-ghost" href="https://github.com/lacspace/npm-packages" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
@@ -122,7 +124,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
           )}
 
           <div className="cta" style={{ marginTop: 40, justifyContent: "center" }}>
-            <a className="btn btn-ghost" href="/packages">← Browse all 110 packages</a>
+            <a className="btn btn-ghost" href="/packages">← Browse all 112 packages</a>
             <a className="btn btn-ghost" href="/handbook">Read the handbook</a>
           </div>
         </section>
