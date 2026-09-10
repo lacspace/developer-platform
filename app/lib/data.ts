@@ -92,8 +92,19 @@ export type Kit = {
   packages: { name: string; desc: string }[];
 };
 
-// Curated ecosystem — the full catalog is 119 packages on npm.
+// Curated ecosystem — the full catalog is 121 packages on npm.
 export const KITS: Kit[] = [
+  {
+    name: "Sheets Kit",
+    icon: "📗",
+    blurb: "The engine behind LUMIFORM — a safe formula engine, real Excel read/write and data converters.",
+    packages: [
+      { name: "formula", desc: "110+ Excel-style functions, no eval, reference metadata" },
+      { name: "xlsx", desc: "Read & write real .xlsx — formulas, formats, multi-sheet" },
+      { name: "csv", desc: "RFC 4180 parse / stringify, streaming, typed rows" },
+      { name: "convert", desc: "JSON ⇄ Excel ⇄ CSV ⇄ YAML ⇄ SQL ⇄ Markdown, one call" },
+    ],
+  },
   {
     name: "Core Runtime Kit",
     icon: "🧰",

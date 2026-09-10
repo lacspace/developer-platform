@@ -1062,5 +1062,39 @@ export const DETAILS: Record<string, PkgDetail> = {
    "createActor"
   ],
   "usage": "import { createMachine, assign, interpret } from \"@lacspace/machine\";\n\nconst toggle = createMachine<{ count: number }, { type: \"TOGGLE\" }>({\n  initial: \"inactive\",\n  context: { count: 0 },\n  states: {\n    inactive: { on: { TOGGLE: { target: \"active\", actions: assign((c) => ({ count: c.count + 1 })) } } },\n    active: { on: { TOGGLE: \"inactive\" } },\n  },\n});\n\n// pure — great for reducers/tests\nconst next = toggle.transition(toggle.initialState, { type: \"TOGGLE\" });\nnext.value;         // \"active\"\nnext.context.count; // 1\n\n// or run it as a live actor\nconst actor = interpret(toggle).start();\nactor.subscribe((s) => console.log(s.value));\nactor.send({ type: \"TOGGLE\" });"
+ },
+ "formula": {
+  "exports": [
+   "compile",
+   "run",
+   "check",
+   "references",
+   "computeColumn",
+   "tableScope",
+   "registerFunction",
+   "describeFunction",
+   "FUNCTIONS",
+   "FUNCTION_NAMES",
+   "FUNCTION_DOCS",
+   "AGGREGATES"
+  ],
+  "usage": "import { compile, computeColumn, check } from \"@lacspace/formula\";\n\nconst rows = [\n  { item: \"Shirt\",  qty: 2, rate: 850,  cost: 600 },\n  { item: \"Jacket\", qty: 1, rate: 2400, cost: 1900 },\n  { item: \"Scarf\",  qty: 5, rate: 450,  cost: 300 },\n];\n\n// one formula, evaluated down a whole table\ncomputeColumn(\"=qty * rate\", rows);                 // [1700, 2400, 2250]\ncomputeColumn(\"=(rate - cost) / rate * 100\", rows); // margins per row\ncomputeColumn(\"=rate / SUM(rate) * 100\", rows);     // bare names read the row, SUM(rate) reads the column\n\n// compile once, run anywhere — no eval, ever\nconst margin = compile(\"=IF(rate = 0, 0, (rate - cost) / rate * 100)\");\nmargin({ field: (n) => rows[0][n], column: (n) => rows.map((r) => r[n]) });\n\n// validate as the user types\ncheck(\"=1+2 3\"); // { ok: false, error: 'Unexpected \"3\"', position: 4 }"
+ },
+ "convert": {
+  "exports": [
+   "convert",
+   "detect",
+   "parseInput",
+   "serialize",
+   "toExcel",
+   "fromExcel",
+   "flatten",
+   "unflatten",
+   "inferTypes",
+   "inferSchema",
+   "parseLines",
+   "transformTable"
+  ],
+  "usage": "import { convert, detect, toExcel, fromExcel } from \"@lacspace/convert\";\n\n// JSON → a real .xlsx (one sheet per key, nested objects flattened to columns)\nconst xlsx = await convert(orders, { to: \"xlsx\", sheet: \"Orders\", flatten: true });\n\n// Excel → JSON rows (input format auto-detected; numbers, booleans and dates typed)\nconst rows = await convert(xlsxBytes, { to: \"json\" });\n\n// CSV → Markdown table, keeping only two columns\nconst md = await convert(csvText, { from: \"csv\", to: \"markdown\", columns: [\"name\", \"total\"] });\n\n// …or SQL INSERTs with a CREATE TABLE\nconst sql = await convert(rows, { to: \"sql\", tableName: \"orders\", ddl: true });\n\ndetect(csvText); // \"csv\""
  }
 };

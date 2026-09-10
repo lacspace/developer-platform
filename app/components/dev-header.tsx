@@ -12,8 +12,9 @@ const MENUS: Menu[] = [
     label: "Packages",
     href: "/packages",
     items: [
-      { label: "All 119 packages", href: "/packages", desc: "The full catalog" },
+      { label: "All 121 packages", href: "/packages", desc: "The full catalog" },
       { label: "Core Runtime Kit", href: "/packages?kit=Core+Runtime+Kit", desc: "logger · result · events · queue · scheduler · machine" },
+      { label: "Sheets Kit", href: "/packages?kit=Sheets+Kit", desc: "formula · xlsx · csv · convert" },
       { label: "Security Kit", href: "/packages?kit=Security+Kit", desc: "crypto · jwt · otp · passkeys" },
       { label: "SEO Kit", href: "/packages?kit=SEO+Kit", desc: "seo · sitemap · robots · og" },
       { label: "React Kit", href: "/packages?kit=React+Kit", desc: "store · query · theme · hooks" },
@@ -41,7 +42,7 @@ const MENUS: Menu[] = [
     label: "Tools",
     href: "/tools",
     items: [
-      { label: "All developer tools", href: "/tools", desc: "24 free, keyless CLIs + libraries" },
+      { label: "All developer tools", href: "/tools", desc: "27 free, keyless CLIs + libraries" },
       { label: "Media API (hosted)", href: "/media-api", desc: "Logos, images & brand kits over HTTP" },
       { label: "lacspace-scraper", href: "/tools/scraper", desc: "Scrape any website → JSON/CSV/Excel" },
       { label: "lacspace-sql", href: "/tools/sql", desc: "SQL over CSV/JSON/Excel files" },

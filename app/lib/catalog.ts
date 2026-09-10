@@ -929,8 +929,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "xlsx",
-        "v": "1.2.0",
-        "d": "Read & write real Excel (.xlsx) with zero dependencies and no headless browser — objects or arrays to a workbook, typed cells (string/number/boolean/Date), per-column number formats, bold headers, column widths, multiple sheets, and built-in CSV↔XLSX conversion. Isomorphic (Node, edge, browser).",
+        "v": "1.3.0",
+        "d": "Read & write real Excel (.xlsx) with zero dependencies and no headless browser — objects or arrays to a workbook, typed cells (string/number/boolean/Date), per-column number formats, bold headers, column widths, multiple sheets, live Excel formula cells (=B2*C2 with cached values), and built-in CSV↔XLSX conversion. Isomorphic (Node, edge, browser).",
         "kw": [
           "xlsx",
           "excel",
@@ -1595,7 +1595,54 @@ export const CATALOG: Group[] = [
         "deps": 0
       }
     ]
+  },
+  {
+    "group": "Sheets Kit",
+    "icon": "📗",
+    "items": [
+      {
+        "n": "formula",
+        "v": "1.0.0",
+        "d": "A safe spreadsheet formula engine — parse and evaluate Excel-style formulas over rows and columns with no eval, no new Function and no dependencies. 110+ functions: SUM/AVERAGE/SUMIFS/COUNTIFS, IF/IFS/SWITCH, text, dates (EDATE, EOMONTH, DATEDIF, NETWORKDAYS), VLOOKUP-style LOOKUP/XLOOKUP/MATCH/INDEX, wildcard criteria, TEXT formats. Every function ships reference metadata for docs and autocomplete; validate as the user types with check(). The engine behind LUMIFORM in Lacspace's ERPs.",
+        "kw": [
+          "formula",
+          "formula-engine",
+          "formula-parser",
+          "excel-formula",
+          "spreadsheet-formula",
+          "sumif",
+          "vlookup",
+          "expression-evaluator",
+          "no-eval",
+          "hyperformula-alternative",
+          "zero-dependency"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "convert",
+        "v": "1.0.0",
+        "d": "The data conversion hub — JSON ⇄ XLSX ⇄ CSV ⇄ TSV ⇄ NDJSON ⇄ YAML ⇄ TOML ⇄ Markdown ⇄ HTML ⇄ SQL in one call. Auto-detects the input, turns nested JSON into flat columns and back (lossless), infers numbers/booleans/dates conservatively, picks sheets, selects/renames/reorders columns, writes injection-safe CSV and SQL with DDL, and streams big files. Built on @lacspace/xlsx and @lacspace/csv — zero external dependencies, isomorphic.",
+        "kw": [
+          "json-to-excel",
+          "excel-to-json",
+          "csv-to-xlsx",
+          "xlsx-to-csv",
+          "json-to-csv",
+          "csv-to-json",
+          "yaml",
+          "toml",
+          "ndjson",
+          "markdown-table",
+          "sql-insert",
+          "converter",
+          "flatten",
+          "zero-dependency"
+        ],
+        "deps": 2
+      }
+    ]
   }
 ];
 
-export const CATALOG_TOTAL = 119;
+export const CATALOG_TOTAL = 121;

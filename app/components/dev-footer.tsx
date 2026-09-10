@@ -3,7 +3,7 @@ const COLS: { title: string; links: { label: string; href: string; external?: bo
     title: "Platform",
     links: [
       { label: "Documentation", href: "/docs" },
-      { label: "All 119 packages", href: "/packages" },
+      { label: "All 121 packages", href: "/packages" },
       { label: "Developer tools", href: "/tools" },
       { label: "Developer handbook", href: "/handbook" },
       { label: "Live playground", href: "/playground" },
