@@ -57,7 +57,7 @@ export const TOOLS: Tool[] = [
     icon: "📍",
     grad: "#2DD4BF,#3B82F6",
     status: "live",
-    version: "1.6.0",
+    version: "1.7.0",
     summary:
       "Name a city, area and business type — it drives a real browser over Google Maps and collects each listing's name, phone, website, rating, review count, opening hours, price level, category tags, plus-code and social links, then exports to JSON, NDJSON, CSV or Excel. No paid Places API.",
     about:
@@ -68,7 +68,11 @@ export const TOOLS: Tool[] = [
     localNote:
       "lacspace-leads drives a real browser over Google Maps, so it runs on your machine — not as a hosted button here (that would break Google's Terms and can't run in a serverless function). It's one command to try locally, no setup.",
     features: [
-      { icon: "🏙️", title: "City sweep", desc: "Comma-separate areas/types and it runs each search, then merges and de-duplicates into one list." },
+      { icon: "🎯", title: "Ask for a number", desc: "--target 500 keeps searching until it has 500 unique leads. One Google search stops near 120; this sweeps past it." },
+      { icon: "🗺️", title: "Map tiling", desc: "Re-centres the same query on a grid across the city, walking outwards — no geocoding service, no API key." },
+      { icon: "🏙️", title: "City sweep", desc: "Comma-separate cities/areas/types and it runs each search, then merges and de-duplicates into one list." },
+      { icon: "✂️", title: "Split by place", desc: "--split city writes one file per city or area alongside the master export." },
+      { icon: "🚫", title: "No-website list", desc: "--no-website keeps only businesses missing a site — an instant pitch list for web work." },
       { icon: "📮", title: "Verified emails", desc: "Visit each website to find an email, then MX-verify the domain — keep only deliverable contacts." },
       { icon: "🔗", title: "8 social networks", desc: "Facebook, Instagram, WhatsApp, LinkedIn, X, YouTube, TikTok and Telegram from the business site." },
       { icon: "📞", title: "E.164 phones", desc: "Normalise every phone to +CC… with one flag — CRM-ready out of the box." },
@@ -82,6 +86,9 @@ export const TOOLS: Tool[] = [
       { icon: "📊", title: "Run summary", desc: "--summary prints per-run stats — totals, with-phone/email, average rating, dedupe hits." },
     ],
     examples: [
+      { label: "500 leads, not 114", code: `npx lacspace-leads restaurants --city Kathmandu \\\n  --target 500 -f xlsx`, note: "Sweeps every area you name, then tiles the map, until it has 500 unique businesses." },
+      { label: "Many cities, one file each", code: `npx lacspace-leads restaurants \\\n  --cities "Kathmandu, Lalitpur, Bhaktapur" \\\n  --areas "Baneshwor, Thamel" --target 400 --split city`, note: "Cross-product of cities x areas, de-duplicated, then written out one Excel file per city." },
+      { label: "Businesses with no website", code: `npx lacspace-leads "beauty salon" --city Pokhara \\\n  --target 200 --no-website --has-phone -f csv`, note: "Every salon in town missing a website, with a phone number to call." },
       { label: "Open-now + price tier, with stats", code: `npx lacspace-leads bars --city Pokhara \\\n  --open-now --price 2 --summary`, note: "Keeps places open right now at price level $$, then prints run-summary stats." },
       { label: "Resumable city sweep", code: `npx lacspace-leads cafes --city Kathmandu \\\n  --area "Thamel,Patan,Baneshwor" --resume -o sweep.csv`, note: "Interrupt it and re-run — --resume continues from the next area, nothing re-scraped." },
       { label: "Dedupe against a master file", code: `npx lacspace-leads gyms --city Lalitpur \\\n  --dedupe-across master.csv --append -o new.csv`, note: "Drops anything already in master.csv, appends only the genuinely new leads." },
