@@ -20,6 +20,21 @@ export interface ToolLink {
   external?: boolean;
 }
 
+/** One step of a how-to walkthrough. */
+export interface ToolGuideStep {
+  title: string;
+  body: string;
+  code?: string;
+  note?: string;
+}
+
+/** A themed group of walkthrough steps, rendered as a numbered guide. */
+export interface ToolGuideSection {
+  heading: string;
+  intro?: string;
+  steps: ToolGuideStep[];
+}
+
 export interface Tool {
   slug: string;
   /** npm package / command name. */
@@ -43,6 +58,8 @@ export interface Tool {
   /** Why it's local-only + how to run it (shown as a callout). */
   localNote?: string;
   features: ToolFeature[];
+  /** Step-by-step "how to use it" walkthrough for the detail page. */
+  guide?: ToolGuideSection[];
   examples: ToolExample[];
   useCases: string[];
   links?: ToolLink[];
@@ -57,7 +74,7 @@ export const TOOLS: Tool[] = [
     icon: "📍",
     grad: "#2DD4BF,#3B82F6",
     status: "live",
-    version: "1.7.0",
+    version: "1.7.1",
     summary:
       "Name a city, area and business type — it drives a real browser over Google Maps and collects each listing's name, phone, website, rating, review count, opening hours, price level, category tags, plus-code and social links, then exports to JSON, NDJSON, CSV or Excel. No paid Places API.",
     about:
@@ -84,6 +101,157 @@ export const TOOLS: Tool[] = [
       { icon: "⏯️", title: "Resumable sweeps", desc: "--resume picks a long multi-area city sweep back up where it stopped — nothing re-scraped." },
       { icon: "🎚️", title: "Rich filters", desc: "--min-rating / --min-reviews / --open-now / --price / --category / --business-status narrow the list on the spot." },
       { icon: "📊", title: "Run summary", desc: "--summary prints per-run stats — totals, with-phone/email, average rating, dedupe hits." },
+    ],
+    guide: [
+      {
+        heading: "Your first list, in two minutes",
+        intro: "Nothing to install and no account anywhere. You need Node 18+ and a few minutes of a real browser running on your machine.",
+        steps: [
+          {
+            title: "Run it with no arguments and answer the questions",
+            body: "The walkthrough asks for a business type, the city, the areas, how many you want and the file format. Every answer has a sensible default, so you can press Enter through it.",
+            code: "npx lacspace-leads",
+            note: "Prefer flags? Everything the walkthrough asks can be passed directly, as in the steps below.",
+          },
+          {
+            title: "Or say it in one line",
+            body: "A business type, where to look, and the format you want out. The file lands in the folder you ran it from.",
+            code: "npx lacspace-leads restaurants --city Kathmandu --area Baneshwor -f xlsx",
+          },
+          {
+            title: "Watch the browser do the work",
+            body: "A real Chromium window opens and walks the map, which is how it works without an API key. Add --headless once you trust it and it runs invisibly.",
+            code: "npx lacspace-leads dentists --city Pokhara --headless -f csv",
+          },
+        ],
+      },
+      {
+        heading: "Getting the number of leads you actually asked for",
+        intro: "One Google Maps search stops serving results at roughly 120, so a big --limit quietly returns about 114. --target is the flag that goes past that.",
+        steps: [
+          {
+            title: "Ask for a total, not a per-search limit",
+            body: "--target keeps searching until it has that many unique businesses: first every place you named, then tiles of the map around the city, de-duplicating the whole way.",
+            code: "npx lacspace-leads restaurants --city Kathmandu --target 500 -f xlsx",
+            note: "-n / --limit still exists and still means listings per single search. Use --target whenever you want more than ~120.",
+          },
+          {
+            title: "Name the neighbourhoods you care about",
+            body: "Each area becomes its own search before any tiling happens, so naming them puts your priorities first and usually finishes sooner.",
+            code: 'npx lacspace-leads restaurants --city Kathmandu \\\n  --areas "Baneshwor, Thamel, Patan, Lazimpat" --target 400',
+          },
+          {
+            title: "Tune how the map is tiled",
+            body: "--step sets the spacing between tiles and --tiles caps how many are tried. Tighter steps find more in a dense city and take longer.",
+            code: "npx lacspace-leads cafes --city Lalitpur --target 600 --step 1.5km --tiles 60",
+            note: "If the map genuinely runs out, the tool says so and suggests widening rather than pretending the target was reachable.",
+          },
+        ],
+      },
+      {
+        heading: "Several cities at once",
+        steps: [
+          {
+            title: "Cross cities with areas and business types",
+            body: "Comma-separate any of them. Every combination runs as its own search and the results merge into one de-duplicated list.",
+            code: 'npx lacspace-leads \\\n  --type "restaurant, cafe" \\\n  --cities "Kathmandu, Lalitpur, Bhaktapur" \\\n  --areas "Baneshwor, Thamel" \\\n  --target 600 -f xlsx',
+          },
+          {
+            title: "Write one file per city",
+            body: "--split gives each city, area or category its own file next to the master export, which is what you want when handing lists to different people.",
+            code: 'npx lacspace-leads gyms --cities "Kathmandu, Pokhara" --target 300 --split city -f xlsx',
+          },
+          {
+            title: "Pick the run back up if it stops",
+            body: "--resume writes a checkpoint next to the output, so an interrupted sweep continues from the next search instead of re-scraping.",
+            code: "npx lacspace-leads salons --city Kathmandu --areas \"Thamel,Patan,Baneshwor\" --resume -o salons.csv",
+          },
+        ],
+      },
+      {
+        heading: "Turning listings into a contact list",
+        steps: [
+          {
+            title: "Add emails and social profiles",
+            body: "--enrich visits each business website to find an email address and links to eight social networks. It is slower, so it is opt-in.",
+            code: "npx lacspace-leads clinics --city Pokhara --target 200 --enrich -f xlsx",
+          },
+          {
+            title: "Keep only contacts that can actually receive mail",
+            body: "--verify-emails checks each domain has MX records, and --has-valid-email drops everything that fails.",
+            code: "npx lacspace-leads hotels --city Kathmandu --target 150 \\\n  --enrich --verify-emails --has-valid-email -f csv",
+          },
+          {
+            title: "Normalise the phone numbers",
+            body: "--country rewrites every phone into international format, which is what a CRM or bulk-SMS tool expects.",
+            code: "npx lacspace-leads pharmacies --city Biratnagar --target 200 --country NP --has-phone",
+          },
+        ],
+      },
+      {
+        heading: "Narrowing to the right prospects",
+        steps: [
+          {
+            title: "Find the businesses that need what you sell",
+            body: "--no-website keeps only businesses with no website at all. Pair it with --has-phone and you have a call list for web work.",
+            code: 'npx lacspace-leads "beauty salon" --city Pokhara --target 200 \\\n  --no-website --has-phone -f csv',
+          },
+          {
+            title: "Filter on quality and status",
+            body: "Rating, review count, price tier, category, open-now and business status all filter the list before it is written.",
+            code: "npx lacspace-leads restaurants --city Kathmandu --target 300 \\\n  --min-rating 4 --min-reviews 50 --sort reviews --desc",
+          },
+          {
+            title: "Choose the columns",
+            body: "A preset picks a sensible bundle, or name exactly the fields you want. Fewer columns means a faster run.",
+            code: "npx lacspace-leads cafes --city Lalitpur --target 200 --preset outreach",
+          },
+        ],
+      },
+      {
+        heading: "Making it a repeatable workflow",
+        steps: [
+          {
+            title: "Build one master file that grows",
+            body: "--append merges each run into the same file and de-duplicates, so running weekly builds a single clean database instead of twelve overlapping exports.",
+            code: "npx lacspace-leads restaurants --city Kathmandu --target 300 \\\n  --append -o master.csv",
+          },
+          {
+            title: "Export only what is new",
+            body: "--dedupe-across drops anything already present in your master file, so the new export contains only businesses you have not seen before.",
+            code: "npx lacspace-leads restaurants --city Kathmandu --target 300 \\\n  --dedupe-across master.csv -o new-this-week.csv",
+          },
+          {
+            title: "Save the whole campaign in a file",
+            body: "A --config JSON holds the searches and shared options, so the same campaign runs identically every time and can go on a schedule.",
+            code: "npx lacspace-leads --config campaign.json",
+          },
+          {
+            title: "Use it as a typed library",
+            body: "Everything the CLI does is exported, including the sweep engine, so you can build it into your own tooling.",
+            code: 'import { sweepLeads, serialize } from "lacspace-leads";\n\nconst { leads, stats } = await sweepLeads({\n  type: "restaurants",\n  city: "Kathmandu",\n  target: 500,\n  headless: true,\n  country: "NP",\n});\nconsole.log(stats); // { searches, tiles, unique, saturated }\nconst { data } = serialize(leads, "csv");',
+          },
+        ],
+      },
+      {
+        heading: "When something looks wrong",
+        steps: [
+          {
+            title: "It returned far fewer than you asked for",
+            body: "That is the map running out, and the tool says so. Widen it: more areas, more cities, related business types, or a bigger --step so the tiles cover more ground.",
+            code: 'npx lacspace-leads --type "restaurant, cafe, bakery" \\\n  --cities "Kathmandu, Lalitpur" --target 800 --step 3km',
+          },
+          {
+            title: "It found nothing at all",
+            body: "Usually a CAPTCHA or a changed page. Run without --headless to see the window, slow it down with --delay, and try again in a few minutes.",
+            code: "npx lacspace-leads restaurants --city Kathmandu --delay 1500",
+          },
+          {
+            title: "Addresses or websites are missing",
+            body: "--no-details skips opening each listing, so only names and map links come back. Filters like --no-website and --split need those details, and will turn them back on for you.",
+          },
+        ],
+      },
     ],
     examples: [
       { label: "500 leads, not 114", code: `npx lacspace-leads restaurants --city Kathmandu \\\n  --target 500 -f xlsx`, note: "Sweeps every area you name, then tiles the map, until it has 500 unique businesses." },

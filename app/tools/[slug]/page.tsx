@@ -121,6 +121,45 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
         </section>
 
         {/* How to use */}
+        {isLive && t.guide && t.guide.length > 0 && (
+          <section className="sec">
+            <Reveal className="sec-head center">
+              <div className="eyebrow">Walkthrough</div>
+              <h2>How to <span className="grad">use it</span></h2>
+              <p>From your first command to a repeatable workflow.</p>
+            </Reveal>
+            <div style={{ maxWidth: 820, margin: "0 auto", display: "flex", flexDirection: "column", gap: 40 }}>
+              {t.guide.map((sec) => (
+                <Reveal key={sec.heading}>
+                  <h3 style={{ fontSize: 20, margin: "0 0 6px" }}>{sec.heading}</h3>
+                  {sec.intro && <p style={{ fontSize: 14, color: "var(--faint)", margin: "0 0 18px" }}>{sec.intro}</p>}
+                  <ol style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 22 }}>
+                    {sec.steps.map((step, i) => (
+                      <li key={step.title} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+                        <span
+                          aria-hidden
+                          style={{
+                            flex: "0 0 26px", height: 26, borderRadius: 999, display: "grid", placeItems: "center",
+                            fontSize: 12, fontWeight: 700, color: "#fff", background: "var(--accent)", marginTop: 2,
+                          }}
+                        >
+                          {i + 1}
+                        </span>
+                        <div style={{ minWidth: 0, flex: 1 }}>
+                          <div style={{ fontSize: 15, fontWeight: 650, color: "var(--fg)", marginBottom: 4 }}>{step.title}</div>
+                          <p style={{ fontSize: 14, color: "var(--muted)", margin: "0 0 10px" }}>{step.body}</p>
+                          {step.code && <CodeBlock label={step.code.includes("import ") ? "typescript" : "terminal"} code={step.code} />}
+                          {step.note && <p style={{ fontSize: 13, color: "var(--faint)", marginTop: 8 }}>{step.note}</p>}
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </Reveal>
+              ))}
+            </div>
+          </section>
+        )}
+
         {isLive && t.examples.length > 0 && (
           <section className="sec">
             <Reveal className="sec-head center">
