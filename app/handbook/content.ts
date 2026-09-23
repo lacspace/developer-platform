@@ -35,6 +35,7 @@ export const KIT_ORDER = [
   "Data",
   "Commerce",
   "React",
+  "UI",
   "Resilience",
   "Ship",
   "Reference",
@@ -816,6 +817,289 @@ export default function App({ children }: { children: React.ReactNode }) {
         pkgs: ["hooks", "ui"],
         blurb:
           "@lacspace/hooks — useDebounce, useLocalStorage, useCopyToClipboard, useIntersectionObserver and 24 more. @lacspace/ui — scroll reveals, counters and a ⌘K palette.",
+      },
+    ],
+  },
+  {
+    id: "components",
+    label: "Components & UI",
+    icon: "\U0001F39B️",
+    kit: "UI",
+    intro:
+      "143 React components across four packages — the interface layer, with no runtime dependencies and no Tailwind. Everything below is rendered live on the components gallery.",
+    recipes: [
+      {
+        id: "ui-install",
+        title: "Install the UI kit",
+        pkgs: ["components", "charts", "table", "date"],
+        blurb:
+          "Four separate packages so you only pay for what you use. They share one set of CSS variables, so they match out of the box.",
+        label: "terminal",
+        lang: "bash",
+        code: `npm i @lacspace/components @lacspace/charts @lacspace/table @lacspace/date`,
+        note: "Import each stylesheet once, at the top of your root layout. React 18+ is the only peer dependency.",
+      },
+      {
+        id: "ui-theme",
+        title: "Make it your brand in one block",
+        pkgs: ["components"],
+        blurb:
+          "Every colour, radius, control height and typeface is a --lac-* variable. Redefine the handful you care about and all 143 components follow — including the ones inside dialogs.",
+        label: "globals.css",
+        lang: "css",
+        code: `:root {
+  --lac-accent: #7c3aed;
+  --lac-accent-hover: #6d31d0;
+  --lac-radius: 14px;
+  --lac-font: "Inter", system-ui, sans-serif;
+  --lac-control-h-md: 42px;
+}
+
+/* Scope them to restyle one region instead of the whole app. */
+.marketing-section {
+  --lac-accent: #0f766e;
+  --lac-radius-pill: 6px;
+}`,
+        note: "Dark mode is already defined for both the OS preference and an explicit data-theme attribute, so a theme toggle wins in both directions.",
+      },
+      {
+        id: "ui-form",
+        title: "A form that says what went wrong",
+        pkgs: ["components", "validate"],
+        blurb:
+          "Field wires up the label, the hint, the error and aria-describedby for you — the part hand-rolled forms almost always get wrong. Pair it with @lacspace/validate and the same schema guards your API route.",
+        label: "SignUp.tsx",
+        lang: "tsx",
+        code: `import { useState } from "react";
+import { Button, Field, Input, PasswordInput, Stack } from "@lacspace/components";
+import { v } from "@lacspace/validate";
+
+const Schema = v.object({
+  email: v.string().email(),
+  password: v.string().min(12),
+});
+
+export function SignUp() {
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  function onSubmit(form: FormData) {
+    const result = Schema.safeParse(Object.fromEntries(form));
+    if (!result.success) return setErrors(result.error.flatten()); // { email: "…" }
+    setErrors({});
+    // …post result.data, already typed
+  }
+
+  return (
+    <form action={onSubmit}>
+      <Stack gap={3}>
+        <Field label="Work email" hint="We never share it." error={errors.email}>
+          {({ id, describedBy, invalid }) => (
+            <Input id={id} name="email" type="email" aria-describedby={describedBy} invalid={invalid} />
+          )}
+        </Field>
+        <Field label="Password" hint="At least 12 characters." error={errors.password}>
+          {({ id, describedBy, invalid }) => (
+            <PasswordInput id={id} name="password" aria-describedby={describedBy} invalid={invalid} />
+          )}
+        </Field>
+        <Button type="submit" full>Create account</Button>
+      </Stack>
+    </form>
+  );
+}`,
+        note: "PasswordInput ships a strength meter driven by scorePassword(), which is exported on its own if you want the number without the input.",
+      },
+      {
+        id: "ui-table",
+        title: "A table people can actually use",
+        pkgs: ["table"],
+        blurb:
+          "Sorting, filtering, search, pagination, selection, column resize and pinning, sticky headers, footer totals and CSV export — declared, not wired by hand.",
+        label: "Accounts.tsx",
+        lang: "tsx",
+        code: `import { DataTable, textColumn, badgeColumn, currencyColumn, dateColumn } from "@lacspace/table";
+
+<DataTable<Account>
+  caption="Account book"
+  data={accounts}
+  getRowId={(row) => row.id}
+  columns={[
+    textColumn<Account>("account", { header: "Account", key: "account", pinned: "left", width: 200 }),
+    badgeColumn<Account>("status", {
+      header: "Status",
+      key: "status",
+      tones: { active: "success", trial: "info", past_due: "warning", churned: "danger" },
+    }),
+    currencyColumn<Account>("mrr", { header: "MRR", key: "mrr", currency: "USD", aggregate: "sum" }),
+    dateColumn<Account>("renews", { header: "Renews", key: "renews" }),
+  ]}
+  defaultSort={[{ id: "mrr", direction: "desc" }]}
+  searchable
+  selectable
+  exportable
+  columnMenu
+  stickyHeader
+/>`,
+        note:
+          "The CSV export neutralises leading =, +, - and @ in cells, so an exported row can never execute as a formula when somebody opens it in Excel.",
+      },
+      {
+        id: "ui-headless",
+        title: "Keep your own markup",
+        pkgs: ["table"],
+        blurb:
+          "useTable() is the same engine with no UI attached. Use it when the design calls for cards, a list or a mobile layout instead of a grid.",
+        label: "Leaderboard.tsx",
+        lang: "tsx",
+        code: `import { useTable, textColumn, numberColumn } from "@lacspace/table";
+
+const table = useTable<Agent>({
+  data: agents,
+  columns: [
+    textColumn<Agent>("agent", { key: "agent" }),
+    numberColumn<Agent>("resolved", { key: "resolved" }),
+  ],
+  getRowId: (row) => row.id,
+  defaultSort: [{ id: "resolved", direction: "desc" }],
+  defaultPageSize: 5,
+});
+
+<input value={table.query} onChange={(e) => table.setQuery(e.target.value)} />
+<ul>
+  {table.rows.map((model) => (
+    <li key={model.id}>{model.row.agent} — {model.row.resolved}</li>
+  ))}
+</ul>
+<button disabled={!table.canNextPage} onClick={table.nextPage}>
+  Next — {table.range.from}–{table.range.to} of {table.range.total}
+</button>`,
+      },
+      {
+        id: "ui-dashboard",
+        title: "A dashboard row: metric, trend, chart",
+        pkgs: ["components", "charts"],
+        blurb:
+          "Stat handles the arrow, the sign and the colour — including metrics where down is good. The charts are plain SVG: no canvas, no D3, and they take the same theme tokens.",
+        label: "Overview.tsx",
+        lang: "tsx",
+        code: `import { Stat, Grid } from "@lacspace/components";
+import { LineChart } from "@lacspace/charts";
+
+<Grid columns={3} gap={3}>
+  <Stat label="MRR" value="$132,215" delta={8.4} comparison="vs last 30 days" />
+  <Stat label="Churn" value="1.9%" delta={-0.4} invertDelta comparison="vs last 30 days" />
+  <Stat label="Open tickets" value="24" delta={12} deltaUnit="absolute" invertDelta />
+</Grid>
+
+<LineChart
+  labels={months}
+  series={[
+    { name: "MRR", data: mrr },
+    { name: "Plan", data: plan, dashed: true },
+  ]}
+  curve
+  dots
+  tooltip
+  responsive
+  dataTable
+  formatValue={(n) => "$" + n + "k"}
+/>`,
+        note:
+          "dataTable renders the same numbers as a visually-hidden table, so the chart is readable by a screen reader and by search engines — not just by eyes.",
+      },
+      {
+        id: "ui-dates",
+        title: "Filter by a date range",
+        pkgs: ["date"],
+        blurb:
+          "Presets, two months side by side, a minimum stay, disabled days and real keyboard navigation. Formatting goes through Intl, so no locale data ships in your bundle.",
+        label: "RangeFilter.tsx",
+        lang: "tsx",
+        code: `import { DateRangePicker, defaultPresets } from "@lacspace/date";
+
+<DateRangePicker
+  numberOfMonths={2}
+  weekStartsOn={1}
+  minNights={1}
+  presets={defaultPresets()}
+  separator=" – "
+  onChange={(range) => setRange(range)}
+/>`,
+        note:
+          "The date engine underneath (monthGrid, addMonths with end-of-month clamping, isDateDisabled) is exported separately and tested across DST boundaries, so you can use it server-side with no React.",
+      },
+      {
+        id: "ui-confirm",
+        title: "Confirm before you delete, and say what happened",
+        pkgs: ["components"],
+        blurb:
+          "Return a promise from onConfirm and the button spins, blocks further clicks and keeps the dialog open if the request fails — so a failed delete never looks like a successful one.",
+        label: "DeleteProject.tsx",
+        lang: "tsx",
+        code: `import { ConfirmDialog, Button, useToast } from "@lacspace/components";
+
+function DeleteProject({ project }: { project: Project }) {
+  const [open, setOpen] = useState(false);
+  const { toast } = useToast();
+
+  return (
+    <>
+      <Button tone="danger" variant="soft" onClick={() => setOpen(true)}>Delete</Button>
+      <ConfirmDialog
+        open={open}
+        onOpenChange={setOpen}
+        tone="danger"
+        title="Delete this project?"
+        message={\`"\${project.name}" and its history will be removed. This cannot be undone.\`}
+        confirmLabel="Delete project"
+        onConfirm={async () => {
+          await api.delete(project.id);
+          toast({ title: "Project deleted", tone: "success" });
+        }}
+      />
+    </>
+  );
+}`,
+        note:
+          "Wrap your app in <ToastProvider> once. maxVisible is a queue rather than a cap — extra toasts wait for a slot, and hovering the stack pauses every countdown.",
+      },
+      {
+        id: "ui-ssr",
+        title: "It server-renders as it is",
+        pkgs: ["components"],
+        blurb:
+          "Nothing touches window, document or matchMedia during render, and ids come from a stable generator, so server and client markup match. In the App Router you import the stylesheets once and use the components anywhere.",
+        label: "app/layout.tsx",
+        lang: "tsx",
+        code: `import "@lacspace/components/styles.css";
+import "@lacspace/charts/styles.css";
+import "@lacspace/table/styles.css";
+import "@lacspace/date/styles.css";
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}`,
+        note:
+          "No CSS pipeline at all (a CDN page, a widget inside somebody else's app)? Render <LacspaceStyles /> instead — it injects the sheet once and is a no-op if it is already there.",
+      },
+      {
+        id: "ui-customise",
+        title: "Four ways to change a component",
+        pkgs: ["components"],
+        blurb:
+          "All four work on every component. If one of them doesn't, treat it as a bug in the library, not in your code.",
+        rows: [
+          ["Change how it looks everywhere", "Redefine the --lac-* variables"],
+          ["Change one instance", "Pass className or style — yours lands last and wins, no !important"],
+          ["Change its structure", "Use the parts (CardHeader, CardBody, CardFooter) instead of one big prop"],
+          ["Drive it from outside", "Pass value and onChange — everything stateful is controllable"],
+        ],
+        note:
+          "Variants are exposed as data-* attributes rather than class names, so your CSS can target any state: .lac-btn[data-variant=\"solid\"][data-loading] { opacity: 0.8; }",
       },
     ],
   },

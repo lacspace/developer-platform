@@ -15,6 +15,7 @@ export const metadata = seo.metadata;
 
 const SURFACES = [
   { icon: "📦", title: "Package reference", d: `Every one of the ${PACKAGE_COUNT} packages — API, exports, install and examples.`, href: "/packages", cta: "Browse packages" },
+  { icon: "🎛️", title: "Components gallery", d: "143 React components, charts, data tables and date pickers — every one rendered live, with a theme editor.", href: "/components", cta: "Open the gallery" },
   { icon: "🧭", title: "Developer handbook", d: "Install, use, upgrade, scaffold and ship — guides with runnable recipes.", href: "/handbook", cta: "Open handbook" },
   { icon: "🧪", title: "Live playground", d: "Run packages in your browser — slugify, money, case, humanize, color, id.", href: "/playground", cta: "Open playground" },
   { icon: "⚖️", title: "Compare", d: "How @lacspace stacks up against zod, dinero, jsonwebtoken and friends.", href: "/compare", cta: "Compare" },
