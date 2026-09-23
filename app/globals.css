@@ -2319,3 +2319,39 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   border: 1px solid var(--hairline);
   border-radius: 8px;
 }
+
+/* ---- Dropdowns: never taller or wider than the window ----------------------
+   A dropdown is absolutely positioned, so anything below the fold is simply
+   unreachable — the page cannot be scrolled to it. The Packages menu was 767px
+   tall, which is more than a 1366x768 laptop has, so its last kits were
+   invisible on the most common laptop screen there is. */
+.nav-menu-card {
+  max-height: calc(100vh - 78px);
+  overflow-y: auto;
+  /* Scrolling the menu must not start scrolling the page behind it. */
+  overscroll-behavior: contain;
+}
+.nav-menu {
+  max-width: calc(100vw - 24px);
+}
+/* The last menu sits near the right edge, so it opens leftwards instead of
+   running off it. The mega panel is centred already and opts out. */
+.nav-item:last-of-type .nav-menu:not([data-mega]) {
+  left: auto;
+  right: 0;
+}
+
+/* Two columns for a menu with too many items to stack. */
+.nav-menu-card[data-cols="2"] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 4px;
+  width: 560px;
+  max-width: calc(100vw - 24px);
+}
+@media (max-width: 900px) {
+  .nav-menu-card[data-cols="2"] {
+    grid-template-columns: minmax(0, 1fr);
+    width: 320px;
+  }
+}

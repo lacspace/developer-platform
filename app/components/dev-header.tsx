@@ -13,6 +13,8 @@ type Menu = {
   href?: string;
   /** A plain one-column dropdown. */
   items?: Item[];
+  /** Lay a plain menu's items out in two columns — for ones too long for a laptop. */
+  cols?: 2;
   /** A wide multi-column panel. Used by Components. */
   columns?: Column[];
   /** Monospace shortcut row pinned under the columns. */
@@ -24,6 +26,9 @@ const MENUS: Menu[] = [
   {
     label: "Packages",
     href: "/packages",
+    // Thirteen kits stacked in one column made a 767px-tall menu: taller than a
+    // 1366x768 laptop, and an absolutely-positioned menu cannot be scrolled to.
+    cols: 2,
     items: [
       { label: `All ${PACKAGE_COUNT} packages`, href: "/packages", desc: "The full catalog" },
       { label: "Components Kit", href: "/packages?kit=Components+Kit", desc: "components · charts · table · date" },
@@ -209,7 +214,7 @@ export function DevHeader() {
                 <button className="nav-trigger" aria-haspopup="true">{m.label} <span aria-hidden className="caret">▾</span></button>
               )}
               <div className="nav-menu" data-mega={m.columns ? "" : undefined}>
-                <div className="nav-menu-card">
+                <div className="nav-menu-card" data-cols={m.cols}>
                   {m.items?.map((i) => (
                     <MenuLink key={i.label} i={i} />
                   ))}
