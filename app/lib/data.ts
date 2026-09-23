@@ -260,6 +260,17 @@ export const KITS: Kit[] = [
       { name: "fonepay", desc: "Fonepay Request-To-Pay — HMAC-SHA512 DV" },
     ],
   },
+  {
+    name: "UI Kit",
+    icon: "🎨",
+    blurb: "143 dependency-free React components across four packages — every colour, radius and control height a --lac-* CSS variable.",
+    packages: [
+      { name: "components", desc: "96 components — buttons, inputs, modals, tabs, toasts" },
+      { name: "charts", desc: "19 real-SVG charts — no canvas, no D3" },
+      { name: "table", desc: "17 data-table parts + a pure, testable engine" },
+      { name: "date", desc: "11 calendar / date / time pickers, no date library" },
+    ],
+  },
 ];
 
 export const STATS = {

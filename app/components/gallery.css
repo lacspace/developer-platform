@@ -1,0 +1,513 @@
+/* ==========================================================================
+   /components — page-local CSS.
+
+   The portal is hand-written CSS: no Tailwind, no animation library, so this
+   file is too. Everything here is prefixed `lacx-` so it can never collide
+   with the library's own `lac-*` classes or with globals.css.
+
+   The one trick worth knowing: @lacspace/components defines its dark tokens on
+   `:root[data-theme="dark"]`, which is right for an app and useless for a
+   preview pane that has to show both themes on one page. So both token sets
+   are restated here on `.lacx-theme[data-theme="…"]` — a class + attribute
+   selector, which outranks `:root[data-theme]` and the bare `:root`, while the
+   inline style the theme editor writes still outranks this. That is exactly
+   the layering we want: file theme < page theme < the knobs you turn.
+   ========================================================================== */
+
+.lacx-theme {
+  /* Fixed-position overlays (Modal, Drawer, Popover, Tooltip, Toast) portal
+     into this element so they inherit the preview theme. Nothing here may
+     create a containing block for them — no transform, no filter, no
+     contain — or they would position against this box instead of the
+     viewport. */
+  position: relative;
+}
+
+.lacx-theme[data-theme="light"] {
+  color-scheme: light;
+  --lac-accent: #4d9fff;
+  --lac-accent-hover: #3d8bea;
+  --lac-accent-active: #2f78d2;
+  --lac-accent-fg: #ffffff;
+  --lac-accent-soft: rgba(77, 159, 255, 0.12);
+  --lac-accent-ring: rgba(77, 159, 255, 0.4);
+  --lac-success: #16a34a;
+  --lac-success-soft: rgba(22, 163, 74, 0.12);
+  --lac-warning: #d97706;
+  --lac-warning-soft: rgba(217, 119, 6, 0.14);
+  --lac-danger: #dc2626;
+  --lac-danger-hover: #c11d1d;
+  --lac-danger-soft: rgba(220, 38, 38, 0.12);
+  --lac-info: #0891b2;
+  --lac-info-soft: rgba(8, 145, 178, 0.12);
+  --lac-bg: #ffffff;
+  --lac-bg-subtle: #f6f8fb;
+  --lac-bg-muted: #eef2f7;
+  --lac-surface: #ffffff;
+  --lac-surface-raised: #ffffff;
+  --lac-overlay: rgba(12, 18, 28, 0.45);
+  --lac-fg: #0f1724;
+  --lac-fg-muted: #4a5668;
+  --lac-fg-faint: #78849a;
+  --lac-fg-on-accent: #ffffff;
+  --lac-border: #dbe2ec;
+  --lac-border-strong: #c3cddc;
+  --lac-border-focus: var(--lac-accent);
+  --lac-shadow-sm: 0 1px 2px rgba(15, 23, 36, 0.06);
+  --lac-shadow: 0 4px 14px rgba(15, 23, 36, 0.09);
+  --lac-shadow-lg: 0 18px 44px rgba(15, 23, 36, 0.16);
+}
+
+.lacx-theme[data-theme="dark"] {
+  color-scheme: dark;
+  --lac-accent: #5aa7ff;
+  --lac-accent-hover: #74b6ff;
+  --lac-accent-active: #8cc3ff;
+  --lac-accent-soft: rgba(90, 167, 255, 0.16);
+  --lac-accent-ring: rgba(90, 167, 255, 0.45);
+  --lac-success: #34d399;
+  --lac-success-soft: rgba(52, 211, 153, 0.16);
+  --lac-warning: #fbbf24;
+  --lac-warning-soft: rgba(251, 191, 36, 0.16);
+  --lac-danger: #f87171;
+  --lac-danger-hover: #fca5a5;
+  --lac-danger-soft: rgba(248, 113, 113, 0.16);
+  --lac-info: #38bdf8;
+  --lac-info-soft: rgba(56, 189, 248, 0.16);
+  --lac-bg: #0b1119;
+  --lac-bg-subtle: #101826;
+  --lac-bg-muted: #16202f;
+  --lac-surface: #111a26;
+  --lac-surface-raised: #17222f;
+  --lac-overlay: rgba(3, 7, 12, 0.66);
+  --lac-fg: #eef3fa;
+  --lac-fg-muted: rgba(238, 243, 250, 0.68);
+  --lac-fg-faint: rgba(238, 243, 250, 0.45);
+  --lac-accent-fg: #06131f;
+  --lac-fg-on-accent: #06131f;
+  --lac-border: #26313f;
+  --lac-border-strong: #35435a;
+  --lac-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --lac-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  --lac-shadow-lg: 0 22px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* ---- Theme editor -------------------------------------------------------- */
+
+.lacx-editor {
+  border: 1px solid var(--lac-border);
+  background: var(--lac-surface);
+  border-radius: var(--lac-radius-lg);
+  padding: 20px;
+  display: grid;
+  gap: 22px;
+  grid-template-columns: minmax(0, 1fr);
+  font-family: var(--lac-font);
+}
+@media (min-width: 900px) {
+  .lacx-editor {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    padding: 26px;
+    gap: 28px;
+  }
+}
+.lacx-editor-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.lacx-editor-title {
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--lac-fg);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.lacx-knobs {
+  display: grid;
+  gap: 18px;
+}
+.lacx-knob-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 620;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lac-fg-faint);
+  margin-bottom: 8px;
+}
+.lacx-knob-label code {
+  font-family: var(--lac-font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--lac-fg-muted);
+}
+.lacx-editor-out {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.lacx-editor-out .codewrap {
+  flex: none;
+}
+.lacx-editor-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--lac-fg-muted);
+  margin: 0;
+}
+
+/* ---- Preview grid -------------------------------------------------------- */
+
+.lacx-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 16px;
+  align-items: start;
+}
+.lacx-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid var(--lac-border);
+  background: var(--lac-surface);
+  border-radius: var(--lac-radius-lg);
+  overflow: hidden;
+  font-family: var(--lac-font);
+}
+.lacx-card[data-wide="true"] {
+  grid-column: 1 / -1;
+}
+@media (min-width: 720px) {
+  .lacx-card[data-span="2"] {
+    grid-column: span 2;
+  }
+}
+.lacx-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 15px 0;
+}
+.lacx-card-name {
+  margin: 0;
+  font-family: var(--lac-font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--lac-fg);
+  letter-spacing: -0.01em;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.lacx-card-about {
+  margin: 5px 15px 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--lac-fg-muted);
+}
+.lacx-toggle {
+  flex: none;
+  cursor: pointer;
+  border: 1px solid var(--lac-border);
+  background: transparent;
+  color: var(--lac-fg-faint);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 620;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: var(--lac-radius-pill);
+  transition: color var(--lac-duration) var(--lac-ease),
+    border-color var(--lac-duration) var(--lac-ease);
+}
+.lacx-toggle:hover {
+  color: var(--lac-accent);
+  border-color: var(--lac-accent);
+}
+.lacx-toggle:focus-visible {
+  outline: var(--lac-ring-width) solid var(--lac-accent-ring);
+  outline-offset: 1px;
+}
+.lacx-stage {
+  margin: 13px 0 0;
+  padding: 18px 15px;
+  background: var(--lac-bg-subtle);
+  border-top: 1px solid var(--lac-border);
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  color: var(--lac-fg);
+  font-size: var(--lac-text-md);
+}
+.lacx-stage[data-center="true"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lacx-snip {
+  padding: 12px 13px;
+  border-top: 1px solid var(--lac-border);
+  background: var(--lac-bg-muted);
+  min-width: 0;
+}
+.lacx-snip .lac-snippet {
+  max-width: 100%;
+}
+
+/* ---- Section chrome (portal-styled, not theme-styled) -------------------- */
+
+.lacx-sec {
+  padding-top: 56px;
+  scroll-margin-top: 90px;
+}
+.lacx-sec-head {
+  margin-bottom: 18px;
+  max-width: 720px;
+}
+.lacx-sec-head h2 {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  margin: 8px 0 0;
+  color: var(--fg);
+}
+.lacx-sec-head p {
+  color: var(--muted);
+  margin-top: 8px;
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+.lacx-count {
+  font-weight: 400;
+  font-size: 0.95rem;
+  color: var(--faint);
+}
+
+/* A jump bar for the categories — sticky, scrollable on a phone. */
+.lacx-jump {
+  position: sticky;
+  top: 62px;
+  z-index: 20;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 10px 0;
+  margin: 0 -4px;
+  background: rgba(7, 11, 20, 0.86);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hairline);
+  scrollbar-width: none;
+}
+.lacx-jump::-webkit-scrollbar {
+  display: none;
+}
+.lacx-jump a {
+  flex: none;
+  font-size: 12.5px;
+  font-weight: 560;
+  color: var(--muted);
+  border: 1px solid var(--hairline-2);
+  background: var(--panel);
+  padding: 6px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.lacx-jump a:first-child {
+  margin-left: 4px;
+}
+.lacx-jump a:last-child {
+  margin-right: 4px;
+}
+.lacx-jump a:hover {
+  color: var(--fg);
+  border-color: var(--accent);
+}
+
+/* ---- Hero strip ---------------------------------------------------------- */
+
+.lacx-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.lacx-hero-stats span {
+  font-size: 12.5px;
+  color: var(--muted);
+  border: 1px solid var(--hairline-2);
+  background: var(--panel);
+  border-radius: 999px;
+  padding: 6px 13px;
+}
+.lacx-hero-stats b {
+  color: var(--fg);
+  font-weight: 650;
+}
+
+/* ---- Full reference ------------------------------------------------------ */
+
+.lacx-ref-pkg {
+  border: 1px solid var(--hairline);
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.lacx-ref-pkg h3 {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 15px;
+  font-weight: 640;
+  color: var(--fg);
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.lacx-ref-pkg > p {
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin: 6px 0 14px;
+}
+.lacx-ref-meta {
+  color: var(--faint);
+  font-size: 12.5px;
+  margin-top: 4px;
+}
+.lacx-ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.lacx-ref-table th,
+.lacx-ref-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 10px 0;
+  border-top: 1px solid var(--hairline);
+}
+.lacx-ref-table thead th {
+  border-top: 0;
+  padding-top: 0;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.lacx-ref-table th[scope="row"] {
+  width: 34%;
+  padding-right: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+  .lacx-ref-table,
+  .lacx-ref-table tbody,
+  .lacx-ref-table tr,
+  .lacx-ref-table th,
+  .lacx-ref-table td {
+    display: block;
+    width: auto;
+  }
+  .lacx-ref-table thead {
+    display: none;
+  }
+  .lacx-ref-table th[scope="row"] {
+    width: auto;
+    border-top: 1px solid var(--hairline);
+    padding-bottom: 2px;
+  }
+  .lacx-ref-table td {
+    border-top: 0;
+    padding-top: 4px;
+  }
+}
+.lacx-names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.lacx-names code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 2px 7px;
+  overflow-wrap: anywhere;
+}
+.lacx-names code[data-kind="component"] {
+  color: var(--fg);
+  border-color: var(--hairline-2);
+}
+.lacx-names code[data-kind="type"] {
+  color: var(--faint);
+  font-style: italic;
+}
+.lacx-empty-names {
+  color: var(--faint);
+  font-size: 12.5px;
+}
+
+/* ---- Small helpers used inside stages ------------------------------------ */
+
+.lacx-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.lacx-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.lacx-box {
+  border: 1px dashed var(--lac-border-strong);
+  border-radius: var(--lac-radius);
+  padding: 10px;
+  min-width: 0;
+}
+.lacx-swatch {
+  display: block;
+  border-radius: var(--lac-radius-sm);
+  background: var(--lac-accent-soft);
+  border: 1px solid var(--lac-accent);
+  height: 100%;
+  width: 100%;
+}
+.lacx-note {
+  font-size: 11.5px;
+  color: var(--lac-fg-faint);
+  margin: 0;
+}
+
+/* Cards whose component opens an in-flow listbox (Combobox, MultiSelect,
+   DropdownMenu). `.lacx-stage` scrolls horizontally, and overflow-x:auto
+   forces overflow-y:auto too — which would clip an absolutely positioned
+   dropdown. These cards opt out and reserve height instead. */
+.lacx-card[data-pop="true"],
+.lacx-card[data-pop="true"] .lacx-stage {
+  overflow: visible;
+}
+.lacx-card[data-pop="true"] .lacx-stage {
+  min-height: 104px;
+}

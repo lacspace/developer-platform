@@ -1,0 +1,522 @@
+/* ==========================================================================
+   /components — data-visualisation showcase
+   Bridges the site's dark palette into the --lac-* tokens that
+   @lacspace/charts, @lacspace/table and @lacspace/date read, so the packages
+   theme themselves instead of us hardcoding a single colour.
+   ========================================================================== */
+
+.dv {
+  /* surfaces */
+  --lac-surface: #0d1420;
+  --lac-surface-raised: #111b2a;
+  --lac-bg-subtle: rgba(255, 255, 255, 0.03);
+  --lac-bg-muted: rgba(255, 255, 255, 0.08);
+
+  /* ink */
+  --lac-fg: var(--fg);
+  --lac-fg-muted: var(--muted);
+  --lac-fg-faint: var(--faint);
+  --lac-fg-on-accent: #ffffff;
+
+  /* lines */
+  --lac-border: var(--hairline);
+  --lac-border-strong: var(--hairline-2);
+
+  /* accent + status */
+  --lac-accent: var(--accent);
+  --lac-accent-soft: rgba(77, 159, 255, 0.16);
+  --lac-accent-ring: rgba(77, 159, 255, 0.4);
+  --lac-success: #34d399;
+  --lac-success-soft: rgba(52, 211, 153, 0.16);
+  --lac-warning: #fbbf24;
+  --lac-warning-soft: rgba(251, 191, 36, 0.16);
+  --lac-danger: #f87171;
+  --lac-danger-soft: rgba(248, 113, 113, 0.16);
+  --lac-info: #38bdf8;
+  --lac-info-soft: rgba(56, 189, 248, 0.16);
+
+  /* shape + type */
+  --lac-font: var(--font-body);
+  --lac-radius: 12px;
+  --lac-radius-sm: 8px;
+  --lac-radius-lg: 14px;
+  --lac-radius-pill: 999px;
+  --lac-text-xs: 11.5px;
+  --lac-text-sm: 13px;
+  --lac-text-md: 14px;
+  --lac-text-lg: 16px;
+  --lac-text-xl: 20px;
+  --lac-leading: 1.5;
+  --lac-space-1: 4px;
+  --lac-space-2: 8px;
+  --lac-space-3: 12px;
+  --lac-space-4: 16px;
+  --lac-space-5: 22px;
+  --lac-control-h-sm: 32px;
+  --lac-control-h-md: 38px;
+  --lac-control-h-lg: 44px;
+  --lac-ring-width: 3px;
+  --lac-duration: 150ms;
+  --lac-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --lac-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --lac-shadow: 0 8px 26px rgba(0, 0, 0, 0.5);
+  --lac-shadow-lg: 0 26px 64px rgba(0, 0, 0, 0.62);
+  --lac-z-popover: 60;
+
+  /* charts only: a hairline of card background between filled marks */
+  --lac-chart-mark-stroke: #0b1220;
+}
+
+/* ---- Fictional-data notice ---------------------------------------------- */
+.dv-note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 0 0 26px;
+  padding: 12px 16px;
+  border: 1px dashed var(--hairline-2);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.dv-note b {
+  color: var(--fg);
+  font-weight: 620;
+}
+
+/* ---- Preview grid -------------------------------------------------------- */
+.dv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+.dv-grid.two {
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+}
+@media (max-width: 520px) {
+  .dv-grid,
+  .dv-grid.two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.dv-card {
+  position: relative;
+  min-width: 0;
+  border: 1px solid var(--hairline);
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.dv-card:hover {
+  border-color: var(--hairline-2);
+}
+.dv-card.span {
+  grid-column: 1 / -1;
+}
+
+/* The live area.
+   Nothing clips by default: chart tooltips sit *above* their data point and a
+   date picker's popover hangs below its field, so an overflow here would cut
+   both off. Only the `.scroll` variant traps a deliberately oversized chart. */
+.dv-viz {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 14px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  background: #0b1220;
+  overflow: visible;
+}
+.dv-viz > * {
+  min-width: 0;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.dv-viz.fill > * {
+  width: 100%;
+}
+/* Pickers put their popover in normal flow under the field. */
+.dv-viz.open {
+  display: block;
+}
+/* A chart kept at its natural size — scroll it rather than shrink it to an
+   unreadable thumbnail. The top padding is the room a tooltip needs above the
+   first row, so hovering never pushes a vertical scrollbar into existence. */
+.dv-viz.scroll {
+  overflow-x: auto;
+  padding-top: 58px;
+}
+.dv-viz.scroll > *,
+.dv-viz.scroll .lac-chart,
+.dv-viz.scroll .lac-chart-svg {
+  max-width: none;
+}
+
+.dv-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.dv-name {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 14.5px;
+  font-weight: 620;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+.dv-tag {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+.dv-when {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+  margin: -4px 0 0;
+}
+
+.dv-toggle {
+  align-self: flex-start;
+  font-size: 12.5px;
+  font-weight: 560;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 5px 11px;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.dv-toggle:hover {
+  color: var(--fg);
+  background: var(--panel-hover);
+  border-color: var(--hairline-2);
+}
+.dv-toggle[aria-expanded="true"] {
+  color: var(--accent);
+  border-color: var(--hairline-2);
+}
+
+/* ---- Stat row with inline sparklines ------------------------------------ */
+.dv-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+}
+.dv-stat {
+  min-width: 0;
+  background: #0b1220;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.dv-stat-k {
+  font-size: 11.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.dv-stat-v {
+  font-size: 22px;
+  font-weight: 680;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+.dv-stat-d {
+  font-size: 12px;
+  font-weight: 580;
+}
+.dv-stat-d.up {
+  color: #34d399;
+}
+.dv-stat-d.down {
+  color: #f87171;
+}
+.dv-stat-s {
+  margin-top: 6px;
+  height: 34px;
+}
+
+/* ---- Table --------------------------------------------------------------- */
+.dv-tablewrap {
+  min-width: 0;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  background: #0b1220;
+  padding: 12px;
+  overflow: hidden;
+}
+.dv-tablewrap .lac-table-wrap {
+  min-width: 0;
+}
+.dv-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.dv-bar b {
+  color: var(--fg);
+  font-weight: 620;
+  font-variant-numeric: tabular-nums;
+}
+.dv-log {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px;
+  color: var(--accent);
+}
+
+/* ---- Headless useTable demo --------------------------------------------- */
+.dv-head-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.dv-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.dv-input {
+  flex: 1 1 180px;
+  min-width: 0;
+  height: 34px;
+  padding: 0 12px;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--fg);
+  background: var(--panel-2);
+  border: 1px solid var(--hairline);
+  border-radius: 9px;
+  outline: none;
+}
+.dv-input:focus {
+  border-color: var(--hairline-2);
+  box-shadow: 0 0 0 3px rgba(77, 159, 255, 0.18);
+}
+.dv-sort {
+  font-size: 12.5px;
+  color: var(--muted);
+  background: var(--panel-2);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.dv-sort[data-active="true"] {
+  color: var(--fg);
+  border-color: var(--hairline-2);
+  background: var(--panel-hover);
+}
+.dv-lead {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+.dv-lead li {
+  list-style: none;
+  min-width: 0;
+}
+.dv-leadrow {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  background: var(--panel-2);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.dv-leadrow:hover {
+  border-color: var(--hairline-2);
+}
+.dv-leadrow[data-selected="true"] {
+  border-color: rgba(77, 159, 255, 0.5);
+  background: rgba(77, 159, 255, 0.09);
+}
+.dv-leadrow:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.dv-rank {
+  font-size: 12px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+.dv-agent {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.dv-agent-n {
+  font-size: 13.5px;
+  font-weight: 560;
+  color: var(--fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dv-meter {
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+.dv-meter i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.dv-num {
+  text-align: right;
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.dv-num b {
+  color: var(--fg);
+  font-weight: 620;
+}
+.dv-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.dv-pager button {
+  font: inherit;
+  color: var(--fg);
+  background: var(--panel-2);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  padding: 5px 11px;
+  cursor: pointer;
+}
+.dv-pager button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.dv-pager .sp {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Dates --------------------------------------------------------------- */
+.dv-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 12.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.dv-readout b {
+  color: var(--fg);
+  font-weight: 620;
+}
+.dv-skel {
+  width: 100%;
+  min-height: 180px;
+  border-radius: 10px;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.03)
+  );
+}
+/* Keep a two-month popover inside the viewport on a phone. The panel scrolls
+   inside itself rather than pushing the page sideways. */
+.dv .lac-date-pop {
+  max-width: min(620px, calc(100vw - 76px));
+  max-height: min(72vh, 560px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.dv .lac-sched-scroll,
+.dv .lac-sched {
+  max-width: 100%;
+}
+.dv-relative {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.dv-relative li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--hairline);
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.dv-relative li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.dv-relative time {
+  color: var(--fg);
+  font-weight: 560;
+  white-space: nowrap;
+}
+
+/* Nothing here may widen the page: every demo scrolls inside its own box. */
+.dv {
+  min-width: 0;
+}
+.dv img,
+.dv pre,
+.dv .codewrap {
+  max-width: 100%;
+}

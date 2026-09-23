@@ -62,6 +62,18 @@ const MENUS: Menu[] = [
       { label: "lacspace.com", href: "https://lacspace.com", desc: "The company", external: true },
     ],
   },
+  {
+    label: "Components",
+    href: "/components",
+    items: [
+      { label: "The gallery", href: "/components", desc: "143 components, all live on one page" },
+      { label: "Live theme editor", href: "/components#theme", desc: "Restyle every preview from four CSS variables" },
+      { label: "Forms", href: "/components#forms", desc: "Fields, inputs, selects, switches" },
+      { label: "Overlays", href: "/components#overlays", desc: "Modal, drawer, popover, tooltip, toast" },
+      { label: "Data display", href: "/components#data", desc: "Avatars, stats, timelines, trees" },
+      { label: "Full export reference", href: "/components#reference", desc: "Every name in all four packages" },
+    ],
+  },
 ];
 
 function ext(i: Item) {
