@@ -1652,7 +1652,7 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "components",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "96 React components with no runtime dependencies — buttons, fields, inputs, selects, switches, sliders, pin/colour/file inputs, combobox and multi-select, modal, drawer, popover, tooltip and a toast queue, tabs, accordion, menus, pagination, stepper, avatars, stats, timelines, trees, tags, ratings, skeletons and progress, plus layout and typography primitives. One plain stylesheet — no Tailwind, no CSS-in-JS: every colour, radius, control height and typeface is a --lac-* variable, so the whole library restyles from one block. Variants live in data-* attributes (so your CSS can target any state without !important), everything stateful works controlled or uncontrolled, and nothing touches the DOM during render, so it server-renders as-is.",
         "kw": [
           "react",
