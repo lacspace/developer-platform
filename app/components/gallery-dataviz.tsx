@@ -67,6 +67,7 @@ import {
 } from "@lacspace/date";
 
 import { CodeBlock } from "./code-block";
+import { cardAnchor } from "./gallery";
 
 import "@lacspace/charts/styles.css";
 import "@lacspace/table/styles.css";
@@ -212,7 +213,7 @@ function Preview({
     (scroll ? " scroll" : "");
 
   return (
-    <article className={span ? "dv-card span" : "dv-card"}>
+    <article id={cardAnchor(name)} className={span ? "dv-card span" : "dv-card"}>
       <div className={vizClass}>{children}</div>
       {readout ? <div className="dv-readout">{readout}</div> : null}
       <div className="dv-head">

@@ -511,3 +511,8 @@
 .lacx-card[data-pop="true"] .lacx-stage {
   min-height: 104px;
 }
+
+/* Deep links from the header land the card under the sticky nav, not behind it. */
+.lacx-card { scroll-margin-top: 88px; }
+
+#install { scroll-margin-top: 78px; }

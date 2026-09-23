@@ -2195,3 +2195,127 @@ a.pd-chip:hover { color: var(--fg); border-color: var(--accent-to); }
   .hc-caret { animation: none; }
   .hc-out { transition: none; }
 }
+
+/* ---- Mega dropdown (Components) ----------------------------------------
+   Four short columns plus a row of monospace shortcuts, centred under its
+   trigger so it never runs off the right edge of the header. */
+.nav-menu[data-mega] {
+  left: 50%;
+  right: auto;
+  width: min(880px, calc(100vw - 32px));
+  transform: translateX(-50%) translateY(2px);
+}
+.nav-item:hover .nav-menu[data-mega],
+.nav-item:focus-within .nav-menu[data-mega] {
+  transform: translateX(-50%);
+}
+.nav-menu[data-mega] .nav-menu-card {
+  padding: 14px 14px 12px;
+}
+.nav-mega {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px 10px;
+  align-items: start;
+}
+.nav-mega-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.nav-mega-h {
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 2px 11px 6px;
+}
+.nav-mega .nav-menu-a {
+  padding: 6px 11px;
+}
+.nav-mega .nav-menu-d {
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+.nav-chips {
+  margin-top: 10px;
+  padding: 11px 11px 3px;
+  border-top: 1px solid var(--hairline);
+}
+.nav-chips-h {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 8px;
+}
+.nav-chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.nav-chip {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px;
+  color: var(--muted);
+  border: 1px solid var(--hairline);
+  border-radius: 7px;
+  padding: 3px 8px;
+  transition: color 0.14s, border-color 0.14s, background 0.14s;
+}
+.nav-chip:hover {
+  color: var(--fg);
+  border-color: var(--accent-to);
+  background: var(--panel-2);
+}
+/* The page you are on is marked in the bar itself, not only in the panel. */
+.nav-trigger[data-active] {
+  color: var(--fg);
+}
+.nav-trigger[data-active]::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 22px;
+  bottom: 2px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.nav-trigger { position: relative; }
+
+/* The panel keeps its width down to the burger breakpoint; only the column
+   count drops, and it can never grow taller than the window. */
+.nav-menu[data-mega] .nav-menu-card {
+  max-height: calc(100vh - 86px);
+  overflow-y: auto;
+}
+@media (max-width: 900px) {
+  .nav-mega { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Drawer: the mega columns flatten into labelled sub-groups. */
+.mm-sub { padding-left: 2px; }
+.mm-sub-h {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 10px 4px 2px;
+  opacity: 0.8;
+}
+.mm-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 4px 4px;
+}
+.mobile-menu .mm-chips a {
+  display: inline-flex;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  padding: 5px 9px;
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+}

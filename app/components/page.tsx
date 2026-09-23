@@ -341,7 +341,7 @@ export default function ComponentsPage() {
 
       <main className="wrap">
         {/* ---- Hero: deliberately short. The components start one scroll down. */}
-        <section className="sec" style={{ paddingTop: 44, paddingBottom: 4 }}>
+        <section className="sec" id="install" style={{ paddingTop: 44, paddingBottom: 4 }}>
           <div className="sec-head center" style={{ marginBottom: 0 }}>
             <div className="eyebrow">UI kit</div>
             <h2 style={{ fontSize: "clamp(1.9rem, 5vw, 3rem)" }}>

@@ -192,6 +192,15 @@ function luminance(input: string): number {
    Page furniture
    ========================================================================== */
 
+/**
+ * Deep-link id for one component card: "DatePicker" -> "c-datepicker".
+ * The header's "most used" shortcuts and any doc link point straight at these,
+ * so a component can be linked to without scrolling the whole category.
+ */
+export function cardAnchor(name: string): string {
+  return `c-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
+}
+
 function Demo({
   name,
   about,
@@ -214,6 +223,7 @@ function Demo({
   const [open, setOpen] = useState(false);
   return (
     <article
+      id={cardAnchor(name)}
       className="lacx-card"
       data-span={span}
       data-wide={wide || undefined}

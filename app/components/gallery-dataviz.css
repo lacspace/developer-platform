@@ -520,3 +520,6 @@
 .dv .codewrap {
   max-width: 100%;
 }
+
+/* Deep links from the header land the card under the sticky nav, not behind it. */
+.dv-card { scroll-margin-top: 88px; }
