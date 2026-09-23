@@ -823,7 +823,7 @@ export default function App({ children }: { children: React.ReactNode }) {
   {
     id: "components",
     label: "Components & UI",
-    icon: "\U0001F39B️",
+    icon: "🎛️",
     kit: "UI",
     intro:
       "143 React components across four packages — the interface layer, with no runtime dependencies and no Tailwind. Everything below is rendered live on the components gallery.",
