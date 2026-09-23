@@ -9,7 +9,7 @@ const seo = site.page({
   title: "Documentation",
   path: "/docs",
   description:
-    "The documentation home for Lacspace — install and scaffold in seconds, then dive into the per-package reference, the developer handbook, a live playground and the Free Licence. 112 zero-dependency packages, one CLI.",
+    `The documentation home for Lacspace — install and scaffold in seconds, then dive into the per-package reference, the developer handbook, a live playground and the Free Licence. ${PACKAGE_COUNT} zero-dependency packages, one CLI.`,
 });
 export const metadata = seo.metadata;
 
@@ -46,7 +46,7 @@ export default function DocsHub() {
             <h1>Everything you need to <span className="grad">build with Lacspace</span></h1>
             <p>
               Install a package or scaffold a whole app in seconds, then go deep with the per-package
-              reference, the handbook and a live playground. 112 zero-dependency packages, one CLI.
+              reference, the handbook and a live playground. {PACKAGE_COUNT} zero-dependency packages, one CLI.
             </p>
           </Reveal>
 

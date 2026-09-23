@@ -2,6 +2,7 @@ import { DevHeader } from "../components/dev-header";
 import { DevFooter } from "../components/dev-footer";
 import { HandbookApp } from "./handbook-app";
 import { site } from "../lib/seo";
+import { PACKAGE_COUNT } from "../lib/counts";
 
 const FAQ = [
   {
@@ -30,7 +31,7 @@ const seo = site.faq(FAQ, {
   title: "Developer Handbook",
   path: "/handbook",
   description:
-    "The interactive guide to the Lacspace ecosystem — search, filter and copy real recipes for secure auth, SEO, backend, money, data, React and resilience across 112 zero-dependency TypeScript packages.",
+    `The interactive guide to the Lacspace ecosystem — search, filter and copy real recipes for secure auth, SEO, backend, money, data, React and resilience across ${PACKAGE_COUNT} zero-dependency TypeScript packages.`,
 });
 export const metadata = seo.metadata;
 

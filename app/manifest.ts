@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
+import { PACKAGE_COUNT } from "./lib/counts";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Lacspace Developer Platform",
     short_name: "Lacspace Dev",
     description:
-      "112 zero-dependency TypeScript packages, a scaffolding CLI, and the docs to build with them.",
+      `${PACKAGE_COUNT} zero-dependency TypeScript packages, a scaffolding CLI, and the docs to build with them.`,
     start_url: "/",
     display: "standalone",
     background_color: "#0A101C",

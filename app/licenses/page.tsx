@@ -3,6 +3,7 @@ import { DevFooter } from "../components/dev-footer";
 import { Reveal } from "../components/reveal";
 import { site } from "../lib/seo";
 import { FREE_LICENCE as L } from "../lib/licence";
+import { PACKAGE_COUNT } from "../lib/counts";
 
 const seo = site.page({
   title: "Licence",
@@ -43,7 +44,7 @@ export default function LicensesHub() {
           <Reveal className="stats" style={{ marginTop: 8, marginBottom: 8 }}>
             <div className="stat"><b className="grad">Free</b><span>for any use</span></div>
             <div className="stat"><b className="grad">MIT</b><span>equivalent</span></div>
-            <div className="stat"><b className="grad">112</b><span>packages covered</span></div>
+            <div className="stat"><b className="grad">{PACKAGE_COUNT}</b><span>packages covered</span></div>
             <div className="stat"><b className="grad">1</b><span>condition: keep notice</span></div>
           </Reveal>
 

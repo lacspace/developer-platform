@@ -63,7 +63,7 @@ export function DevFooter() {
               <img className="brand-mark" src="/brand/mark.png" alt="Lacspace" width={26} height={26} />
               <span>Lacspace Developer</span>
             </div>
-            <p>112 zero-dependency, isomorphic TypeScript packages, a scaffolding CLI, and the docs to build with them.</p>
+            <p>{PACKAGE_COUNT} zero-dependency, isomorphic TypeScript packages, a scaffolding CLI, and the docs to build with them.</p>
             <div className="foot-badges">
               <span>Isomorphic</span><span>ESM + CJS</span><span>TypeScript</span><span>0 deps</span>
             </div>

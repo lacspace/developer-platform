@@ -4,6 +4,7 @@ import { Reveal } from "../components/reveal";
 import { CodeBlock } from "../components/code-block";
 import { CreateDemo } from "./create-demo";
 import { site } from "../lib/seo";
+import { PACKAGE_COUNT } from "../lib/counts";
 
 const seo = site.page({
   title: "create-lacspace-app",
@@ -182,7 +183,7 @@ export default function CreateAppPage() {
             <div className="stat"><b className="grad">9</b><span>templates</span></div>
             <div className="stat"><b className="grad">0.12s</b><span>to scaffold</span></div>
             <div className="stat"><b className="grad">70</b><span>files each</span></div>
-            <div className="stat"><b className="grad">112</b><span>packages ready</span></div>
+            <div className="stat"><b className="grad">{PACKAGE_COUNT}</b><span>packages ready</span></div>
             <div className="stat"><b className="grad">100%</b><span>TypeScript</span></div>
             <div className="stat"><b className="grad">Free</b><span>licence</span></div>
           </Reveal>

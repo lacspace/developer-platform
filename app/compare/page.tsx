@@ -35,7 +35,7 @@ export default function Compare() {
 
           <Reveal className="stats" style={{ marginTop: 8, marginBottom: 8 }}>
             <div className="stat"><b className="grad">0</b><span>runtime deps</span></div>
-            <div className="stat"><b className="grad">112</b><span>packages</span></div>
+            <div className="stat"><b className="grad">{PACKAGE_COUNT}</b><span>packages</span></div>
             <div className="stat"><b className="grad">ESM+CJS</b><span>dual output</span></div>
             <div className="stat"><b className="grad">100%</b><span>TypeScript</span></div>
             <div className="stat"><b className="grad">Iso</b><span>node · edge · browser</span></div>
