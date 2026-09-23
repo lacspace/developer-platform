@@ -5,7 +5,7 @@ import { DevHeader } from "../../components/dev-header";
 import { DevFooter } from "../../components/dev-footer";
 import { CodeBlock } from "../../components/code-block";
 import { InstallBox } from "../../components/install-box";
-import { CATALOG } from "../../lib/catalog";
+import { CATALOG, CATALOG_TOTAL } from "../../lib/catalog";
 import { DETAILS } from "../../lib/pkg-detail";
 import { site } from "../../lib/seo";
 
@@ -14,6 +14,13 @@ const find = (slug: string) => FLAT.find((p) => p.n === slug);
 
 const DEMOABLE = new Set(["slugify", "money", "case", "humanize", "color", "id", "validate", "crypto", "jwt", "otp", "password", "markdown", "redact", "csv"]);
 const STUDIO = new Set(["logo", "image"]); // live Logo & Image Studio playground
+// The Components Kit has a live gallery of every component it exports.
+const GALLERY: Record<string, string> = {
+  components: "/components",
+  charts: "/components#charts",
+  table: "/components#tables",
+  date: "/components#dates",
+};
 
 export function generateStaticParams() {
   return FLAT.map((p) => ({ slug: p.n }));
@@ -81,6 +88,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
 
           <div className="pd-actions">
             <a className="btn btn-primary" href={`https://www.npmjs.com/package/@lacspace/${p.n}`} target="_blank" rel="noopener">View on npm ↗</a>
+            {GALLERY[p.n] && <a className="btn btn-ghost" href={GALLERY[p.n]}>See it live in the gallery →</a>}
             {STUDIO.has(p.n) && <a className="btn btn-ghost" href="/tools/studio/try">Try it live →</a>}
             {p.n === "brand" && <a className="btn btn-ghost" href="/tools/brand/try">Open Brand Center →</a>}
             {DEMOABLE.has(p.n) && <a className="btn btn-ghost" href="/playground">Try in the playground →</a>}
@@ -125,7 +133,7 @@ export default async function PackagePage({ params }: { params: Promise<{ slug: 
           )}
 
           <div className="cta" style={{ marginTop: 40, justifyContent: "center" }}>
-            <a className="btn btn-ghost" href="/packages">← Browse all 121 packages</a>
+            <a className="btn btn-ghost" href="/packages">← Browse all {CATALOG_TOTAL} packages</a>
             <a className="btn btn-ghost" href="/handbook">Read the handbook</a>
           </div>
         </section>

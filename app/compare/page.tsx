@@ -3,6 +3,7 @@ import { DevFooter } from "../components/dev-footer";
 import { Reveal } from "../components/reveal";
 import { CompareApp } from "./compare-app";
 import { site } from "../lib/seo";
+import { PACKAGE_COUNT } from "../lib/counts";
 
 const seo = site.page({
   title: "Compare Packages",
@@ -52,7 +53,7 @@ export default function Compare() {
           </Reveal>
 
           <div className="cta" style={{ marginTop: 30, justifyContent: "center" }}>
-            <a className="btn btn-primary" href="/packages">Browse all 121 packages →</a>
+            <a className="btn btn-primary" href="/packages">Browse all {PACKAGE_COUNT} packages →</a>
             <a className="btn btn-ghost" href="/playground">Try them live</a>
           </div>
         </section>

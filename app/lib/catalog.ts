@@ -1,5 +1,8 @@
-// Full @lacspace package catalog — generated from the monorepo (93 scoped packages).
-// Plus 2 CLIs (create-lacspace-app, create-lacspace-seo) = 87 packages on npm.
+// Full @lacspace package catalog — generated from the monorepo.
+// CATALOG_TOTAL at the bottom counts these plus the two create-* CLIs; never
+// hardcode that number anywhere else, import it.
+
+import { PACKAGE_COUNT } from "./counts";
 
 export type Pkg = { n: string; v: string; d: string; kw: string[]; deps: number };
 export type Group = { group: string; icon: string; items: Pkg[] };
@@ -1642,7 +1645,110 @@ export const CATALOG: Group[] = [
         "deps": 2
       }
     ]
+  },
+  {
+    "group": "Components Kit",
+    "icon": "🎛️",
+    "items": [
+      {
+        "n": "components",
+        "v": "1.0.0",
+        "d": "96 React components with no runtime dependencies — buttons, fields, inputs, selects, switches, sliders, pin/colour/file inputs, combobox and multi-select, modal, drawer, popover, tooltip and a toast queue, tabs, accordion, menus, pagination, stepper, avatars, stats, timelines, trees, tags, ratings, skeletons and progress, plus layout and typography primitives. One plain stylesheet — no Tailwind, no CSS-in-JS: every colour, radius, control height and typeface is a --lac-* variable, so the whole library restyles from one block. Variants live in data-* attributes (so your CSS can target any state without !important), everything stateful works controlled or uncontrolled, and nothing touches the DOM during render, so it server-renders as-is.",
+        "kw": [
+          "react",
+          "react-components",
+          "component-library",
+          "ui-library",
+          "design-system",
+          "accessible",
+          "a11y",
+          "css-variables",
+          "dark-mode",
+          "theming",
+          "zero-dependency",
+          "ssr",
+          "typescript",
+          "no-tailwind"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "charts",
+        "v": "1.0.0",
+        "d": "19 chart components drawn as plain SVG — line, area, bar (vertical, horizontal, stacked), pie, donut, sparkline, spark bars, gauge, heatmap (matrix and calendar), radar, funnel and candlestick, plus the frame, grid, axis, legend, tooltip and data-table primitives to compose your own. No canvas, no D3, no runtime dependencies. The scale maths (linearScale, niceTicks, bandScale, stackSeries, linePath, smoothPath, arcPath, pieSlices, nearestPoint) is exported separately, so you can place marks yourself with no React at all. Shares the --lac-* tokens, so charts match the rest of your UI.",
+        "kw": [
+          "react-charts",
+          "charts",
+          "svg-charts",
+          "line-chart",
+          "bar-chart",
+          "pie-chart",
+          "sparkline",
+          "heatmap",
+          "candlestick",
+          "gauge",
+          "dataviz",
+          "no-d3",
+          "zero-dependency",
+          "typescript"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "table",
+        "v": "1.0.0",
+        "d": "A data table that does the boring parts: multi-column sort, per-column filters, global search, pagination, row selection, column resize, reorder and pinning, sticky headers, footer aggregates and CSV/TSV export — with spreadsheet-formula neutralising so an exported cell can never execute in Excel. Use the finished <DataTable /> or the headless useTable() hook and render the markup yourself. Column helpers (text, number, currency, date, badge, boolean, link, actions) type the row for you, and every engine function (sortRows, filterRows, pageSlice, toCsv) is exported for use without React.",
+        "kw": [
+          "react-table",
+          "data-table",
+          "datagrid",
+          "sortable",
+          "filterable",
+          "pagination",
+          "row-selection",
+          "csv-export",
+          "headless-ui",
+          "zero-dependency",
+          "typescript"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "date",
+        "v": "1.0.0",
+        "d": "Calendar and date pickers that handle the awkward cases — single date, range with presets and minimum nights, month, year, week, time, date-time, a schedule/availability grid and a hydration-safe RelativeTime. Locale, week start, disabled days, min/max and keyboard navigation are all real, not decorative. Formatting goes through Intl, so no locale data ships. The date engine (monthGrid, addDays/addMonths with end-of-month clamping, range helpers, isDateDisabled, relative bucketing) is exported on its own and tested across DST boundaries.",
+        "kw": [
+          "react-datepicker",
+          "date-picker",
+          "calendar",
+          "date-range",
+          "time-picker",
+          "week-picker",
+          "scheduler",
+          "relative-time",
+          "intl",
+          "i18n",
+          "zero-dependency",
+          "typescript"
+        ],
+        "deps": 0
+      }
+    ]
   }
 ];
 
-export const CATALOG_TOTAL = 121;
+// Counted from the data, never typed by hand — the CLIs are the two create-*
+// scaffolders, which are published but are not library packages.
+export const CLI_TOTAL = 2;
+export const CATALOG_TOTAL =
+  CATALOG.reduce((n, g) => n + g.items.length, 0) + CLI_TOTAL;
+
+// Add a package here and forget to bump lib/counts.ts and the build stops,
+// rather than the nav and the footer quietly disagreeing with this page.
+if (CATALOG_TOTAL !== PACKAGE_COUNT) {
+  throw new Error(
+    `PACKAGE_COUNT in lib/counts.ts is ${PACKAGE_COUNT}, but the catalog holds ` +
+      `${CATALOG_TOTAL} (${CATALOG_TOTAL - CLI_TOTAL} packages + ${CLI_TOTAL} CLIs). Update it.`,
+  );
+}
+

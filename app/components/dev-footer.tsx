@@ -1,9 +1,11 @@
+import { PACKAGE_COUNT } from "../lib/counts";
+
 const COLS: { title: string; links: { label: string; href: string; external?: boolean }[] }[] = [
   {
     title: "Platform",
     links: [
       { label: "Documentation", href: "/docs" },
-      { label: "All 121 packages", href: "/packages" },
+      { label: `All ${PACKAGE_COUNT} packages`, href: "/packages" },
       { label: "Developer tools", href: "/tools" },
       { label: "Developer handbook", href: "/handbook" },
       { label: "Live playground", href: "/playground" },

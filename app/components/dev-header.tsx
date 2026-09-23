@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { LogoBuild } from "./logo-build";
+import { PACKAGE_COUNT } from "../lib/counts";
 
 type Item = { label: string; href: string; desc?: string; external?: boolean };
 type Column = { title: string; items: Item[] };
@@ -24,7 +25,8 @@ const MENUS: Menu[] = [
     label: "Packages",
     href: "/packages",
     items: [
-      { label: "All 121 packages", href: "/packages", desc: "The full catalog" },
+      { label: `All ${PACKAGE_COUNT} packages`, href: "/packages", desc: "The full catalog" },
+      { label: "Components Kit", href: "/packages?kit=Components+Kit", desc: "components · charts · table · date" },
       { label: "Core Runtime Kit", href: "/packages?kit=Core+Runtime+Kit", desc: "logger · result · events · queue · scheduler · machine" },
       { label: "Sheets Kit", href: "/packages?kit=Sheets+Kit", desc: "formula · xlsx · csv · convert" },
       { label: "Security Kit", href: "/packages?kit=Security+Kit", desc: "crypto · jwt · otp · passkeys" },

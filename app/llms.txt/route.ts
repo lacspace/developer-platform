@@ -1,5 +1,5 @@
 import { llmsTxtResponse } from "@lacspace/llms-txt";
-import { CATALOG } from "../lib/catalog";
+import { CATALOG, CATALOG_TOTAL } from "../lib/catalog";
 
 export const dynamic = "force-static";
 
@@ -7,8 +7,7 @@ export function GET() {
   return llmsTxtResponse(
     {
       title: "Lacspace Developer Platform",
-      summary:
-        "112 zero-dependency, isomorphic TypeScript packages, the create-lacspace-app CLI, and the docs to build with them.",
+      summary: `${CATALOG_TOTAL} zero-dependency, isomorphic TypeScript packages — including a 143-component React UI kit with charts, data tables and date pickers — the create-lacspace-app CLI, and the docs to build with them.`,
       details:
         "All packages are published under the @lacspace npm org, ship dual ESM + CJS with TypeScript types, and are free under the Lacspace Free Licence. Anything cryptographic uses Web Crypto.",
       sections: [
@@ -16,7 +15,8 @@ export function GET() {
           title: "Start here",
           links: [
             { title: "Developer handbook", url: "https://developer.lacspace.com/handbook", notes: "install, use, integrate, upgrade" },
-            { title: "All packages", url: "https://developer.lacspace.com/packages", notes: "the full 112-package catalog" },
+            { title: "All packages", url: "https://developer.lacspace.com/packages", notes: `the full ${CATALOG_TOTAL}-package catalog` },
+            { title: "Components gallery", url: "https://developer.lacspace.com/components", notes: "143 React components, charts, tables and date pickers, rendered live" },
             { title: "Live templates", url: "https://templates.lacspace.com", notes: "8 finished Next.js apps" },
             { title: "create-lacspace-app", url: "https://www.npmjs.com/package/create-lacspace-app", notes: "scaffold a finished app" },
           ],

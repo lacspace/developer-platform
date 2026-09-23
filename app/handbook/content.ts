@@ -1,6 +1,8 @@
 // Structured, searchable handbook content. The interactive app in handbook-app.tsx
 // renders this with search, kit filters, a scrollspy TOC and a package-manager switcher.
 
+import { PACKAGE_COUNT } from "../lib/counts";
+
 export type Recipe = {
   id: string;
   title: string;
@@ -83,7 +85,7 @@ money(19.99, "USD").format();       // "$19.99"`,
     label: "How it's built",
     icon: "🧱",
     kit: "Start",
-    intro: "Four rules hold across the whole catalog — which is what makes 121 packages feel like one standard library.",
+    intro: `Four rules hold across the whole catalog — which is what makes ${PACKAGE_COUNT} packages feel like one standard library.`,
     recipes: [
       {
         id: "rules",
@@ -938,7 +940,7 @@ export const MENTIONED_PKGS = Array.from(
 ).sort();
 
 export const RESOURCES = [
-  { label: "All 121 packages", href: "/packages", icon: "📦" },
+  { label: `All ${PACKAGE_COUNT} packages`, href: "/packages", icon: "📦" },
   { label: "Live playground", href: "/playground", icon: "🧪" },
   { label: "Compare vs the usual deps", href: "/compare", icon: "⚖️" },
   { label: "Live templates", href: "https://templates.lacspace.com", icon: "🖥️", external: true },
