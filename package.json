@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "dev": "npm run css:sources && next dev",
+    "build": "npm run css:sources && next build",
+    "start": "next start",
+    "css:sources": "node scripts/gen-css-sources.mjs"
   },
   "dependencies": {
     "@lacspace/brand": "^1.1.0",

@@ -50,6 +50,7 @@ const MENUS: Menu[] = [
           { label: "The gallery", href: "/components", desc: "143 components, all live on one page" },
           { label: "Live theme editor", href: "/components#theme", desc: "Restyle every preview from four variables" },
           { label: "Install & packages", href: "/components#install", desc: "One line for all four" },
+          { label: "CSS CDN — no npm", href: "/css", desc: "One link tag, themed at the edge" },
           { label: "Full export reference", href: "/components#reference", desc: "Every name in all four packages" },
         ],
       },

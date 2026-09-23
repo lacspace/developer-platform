@@ -17,6 +17,7 @@ export function GET() {
             { title: "Developer handbook", url: "https://developer.lacspace.com/handbook", notes: "install, use, integrate, upgrade" },
             { title: "All packages", url: "https://developer.lacspace.com/packages", notes: `the full ${CATALOG_TOTAL}-package catalog` },
             { title: "Components gallery", url: "https://developer.lacspace.com/components", notes: "143 React components, charts, tables and date pickers, rendered live" },
+            { title: "CSS CDN", url: "https://developer.lacspace.com/css", notes: "the component kit as one <link> tag, themed at the edge — no npm or build step" },
             { title: "Live templates", url: "https://templates.lacspace.com", notes: "8 finished Next.js apps" },
             { title: "create-lacspace-app", url: "https://www.npmjs.com/package/create-lacspace-app", notes: "scaffold a finished app" },
           ],

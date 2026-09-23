@@ -7,6 +7,7 @@ const BASE = "https://developer.lacspace.com";
 const LASTMOD = new Date("2026-09-06");
 // The components gallery shipped later than the rest of the site.
 const COMPONENTS_LASTMOD = new Date("2026-09-23");
+const CSS_CDN_LASTMOD = new Date("2026-09-24");
 
 const TOOL_URLS = TOOLS.map((t) => ({
   loc: `${BASE}/tools/${t.slug}`,
@@ -37,6 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { loc: `${BASE}/`, changefreq: "weekly", priority: 1.0, lastmod: LASTMOD },
     { loc: `${BASE}/packages`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     { loc: `${BASE}/components`, changefreq: "weekly", priority: 0.9, lastmod: COMPONENTS_LASTMOD },
+    { loc: `${BASE}/css`, changefreq: "weekly", priority: 0.8, lastmod: CSS_CDN_LASTMOD },
     { loc: `${BASE}/tools`, changefreq: "weekly", priority: 0.9, lastmod: LASTMOD },
     ...TOOL_URLS,
     ...TRY_URLS,
