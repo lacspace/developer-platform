@@ -318,7 +318,7 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "llms-txt",
-        "v": "1.4.0",
+        "v": "1.5.0",
         "d": "Generate, parse, and validate llms.txt / llms-full.txt (the llmstxt.org standard) — build both from your sitemap, routes, or a page list, with ## Optional blocks. A Markdown map of your site for LLMs. Zero-dependency, isomorphic.",
         "kw": [
           "llms-txt",
@@ -374,7 +374,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "seo",
-        "v": "1.8.0",
+        "v": "1.9.0",
         "d": "Typed metadata + JSON-LD for modern web apps — schema.org builders (Organization, Article, Product, FAQ, Breadcrumb, Event, Dataset, Book, Podcast), robots directives, richer Open Graph & Twitter cards, canonical + hreflang alternates, a Next.js App Router Metadata helper, the defineSite() SEO Autopilot engine, and an on-page SEO auditor with a CI sitemap crawler (`npx @lacspace/seo audit <url>` / `crawl <site> --min-grade A`). Zero-dependency, isomorphic.",
         "kw": [
           "seo",
