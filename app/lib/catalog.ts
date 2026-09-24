@@ -140,7 +140,7 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "apikey",
-        "v": "1.3.0",
+        "v": "1.3.1",
         "d": "Issue & verify API keys the right way — prefixed high-entropy keys, store only the SHA-256 hash, constant-time verify, plus a storage-agnostic record toolkit: public fingerprints, hierarchical scopes, expiry, key rotation with a grace window, and revocation. Isomorphic over Web Crypto.",
         "kw": [
           "api-key",
@@ -154,7 +154,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "crypto",
-        "v": "1.2.0",
+        "v": "1.2.1",
         "d": "Safe, boring cryptography over Web Crypto — authenticated AES-256-GCM, PBKDF2/HKDF key derivation, SHA-256/384/512, HMAC, timing-safe compare and unbiased secure random (tokens, UUIDs, integers). Isomorphic (Node, edge, browser, RN).",
         "kw": [
           "crypto",
@@ -168,7 +168,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "headers",
-        "v": "1.2.0",
+        "v": "1.3.0",
         "d": "Secure HTTP headers & a typed Content-Security-Policy builder — HSTS, CSP nonces & hashes, a typed Permissions-Policy, COOP/COEP/CORP cross-origin isolation, Reporting-Endpoints and report-only, plus ready-made strict and API presets. Framework-agnostic + Next.js. Zero-dependency, isomorphic.",
         "kw": [
           "security-headers",
@@ -182,7 +182,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "jwt",
-        "v": "1.4.0",
+        "v": "1.4.1",
         "d": "JSON Web Tokens over Web Crypto — HS/RS/ES/EdDSA signing, JWK/JWKS with kid-based key rotation, and strict expiry/issuer/audience/subject/jti checks. Plus refresh-token rotation and CSRF tokens. Isomorphic — Node, edge, browser.",
         "kw": [
           "jwt",
@@ -202,7 +202,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "lock",
-        "v": "1.1.0",
+        "v": "1.2.0",
         "d": "Account lockout & brute-force protection (server lock) — N-strikes with exponential or progressive/tiered backoff, per-account + per-IP composite locking, allow/deny lists, and a CAPTCHA step-up threshold before hard lockout. Pluggable store, zero-dependency, isomorphic.",
         "kw": [
           "account-lockout",
@@ -234,7 +234,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "otp",
-        "v": "1.2.0",
+        "v": "1.2.1",
         "d": "TOTP & HOTP two-factor auth, Google Authenticator compatible — generate secrets, compute/verify codes, parse and build otpauth:// QR URIs, and issue single-use recovery codes. Built on Web Crypto: Node, edge and browser. Zero-dependency, isomorphic.",
         "kw": [
           "otp",
@@ -251,7 +251,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "password",
-        "v": "1.1.0",
+        "v": "1.1.1",
         "d": "Password hashing & verification — PBKDF2-HMAC-SHA256 (OWASP iterations, portable PHC string) plus a zxcvbn-style strength estimator, k-anonymity breach check, a configurable policy evaluator, and CSPRNG passphrase/password generators. Isomorphic over Web Crypto.",
         "kw": [
           "password",
@@ -270,7 +270,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "rate-limit",
-        "v": "1.2.0",
+        "v": "1.2.1",
         "d": "Framework-agnostic rate limiting — five algorithms (fixed, sliding-window log & weighted counter, token bucket, leaky bucket) over a pluggable store, with cost-weighted requests, composite and per-route limiters, and standard IETF RateLimit-* + legacy X-RateLimit-* headers. For API routes, middleware and edge. Zero-dependency, isomorphic.",
         "kw": [
           "rate-limit",
@@ -284,7 +284,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "redact",
-        "v": "1.1.0",
+        "v": "1.1.1",
         "d": "Redact secrets & PII from logs — masks by sensitive key and by pattern (Luhn-checked cards, SSNs, JWTs, IBANs, IPs, AWS/GitHub/Slack/Stripe keys, private keys). Cycle-safe deep object redaction with partial masking, custom patterns and a never-throw guarantee. Zero-dependency, isomorphic.",
         "kw": [
           "redact",
@@ -298,7 +298,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "webauthn",
-        "v": "1.2.0",
+        "v": "1.2.1",
         "d": "Passkeys / biometric (FaceID, fingerprint, security keys) — browser ceremony helpers + server-side ES256/RS256/Ed25519 verification over Web Crypto, with passkey-sync backup flags, AAGUID, UV/resident-key policy and transports. Zero-dependency, isomorphic.",
         "kw": [
           "webauthn",
