@@ -89,7 +89,7 @@ const SURFACES: Surface[] = [
   {
     icon: "🚀",
     title: "Scaffold an App",
-    desc: "create-lacspace-app writes a finished Next.js app in ~0.12s — 8 templates, SEO wired.",
+    desc: "create-lacspace-app writes a finished Next.js app in ~0.12s — 9 templates, SEO wired.",
     href: "/handbook#scaffold",
     cta: "Scaffold now",
   },

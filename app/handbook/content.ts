@@ -1150,7 +1150,7 @@ async function getRate(pair: string) {
         blurb: "Pick a template, recolour it with --theme, and grow it later with add.",
         label: "terminal",
         lang: "bash",
-        code: `# scaffold from any of 8 templates, recoloured to your brand
+        code: `# scaffold from any of 9 templates, recoloured to your brand
 npm create lacspace-app@latest my-app -- --template saas --theme lacspace
 
 # grow an existing app — drop in prebuilt, themed sections

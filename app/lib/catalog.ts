@@ -360,7 +360,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "rss",
-        "v": "1.4.0",
+        "v": "1.4.1",
         "d": "Generate RSS 2.0, Atom 1.0 and JSON Feed 1.1 from one item set — with podcast (iTunes) tags, enclosures, media, rich channel metadata and a one-call feeds() builder. Zero-dependency, isomorphic.",
         "kw": [
           "rss",
