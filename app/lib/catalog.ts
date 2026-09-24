@@ -388,7 +388,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "site-verify",
-        "v": "1.3.0",
+        "v": "1.3.1",
         "d": "Search-engine site verification — meta tags, DNS TXT records, upload files, Next.js verification metadata, batch emit, and tag parsing for Google Search Console, Bing, Yandex, Baidu, Pinterest, Ahrefs, Facebook & more. Zero-dependency, isomorphic.",
         "kw": [
           "site-verification",
@@ -416,7 +416,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "slugify",
-        "v": "1.2.0",
+        "v": "1.2.1",
         "d": "Turn any text into a clean, SEO-friendly URL slug — transliterates diacritics/Cyrillic/Greek, expands symbols, truncates on word boundaries, and guarantees uniqueness with a stateful slugger(). Validate with isSlug, plus strict/locale options. Zero-dependency, isomorphic.",
         "kw": [
           "slugify",
@@ -666,7 +666,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "markdown",
-        "v": "1.1.0",
+        "v": "1.1.1",
         "d": "A small, safe Markdown → HTML renderer — headings with anchor ids, nested & task lists, fenced code, GFM tables, strikethrough and autolinks. HTML in the source is escaped by default. Plus YAML frontmatter parsing, a nested table of contents, plain-text excerpts and an HTML sanitizer. Zero-dependency, isomorphic.",
         "kw": [
           "markdown",
@@ -918,7 +918,7 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "csv",
-        "v": "1.2.0",
+        "v": "1.2.1",
         "d": "Correct, RFC 4180 CSV parsing & stringifying — quoted fields, escaped quotes, newlines in cells, CRLF, custom dialects (delimiter/quote/escape/comment), TSV & BOM, plus opt-in type coercion, column mapping and a chunked/streaming parser. Zero-dependency, isomorphic.",
         "kw": [
           "csv",
