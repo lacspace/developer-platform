@@ -346,7 +346,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "robots",
-        "v": "1.4.0",
+        "v": "1.4.1",
         "d": "Build and parse robots.txt — typed per-user-agent rules, crawl-delay & clean-param, sitemap refs, a parser + longest-match isAllowed(), and one-liners to block/allow AI crawlers per-agent from a 21-bot catalog (GPTBot, ClaudeBot, CCBot, Google-Extended, PerplexityBot…). Next.js robots.ts output. Zero-dependency, isomorphic.",
         "kw": [
           "robots-txt",
@@ -402,7 +402,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "sitemap",
-        "v": "1.3.0",
+        "v": "1.4.0",
         "d": "Generate sitemap.xml, sitemap indexes and Next.js sitemaps — image/video/news extensions, hreflang alternates, auto-split at 50k URLs, plus priority/changefreq/lastmod validators and a URL-count guard. Zero-dependency, isomorphic.",
         "kw": [
           "sitemap",
