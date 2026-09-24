@@ -1652,7 +1652,7 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "components",
-        "v": "1.0.1",
+        "v": "1.1.0",
         "d": "96 React components with no runtime dependencies — buttons, fields, inputs, selects, switches, sliders, pin/colour/file inputs, combobox and multi-select, modal, drawer, popover, tooltip and a toast queue, tabs, accordion, menus, pagination, stepper, avatars, stats, timelines, trees, tags, ratings, skeletons and progress, plus layout and typography primitives. One plain stylesheet — no Tailwind, no CSS-in-JS: every colour, radius, control height and typeface is a --lac-* variable, so the whole library restyles from one block. Variants live in data-* attributes (so your CSS can target any state without !important), everything stateful works controlled or uncontrolled, and nothing touches the DOM during render, so it server-renders as-is.",
         "kw": [
           "react",
@@ -1674,7 +1674,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "charts",
-        "v": "1.0.0",
+        "v": "1.1.0",
         "d": "19 chart components drawn as plain SVG — line, area, bar (vertical, horizontal, stacked), pie, donut, sparkline, spark bars, gauge, heatmap (matrix and calendar), radar, funnel and candlestick, plus the frame, grid, axis, legend, tooltip and data-table primitives to compose your own. No canvas, no D3, no runtime dependencies. The scale maths (linearScale, niceTicks, bandScale, stackSeries, linePath, smoothPath, arcPath, pieSlices, nearestPoint) is exported separately, so you can place marks yourself with no React at all. Shares the --lac-* tokens, so charts match the rest of your UI.",
         "kw": [
           "react-charts",
@@ -1696,7 +1696,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "table",
-        "v": "1.0.0",
+        "v": "1.1.0",
         "d": "A data table that does the boring parts: multi-column sort, per-column filters, global search, pagination, row selection, column resize, reorder and pinning, sticky headers, footer aggregates and CSV/TSV export — with spreadsheet-formula neutralising so an exported cell can never execute in Excel. Use the finished <DataTable /> or the headless useTable() hook and render the markup yourself. Column helpers (text, number, currency, date, badge, boolean, link, actions) type the row for you, and every engine function (sortRows, filterRows, pageSlice, toCsv) is exported for use without React.",
         "kw": [
           "react-table",
@@ -1715,7 +1715,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "date",
-        "v": "1.0.0",
+        "v": "1.1.0",
         "d": "Calendar and date pickers that handle the awkward cases — single date, range with presets and minimum nights, month, year, week, time, date-time, a schedule/availability grid and a hydration-safe RelativeTime. Locale, week start, disabled days, min/max and keyboard navigation are all real, not decorative. Formatting goes through Intl, so no locale data ships. The date engine (monthGrid, addDays/addMonths with end-of-month clamping, range helpers, isDateDisabled, relative bucketing) is exported on its own and tested across DST boundaries.",
         "kw": [
           "react-datepicker",
