@@ -74,7 +74,7 @@ export const TOOLS: Tool[] = [
     icon: "🤖",
     grad: "#4d9fff,#A78BFA",
     status: "live",
-    version: "0.1.0",
+    version: "0.1.1",
     summary:
       "One command gives Claude Code, Claude Desktop, Cursor, VS Code and Windsurf nine read-only tools over the Model Context Protocol: fetch and scrape pages, crawl a site, read PDF/DOCX/PPTX/EPUB, audit SEO, profile a company from its domain, check uptime and TLS, validate an email, and find business leads. No API keys. Every tool returns readable text for the model and JSON for programs.",
     about:
