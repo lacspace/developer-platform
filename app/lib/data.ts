@@ -271,6 +271,91 @@ export const KITS: Kit[] = [
       { name: "date", desc: "11 calendar / date / time pickers, no date library" },
     ],
   },
+  {
+    name: "Global Data Kit",
+    icon: "🌍",
+    blurb: "Build for the whole world — countries, currencies, IBANs, tax ids, phone numbers and postal codes, verified against ISO and ICU.",
+    packages: [
+      { name: "country", desc: "ISO 3166-1 codes, names + aliases, calling codes, flags" },
+      { name: "currency", desc: "ISO 4217 codes, minor units, symbols, formatting" },
+      { name: "iban", desc: "IBAN validate/parse/format (MOD 97) + BIC + ISIN" },
+      { name: "tax-id", desc: "EU VAT, GSTIN, ABN, EIN, CPF/CNPJ… with real checksums" },
+      { name: "phone", desc: "E.164 parse, validate & format, country detection" },
+      { name: "postal-code", desc: "Validate & normalise postal codes for 130 countries" },
+    ],
+  },
+  {
+    name: "AI Kit",
+    icon: "🤖",
+    blurb: "Provider-agnostic, keyless LLM building blocks — chat, streaming, prompts, tokens, chunking and tool schemas.",
+    packages: [
+      { name: "ai", desc: "One chat client for any OpenAI-compatible, Ollama or Google endpoint" },
+      { name: "stream", desc: "SSE / NDJSON token streams, parsed and back-pressured" },
+      { name: "prompt", desc: "Typed prompt templates, few-shot and versioning" },
+      { name: "tokenizer", desc: "Offline token counting & budget trimming" },
+      { name: "chunk", desc: "Semantic & recursive text splitters for RAG" },
+      { name: "json-repair", desc: "Repair almost-JSON from a model into real JSON" },
+    ],
+  },
+  {
+    name: "AI App Kit",
+    icon: "🧠",
+    blurb: "Composable RAG, agents, evals and safety — every model, store and splitter is an injectable interface.",
+    packages: [
+      { name: "embeddings", desc: "Keyless embeddings client + pure vector math" },
+      { name: "vector", desc: "In-memory vector store — k-NN, filters, JSON persistence" },
+      { name: "rag", desc: "Index, retrieve and assemble prompt context" },
+      { name: "agent", desc: "Tool-calling / ReAct loop with an observable trace" },
+      { name: "eval", desc: "Score LLM outputs — deterministic + LLM-as-judge" },
+      { name: "moderation", desc: "PII redaction, toxicity, prompt-injection guardrails" },
+    ],
+  },
+  {
+    name: "Web Engagement Kit",
+    icon: "🔔",
+    blurb: "Push, PWA, toasts, CAPTCHA, realtime and consent — no vendor, no keys.",
+    packages: [
+      { name: "web-push", desc: "Web Push over pure Web Crypto — no Firebase" },
+      { name: "pwa", desc: "Service worker + manifest generator, install prompt" },
+      { name: "notify", desc: "In-app toasts — store, vanilla renderer, React binding" },
+      { name: "captcha", desc: "Keyless proof-of-work CAPTCHA with a drop-in widget" },
+      { name: "sse", desc: "Server-Sent Events hub + browser client + useSSE" },
+      { name: "consent", desc: "GDPR cookie consent — banner, store, server-gatable" },
+    ],
+  },
+  {
+    name: "Dates & Time Kit",
+    icon: "🕒",
+    blurb: "Date math, ISO-8601 durations, IANA timezones via Intl and time-range algebra — no bundled tz data.",
+    packages: [
+      { name: "datetime", desc: "Immutable date math, token format/parse, diff" },
+      { name: "duration", desc: "ISO-8601 durations — parse, normalise, arithmetic" },
+      { name: "timezone", desc: "IANA offsets & zoned ⇄ UTC, DST-aware" },
+      { name: "interval", desc: "Time ranges, merge/free-busy, business-day math" },
+    ],
+  },
+  {
+    name: "Testing Kit",
+    icon: "🧪",
+    blurb: "Runner-agnostic testing primitives — assertions, spies, fixtures and snapshots that work in any runner.",
+    packages: [
+      { name: "expect", desc: "Chainable assertions with readable diffs" },
+      { name: "spy", desc: "Spies, stubs and fake timers" },
+      { name: "fixtures", desc: "Typed factories and per-test fixture lifecycles" },
+      { name: "snapshot", desc: "Serialised snapshots with stable formatting" },
+    ],
+  },
+  {
+    name: "Media Kit",
+    icon: "🎨",
+    blurb: "Generate real logos and images without AI, and use the official Lacspace brand.",
+    packages: [
+      { name: "logo", desc: "No-AI logo generator — name + keywords → on-brand SVG" },
+      { name: "image", desc: "Gradients, patterns and mesh to PNG/JPEG/WebP on a size budget" },
+      { name: "brand", desc: "The official Lacspace mark, colours & animations" },
+      { name: "og", desc: "Open Graph / social card generator for next/og and the edge" },
+    ],
+  },
 ];
 
 export const STATS = {
