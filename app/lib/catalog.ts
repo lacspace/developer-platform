@@ -638,7 +638,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "humanize",
-        "v": "1.1.0",
+        "v": "1.2.0",
         "d": "Turn machine values into human-readable text — bytes, durations, relative time, ordinals, plurals, compact numbers, grammatical lists, number-to-words, Roman numerals and SI units. Zero-dependency, isomorphic — one typed package instead of a pile of tiny formatting libs.",
         "kw": [
           "humanize",
@@ -680,7 +680,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "money",
-        "v": "1.1.0",
+        "v": "1.2.0",
         "d": "Money done right — integer minor units (no floating-point cent bugs), currency-safe arithmetic, remainder-preserving allocation/split, explicit rounding modes (incl. banker's), Intl and Intl-free formatting, string parsing, and injected-rate conversion. Zero-dependency, isomorphic.",
         "kw": [
           "money",
@@ -808,7 +808,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "email-validate",
-        "v": "1.1.0",
+        "v": "1.2.0",
         "d": "Smart, network-free email validation — RFC-5322 syntax (incl. quoted local parts & IP-literal domains), disposable/temp-mail & role-account detection, free-provider flags, Gmail normalization and 'did you mean?' typo suggestions. Zero-dependency, isomorphic.",
         "kw": [
           "email-validation",
@@ -822,7 +822,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "email-verify",
-        "v": "1.1.0",
+        "v": "1.2.0",
         "d": "Best-effort email deliverability for Node — syntax + disposable/role, MX lookup with priority ranking, an optional SMTP RCPT probe (no mail sent), catch-all detection, a 0-100 confidence score, and de-duped batch verification. All DNS/SMTP injectable; zero npm dependencies.",
         "kw": [
           "email-verification",
