@@ -20,7 +20,7 @@
     "@lacspace/date": "^1.1.0",
     "@lacspace/formula": "^1.0.0",
     "@lacspace/humanize": "^1.2.0",
-    "@lacspace/id": "^1.0.1",
+    "@lacspace/id": "^1.1.1",
     "@lacspace/image": "^1.1.0",
     "@lacspace/jwt": "^1.4.1",
     "@lacspace/llms-txt": "^1.5.0",

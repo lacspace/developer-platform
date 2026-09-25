@@ -652,7 +652,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "id",
-        "v": "1.1.0",
+        "v": "1.1.1",
         "d": "Every ID kind you need — UUID v4/v7, ULID, cuid2, Snowflake, Nano-ID, base62/base58 and Stripe-style prefixed ids. Custom alphabets with unbiased sampling, time-sortable ids with decodeTime. Cryptographically random (Web Crypto), zero-dependency, isomorphic.",
         "kw": [
           "uuid",
@@ -760,7 +760,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "signed-url",
-        "v": "1.1.0",
+        "v": "1.2.0",
         "d": "HMAC-signed, expiring URLs & tokens over Web Crypto — secure download links, magic-login links, unsubscribe and one-time-action tokens — now with key rotation, method/IP/path binding, single-use nonces, signed claims and clock tolerance. Tamper-proof, timing-safe. Isomorphic (Node, edge, browser).",
         "kw": [
           "signed-url",
@@ -774,7 +774,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "webhooks",
-        "v": "1.1.0",
+        "v": "1.2.0",
         "d": "The webhook toolkit for both directions — sign & deliver outgoing webhooks with retries/backoff, verify incoming ones (timing-safe, replay-protected) with Stripe / GitHub / Shopify presets, plus typed event envelopes, exactly-once idempotency and pure endpoint routing. One internal dependency (@lacspace/crypto), isomorphic.",
         "kw": [
           "webhook",
@@ -836,7 +836,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "mailer",
-        "v": "1.2.0",
+        "v": "1.2.1",
         "d": "A tiny zero-dependency SMTP client for Node — send email over raw net/tls with STARTTLS & AUTH, plus a fluent MIME builder (inline images, attachments, alternatives), RFC 5322 address + RFC 2047 helpers, batch send with retry, and no-network test transports. Provider presets (Hostinger, Gmail, Outlook, Zoho…) make setup one line.",
         "kw": [
           "smtp",
@@ -932,7 +932,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "xlsx",
-        "v": "1.3.0",
+        "v": "1.4.0",
         "d": "Read & write real Excel (.xlsx) with zero dependencies and no headless browser — objects or arrays to a workbook, typed cells (string/number/boolean/Date), per-column number formats, bold headers, column widths, multiple sheets, live Excel formula cells (=B2*C2 with cached values), and built-in CSV↔XLSX conversion. Isomorphic (Node, edge, browser).",
         "kw": [
           "xlsx",
