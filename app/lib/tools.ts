@@ -74,9 +74,9 @@ export const TOOLS: Tool[] = [
     icon: "🤖",
     grad: "#4d9fff,#A78BFA",
     status: "live",
-    version: "0.1.1",
+    version: "0.2.0",
     summary:
-      "One command gives Claude Code, Claude Desktop, Cursor, VS Code and Windsurf nine read-only tools over the Model Context Protocol: fetch and scrape pages, crawl a site, read PDF/DOCX/PPTX/EPUB, audit SEO, profile a company from its domain, check uptime and TLS, validate an email, and find business leads. No API keys. Every tool returns readable text for the model and JSON for programs.",
+      "One command gives Claude Code, Claude Desktop, Cursor, VS Code and Windsurf ten read-only tools over the Model Context Protocol: fetch, render, screenshot and scrape pages, crawl a site, read PDF/DOCX/PPTX/EPUB, audit SEO, profile a company from its domain, check uptime and TLS, validate an email, and find business leads. No API keys. Every tool returns readable text for the model and JSON for programs.",
     about:
       "lacspace-mcp speaks MCP over stdio (JSON-RPC, one message per line), the transport every local AI client uses, and implements the protocol itself rather than shipping an SDK at runtime — protocol versions 2025-06-18, 2025-03-26 and 2024-11-05. The tools wrap lacspace-scraper, lacspace-extract, lacspace-inspect, lacspace-enrich, lacspace-leads and the @lacspace email packages. Safety switches: extract_document reads files only under allowed directories (symlinks resolved), --block-private refuses private-network and cloud-metadata targets, and --only/--disable trim the tool list. Its interoperability tests drive the built server with the official MCP SDK client — the same code path Claude Code and Cursor use. The same tools run from the terminal with `lacspace-mcp call`.",
     install: "claude mcp add lacspace -- npx -y lacspace-mcp",
@@ -84,7 +84,8 @@ export const TOOLS: Tool[] = [
     localOnly: true,
     localNote: "An MCP server runs next to your AI client, not in a browser. Install it with the one-liner above, or print the config for Claude Desktop, Cursor, VS Code or Windsurf with `npx lacspace-mcp config <client>`.",
     features: [
-      { icon: "📄", title: "fetch_page & crawl_site", desc: "Readable text, headings, links, tables, Open Graph and JSON-LD from a page, or a bounded crawl of a site." },
+      { icon: "📄", title: "fetch_page & crawl_site", desc: "Readable text, headings, links, tables, Open Graph and JSON-LD from a page (render: true for JavaScript-built pages), or a bounded crawl with live progress." },
+      { icon: "📸", title: "screenshot_page", desc: "A PNG of the rendered page the model can look at — viewport or full page, wait for a selector, scroll for lazy content." },
       { icon: "🎯", title: "scrape", desc: "Exact fields with CSS selectors — `a@href`, `.price | number` — repeated over every item." },
       { icon: "📑", title: "extract_document", desc: "PDF, DOCX, PPTX, EPUB, HTML, CSV, XLSX and Markdown → Markdown, from a local file or a URL, with PDF page ranges." },
       { icon: "🔬", title: "audit_page", desc: "SEO, social, structured data, security headers and crawlability graded A–F, with a fix for every problem." },
@@ -92,7 +93,7 @@ export const TOOLS: Tool[] = [
       { icon: "🩺", title: "check_site", desc: "Status, redirect chain, response time, server headers and TLS certificate expiry." },
       { icon: "✉️", title: "validate_email", desc: "Syntax, disposable, role account, typo suggestion, normalised form and MX lookup. Nothing is sent." },
       { icon: "📍", title: "find_leads", desc: "Google Maps businesses by type and city with rating, phone, website and, on request, email and socials." },
-      { icon: "🛡️", title: "Safe by default", desc: "Read-only tools; file access sandboxed; --block-private stops SSRF into your network or cloud metadata." },
+      { icon: "🛡️", title: "Safe by default", desc: "Read-only tools; file access limited to your open workspace folders and --allow-path; --block-private stops SSRF into your network or cloud metadata; a confirmation question before big crawls and lead runs." },
       { icon: "🧪", title: "Tested against the official client", desc: "Unit, tool and interoperability layers; the MCP SDK client drives the built server over stdio." },
     ],
     examples: [
