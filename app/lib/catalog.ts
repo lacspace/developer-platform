@@ -233,6 +233,26 @@ export const CATALOG: Group[] = [
         "deps": 2
       },
       {
+        "n": "oauth",
+        "v": "1.0.0",
+        "d": "OAuth 2.1 / OpenID Connect client for social login — Google, GitHub, Microsoft, Apple, GitLab, Discord, Slack, LinkedIn, Facebook, X, Spotify, Twitch, Notion, and any OIDC issuer via discovery (Auth0, Okta, Keycloak, Cognito). PKCE, state, nonce, ID-token verification over JWKS, refresh, revoke, normalised profiles. Every preset is cross-checked against the provider's live discovery document. Web Crypto, injectable fetch, isomorphic.",
+        "kw": [
+          "oauth",
+          "oauth2",
+          "oidc",
+          "openid-connect",
+          "social-login",
+          "sign-in-with-google",
+          "sign-in-with-apple",
+          "github-login",
+          "pkce",
+          "id-token",
+          "jwks",
+          "auth"
+        ],
+        "deps": 1
+      },
+      {
         "n": "otp",
         "v": "1.2.1",
         "d": "TOTP & HOTP two-factor auth, Google Authenticator compatible — generate secrets, compute/verify codes, parse and build otpauth:// QR URIs, and issue single-use recovery codes. Built on Web Crypto: Node, edge and browser. Zero-dependency, isomorphic.",
@@ -293,6 +313,24 @@ export const CATALOG: Group[] = [
           "secrets",
           "logging",
           "sanitize-logs"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "session",
+        "v": "1.0.0",
+        "d": "Encrypted, signed cookie sessions for any runtime — AES-256-GCM over Web Crypto with HKDF-stretched keys, secret rotation, rolling and absolute expiry, __Host- cookie rules enforced, a 10-minute OAuth state store and double-submit CSRF tokens. Works with Web Request/Response, Node http, Next.js, Hono, Express. Zero-dependency, isomorphic.",
+        "kw": [
+          "session",
+          "cookie-session",
+          "encrypted-cookie",
+          "aes-gcm",
+          "web-crypto",
+          "csrf",
+          "oauth-state",
+          "iron-session",
+          "cookie",
+          "auth"
         ],
         "deps": 0
       },

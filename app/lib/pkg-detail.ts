@@ -1640,5 +1640,59 @@ export const DETAILS: Record<string, PkgDetail> = {
      "weekdayOrder"
   ],
   "usage": "import { DatePicker, DateRangePicker, defaultPresets } from \"@lacspace/date\";\nimport \"@lacspace/date/styles.css\";\n\n<DatePicker\n  format=\"dd/MM/yyyy\"\n  weekStartsOn={1}\n  clearable\n  showTodayButton\n  onChange={setDay}\n  onInvalidInput={(text) => console.warn(\"could not read\", text)}\n/>\n\n<DateRangePicker\n  numberOfMonths={2}\n  minNights={1}\n  presets={defaultPresets()}\n  separator=\" – \"\n  onChange={setRange}\n/>"
+ },
+ "oauth": {
+  "exports": [
+   "createOAuthClient",
+   "OAuthError",
+   "google",
+   "github",
+   "microsoft",
+   "apple",
+   "createAppleClientSecret",
+   "gitlab",
+   "discord",
+   "slack",
+   "linkedin",
+   "facebook",
+   "x",
+   "spotify",
+   "twitch",
+   "notion",
+   "oidc",
+   "auth0",
+   "okta",
+   "keycloak",
+   "cognito",
+   "oauth2",
+   "providers",
+   "discover",
+   "oidcProfile",
+   "generateCodeVerifier",
+   "codeChallengeS256",
+   "generateState",
+   "generateNonce",
+   "accessTokenHash"
+  ],
+  "usage": "import { createOAuthClient, google } from \"@lacspace/oauth\";\n\nconst client = createOAuthClient(google({ clientId, clientSecret, redirectUri: \"https://app.example.com/auth/google/callback\" }));\n\n// 1. redirect — store state, codeVerifier and nonce (e.g. @lacspace/session's OAuth state store)\nconst { url, state, codeVerifier, nonce } = await client.authorizationUrl({ prompt: \"select_account\" });\n\n// 2. callback — state ✓ PKCE ✓ nonce ✓ ID token verified over JWKS ✓\nconst tokens  = await client.handleCallback(req.url, { state, codeVerifier, nonce });\nconst profile = await client.userInfo(tokens);\n// { id: \"1088…\", email: \"ada@example.com\", emailVerified: true, name: \"Ada Lovelace\", picture: \"https://…\" }\n\n// any OIDC issuer: oidc({ issuer: \"https://acme.eu.auth0.com/\", clientId, clientSecret, redirectUri })"
+ },
+ "session": {
+  "exports": [
+   "createCookieSession",
+   "createOAuthStateStore",
+   "createCsrf",
+   "parseCookies",
+   "serializeCookie",
+   "clearCookie",
+   "getCookie",
+   "cookieHeaderOf",
+   "setFlash",
+   "takeFlash",
+   "constantTimeEqual",
+   "randomBytes",
+   "toBase64url",
+   "fromBase64url"
+  ],
+  "usage": "import { createCookieSession, createOAuthStateStore, createCsrf } from \"@lacspace/session\";\n\nconst sessions = createCookieSession<{ userId: string }>({ secrets: [process.env.SESSION_SECRET!], rolling: true });\n\nconst s = await sessions.read(request);             // Cookie header, Web Request or Node req — never throws\nif (!s.data) return unauthorized(s.reason);           // \"missing\" | \"tampered\" | \"expired\" | …\nheaders.append(\"set-cookie\", await sessions.commit({ userId: \"u1\" }));   // __Host-session=v1.… AES-256-GCM\nheaders.append(\"set-cookie\", sessions.destroy());\n\nconst oauthState = createOAuthStateStore({ secrets: [SECRET] });   // 10-minute { state, codeVerifier, nonce }\nconst csrf = createCsrf({ secrets: [SECRET] });                    // tokens bound to s.id"
  }
 };
