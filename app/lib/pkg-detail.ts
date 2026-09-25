@@ -1,6 +1,112 @@
 // Generated from the monorepo — per-package exports + a usage example.
 export type PkgDetail = { exports: string[]; usage: string };
 export const DETAILS: Record<string, PkgDetail> = {
+ "country": {
+  "exports": [
+   "country",
+   "countries",
+   "isCountryCode",
+   "countryName",
+   "alpha2ToAlpha3",
+   "alpha3ToAlpha2",
+   "numericToAlpha2",
+   "callingCode",
+   "countriesByCallingCode",
+   "callingCodes",
+   "countriesUsing",
+   "countriesInRegion",
+   "searchCountries",
+   "flagEmoji",
+   "normalizeName"
+  ],
+  "usage": "import { country, countriesUsing, flagEmoji } from \"@lacspace/country\";\n\ncountry(\"Nepal\");        // { alpha2: \"NP\", alpha3: \"NPL\", numeric: \"524\", callingCodes: [\"977\"], currencies: [\"NPR\"], … }\ncountriesUsing(\"EUR\");   // 35 countries\nflagEmoji(\"in\");         // \"🇮🇳\""
+ },
+ "currency": {
+  "exports": [
+   "currency",
+   "currencies",
+   "isCurrencyCode",
+   "currencyName",
+   "currencySymbol",
+   "minorUnits",
+   "toMinor",
+   "fromMinor",
+   "formatCurrency",
+   "FUND_CODES"
+  ],
+  "usage": "import { minorUnits, toMinor, formatCurrency } from \"@lacspace/currency\";\n\nminorUnits(\"JPY\");                                   // 0\ntoMinor(19.99, \"USD\");                               // 1999\nformatCurrency(1234.5, \"EUR\", { locale: \"de\" });    // \"1.234,50 €\""
+ },
+ "iban": {
+  "exports": [
+   "parseIban",
+   "isValidIban",
+   "generateIban",
+   "formatIban",
+   "electronicIban",
+   "ibanCountries",
+   "ibanLength",
+   "exampleIban",
+   "mod97",
+   "SEPA",
+   "parseBic",
+   "isValidBic",
+   "isValidIsin",
+   "isinCheckDigit"
+  ],
+  "usage": "import { parseIban, generateIban, isValidIsin } from \"@lacspace/iban\";\n\nparseIban(\"GB82 WEST 1234 5698 7654 32\");\n// { valid: true, country: \"GB\", bankCode: \"WEST\", branchCode: \"123456\", accountNumber: \"98765432\", sepa: true, … }\ngenerateIban(\"DE\", \"370400440532013000\"); // \"DE89370400440532013000\"\nisValidIsin(\"US0378331005\");              // true"
+ },
+ "tax-id": {
+  "exports": [
+   "validateTaxId",
+   "isValidTaxId",
+   "TAX_ID_COUNTRIES",
+   "validateVat",
+   "isValidVat",
+   "VAT_COUNTRIES",
+   "isValidGstin",
+   "isValidPan",
+   "isValidAbn",
+   "isValidAcn",
+   "isValidTfn",
+   "isValidIrd",
+   "isValidBn",
+   "isValidEin",
+   "isValidCpf",
+   "isValidCnpj",
+   "isValidCuit",
+   "isValidRut",
+   "isValidRfc",
+   "isValidNepalPan",
+   "isValidUen",
+   "isValidNpwp",
+   "isValidKrBrn",
+   "isValidJpCorporateNumber",
+   "isValidZaTaxNumber",
+   "luhn"
+  ],
+  "usage": "import { validateTaxId, isValidVat, isValidGstin } from \"@lacspace/tax-id\";\n\nvalidateTaxId(\"DE136695976\");\n// { valid: true, country: \"DE\", type: \"vat\", strength: \"checksum\", normalized: \"DE136695976\" }\nvalidateTaxId(\"27AAPFU0939F1ZV\", { country: \"IN\" }); // { valid: true, type: \"gstin\", … }\nisValidVat(\"BE 0428.759.497\");                       // true"
+ },
+ "phone": {
+  "exports": [
+   "parsePhone",
+   "isValidPhone",
+   "formatPhone",
+   "phoneCountry",
+   "RULED_COUNTRIES"
+  ],
+  "usage": "import { parsePhone, formatPhone, phoneCountry } from \"@lacspace/phone\";\n\nparsePhone(\"+977 980-123-4567\");\n// { valid: true, country: \"NP\", e164: \"+9779801234567\", international: \"+977 980 123 4567\", type: \"mobile\", … }\nparsePhone(\"(202) 456-1111\", { defaultCountry: \"US\" }).e164; // \"+12024561111\"\nphoneCountry(\"+1 416 555 0123\");                              // \"CA\""
+ },
+ "postal-code": {
+  "exports": [
+   "validatePostalCode",
+   "isValidPostalCode",
+   "formatPostalCode",
+   "hasPostalCodes",
+   "examplePostalCode",
+   "postalCodeCountries"
+  ],
+  "usage": "import { validatePostalCode, formatPostalCode, hasPostalCodes } from \"@lacspace/postal-code\";\n\nvalidatePostalCode(\"sw1a 1aa\", \"GB\"); // { valid: true, normalized: \"SW1A 1AA\" }\nformatPostalCode(\"k1a0b1\", \"CA\");     // \"K1A 0B1\"\nhasPostalCodes(\"AE\");                 // false"
+ },
  "logo": {
   "exports": [
    "generateLogo",

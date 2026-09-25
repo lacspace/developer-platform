@@ -9,4 +9,4 @@
  * It is not a second source of truth: `lib/catalog.ts` counts the real data and
  * throws at build time if this number disagrees with it.
  */
-export const PACKAGE_COUNT = 125;
+export const PACKAGE_COUNT = 131;

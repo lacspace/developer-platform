@@ -1273,6 +1273,54 @@ export const CATALOG: Group[] = [
     ]
   },
   {
+    "group": "Global Data Kit",
+    "icon": "🌍",
+    "items": [
+      {
+        "n": "country",
+        "v": "1.0.0",
+        "d": "ISO 3166-1 countries with alpha-2/alpha-3/numeric codes, names, calling codes, currencies, top-level domains, regions and flag emoji \u2014 lookup by any code, name or alias, search, and typed data. Every code and ICU's name for it are cross-checked in the tests. Zero-dependency, isomorphic.",
+        "kw": ["iso-3166", "country-codes", "countries", "calling-codes", "flags", "region", "alpha-2", "alpha-3", "country-data"],
+        "deps": 0
+      },
+      {
+        "n": "currency",
+        "v": "1.0.0",
+        "d": "ISO 4217 currencies \u2014 codes, numeric codes, minor units asserted against the ISO list (0 for JPY, 3 for BHD, 4 for CLF), names, symbols, fund/special classification and Intl-free formatting for en/de/fr/ch/in locales. Zero-dependency, isomorphic.",
+        "kw": ["iso-4217", "currency-codes", "currencies", "minor-units", "currency-symbols", "currency-format", "money"],
+        "deps": 0
+      },
+      {
+        "n": "iban",
+        "v": "1.0.0",
+        "d": "Validate, parse and format IBANs (ISO 13616 registry for 90 countries, MOD 97-10) with bank/branch/account extraction, SEPA flag and generation, plus BIC/SWIFT (ISO 9362) and ISIN (ISO 6166) checks. Every registry example is verified by its own check digits. Zero-dependency, isomorphic.",
+        "kw": ["iban", "iban-validation", "bic", "swift", "isin", "mod97", "bank-account", "sepa", "iso-13616"],
+        "deps": 0
+      },
+      {
+        "n": "tax-id",
+        "v": "1.0.0",
+        "d": "Validate tax and business identifiers with their real checksums \u2014 EU VAT (all 27 + UK/XI), Indian GSTIN and PAN, Australian ABN/ACN/TFN, NZ IRD, Canadian BN, US EIN, Brazilian CPF/CNPJ, Argentine CUIT, Chilean RUT, Mexican RFC, Nepali PAN, Singapore UEN, Korean BRN, Japanese corporate number and more \u2014 reporting checksum vs format strength. Zero-dependency, isomorphic.",
+        "kw": ["vat", "vat-validation", "tax-id", "gstin", "pan", "abn", "ein", "cnpj", "cpf", "tin", "checksum"],
+        "deps": 0
+      },
+      {
+        "n": "phone",
+        "v": "1.0.0",
+        "d": "Parse, validate and format international phone numbers \u2014 E.164, national and international formats, country detection from the calling code (shared +1/+44/+7 codes resolved by leading digits), trunk prefixes, extensions, per-country length rules and mobile detection for 80+ countries. Isomorphic.",
+        "kw": ["phone", "phone-number", "e164", "phone-validation", "phone-format", "calling-code", "libphonenumber-alternative", "international-phone"],
+        "deps": 1
+      },
+      {
+        "n": "postal-code",
+        "v": "1.0.0",
+        "d": "Validate and normalise postal codes for 130 countries \u2014 ZIP, postcode, PIN, CEP \u2014 with the national spacing and casing (SW1A 1AA, K1A 0B1, 01310-100), and knows which countries have no postal codes. Zero-dependency, isomorphic.",
+        "kw": ["postal-code", "zip-code", "postcode", "pin-code", "zipcode-validation", "address-validation", "cep"],
+        "deps": 0
+      }
+    ]
+  },
+  {
     "group": "Dates & Time",
     "icon": "🕒",
     "items": [
