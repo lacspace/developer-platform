@@ -68,6 +68,54 @@ export interface Tool {
 
 export const TOOLS: Tool[] = [
   {
+    slug: "mcp",
+    name: "lacspace-mcp",
+    tagline: "The Lacspace tools for AI agents — one MCP server for Claude, Cursor and VS Code.",
+    icon: "🤖",
+    grad: "#4d9fff,#A78BFA",
+    status: "live",
+    version: "0.1.0",
+    summary:
+      "One command gives Claude Code, Claude Desktop, Cursor, VS Code and Windsurf nine read-only tools over the Model Context Protocol: fetch and scrape pages, crawl a site, read PDF/DOCX/PPTX/EPUB, audit SEO, profile a company from its domain, check uptime and TLS, validate an email, and find business leads. No API keys. Every tool returns readable text for the model and JSON for programs.",
+    about:
+      "lacspace-mcp speaks MCP over stdio (JSON-RPC, one message per line), the transport every local AI client uses, and implements the protocol itself rather than shipping an SDK at runtime — protocol versions 2025-06-18, 2025-03-26 and 2024-11-05. The tools wrap lacspace-scraper, lacspace-extract, lacspace-inspect, lacspace-enrich, lacspace-leads and the @lacspace email packages. Safety switches: extract_document reads files only under allowed directories (symlinks resolved), --block-private refuses private-network and cloud-metadata targets, and --only/--disable trim the tool list. Its interoperability tests drive the built server with the official MCP SDK client — the same code path Claude Code and Cursor use. The same tools run from the terminal with `lacspace-mcp call`.",
+    install: "claude mcp add lacspace -- npx -y lacspace-mcp",
+    quickstart: "npx lacspace-mcp config cursor",
+    localOnly: true,
+    localNote: "An MCP server runs next to your AI client, not in a browser. Install it with the one-liner above, or print the config for Claude Desktop, Cursor, VS Code or Windsurf with `npx lacspace-mcp config <client>`.",
+    features: [
+      { icon: "📄", title: "fetch_page & crawl_site", desc: "Readable text, headings, links, tables, Open Graph and JSON-LD from a page, or a bounded crawl of a site." },
+      { icon: "🎯", title: "scrape", desc: "Exact fields with CSS selectors — `a@href`, `.price | number` — repeated over every item." },
+      { icon: "📑", title: "extract_document", desc: "PDF, DOCX, PPTX, EPUB, HTML, CSV, XLSX and Markdown → Markdown, from a local file or a URL, with PDF page ranges." },
+      { icon: "🔬", title: "audit_page", desc: "SEO, social, structured data, security headers and crawlability graded A–F, with a fix for every problem." },
+      { icon: "🏢", title: "enrich_domain", desc: "Company name, logo, emails, phones, socials, tech stack, MX/SPF/DMARC and RDAP registration from a domain." },
+      { icon: "🩺", title: "check_site", desc: "Status, redirect chain, response time, server headers and TLS certificate expiry." },
+      { icon: "✉️", title: "validate_email", desc: "Syntax, disposable, role account, typo suggestion, normalised form and MX lookup. Nothing is sent." },
+      { icon: "📍", title: "find_leads", desc: "Google Maps businesses by type and city with rating, phone, website and, on request, email and socials." },
+      { icon: "🛡️", title: "Safe by default", desc: "Read-only tools; file access sandboxed; --block-private stops SSRF into your network or cloud metadata." },
+      { icon: "🧪", title: "Tested against the official client", desc: "Unit, tool and interoperability layers; the MCP SDK client drives the built server over stdio." },
+    ],
+    examples: [
+      { label: "Claude Code", code: `claude mcp add lacspace -- npx -y lacspace-mcp`, note: "Then ask: “Read https://example.com/pricing and summarise the plans.”" },
+      { label: "Cursor / Claude Desktop / VS Code", code: `npx lacspace-mcp config cursor
+npx lacspace-mcp config claude-desktop
+npx lacspace-mcp config vscode`, note: "Prints the exact JSON to paste, including any safety flags you pass." },
+      { label: "Lock it down for a shared machine", code: `npx lacspace-mcp --block-private --allow-path ~/docs --disable find_leads`, note: "No private-network fetches, files only under ~/docs, no browser-driven tool." },
+      { label: "Run a tool without an agent", code: `npx lacspace-mcp call check_site '{"url":"https://developer.lacspace.com"}'
+npx lacspace-mcp call extract_document '{"source":"./report.pdf","pages":"1-3"}'`, note: "Same tools from the terminal — handy for debugging and scripts." },
+      { label: "Add your own tool", code: `import { createServer, serveStdio } from "lacspace-mcp";
+const server = createServer({ policy: { blockPrivate: true }, extraTools: [myTool] });
+await serveStdio(server);` },
+    ],
+    useCases: ["Let Claude or Cursor read and cite live web pages", "Audit a landing page from inside the editor", "Pull tables out of PDFs during a chat", "Research a company or a lead list without leaving the agent"],
+    links: [
+      { label: "npm", href: "https://www.npmjs.com/package/lacspace-mcp", external: true },
+      { label: "Source", href: "https://github.com/lacspace/npm-packages/tree/main/lacspace-mcp", external: true },
+      { label: "Model Context Protocol", href: "https://modelcontextprotocol.io", external: true },
+    ],
+    keywords: ["mcp", "mcp-server", "model-context-protocol", "claude-code", "cursor", "ai-agents", "web-scraping", "seo-audit", "pdf-extraction", "lead-generation"],
+  },
+  {
     slug: "leads",
     name: "lacspace-leads",
     tagline: "Find local-business leads from Google Maps — free, no API keys.",
@@ -282,7 +330,7 @@ export const TOOLS: Tool[] = [
     icon: "🕸️",
     grad: "#8B5CF6,#EC4899",
     status: "live",
-    version: "0.2.0",
+    version: "0.2.2",
     summary:
       "Point it at any page or a list of sources and pull structured data — by CSS selectors or automatic detection (metadata, headings, links, images, emails, phones, tables, JSON-LD, OpenGraph). Paginate through listings, follow each result into its detail page, clean fields inline, crawl whole sites, render JS-heavy pages in a real browser, and export to JSON, NDJSON, CSV or Excel. Robots-aware.",
     about:
