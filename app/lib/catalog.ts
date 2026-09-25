@@ -374,7 +374,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "seo",
-        "v": "1.9.0",
+        "v": "1.9.1",
         "d": "Typed metadata + JSON-LD for modern web apps — schema.org builders (Organization, Article, Product, FAQ, Breadcrumb, Event, Dataset, Book, Podcast), robots directives, richer Open Graph & Twitter cards, canonical + hreflang alternates, a Next.js App Router Metadata helper, the defineSite() SEO Autopilot engine, and an on-page SEO auditor with a CI sitemap crawler (`npx @lacspace/seo audit <url>` / `crawl <site> --min-grade A`). Zero-dependency, isomorphic.",
         "kw": [
           "seo",
