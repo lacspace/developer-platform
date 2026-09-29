@@ -1708,5 +1708,29 @@ export const DETAILS: Record<string, PkgDetail> = {
    "screenText"
   ],
   "usage": "import { createScreen } from \"@lacspace/screen\";\n\nconst screen = createScreen({\n  dimensions: {\n    death:    { terms: [\"died\", \"killed\", \"\\u092e\\u0943\\u0924\\u094d\\u092f\\u0941\"] },\n    minor:    { terms: [\"child\", \"\\u092c\\u093e\\u0932\\u092c\\u093e\\u0932\\u093f\\u0915\\u093e\"], forceReview: true },\n    hate:     { terms: [/* your list */], weight: 3, forceBlock: true },\n  },\n  negations: [\"no\", \"not\", \"-\\u0928\", \"-\\u0928\\u0928\\u094d\"],\n  gazetteer: [\"\\u0915\\u093e\\u0920\\u092e\\u093e\\u0921\\u094c\\u0902\"],\n  thresholds: { clear: 0, review: 1, block: 5 },\n});\n\nconst r = screen(storyText);\nr.decision; // \"clear\" | \"review\" | \"block\"\nif (r.decision === \"review\") await askTheModel(storyText); // only the uncertain ones reach the LLM"
+ },
+ "keyphrase": {
+  "exports": [
+   "keyphrase",
+   "toHashtag",
+   "ENGLISH_STOPWORDS",
+   "NEPALI_STOPWORDS"
+  ],
+  "usage": "import { keyphrase } from \"@lacspace/keyphrase\";\n\nconst r = keyphrase(articleText, {\n  gazetteer: [\"Nepal Rastra Bank\", \"\\u0928\\u0947\\u092a\\u093e\\u0932 \\u0930\\u093e\\u0937\\u094d\\u091f\\u094d\\u0930 \\u092c\\u0948\\u0902\\u0915\"],\n  categories: { economy: [\"rate\", \"inflation\", \"bank\"], sports: [\"match\", \"goal\"] },\n});\nr.tags;       // [\"policy interest rate\", \"central bank\", ...]\nr.hashtags;   // [\"#PolicyInterestRate\", ...]\nr.entities;   // [{ text: \"Nepal Rastra Bank\", count: 2 }]\nr.categories; // [{ category: \"economy\", score: 4 }]  — auto-detects en/ne"
+ },
+ "llm-cache": {
+  "exports": [
+   "createLlmCache",
+   "memoryStore",
+   "contentHash"
+  ],
+  "usage": "import { createLlmCache, memoryStore } from \"@lacspace/llm-cache\";\n\nconst cache = createLlmCache({ store: memoryStore(), ttlMs: 86_400_000, promptVersion: \"v3\" });\n\nconst pack = await cache.wrap(\n  { input: condensedSources, model: \"gemini\", variant: { lang: \"ne\" } },\n  () => callGemini(condensedSources),   // only runs on a miss\n  { staleIfError: true },               // 429? serve the last good result\n);\ncache.stats(); // { hits, misses, sets }"
+ },
+ "keypool": {
+  "exports": [
+   "createKeypool",
+   "kvStore"
+  ],
+  "usage": "import { createKeypool } from \"@lacspace/keypool\";\n\nconst pool = createKeypool({\n  keys: [\n    { id: \"gem-1\", provider: \"gemini\", secret: process.env.GEMINI_1! },\n    { id: \"gem-2\", provider: \"gemini\", secret: process.env.GEMINI_2! },\n  ],\n  providerLimits: { gemini: { rpm: 15, rpd: 1500, tpm: 1_000_000 } },\n});\n\nconst picked = await pool.pick(\"gemini\", \"gemini-2.0-flash\", estTokens);\nif (!picked) throw new Error(\"all keys cooling down\");\nconst res = await callGemini(picked.secret, prompt);\nawait pool.report(picked.id, { ok: true, tokens: res.usage.total, model: \"gemini-2.0-flash\" });"
  }
 };

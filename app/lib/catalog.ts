@@ -1293,6 +1293,60 @@ export const CATALOG: Group[] = [
         "d": "A cheap lexical content screener and LLM admission gate \u2014 score text against your own weighted, multi-language term lexicons (with negation, proximity windows and a named-entity gazetteer) and get a clear / review / block decision, so obviously-clean and obviously-flagged text never reaches an expensive model. Deterministic, auditable, isomorphic.",
         "kw": ["content-moderation", "lexical", "screener", "triage", "llm-gate", "admission-control", "classifier", "negation", "gazetteer", "sensitivity"],
         "deps": 0
+      },
+      {
+        "n": "keyphrase",
+        "v": "1.0.0",
+        "d": "Extractive keyphrases, tags, hashtags, named entities and category votes — a zero-dependency RAKE + TF-IDF engine with built-in English and Nepali stopwords, Devanagari-aware, so you can stop asking an LLM to generate tags/hashtags/entities. Deterministic, isomorphic.",
+        "kw": [
+          "keyphrase",
+          "keyword-extraction",
+          "rake",
+          "tfidf",
+          "tags",
+          "hashtags",
+          "named-entity",
+          "category",
+          "nepali",
+          "devanagari"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "llm-cache",
+        "v": "1.0.0",
+        "d": "A content-hash cache for LLM calls — key by (model family, prompt version, normalized input) so identical requests, retries after a 429 and repeated rewrites never pay twice. Pluggable async store (in-memory LRU built in, Mongo/Redis/KV via an adapter), TTL, stale-if-error and a wrap() memoizer. Zero-dependency, isomorphic.",
+        "kw": [
+          "llm-cache",
+          "cache",
+          "memoize",
+          "content-hash",
+          "prompt-cache",
+          "ttl",
+          "lru",
+          "rate-limit",
+          "429",
+          "openai"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "keypool",
+        "v": "1.0.0",
+        "d": "Provider-agnostic API-key rotation and rate-limit accounting — pool N free keys per provider, track RPM/RPD/TPM/TPD windows (per model), round-robin among healthy keys, cool down on 429 via retry-after, quarantine invalid keys, and share state across processes via an adapter. pick(provider, model, estTokens) → key | null. Zero-dependency, isomorphic.",
+        "kw": [
+          "api-key",
+          "key-rotation",
+          "rate-limit",
+          "keypool",
+          "round-robin",
+          "429",
+          "retry-after",
+          "quota",
+          "gemini",
+          "groq"
+        ],
+        "deps": 0
       }
     ]
   },
