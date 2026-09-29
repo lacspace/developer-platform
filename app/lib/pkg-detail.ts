@@ -1694,5 +1694,19 @@ export const DETAILS: Record<string, PkgDetail> = {
    "fromBase64url"
   ],
   "usage": "import { createCookieSession, createOAuthStateStore, createCsrf } from \"@lacspace/session\";\n\nconst sessions = createCookieSession<{ userId: string }>({ secrets: [process.env.SESSION_SECRET!], rolling: true });\n\nconst s = await sessions.read(request);             // Cookie header, Web Request or Node req — never throws\nif (!s.data) return unauthorized(s.reason);           // \"missing\" | \"tampered\" | \"expired\" | …\nheaders.append(\"set-cookie\", await sessions.commit({ userId: \"u1\" }));   // __Host-session=v1.… AES-256-GCM\nheaders.append(\"set-cookie\", sessions.destroy());\n\nconst oauthState = createOAuthStateStore({ secrets: [SECRET] });   // 10-minute { state, codeVerifier, nonce }\nconst csrf = createCsrf({ secrets: [SECRET] });                    // tokens bound to s.id"
+ },
+ "condense": {
+  "exports": [
+   "condense",
+   "splitSentences"
+  ],
+  "usage": "import { condense } from \"@lacspace/condense\";\n\nconst digest = condense(\n  [\n    { text: kathmanduPost, label: \"Kathmandu Post\" },\n    { text: himalayanTimes, label: \"Himalayan Times\" },\n    { text: onlineKhabar, label: \"Online Khabar\" },\n  ],\n  { tokenBudget: 1500, gazetteer: [\"Nepal Rastra Bank\", \"\\u0928\\u0947\\u092a\\u093e\\u0932 \\u0930\\u093e\\u0937\\u094d\\u091f\\u094d\\u0930 \\u092c\\u0948\\u0902\\u0915\"] },\n);\n\ndigest.text;       // kept sentences grouped per source under [S1 Kathmandu Post] headers\ndigest.tokens;     // \\u2264 tokenBudget\ndigest.droppedDup; // near-duplicate sentences removed across sources\n// Feed digest.text to the model instead of six full articles."
+ },
+ "screen": {
+  "exports": [
+   "createScreen",
+   "screenText"
+  ],
+  "usage": "import { createScreen } from \"@lacspace/screen\";\n\nconst screen = createScreen({\n  dimensions: {\n    death:    { terms: [\"died\", \"killed\", \"\\u092e\\u0943\\u0924\\u094d\\u092f\\u0941\"] },\n    minor:    { terms: [\"child\", \"\\u092c\\u093e\\u0932\\u092c\\u093e\\u0932\\u093f\\u0915\\u093e\"], forceReview: true },\n    hate:     { terms: [/* your list */], weight: 3, forceBlock: true },\n  },\n  negations: [\"no\", \"not\", \"-\\u0928\", \"-\\u0928\\u0928\\u094d\"],\n  gazetteer: [\"\\u0915\\u093e\\u0920\\u092e\\u093e\\u0921\\u094c\\u0902\"],\n  thresholds: { clear: 0, review: 1, block: 5 },\n});\n\nconst r = screen(storyText);\nr.decision; // \"clear\" | \"review\" | \"block\"\nif (r.decision === \"review\") await askTheModel(storyText); // only the uncertain ones reach the LLM"
  }
 };

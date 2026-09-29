@@ -1276,7 +1276,27 @@ export const CATALOG: Group[] = [
       }
     ]
   },
-  {
+    {
+    "group": "LLM Efficiency",
+    "icon": "⚡",
+    "items": [
+      {
+        "n": "condense",
+        "v": "1.0.0",
+        "d": "Extractive multi-source condenser \u2014 turn several articles on one story into a short, deduplicated, token-budgeted digest that keeps the numbers, quotes and named entities, so an LLM only rewrites a fraction of the text. BM25 sentence ranking, near-duplicate removal, per-source attribution with char offsets, Devanagari-aware (\u0964/\u0965, \u0966-\u096f, \u0930\u0941). Deterministic, isomorphic.",
+        "kw": ["condense", "summarize", "extractive-summary", "multi-document", "bm25", "token-budget", "dedupe", "prompt-compression", "rag", "devanagari"],
+        "deps": 2
+      },
+      {
+        "n": "screen",
+        "v": "1.0.0",
+        "d": "A cheap lexical content screener and LLM admission gate \u2014 score text against your own weighted, multi-language term lexicons (with negation, proximity windows and a named-entity gazetteer) and get a clear / review / block decision, so obviously-clean and obviously-flagged text never reaches an expensive model. Deterministic, auditable, isomorphic.",
+        "kw": ["content-moderation", "lexical", "screener", "triage", "llm-gate", "admission-control", "classifier", "negation", "gazetteer", "sensitivity"],
+        "deps": 0
+      }
+    ]
+  },
+{
     "group": "Testing Kit",
     "icon": "🧪",
     "items": [

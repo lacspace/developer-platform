@@ -311,6 +311,15 @@ export const KITS: Kit[] = [
     ],
   },
   {
+    name: "LLM Efficiency Kit",
+    icon: "⚡",
+    blurb: "Make a free-tier AI key go far — feed the model a condensed digest and screen out the calls it never needed.",
+    packages: [
+      { name: "condense", desc: "Extractive multi-source condenser — dedupe, keep numbers/quotes, token budget" },
+      { name: "screen", desc: "Lexical clear/review/block gate — only ambiguous text reaches the LLM" },
+    ],
+  },
+  {
     name: "Web Engagement Kit",
     icon: "🔔",
     blurb: "Push, PWA, toasts, CAPTCHA, realtime and consent — no vendor, no keys.",
