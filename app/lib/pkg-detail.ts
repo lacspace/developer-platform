@@ -1732,5 +1732,21 @@ export const DETAILS: Record<string, PkgDetail> = {
    "kvStore"
   ],
   "usage": "import { createKeypool } from \"@lacspace/keypool\";\n\nconst pool = createKeypool({\n  keys: [\n    { id: \"gem-1\", provider: \"gemini\", secret: process.env.GEMINI_1! },\n    { id: \"gem-2\", provider: \"gemini\", secret: process.env.GEMINI_2! },\n  ],\n  providerLimits: { gemini: { rpm: 15, rpd: 1500, tpm: 1_000_000 } },\n});\n\nconst picked = await pool.pick(\"gemini\", \"gemini-2.0-flash\", estTokens);\nif (!picked) throw new Error(\"all keys cooling down\");\nconst res = await callGemini(picked.secret, prompt);\nawait pool.report(picked.id, { ok: true, tokens: res.usage.total, model: \"gemini-2.0-flash\" });"
+ },
+ "translit": {
+  "exports": [
+   "transliterate",
+   "matchName",
+   "nameVariants",
+   "stripHonorifics",
+   "normalizeName",
+   "phoneticKey",
+   "scriptRatio",
+   "dominantScript",
+   "devanagariToLatin",
+   "latinToDevanagari",
+   "detectScript"
+  ],
+  "usage": "import { matchName, transliterate, dominantScript } from \"@lacspace/translit\";\n\nmatchName(\"Ram Chandra Poudel\", \"\\u0930\\u093e\\u092e\\u091a\\u0928\\u094d\\u0926\\u094d\\u0930 \\u092a\\u094c\\u0921\\u0947\\u0932\").match; // true\nmatchName(\"\\u092a\\u094c\\u0921\\u0947\\u0932 \\u0930\\u093e\\u092e\\u091a\\u0928\\u094d\\u0926\\u094d\\u0930\", \"Ramchandra Poudel\", { gazetteer }).canonical; // \"Ram Chandra Poudel\"\ntransliterate(\"\\u0930\\u093e\\u092e\\u091a\\u0928\\u094d\\u0926\\u094d\\u0930\"); // \"raamachandra\"\ndominantScript(englishArticleWithNepaliNames, { gazetteer }).adjustedRatio; // ignores names + quotes"
  }
 };
