@@ -1329,7 +1329,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "screen",
-        "v": "1.0.1",
+        "v": "1.1.0",
         "d": "A cheap lexical content screener and LLM admission gate \u2014 score text against your own weighted, multi-language term lexicons (with negation, proximity windows and a named-entity gazetteer) and get a clear / review / block decision, so obviously-clean and obviously-flagged text never reaches an expensive model. Deterministic, auditable, isomorphic.",
         "kw": ["content-moderation", "lexical", "screener", "triage", "llm-gate", "admission-control", "classifier", "negation", "gazetteer", "sensitivity"],
         "deps": 0
