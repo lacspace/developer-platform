@@ -1748,5 +1748,15 @@ export const DETAILS: Record<string, PkgDetail> = {
    "detectScript"
   ],
   "usage": "import { matchName, transliterate, dominantScript } from \"@lacspace/translit\";\n\nmatchName(\"Ram Chandra Poudel\", \"\\u0930\\u093e\\u092e\\u091a\\u0928\\u094d\\u0926\\u094d\\u0930 \\u092a\\u094c\\u0921\\u0947\\u0932\").match; // true\nmatchName(\"\\u092a\\u094c\\u0921\\u0947\\u0932 \\u0930\\u093e\\u092e\\u091a\\u0928\\u094d\\u0926\\u094d\\u0930\", \"Ramchandra Poudel\", { gazetteer }).canonical; // \"Ram Chandra Poudel\"\ntransliterate(\"\\u0930\\u093e\\u092e\\u091a\\u0928\\u094d\\u0926\\u094d\\u0930\"); // \"raamachandra\"\ndominantScript(englishArticleWithNepaliNames, { gazetteer }).adjustedRatio; // ignores names + quotes"
+ },
+ "factcheck-lite": {
+  "exports": [
+   "extractClaims",
+   "verify",
+   "extractNumeric",
+   "extractDates",
+   "normalizeDigits"
+  ],
+  "usage": "import { verify, extractClaims } from \"@lacspace/factcheck-lite\";\n\nconst r = verify(generatedArticle, sourceTexts, { numberTolerance: 0 });\nr.ok;          // false if any figure is unsupported\nr.mismatches;  // [{ type: \"percentage\", value: 6.5, nearest: 5.5, note }]\n// 12 crore == १२ करोड == 120,000,000 all compare equal; entities matched across scripts via @lacspace/translit"
  }
 };

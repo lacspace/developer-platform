@@ -1293,6 +1293,30 @@ export const CATALOG: Group[] = [
     ]
   },
     {
+    "group": "Newsroom Kit",
+    "icon": "📰",
+    "items": [
+      {
+        "n": "factcheck-lite",
+        "v": "1.0.0",
+        "d": "Deterministic fact-consistency checks for generated articles — extract every number, amount, percentage, date and named entity (Devanagari digits, लाख/करोड scaling, रु/NPR, %/प्रतिशत, AD + Bikram Sambat dates) and verify each appears in, or is derivable from, the sources. Catches fabricated or drifted figures without an LLM rewrite round; cross-script entity matching via @lacspace/translit. Isomorphic, deterministic.",
+        "kw": [
+          "fact-check",
+          "verification",
+          "claims",
+          "numbers",
+          "dates",
+          "bikram-sambat",
+          "nepali",
+          "hallucination",
+          "grounding",
+          "newsroom"
+        ],
+        "deps": 1
+      }
+    ]
+  },
+  {
     "group": "LLM Efficiency",
     "icon": "⚡",
     "items": [
