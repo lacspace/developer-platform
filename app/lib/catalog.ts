@@ -1021,7 +1021,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "translit",
-        "v": "1.0.1",
+        "v": "1.0.2",
         "d": "Nepali ⇄ English name transliteration and cross-script fuzzy name matching — romanize Devanagari (schwa-deleted), generate spelling variants (Poudel/Paudel), strip honorifics, and match \"Ram Chandra Poudel\" to \"रामचन्द्र पौडेल\". Plus Devanagari-aware script-ratio and language-mix analysis that ignores proper nouns and quotes. Zero-dependency, isomorphic, deterministic.",
         "kw": [
           "transliteration",
