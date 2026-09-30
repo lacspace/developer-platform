@@ -1766,5 +1766,19 @@ export const DETAILS: Record<string, PkgDetail> = {
    "NE_STOP"
   ],
   "usage": "import { detectTrends } from \"@lacspace/trend-detect\";\n\nconst trends = detectTrends(items, { windowHours: 24, baselineHours: 168, minCount: 3, topK: 20 });\n// items: { text, at, category?, terms?, id? }[]\n// → [{ term: \"flood\", recent: 12, baseline: 1.2, z: 6.4, growth: 5.5, score: 34.1, category, items }]"
+ },
+ "feed-reader": {
+  "exports": [
+   "parseFeed",
+   "discoverFeeds",
+   "commonFeedPaths",
+   "scoreFeedHealth",
+   "readFeed",
+   "feedFetchAllowed",
+   "parseRobots",
+   "isAllowed",
+   "toISO"
+  ],
+  "usage": "import { discoverFeeds, readFeed, feedFetchAllowed } from \"@lacspace/feed-reader\";\n\nconst feeds = discoverFeeds(html, \"https://example.com/\");\nif (feedFetchAllowed(feeds[0].href, robotsTxt, \"MyBot\")) {\n  const body = await fetch(feeds[0].href).then(r => r.text());\n  const { feed, health } = readFeed(body);\n  // health → { score, status, ageHours, postsPerDay, duplicateRatio, spike, reasons }\n}"
  }
 };

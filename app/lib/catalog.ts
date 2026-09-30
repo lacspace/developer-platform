@@ -1021,7 +1021,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "translit",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Nepali ⇄ English name transliteration and cross-script fuzzy name matching — romanize Devanagari (schwa-deleted), generate spelling variants (Poudel/Paudel), strip honorifics, and match \"Ram Chandra Poudel\" to \"रामचन्द्र पौडेल\". Plus Devanagari-aware script-ratio and language-mix analysis that ignores proper nouns and quotes. Zero-dependency, isomorphic, deterministic.",
         "kw": [
           "transliteration",
@@ -1298,7 +1298,7 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "factcheck-lite",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Deterministic fact-consistency checks for generated articles — extract every number, amount, percentage, date and named entity (Devanagari digits, लाख/करोड scaling, रु/NPR, %/प्रतिशत, AD + Bikram Sambat dates) and verify each appears in, or is derivable from, the sources. Catches fabricated or drifted figures without an LLM rewrite round; cross-script entity matching via @lacspace/translit. Isomorphic, deterministic.",
         "kw": [
           "fact-check",
@@ -1328,6 +1328,22 @@ export const CATALOG: Group[] = [
           "nepali"
         ],
         "deps": 0
+      },
+      {
+        "n": "feed-reader",
+        "v": "1.0.0",
+        "d": "Read the feeds you follow — the read-side complement to @lacspace/rss. Parse a fetched RSS 2.0, RSS 1.0 (RDF), Atom 1.0 or JSON Feed 1.1 body into one normalized shape, autodiscover the feeds a web page advertises, and score each source's health (staleness vs its own cadence, duplicate/poisoned items, volume spikes, missing fields, fetch error rate) so a large source list prunes itself. Robots.txt respect via @lacspace/robots. Deterministic, isomorphic, zero third-party deps, bring-your-own-fetch.",
+        "kw": [
+          "rss",
+          "atom",
+          "json-feed",
+          "feed-parser",
+          "feed-reader",
+          "autodiscovery",
+          "feed-health",
+          "newsroom"
+        ],
+        "deps": 1
       }
     ]
   },
