@@ -1758,5 +1758,13 @@ export const DETAILS: Record<string, PkgDetail> = {
    "normalizeDigits"
   ],
   "usage": "import { verify, extractClaims } from \"@lacspace/factcheck-lite\";\n\nconst r = verify(generatedArticle, sourceTexts, { numberTolerance: 0 });\nr.ok;          // false if any figure is unsupported\nr.mismatches;  // [{ type: \"percentage\", value: 6.5, nearest: 5.5, note }]\n// 12 crore == १२ करोड == 120,000,000 all compare equal; entities matched across scripts via @lacspace/translit"
+ },
+ "trend-detect": {
+  "exports": [
+   "detectTrends",
+   "EN_STOP",
+   "NE_STOP"
+  ],
+  "usage": "import { detectTrends } from \"@lacspace/trend-detect\";\n\nconst trends = detectTrends(items, { windowHours: 24, baselineHours: 168, minCount: 3, topK: 20 });\n// items: { text, at, category?, terms?, id? }[]\n// → [{ term: \"flood\", recent: 12, baseline: 1.2, z: 6.4, growth: 5.5, score: 34.1, category, items }]"
  }
 };

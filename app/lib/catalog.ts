@@ -1313,6 +1313,21 @@ export const CATALOG: Group[] = [
           "newsroom"
         ],
         "deps": 1
+      },
+      {
+        "n": "trend-detect",
+        "v": "1.0.0",
+        "d": "Burst / trending-topic detection over your own stream of items — score entities and terms by how far their recent frequency departs from a rolling baseline (z-score + growth), per category, English + Nepali, with stopword filtering. Rank a writer queue by what's actually rising. No platform scraping, deterministic, isomorphic.",
+        "kw": [
+          "trending",
+          "burst-detection",
+          "z-score",
+          "topics",
+          "newsroom",
+          "ranking",
+          "nepali"
+        ],
+        "deps": 0
       }
     ]
   },
