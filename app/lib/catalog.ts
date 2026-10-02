@@ -1405,6 +1405,40 @@ export const CATALOG: Group[] = [
     ]
   },
   {
+    "group": "Automation Kit",
+    "icon": "🤖",
+    "items": [
+      {
+        "n": "extractive",
+        "v": "1.0.0",
+        "d": "Turn a full article into a compact brief for an AI writer — extractive TextRank summary, key-facts (numbers, money, %, dates, named entities), headline candidates and key phrases/hashtags, for English and Nepali (danda-aware, decimal-safe). Deterministic, no LLM; reuses keyphrase + factcheck-lite. describe() command schema for an AI conductor.",
+        "kw": ["summarization", "extractive", "textrank", "key-facts", "headline", "brief", "nepali", "newsroom"],
+        "deps": 3
+      },
+      {
+        "n": "hookwriter",
+        "v": "1.0.0",
+        "d": "Deterministic platform copy from facts — hooks, titles, captions, CTAs, descriptions in many styles (question, number-led, what-it-means, breaking, how-to, quote…), en + ne, trimmed to each platform's limit. Fills ONLY the facts you pass (never invents claims), drops sensational phrasing; AI optional, only to fill slots. describe() schema. Zero deps.",
+        "kw": ["copywriting", "captions", "hooks", "headlines", "cta", "templates", "bilingual", "nepali", "newsroom"],
+        "deps": 0
+      },
+      {
+        "n": "postbandit",
+        "v": "1.0.0",
+        "d": "A tiny Thompson-sampling multi-armed bandit to learn the best option per platform — posting time, format, thumbnail or title variant — from engagement rewards. Beta posteriors per arm, deterministic when seeded, JSON-persistable; plugs into postplan. Zero deps.",
+        "kw": ["bandit", "thompson-sampling", "ab-testing", "optimization", "scheduling", "social-media", "newsroom"],
+        "deps": 0
+      },
+      {
+        "n": "commentguard",
+        "v": "1.0.0",
+        "d": "Comment moderation for English, romanized Nepali and Devanagari — spam, abuse, hate, doxxing, link-spam → allow/review/flag/hide, with PII detection (Nepali phone/email/URLs) and FAQ auto-replies. Deterministic rules + small extendable lexicons; borderline flag for an optional AI second opinion. describe() schema. Zero deps.",
+        "kw": ["moderation", "comment-moderation", "spam", "abuse", "doxxing", "pii", "nepali", "newsroom"],
+        "deps": 0
+      }
+    ]
+  },
+  {
     "group": "LLM Efficiency",
     "icon": "⚡",
     "items": [
