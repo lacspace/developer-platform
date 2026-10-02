@@ -1021,8 +1021,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "translit",
-        "v": "1.0.3",
-        "d": "Nepali ⇄ English name transliteration and cross-script fuzzy name matching — romanize Devanagari (schwa-deleted), generate spelling variants (Poudel/Paudel), strip honorifics, and match \"Ram Chandra Poudel\" to \"रामचन्द्र पौडेल\". Plus Devanagari-aware script-ratio and language-mix analysis that ignores proper nouns and quotes. Zero-dependency, isomorphic, deterministic.",
+        "v": "1.0.4",
+        "d": "Nepali ⇄ English name transliteration and cross-script fuzzy name matching — romanize Devanagari (schwa-deleted), generate spelling variants (Poudel/Paudel), strip honorifics, and match \"Ram Chandra Poudel\" to \"रामचन्द्र पौडेल\", with a per-token safety guard so different people who share a surname never collapse. Plus looksLikeName / isCommonWord so a search box doesn't transliterate ordinary words, and Devanagari-aware script-ratio analysis that ignores proper nouns and quotes. Zero-dependency, isomorphic, deterministic.",
         "kw": [
           "transliteration",
           "devanagari",
@@ -1344,6 +1344,22 @@ export const CATALOG: Group[] = [
           "newsroom"
         ],
         "deps": 1
+      },
+      {
+        "n": "datecheck",
+        "v": "1.0.0",
+        "d": "Tell how old an article really is — so an undated 2019 story is never republished as today's news. Extract the published/modified date from HTML (JSON-LD incl. @graph, meta tags, <time>, URL patterns, bylines), including Nepali Bikram Sambat dates (Devanagari digits, every month spelling, BS→AD on a verified table), detect body-text staleness, and return a fresh | stale | unknown verdict. Fail-closed: no date + no signal = unknown, never silently fresh. AI only via an optional injected hook. Zero third-party deps, deterministic, isomorphic.",
+        "kw": [
+          "date-extraction",
+          "published-date",
+          "bikram-sambat",
+          "nepali-date",
+          "freshness",
+          "staleness",
+          "jsonld",
+          "newsroom"
+        ],
+        "deps": 0
       }
     ]
   },

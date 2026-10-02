@@ -1743,11 +1743,13 @@ export const DETAILS: Record<string, PkgDetail> = {
    "phoneticKey",
    "scriptRatio",
    "dominantScript",
+   "looksLikeName",
+   "isCommonWord",
    "devanagariToLatin",
    "latinToDevanagari",
    "detectScript"
   ],
-  "usage": "import { matchName, transliterate, dominantScript } from \"@lacspace/translit\";\n\nmatchName(\"Ram Chandra Poudel\", \"\\u0930\\u093e\\u092e\\u091a\\u0928\\u094d\\u0926\\u094d\\u0930 \\u092a\\u094c\\u0921\\u0947\\u0932\").match; // true\nmatchName(\"\\u092a\\u094c\\u0921\\u0947\\u0932 \\u0930\\u093e\\u092e\\u091a\\u0928\\u094d\\u0926\\u094d\\u0930\", \"Ramchandra Poudel\", { gazetteer }).canonical; // \"Ram Chandra Poudel\"\ntransliterate(\"\\u0930\\u093e\\u092e\\u091a\\u0928\\u094d\\u0926\\u094d\\u0930\"); // \"raamachandra\"\ndominantScript(englishArticleWithNepaliNames, { gazetteer }).adjustedRatio; // ignores names + quotes"
+  "usage": "import { matchName, looksLikeName, dominantScript } from \"@lacspace/translit\";\n\nmatchName(\"Ram Chandra Poudel\", \"\\u0930\\u093e\\u092e\\u091a\\u0928\\u094d\\u0926\\u094d\\u0930 \\u092a\\u094c\\u0921\\u0947\\u0932\").match; // true\nmatchName(\"Laxmi\", \"\\u0932\\u0915\\u094d\\u0937\\u094d\\u092e\\u0940\").match; // true (x = क्ष cluster)\nlooksLikeName(\"india west indies\").isName; // false — don't transliterate this\nmatchName(a, b, { requireName: true }).match; // gated: both sides must look like a name"
  },
  "factcheck-lite": {
   "exports": [
@@ -1780,5 +1782,19 @@ export const DETAILS: Record<string, PkgDetail> = {
    "toISO"
   ],
   "usage": "import { discoverFeeds, readFeed, feedFetchAllowed } from \"@lacspace/feed-reader\";\n\nconst feeds = discoverFeeds(html, \"https://example.com/\");\nif (feedFetchAllowed(feeds[0].href, robotsTxt, \"MyBot\")) {\n  const body = await fetch(feeds[0].href).then(r => r.text());\n  const { feed, health } = readFeed(body);\n  // health → { score, status, ageHours, postsPerDay, duplicateRatio, spike, reasons }\n}"
+ },
+ "datecheck": {
+  "exports": [
+   "extractPublishedDate",
+   "textStaleness",
+   "assessFreshness",
+   "assessFreshnessWithAI",
+   "freshnessPrompt",
+   "parseAnyDate",
+   "bsToAd",
+   "adToBs",
+   "normalizeDigits"
+  ],
+  "usage": "import { extractPublishedDate, assessFreshness, bsToAd } from \"@lacspace/datecheck\";\n\nextractPublishedDate(html, url).publishedAt; // reads JSON-LD / meta / <time> / URL / byline, incl. Bikram Sambat\nassessFreshness({ html, text, url, feedDate, now: new Date(), maxAgeHours: 48 }).verdict; // \"fresh\" | \"stale\" | \"unknown\"\nbsToAd(2083, 6, 16); // → 2026-10-02 (AD)\n// fail-closed: no date + no signal = \"unknown\", never silently fresh"
  }
 };
