@@ -1364,6 +1364,47 @@ export const CATALOG: Group[] = [
     ]
   },
   {
+    "group": "Creative Kit",
+    "icon": "🎬",
+    "items": [
+      {
+        "n": "stockmedia",
+        "v": "1.0.0",
+        "d": "Search and download free-licence stock video clips and photos from the official Pexels and Pixabay APIs, normalized to one asset shape with licence + a one-line attribution each. Pooled bring-your-own keys, orientation/resolution/duration/safe-search filters, a heuristic news-safe flag, per-query cache. Never scrapes news/social/image-search. Zero third-party deps, bring-your-own-fetch.",
+        "kw": ["stock-media", "stock-video", "pexels", "pixabay", "b-roll", "free-license", "attribution", "newsroom"],
+        "deps": 0
+      },
+      {
+        "n": "montage",
+        "v": "1.0.0",
+        "d": "Compile clips + stills into a platform-ready social video: a deterministic ffmpeg timeline builder with per-platform presets and safe areas (Reels/TikTok/Shorts 9:16, FB 4:5/1:1, YouTube 16:9), Ken Burns, xfade transitions, Devanagari-shaped kinetic captions, lower-thirds, logo bug and progress bar — plus an optional low-CPU runner (nice + thread cap + ulimit). Bring your own ffmpeg; zero third-party deps.",
+        "kw": ["ffmpeg", "video", "montage", "reels", "tiktok", "ken-burns", "captions", "devanagari", "newsroom"],
+        "deps": 0
+      },
+      {
+        "n": "audiomix",
+        "v": "1.0.0",
+        "d": "Mix a voiceover with a music bed: sidechain-duck music under the voice, place SFX stings, normalize to -14 LUFS — an ffmpeg command builder, a licensed-music library loader (each track needs a licence sidecar; emits the credit line), and a deterministic tempo/beat detector for beat-synced cuts. No copyrighted platform music. Bring your own ffmpeg; zero third-party deps.",
+        "kw": ["audio", "ffmpeg", "ducking", "sidechain", "loudness", "lufs", "tempo", "beat-detection", "newsroom"],
+        "deps": 0
+      },
+      {
+        "n": "newscard",
+        "v": "1.0.0",
+        "d": "Generate branded news image posts — headline, quote, stat, breaking-banner and carousel cards (IG portrait 1080×1350, square, OG 1200×630, story), bilingual en/ne with correct Devanagari shaping, to PNG/WebP. Pure deterministic SVG builder + renderer via @resvg/resvg-js. Includes a safety-gated AI image-prompt helper that always labels 'AI illustration' and refuses photoreal depictions of real people or events.",
+        "kw": ["social-card", "news-card", "image-generator", "svg", "og-image", "carousel", "devanagari", "bilingual", "newsroom"],
+        "deps": 1
+      },
+      {
+        "n": "postplan",
+        "v": "1.0.0",
+        "d": "Choose a post format (video / single image / carousel / text) per story and platform, so a feed like Facebook gets a natural mix instead of all videos. Rule-based and deterministic — platform fit, what the story can produce, a breaking-news nudge, and a don't-repeat-the-last-few mix penalty — with an optional cheap AI tie-break (injected llm) only when two formats are nearly tied. Zero deps, isomorphic.",
+        "kw": ["social-media", "content-planning", "format-selection", "scheduling", "newsroom", "facebook", "instagram"],
+        "deps": 0
+      }
+    ]
+  },
+  {
     "group": "LLM Efficiency",
     "icon": "⚡",
     "items": [
