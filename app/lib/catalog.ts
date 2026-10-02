@@ -1021,7 +1021,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "translit",
-        "v": "1.0.4",
+        "v": "1.0.5",
         "d": "Nepali ⇄ English name transliteration and cross-script fuzzy name matching — romanize Devanagari (schwa-deleted), generate spelling variants (Poudel/Paudel), strip honorifics, and match \"Ram Chandra Poudel\" to \"रामचन्द्र पौडेल\", with a per-token safety guard so different people who share a surname never collapse. Plus looksLikeName / isCommonWord so a search box doesn't transliterate ordinary words, and Devanagari-aware script-ratio analysis that ignores proper nouns and quotes. Zero-dependency, isomorphic, deterministic.",
         "kw": [
           "transliteration",
@@ -1449,6 +1449,13 @@ export const CATALOG: Group[] = [
         "d": "Automatic data posts from official Nepal sources — NRB forex (day-over-day deltas), FENEGOSIDA gold/silver, NOC fuel, DHM city weather + special-bulletin alerts, DoEnv air quality (AQI from PM2.5), injected NEPSE — each as a bilingual, BS+AD-dated newscard table/alert card with caption, alt text, hashtags, sparkline, worth-posting gate and a montage video plan. No AI tokens.",
         "kw": ["nepal", "forex", "nrb", "gold-price", "fuel", "weather", "dhm", "aqi", "nepse", "social-card", "newsroom", "automation"],
         "deps": 2
+      },
+      {
+        "n": "speakable",
+        "v": "1.0.0",
+        "d": "Engine-agnostic spoken-form normaliser for Nepali and English TTS — numbers (unique Nepali 0–99 words, लाख/करोड, डेढ/अढाई idioms), Bikram Sambat + AD dates, times, currency, percent, phones/plates digit-by-digit, units, ordinals, acronyms (NEPSE → नेप्से), abbreviations, cross-script names with overrides; sentence pauses + slower numbers, SSML for edge-tts/Azure, estimated word timings, and engine WordBoundary alignment mapped back to the ORIGINAL text so captions never drift.",
+        "kw": ["tts", "text-to-speech", "text-normalization", "nepali", "bikram-sambat", "ssml", "edge-tts", "word-timings", "captions", "newsroom"],
+        "deps": 1
       }
     ]
   },
