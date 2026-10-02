@@ -1390,8 +1390,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "newscard",
-        "v": "1.0.0",
-        "d": "Generate branded news image posts — headline, quote, stat, breaking-banner and carousel cards (IG portrait 1080×1350, square, OG 1200×630, story), bilingual en/ne with correct Devanagari shaping, to PNG/WebP. Pure deterministic SVG builder + renderer via @resvg/resvg-js. Includes a safety-gated AI image-prompt helper that always labels 'AI illustration' and refuses photoreal depictions of real people or events.",
+        "v": "1.1.0",
+        "d": "Generate branded news image posts — headline, quote, stat, breaking-banner and carousel cards (IG portrait 1080×1350, square, OG 1200×630, story), bilingual en/ne with correct Devanagari shaping (Pango/HarfBuzz via sharp — conjuncts and matras render right), to PNG/WebP. Pure deterministic layout engine + sharp renderer. Includes a safety-gated AI image-prompt helper that always labels 'AI illustration' and refuses photoreal depictions of real people or events.",
         "kw": ["social-card", "news-card", "image-generator", "svg", "og-image", "carousel", "devanagari", "bilingual", "newsroom"],
         "deps": 1
       },
