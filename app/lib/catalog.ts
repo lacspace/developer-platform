@@ -1390,8 +1390,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "newscard",
-        "v": "1.1.0",
-        "d": "Generate branded news image posts — headline, quote, stat, breaking-banner and carousel cards (IG portrait 1080×1350, square, OG 1200×630, story), bilingual en/ne with correct Devanagari shaping (Pango/HarfBuzz via sharp — conjuncts and matras render right), to PNG/WebP. Pure deterministic layout engine + sharp renderer. Includes a safety-gated AI image-prompt helper that always labels 'AI illustration' and refuses photoreal depictions of real people or events.",
+        "v": "1.2.0",
+        "d": "Generate branded news image posts — headline, quote, stat, breaking-banner, data-table and carousel cards (IG portrait 1080×1350, square, OG 1200×630, story), bilingual en/ne with correct Devanagari shaping (Pango/HarfBuzz via sharp — conjuncts and matras render right), to PNG/WebP. Pure deterministic layout engine + sharp renderer. Includes a safety-gated AI image-prompt helper that always labels 'AI illustration' and refuses photoreal depictions of real people or events.",
         "kw": ["social-card", "news-card", "image-generator", "svg", "og-image", "carousel", "devanagari", "bilingual", "newsroom"],
         "deps": 1
       },
@@ -1435,6 +1435,20 @@ export const CATALOG: Group[] = [
         "d": "Comment moderation for English, romanized Nepali and Devanagari — spam, abuse, hate, doxxing, link-spam → allow/review/flag/hide, with PII detection (Nepali phone/email/URLs) and FAQ auto-replies. Deterministic rules + small extendable lexicons; borderline flag for an optional AI second opinion. describe() schema. Zero deps.",
         "kw": ["moderation", "comment-moderation", "spam", "abuse", "doxxing", "pii", "nepali", "newsroom"],
         "deps": 0
+      },
+      {
+        "n": "trends",
+        "v": "1.0.0",
+        "d": "Trending topics and hashtags for a region from official/public sources only — Google Trends daily RSS, YouTube mostPopular (optional key), Wikipedia pageviews — merged across scripts (Dashain ≡ दशैं) and scored, with story-relevance gating so you never trend-jack, and per-platform hashtag sets with limits + a shadow-ban filter. Bring-your-own-fetch; describe() schema.",
+        "kw": ["trends", "trending", "hashtags", "google-trends", "youtube", "wikipedia", "nepal", "newsroom"],
+        "deps": 2
+      },
+      {
+        "n": "datacards",
+        "v": "1.0.0",
+        "d": "Automatic data posts from official Nepal sources — NRB forex (day-over-day deltas), FENEGOSIDA gold/silver, NOC fuel, DHM city weather + special-bulletin alerts, DoEnv air quality (AQI from PM2.5), injected NEPSE — each as a bilingual, BS+AD-dated newscard table/alert card with caption, alt text, hashtags, sparkline, worth-posting gate and a montage video plan. No AI tokens.",
+        "kw": ["nepal", "forex", "nrb", "gold-price", "fuel", "weather", "dhm", "aqi", "nepse", "social-card", "newsroom", "automation"],
+        "deps": 2
       }
     ]
   },
