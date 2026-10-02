@@ -1484,6 +1484,20 @@ export const CATALOG: Group[] = [
         "d": "Engine-agnostic text-to-speech pipeline for Nepali/English newsrooms — speakable normalisation → edge-tts (Python WordBoundary stream, CLI fallback), Piper offline, or a custom engine → audio + word timings aligned back to the ORIGINAL text (engine events or estimates scaled to the real duration read from WAV/MP3 bytes, zero deps) → captionsync-ready segments. Retry with backoff + voice fallback ladder, voice registry, content-hash cache. BYO engine binary; no keys.",
         "kw": ["tts", "text-to-speech", "edge-tts", "piper", "nepali", "word-timings", "captions", "voiceover", "newsroom"],
         "deps": 1
+      },
+      {
+        "n": "explainer",
+        "v": "1.0.0",
+        "d": "Article → explainer without an LLM (en/ne): title / what happened / why it matters / key numbers (as written, with currency) / who / background / what's next / CTA slides, a ready newscard carousel, a 30–60 s video script with scenes (voiceover ≤30 words, on-screen line, duration, stock-footage queries, overlay hints), FAQ pairs, category + hashtags. TextRank + keyphrase + Nepali name finder; optional LLM polish with a facts lock.",
+        "kw": ["explainer", "carousel", "video-script", "faq", "textrank", "nepali", "newsroom", "social-media"],
+        "deps": 3
+      },
+      {
+        "n": "quizpoll",
+        "v": "1.0.0",
+        "d": "Quiz + poll items from an article (en/ne), no LLM: fill-in-the-blank on figures (distractors scale the number as written — Devanagari digits, लाख/करोड, decimals kept) and on names (distractors from the article), true/false incl. a perturbed figure, opinion polls from safe templates, did-you-know cards; seeded deterministic shuffle with answer index; per-platform fit (IG poll 2 / quiz 4, YouTube 5, X 4).",
+        "kw": ["quiz", "poll", "engagement", "instagram", "youtube", "nepali", "newsroom"],
+        "deps": 1
       }
     ]
   },
