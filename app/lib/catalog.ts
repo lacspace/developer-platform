@@ -1390,7 +1390,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "newscard",
-        "v": "1.2.0",
+        "v": "1.2.1",
         "d": "Generate branded news image posts — headline, quote, stat, breaking-banner, data-table and carousel cards (IG portrait 1080×1350, square, OG 1200×630, story), bilingual en/ne with correct Devanagari shaping (Pango/HarfBuzz via sharp — conjuncts and matras render right), to PNG/WebP. Pure deterministic layout engine + sharp renderer. Includes a safety-gated AI image-prompt helper that always labels 'AI illustration' and refuses photoreal depictions of real people or events.",
         "kw": ["social-card", "news-card", "image-generator", "svg", "og-image", "carousel", "devanagari", "bilingual", "newsroom"],
         "deps": 1
@@ -1463,6 +1463,20 @@ export const CATALOG: Group[] = [
         "d": "Platform-safe burn-in captions from word/sentence timings — Devanagari-safe line breaking (never inside a word), max 2 lines, Reels/TikTok/Shorts/FB/YouTube safe areas, auto font-size fit, punctuation-aware breaks, orphan avoidance, cue duration bounds, karaoke highlight — as ASS (libass shapes Devanagari, drawtext doesn't), SRT, VTT, the ffmpeg subtitles filter and a montage drawtext fallback. Pairs with speakable timings. Zero deps.",
         "kw": ["captions", "subtitles", "ass", "srt", "vtt", "karaoke", "libass", "ffmpeg", "devanagari", "reels", "shorts", "newsroom"],
         "deps": 0
+      },
+      {
+        "n": "thumbgen",
+        "v": "1.0.0",
+        "d": "Thumbnail variants for YouTube/OG/square/story from a headline + licensed photo — split, fullbleed with scrim, typographic band, number badge for data stories, quote; breaking banner + category accents; headline auto-fit to 3–4 whole-word lines with correct Devanagari shaping (sharp/Pango via newscard); credit, logo; rationale per variant for A/B via postbandit. No AI tokens.",
+        "kw": ["thumbnail", "youtube-thumbnail", "og-image", "image-generator", "devanagari", "a-b-testing", "newsroom"],
+        "deps": 1
+      },
+      {
+        "n": "motiongfx",
+        "v": "1.0.0",
+        "d": "Animated news motion graphics as pure ffmpeg filters — lower-thirds (slide/wipe/pop) coloured by category and urgency, breaking stingers (bar/flash/corner), scrolling ticker, brand sting clip, and auto-shorts (16:9 → 9:16 with blurred fill) — eased time expressions, safe-area aware per preset, Devanagari via your font. Plugs into montage chains and multi-cut.",
+        "kw": ["ffmpeg", "motion-graphics", "lower-third", "stinger", "ticker", "shorts", "video", "newsroom", "devanagari"],
+        "deps": 1
       }
     ]
   },
