@@ -1477,6 +1477,13 @@ export const CATALOG: Group[] = [
         "d": "Animated news motion graphics as pure ffmpeg filters — lower-thirds (slide/wipe/pop) coloured by category and urgency, breaking stingers (bar/flash/corner), scrolling ticker, brand sting clip, and auto-shorts (16:9 → 9:16 with blurred fill) — eased time expressions, safe-area aware per preset, Devanagari via your font. Plugs into montage chains and multi-cut.",
         "kw": ["ffmpeg", "motion-graphics", "lower-third", "stinger", "ticker", "shorts", "video", "newsroom", "devanagari"],
         "deps": 1
+      },
+      {
+        "n": "tts",
+        "v": "1.0.0",
+        "d": "Engine-agnostic text-to-speech pipeline for Nepali/English newsrooms — speakable normalisation → edge-tts (Python WordBoundary stream, CLI fallback), Piper offline, or a custom engine → audio + word timings aligned back to the ORIGINAL text (engine events or estimates scaled to the real duration read from WAV/MP3 bytes, zero deps) → captionsync-ready segments. Retry with backoff + voice fallback ladder, voice registry, content-hash cache. BYO engine binary; no keys.",
+        "kw": ["tts", "text-to-speech", "edge-tts", "piper", "nepali", "word-timings", "captions", "voiceover", "newsroom"],
+        "deps": 1
       }
     ]
   },
