@@ -1383,8 +1383,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "audiomix",
-        "v": "1.0.0",
-        "d": "Mix a voiceover with a music bed: sidechain-duck music under the voice, place SFX stings, normalize to -14 LUFS — an ffmpeg command builder, a licensed-music library loader (each track needs a licence sidecar; emits the credit line), and a deterministic tempo/beat detector for beat-synced cuts. No copyrighted platform music. Bring your own ffmpeg; zero third-party deps.",
+        "v": "1.1.0",
+        "d": "Mix a voiceover with a music bed: sidechain-duck music under the voice, place SFX stings, normalize to -14 LUFS — an ffmpeg command builder, a licensed-music library loader, a free Creative-Commons music finder over Jamendo (trending/popularity order, licence + attribution per track), and a deterministic tempo/beat detector for beat-synced cuts. Safe to bake into uploads — unlike platform 'trending sounds', which get Content-ID-claimed. Bring your own ffmpeg; zero third-party deps.",
         "kw": ["audio", "ffmpeg", "ducking", "sidechain", "loudness", "lufs", "tempo", "beat-detection", "newsroom"],
         "deps": 0
       },
