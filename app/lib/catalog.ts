@@ -1376,9 +1376,9 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "montage",
-        "v": "1.0.0",
+        "v": "1.1.0",
         "d": "Compile clips + stills into a platform-ready social video: a deterministic ffmpeg timeline builder with per-platform presets and safe areas (Reels/TikTok/Shorts 9:16, FB 4:5/1:1, YouTube 16:9), Ken Burns, xfade transitions, Devanagari-shaped kinetic captions, lower-thirds, logo bug and progress bar — plus an optional low-CPU runner (nice + thread cap + ulimit). Bring your own ffmpeg; zero third-party deps.",
-        "kw": ["ffmpeg", "video", "montage", "reels", "tiktok", "ken-burns", "captions", "devanagari", "newsroom"],
+        "kw": ["ffmpeg", "video", "montage", "reels", "tiktok", "ken-burns", "captions", "devanagari", "libass", "multi-cut", "newsroom"],
         "deps": 0
       },
       {
@@ -1456,6 +1456,13 @@ export const CATALOG: Group[] = [
         "d": "Engine-agnostic spoken-form normaliser for Nepali and English TTS — numbers (unique Nepali 0–99 words, लाख/करोड, डेढ/अढाई idioms), Bikram Sambat + AD dates, times, currency, percent, phones/plates digit-by-digit, units, ordinals, acronyms (NEPSE → नेप्से), abbreviations, cross-script names with overrides; sentence pauses + slower numbers, SSML for edge-tts/Azure, estimated word timings, and engine WordBoundary alignment mapped back to the ORIGINAL text so captions never drift.",
         "kw": ["tts", "text-to-speech", "text-normalization", "nepali", "bikram-sambat", "ssml", "edge-tts", "word-timings", "captions", "newsroom"],
         "deps": 1
+      },
+      {
+        "n": "captionsync",
+        "v": "1.0.0",
+        "d": "Platform-safe burn-in captions from word/sentence timings — Devanagari-safe line breaking (never inside a word), max 2 lines, Reels/TikTok/Shorts/FB/YouTube safe areas, auto font-size fit, punctuation-aware breaks, orphan avoidance, cue duration bounds, karaoke highlight — as ASS (libass shapes Devanagari, drawtext doesn't), SRT, VTT, the ffmpeg subtitles filter and a montage drawtext fallback. Pairs with speakable timings. Zero deps.",
+        "kw": ["captions", "subtitles", "ass", "srt", "vtt", "karaoke", "libass", "ffmpeg", "devanagari", "reels", "shorts", "newsroom"],
+        "deps": 0
       }
     ]
   },
