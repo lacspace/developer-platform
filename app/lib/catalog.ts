@@ -990,7 +990,7 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "nepali-date",
-        "v": "1.2.0",
+        "v": "1.2.1",
         "d": "Bikram Sambat (BS) ↔ Gregorian (AD) date conversion — zero-dependency, isomorphic, with token formatting (Nepali digits & names), BS date arithmetic, parsing, calendar-month and fiscal-year helpers.",
         "kw": [
           "nepali-date",
@@ -1347,7 +1347,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "datecheck",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Tell how old an article really is — so an undated 2019 story is never republished as today's news. Extract the published/modified date from HTML (JSON-LD incl. @graph, meta tags, <time>, URL patterns, bylines), including Nepali Bikram Sambat dates (Devanagari digits, every month spelling, BS→AD on a verified table), detect body-text staleness, and return a fresh | stale | unknown verdict. Fail-closed: no date + no signal = unknown, never silently fresh. AI only via an optional injected hook. Zero third-party deps, deterministic, isomorphic.",
         "kw": [
           "date-extraction",
