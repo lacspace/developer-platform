@@ -1,3 +1,5 @@
+import { PACKAGE_COUNT } from "./counts";
+
 // Shared content for the Lacspace Templates / Developer platform.
 
 export type Template = {
@@ -94,6 +96,52 @@ export type Kit = {
 
 // Curated ecosystem — the full catalog is CATALOG_TOTAL packages (see lib/catalog.ts).
 export const KITS: Kit[] = [
+  {
+    name: "Newsroom Kit",
+    icon: "📰",
+    blurb: "Run an AI newsroom on free keys — triage, ground, check and moderate deterministically, so the model only writes.",
+    packages: [
+      { name: "triage", desc: "Pick which stories to write before spending a single AI token" },
+      { name: "factcheck-lite", desc: "Every number, date and name in a draft must appear in the sources" },
+      { name: "datanews", desc: "Bilingual stories straight from data — gold, forex, NEPSE, weather, fuel" },
+      { name: "sensitivity", desc: "Zero-AI first pass for the sensitive-story gate, en + ne" },
+      { name: "commentguard", desc: "Comment moderation — abuse, threats, personal data, spam" },
+    ],
+  },
+  {
+    name: "Creative Kit",
+    icon: "🎬",
+    blurb: "Turn a story into posts and short video locally — cards, thumbnails, captions, voice and montage.",
+    packages: [
+      { name: "montage", desc: "ffmpeg video timelines — cuts, Ken Burns, overlays" },
+      { name: "newscard", desc: "Branded image posts and table cards rendered to PNG" },
+      { name: "captionsync", desc: "Word-timed karaoke captions synced to speech" },
+      { name: "tts", desc: "Text-to-speech with timings mapped back to the text" },
+    ],
+  },
+  {
+    name: "Automation Kit",
+    icon: "🤖",
+    blurb: "Let an AI conduct deterministic tools — platform copy, post formats, quizzes and what to post next.",
+    packages: [
+      { name: "conductor", desc: "One command catalogue over every package, with plan validation" },
+      { name: "hookwriter", desc: "Platform-fitted hooks, captions and hashtags" },
+      { name: "quizpoll", desc: "Quizzes and polls from an article, no LLM" },
+      { name: "postbandit", desc: "Learn which post variants actually perform" },
+    ],
+  },
+  {
+    name: "Nepal Toolkit",
+    icon: "🇳🇵",
+    blurb: "Everything a Nepali product needs — calendar, official holidays, names, Preeti and romanised typing.",
+    packages: [
+      { name: "nepali-date", desc: "Bikram Sambat ⇄ Gregorian, formatting, fiscal years" },
+      { name: "nepal-holidays", desc: "Official public holidays from the Home Ministry gazette" },
+      { name: "nepali-typing", desc: "Romanised Nepali → Devanagari with candidates" },
+      { name: "preeti", desc: "Preeti ⇄ Unicode for legacy Nepali text" },
+      { name: "translit", desc: "Nepali ⇄ English name matching (Poudel / पौडेल)" },
+    ],
+  },
   {
     name: "Sheets Kit",
     icon: "📗",
@@ -373,5 +421,5 @@ export const STATS = {
   pages: "11",
   components: "26",
   templates: "8",
-  packages: "95",
+  packages: String(PACKAGE_COUNT),
 };

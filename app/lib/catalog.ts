@@ -893,6 +893,62 @@ export const CATALOG: Group[] = [
     "icon": "📈",
     "items": [
       {
+        "n": "marketwrap",
+        "v": "1.0.0",
+        "d": "Deterministic, no-AI stock-market wrap writer in English and Nepali (Devanagari). From the index close/change, breadth, turnover, sector moves and top gainers/losers it writes a factual daily wrap such as \"NEPSE fell 11.90 points (−0.45%) to 2,587.25. Decliners led 238 to 95. Turnover Rs 4.29 arba.\" / \"नेप्से ११.९० अंक (−०.४५%) घटेर २,५८७.२५ मा बन्द भयो।\", with seeded phrasing variants so it doesn't read the same every day, South-Asian number formatting (lakh/crore/arba), a headline, and the computed facts. Every number comes from your input; no advice language. Zero-dependency.",
+        "kw": [
+          "nepse",
+          "stock-market",
+          "market-wrap",
+          "market-summary",
+          "nepali",
+          "devanagari"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "patterns",
+        "v": "1.0.0",
+        "d": "Rule-based chart-pattern detection on OHLCV bars: ATR-sized swings (zigzag), harmonic XABCD patterns (Gartley, Bat, Butterfly, Crab, Cypher, AB=CD) with potential-reversal zones, an Elliott impulse count that obeys the three hard rules, classic chart patterns (double tops/bottoms, head & shoulders, triangles, wedges, channels, ranges) with necklines and measured moves, per-session TPO market profiles and volume profiles, and Kagi / Point & Figure transforms. Drawing-ready paths and zones plus plain data. Descriptive geometry, never a forecast. Zero-dependency.",
+        "kw": [
+          "technical-analysis",
+          "chart-patterns",
+          "harmonic-patterns",
+          "elliott-wave",
+          "zigzag",
+          "head-and-shoulders"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "portfolio",
+        "v": "1.1.0",
+        "d": "Portfolio analytics from holdings {symbol, qty, wacc} and daily closes: unrealised P/L vs WACC per holding and in total, market-value weights, HHI concentration (0–10,000) and effective number of holdings, sector weights, annualised volatility (daily log returns × √periods, default 240 for NEPSE), beta and correlation against an index on shared dates, max drawdown with peak/trough dates, Sharpe and Sortino with a risk-free rate. Duplicate lots merged, missing closes forward-filled. Deterministic, zero-dependency.",
+        "kw": [
+          "portfolio",
+          "portfolio-analytics",
+          "risk",
+          "volatility",
+          "beta",
+          "drawdown"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "rules",
+        "v": "1.2.0",
+        "d": "Trading rules as data: a small, safe JSON rule language for \"buy when …, sell when …\" (price, SMA/EMA, RSI, MACD, ATR, Bollinger, Supertrend direction, N-candle high/low, average volume, % change; above / below / crosses above / crosses below; all/any groups; ATR stop and target), evaluated per candle on OHLCV arrays. Includes a validator that coerces AI-written JSON (no code execution), plain-English descriptions, a next-open backtester (stop-first, costs both sides) and a last-candle screener with sector/price/turnover filters and ranking — all on the same engine. Zero-dependency.",
+        "kw": [
+          "trading-rules",
+          "strategy",
+          "backtest",
+          "backtesting",
+          "screener",
+          "stock-screener"
+        ],
+        "deps": 0
+      },
+      {
         "n": "indicators",
         "v": "1.2.0",
         "d": "30+ streaming technical indicators (RSI, MACD, EMA, Bollinger, ATR, Supertrend, ADX, VWAP, Ichimoku, Parabolic SAR, StochRSI, CCI, MFI, Keltner, Donchian, OBV, CMF and more) with O(1) incremental next() updates for live price feeds, plus batch helpers. Zero-dependency.",
@@ -922,8 +978,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "market-clock",
-        "v": "1.1.0",
-        "d": "Holiday-aware, timezone-correct trading clock — is NSE/BSE/NYSE/LSE open now, which session segment (pre-open/regular/post), next open/close, half-days and the next N sessions. Built-in presets for 8 exchanges (DST-correct) or bring your own spec. Zero-dependency.",
+        "v": "1.2.0",
+        "d": "Holiday-aware, timezone-correct trading clock — is NEPSE/NSE/BSE/NYSE/LSE open now, current session segment, next open/close, half-days, next N sessions. Built-in exchange presets + bring your own spec. Zero-dependency.",
         "kw": [
           "market-hours",
           "trading-hours",
@@ -989,6 +1045,48 @@ export const CATALOG: Group[] = [
     "icon": "🇳🇵",
     "items": [
       {
+        "n": "nepal-holidays",
+        "v": "1.0.0",
+        "d": "Nepal's official public holidays by Bikram Sambat year, transcribed from the Ministry of Home Affairs notice in Nepal Rajpatra (BS 2083: Khanda 75, Sankhya 67, Bhag 5). BS + AD dates, English/Nepali names, kind (public holiday / observance with offices open), scope (national, regional with districts, community, women, education, disability), multi-day Dashain and Tihar ranges, lunar holidays the notice leaves undated kept as null. holidays(), holidaysOn(), isHoliday(), upcoming(), bsToAD()/adToBS(). Every date checked against the weekday printed in the notice. Pure JS, zero dependencies, React Native safe.",
+        "kw": [
+          "nepal",
+          "holidays",
+          "public-holidays",
+          "bikram-sambat",
+          "nepali-calendar",
+          "dashain"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "preeti",
+        "v": "1.0.0",
+        "d": "Preeti ⇄ Unicode for Nepali: convert legacy Preeti-font ASCII text (\"g]kfn\") to Unicode Devanagari (नेपाल) and back. Handles short-i and reph reordering, half letters, ra-kaar (| and «), conjunct keys (क्ष ज्ञ त्र श्र …), Preeti numerals, and looksLikePreeti() to detect pasted legacy text. Pure JS, zero dependencies, React Native safe.",
+        "kw": [
+          "preeti",
+          "nepali",
+          "devanagari",
+          "unicode",
+          "font",
+          "converter"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "nepali-typing",
+        "v": "1.0.0",
+        "d": "Romanised Nepali → Devanagari typing with per-word candidates, like a phonetic input method: \"namaste\" → नमस्ते, \"mero desh\" → मेरो देश, \"kathmandu\" → काठमाडौं, \"netaharulai\" → नेताहरूलाई. A frequency lexicon matched by a loose key that forgives romanisation variance (aa/a, sh/s, w/v/b, ch/chh, dropped schwas, nasals), typed case endings, English loanwords (facebook → फेसबुक), a phonetic engine with ITRANS capitals (T D N Sh → ट ड ण ष), buildLexicon() from your own Nepali text and learn() to remember picks. Pure JS, zero dependencies, React Native safe.",
+        "kw": [
+          "nepali",
+          "devanagari",
+          "transliteration",
+          "input-method",
+          "ime",
+          "romanized"
+        ],
+        "deps": 0
+      },
+      {
         "n": "nepali-date",
         "v": "1.2.1",
         "d": "Bikram Sambat (BS) ↔ Gregorian (AD) date conversion — zero-dependency, isomorphic, with token formatting (Nepali digits & names), BS date arithmetic, parsing, calendar-month and fiscal-year helpers.",
@@ -1005,8 +1103,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "nepali-utils",
-        "v": "1.2.0",
-        "d": "Everyday Nepal helpers — NPR currency formatting (integer-paisa parse/format), Devanagari numerals, amount-in-words (Nepali & Roman), validators (vehicle plate, citizenship), provinces & district lookup. Zero-dependency.",
+        "v": "1.6.0",
+        "d": "Everyday Nepal helpers — NPR currency formatting, Devanagari numerals, amount-in-words, validators, provinces. Zero-dependency.",
         "kw": [
           "nepal",
           "nepali",
@@ -1174,8 +1272,8 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "ai",
-        "v": "1.1.0",
-        "d": "A tiny, provider-agnostic LLM chat client over fetch — one chat()/stream() API for OpenAI, Anthropic, Google Gemini and any OpenAI-compatible endpoint (Groq, Together, OpenRouter, Ollama). Now with typed message builders, retry/backoff + timeout, usage/cost accounting and JSON-output parsing. Bring your own key, no SDK, isomorphic.",
+        "v": "1.2.1",
+        "d": "A tiny, zero-dependency, provider-agnostic LLM chat client over fetch — one chat()/stream() API for OpenAI, Anthropic, Google Gemini and any OpenAI-compatible endpoint (Groq, Together, OpenRouter, Ollama), plus typed message builders, retry/backoff + timeout, usage/cost accounting and JSON-output parsing. Bring your own key, no SDK, isomorphic.",
         "kw": ["ai", "llm", "chat", "openai", "anthropic", "claude", "gemini", "groq", "openrouter", "ollama", "retry", "cost-estimation", "structured-output"],
         "deps": 0
       },
@@ -1297,6 +1395,62 @@ export const CATALOG: Group[] = [
     "icon": "📰",
     "items": [
       {
+        "n": "triage",
+        "v": "1.0.0",
+        "d": "Pre-write news triage: decide which story candidates to write before spending AI tokens. Ranks by freshness decay, independent source domains (registrable-domain dedupe), trend, novelty and trust; fills per-language publish slots with category quotas; a breaking fast lane (breaking flag, or ≥3 independent sources within an hour plus trend) that jumps full slots with an hourly cap; sensitive stories need two independent sources or an official one; routine notices (bonus/right share, court notice boards) are down-ranked and grouped into roundups; stale, duplicate and would-expire-before-next-slot items are dropped. write_now / queue / drop with reasons. Deterministic, no AI, zero-dependency.",
+        "kw": [
+          "news",
+          "newsroom",
+          "triage",
+          "editorial",
+          "prioritization",
+          "breaking-news"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "sensitivity",
+        "v": "1.0.0",
+        "d": "Zero-AI first pass for a newsroom's sensitive-story gate, in Nepali and English. classify({ title, text, lang }) returns categories (election, court, death, communal, named_individual, minor, health_emergency), a confidence (certain → skip the model, unsure → ask it) and the matched terms. Bilingual lexicons with suffix-aware Devanagari matching, false-friend exclusions (death overs, climate justice, मुद्दा as 'issue', 'N वर्षका लागि'), headline/lead weighting that ignores scraped sidebar noise, harm context for minors, a person check for allegations, and policy-ruling detection for courts. On 200 real newsroom stories it settled 76% without the model. Zero-dependency.",
+        "kw": [
+          "newsroom",
+          "content-moderation",
+          "sensitivity",
+          "classification",
+          "nepali",
+          "devanagari"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "packfix",
+        "v": "1.0.1",
+        "d": "Targeted repair of failed AI-written story packs, instead of whole-pack rewrites. From your validator's failures it clears name false positives (descriptive Title Case phrases, names found in other-script sources via transliteration), swaps near-misspellings for the source spelling, ranks the sentences behind an 8-gram plagiarism overlap and picks the smallest set to rewrite, and neutralises judgement words (explosive, massive, shocking…) with context guards. Whatever it can't fix comes back with sentence ids, so you re-ask the model for 1–2 sentences, not the whole pack.",
+        "kw": [
+          "llm",
+          "ai",
+          "newsroom",
+          "validation",
+          "repair",
+          "plagiarism"
+        ],
+        "deps": 1
+      },
+      {
+        "n": "datanews",
+        "v": "1.1.1",
+        "d": "Zero-AI bilingual (English / Nepali) news stories from structured data: gold & silver prices, Nepal Rastra Bank forex rates, NEPSE market close, DHM weather forecasts and fuel prices. render(kind, data, { lang }) returns headline, deck, summary, 3-5 body paragraphs, 3 bullets, tags, category and the key numbers. Every number comes from your input, missing fields drop their sentence (never \"N/A\"), phrasing rotates by date, Nepali uses Devanagari numerals with lakh/crore grouping. Zero-dependency.",
+        "kw": [
+          "news",
+          "nlg",
+          "data-journalism",
+          "automated-journalism",
+          "nepali",
+          "devanagari"
+        ],
+        "deps": 0
+      },
+      {
         "n": "factcheck-lite",
         "v": "1.0.1",
         "d": "Deterministic fact-consistency checks for generated articles — extract every number, amount, percentage, date and named entity (Devanagari digits, लाख/करोड scaling, रु/NPR, %/प्रतिशत, AD + Bikram Sambat dates) and verify each appears in, or is derivable from, the sources. Catches fabricated or drifted figures without an LLM rewrite round; cross-script entity matching via @lacspace/translit. Isomorphic, deterministic.",
@@ -1376,15 +1530,15 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "montage",
-        "v": "1.1.0",
-        "d": "Compile clips + stills into a platform-ready social video: a deterministic ffmpeg timeline builder with per-platform presets and safe areas (Reels/TikTok/Shorts 9:16, FB 4:5/1:1, YouTube 16:9), Ken Burns, xfade transitions, Devanagari-shaped kinetic captions, lower-thirds, logo bug and progress bar — plus an optional low-CPU runner (nice + thread cap + ulimit). Bring your own ffmpeg; zero third-party deps.",
+        "v": "1.1.1",
+        "d": "Compile a list of clips and stills into a platform-ready social video: an ffmpeg timeline builder with per-platform presets and safe areas (Reels/TikTok/Shorts 9:16, FB 4:5 and 1:1, YouTube 16:9), Ken Burns on stills, xfade transitions (crossfade/slide/zoom-punch/whip), Devanagari-shaped kinetic captions, lower-thirds, logo bug and progress bar. Pure deterministic command builder plus an optional low-CPU runner (nice + thread cap + ulimit -c 0). Bring your own ffmpeg; zero third-party dependencies, isomorphic. 1.1 adds plan() — a render-time estimator with a cost breakdown and cheaper alternatives — a fast quality mode (ultrafast, 24 fps, lighter Ken Burns), 720p renditions reused across cuts, libass ASS captions (correct Devanagari shaping via @lacspace/captionsync), and one-process multi-cut: en/ne/square/reels outputs from a single decode.",
         "kw": ["ffmpeg", "video", "montage", "reels", "tiktok", "ken-burns", "captions", "devanagari", "libass", "multi-cut", "newsroom"],
         "deps": 0
       },
       {
         "n": "audiomix",
-        "v": "1.1.0",
-        "d": "Mix a voiceover with a music bed: sidechain-duck music under the voice, place SFX stings, normalize to -14 LUFS — an ffmpeg command builder, a licensed-music library loader, a free Creative-Commons music finder over Jamendo (trending/popularity order, licence + attribution per track), and a deterministic tempo/beat detector for beat-synced cuts. Safe to bake into uploads — unlike platform 'trending sounds', which get Content-ID-claimed. Bring your own ffmpeg; zero third-party deps.",
+        "v": "1.2.0",
+        "d": "Mix a newsroom voiceover with a music bed: sidechain-duck the music under the voice, place SFX stings, and normalize to -14 LUFS — an ffmpeg command builder plus a licensed-music library loader (local tracks with a licence sidecar) AND a free Creative-Commons music finder over the Jamendo API (bring-your-own client_id, orderable by popularity/'trending', licence + attribution per track), plus a deterministic tempo/beat detector for beat-synced cuts. Safe to bake into API uploads — unlike platform 'trending sounds', which are Content-ID-claimed. Bring your own ffmpeg; zero third-party dependencies.",
         "kw": ["audio", "ffmpeg", "ducking", "sidechain", "loudness", "lufs", "tempo", "beat-detection", "newsroom"],
         "deps": 0
       },
@@ -1409,16 +1563,30 @@ export const CATALOG: Group[] = [
     "icon": "🤖",
     "items": [
       {
-        "n": "extractive",
+        "n": "conductor",
         "v": "1.0.0",
-        "d": "Turn a full article into a compact brief for an AI writer — extractive TextRank summary, key-facts (numbers, money, %, dates, named entities), headline candidates and key phrases/hashtags, for English and Nepali (danda-aware, decimal-safe). Deterministic, no LLM; reuses keyphrase + factcheck-lite. describe() command schema for an AI conductor.",
+        "d": "Drive every describe()-capable @lacspace package through one interface — merge descriptors into a single command catalogue, render it token-light for an LLM prompt, validate an AI-written plan against the command schemas (unknown commands, required inputs, types/enums, forward references, duplicate ids), and execute it step by step with $steps.<id>.output references, parallel groups, per-step timeouts, a whole-plan budget, optional steps, when-conditions and a dry run. The AI decides; the packages do the work. Zero deps.",
+        "kw": [
+          "orchestration",
+          "agent",
+          "plan",
+          "workflow",
+          "json-schema",
+          "llm"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "extractive",
+        "v": "1.2.2",
+        "d": "Turn a full article into a compact brief for an AI writer — extractive TextRank summary, key-facts (numbers, money, percentages, dates, named entities), headline candidates and key phrases/hashtags, for English and Nepali (sentence splitting on the danda '।', decimal-safe). Deterministic, no LLM; reuses @lacspace/keyphrase and @lacspace/factcheck-lite. Exposes a describe() command schema so an AI 'conductor' can drive it.",
         "kw": ["summarization", "extractive", "textrank", "key-facts", "headline", "brief", "nepali", "newsroom"],
         "deps": 3
       },
       {
         "n": "hookwriter",
-        "v": "1.0.0",
-        "d": "Deterministic platform copy from facts — hooks, titles, captions, CTAs, descriptions in many styles (question, number-led, what-it-means, breaking, how-to, quote…), en + ne, trimmed to each platform's limit. Fills ONLY the facts you pass (never invents claims), drops sensational phrasing; AI optional, only to fill slots. describe() schema. Zero deps.",
+        "v": "1.1.0",
+        "d": "Deterministic platform copy from facts — hooks, titles, captions, CTAs and descriptions in many styles (question, number-led, what-it-means, contrast, breaking, how-to, quote…), English and Nepali, trimmed to each platform's character limit (YouTube/IG/TikTok/FB/X/Threads/LinkedIn/Telegram). Fills ONLY the facts you pass (never invents claims) and drops sensational phrasing; AI optional, only to fill slots. Exposes a describe() command schema for an AI 'conductor'. Zero dependencies.",
         "kw": ["copywriting", "captions", "hooks", "headlines", "cta", "templates", "bilingual", "nepali", "newsroom"],
         "deps": 0
       },
@@ -1431,36 +1599,36 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "commentguard",
-        "v": "1.0.0",
-        "d": "Comment moderation for English, romanized Nepali and Devanagari — spam, abuse, hate, doxxing, link-spam → allow/review/flag/hide, with PII detection (Nepali phone/email/URLs) and FAQ auto-replies. Deterministic rules + small extendable lexicons; borderline flag for an optional AI second opinion. describe() schema. Zero deps.",
+        "v": "1.2.0",
+        "d": "Comment moderation for English, romanized Nepali and Devanagari — scores spam, abuse, hate, doxxing and link-spam and returns an allow / review / flag / hide action, with PII detection (Nepali phone, email, URLs/shorteners) and FAQ auto-reply suggestions. Deterministic rules + small, extendable lexicons; a borderline flag marks gray-zone comments for an optional AI second opinion. Exposes a describe() command schema. Zero dependencies.",
         "kw": ["moderation", "comment-moderation", "spam", "abuse", "doxxing", "pii", "nepali", "newsroom"],
         "deps": 0
       },
       {
         "n": "trends",
-        "v": "1.0.0",
-        "d": "Trending topics and hashtags for a region from official/public sources only — Google Trends daily RSS, YouTube mostPopular (optional key), Wikipedia pageviews — merged across scripts (Dashain ≡ दशैं) and scored, with story-relevance gating so you never trend-jack, and per-platform hashtag sets with limits + a shadow-ban filter. Bring-your-own-fetch; describe() schema.",
+        "v": "1.1.0",
+        "d": "Trending topics and hashtags for a region from official/public sources only — Google Trends daily RSS (geo), YouTube Data API mostPopular (optional key), and Wikipedia pageviews — merged across scripts and scored (multi-source terms rank up), with story-relevance gating so you never trend-jack unrelated topics, and per-platform hashtag sets with limits + a banned/shadow-ban filter. Bring-your-own-fetch, deterministic given inputs. Reuses @lacspace/keyphrase and @lacspace/translit.",
         "kw": ["trends", "trending", "hashtags", "google-trends", "youtube", "wikipedia", "nepal", "newsroom"],
         "deps": 2
       },
       {
         "n": "datacards",
-        "v": "1.0.0",
-        "d": "Automatic data posts from official Nepal sources — NRB forex (day-over-day deltas), FENEGOSIDA gold/silver, NOC fuel, DHM city weather + special-bulletin alerts, DoEnv air quality (AQI from PM2.5), injected NEPSE — each as a bilingual, BS+AD-dated newscard table/alert card with caption, alt text, hashtags, sparkline, worth-posting gate and a montage video plan. No AI tokens.",
+        "v": "1.0.1",
+        "d": "Automatic data posts from official Nepal sources — Nepal Rastra Bank forex (with day-over-day deltas), FENEGOSIDA gold/silver, Nepal Oil Corporation fuel, DHM city weather forecasts + special-bulletin alerts, Department of Environment air quality (AQI from PM2.5), and injected NEPSE — each turned into a bilingual (English/Nepali, Bikram Sambat + AD dated) @lacspace/newscard table or alert card with caption, alt text, hashtags, an optional sparkline, a worth-posting gate, and a 10–15 s montage video plan. Deterministic, bring-your-own-fetch, no AI tokens.",
         "kw": ["nepal", "forex", "nrb", "gold-price", "fuel", "weather", "dhm", "aqi", "nepse", "social-card", "newsroom", "automation"],
         "deps": 2
       },
       {
         "n": "speakable",
-        "v": "1.0.0",
-        "d": "Engine-agnostic spoken-form normaliser for Nepali and English TTS — numbers (unique Nepali 0–99 words, लाख/करोड, डेढ/अढाई idioms), Bikram Sambat + AD dates, times, currency, percent, phones/plates digit-by-digit, units, ordinals, acronyms (NEPSE → नेप्से), abbreviations, cross-script names with overrides; sentence pauses + slower numbers, SSML for edge-tts/Azure, estimated word timings, and engine WordBoundary alignment mapped back to the ORIGINAL text so captions never drift.",
+        "v": "1.0.1",
+        "d": "Engine-agnostic spoken-form normaliser for Nepali and English text-to-speech. Rewrites what TTS engines mangle before any engine sees it: numbers (unique Nepali 0–99 words, लाख/करोड scales, डेढ/अढाई/साढे idioms, decimals), Bikram Sambat and AD dates (२०८३ असोज १६ → दुई हजार त्रियासी साल असोज सोह्र गते), times (१३:३८ → दिउँसो एक बजेर अठतिस मिनेट), currency (रु. १ लाख ५० हजार / NPR 1,20,000 / $120M), percent, phone numbers and plates digit-by-digit, units, ordinals, acronyms (NEPSE → नेप्से, NRB → एन आर बी, extendable), abbreviations (डा./वि.सं./Dr.), cross-script names via @lacspace/translit with a pronunciation override dictionary. Then sentence segmentation with pauses and slower rate on numbers, SSML for edge-tts/Azure, estimated word timings, and alignment of engine WordBoundary events back to the ORIGINAL text so captions never drift. Deterministic, no AI tokens.",
         "kw": ["tts", "text-to-speech", "text-normalization", "nepali", "bikram-sambat", "ssml", "edge-tts", "word-timings", "captions", "newsroom"],
         "deps": 1
       },
       {
         "n": "captionsync",
-        "v": "1.0.0",
-        "d": "Platform-safe burn-in captions from word/sentence timings — Devanagari-safe line breaking (never inside a word), max 2 lines, Reels/TikTok/Shorts/FB/YouTube safe areas, auto font-size fit, punctuation-aware breaks, orphan avoidance, cue duration bounds, karaoke highlight — as ASS (libass shapes Devanagari, drawtext doesn't), SRT, VTT, the ffmpeg subtitles filter and a montage drawtext fallback. Pairs with speakable timings. Zero deps.",
+        "v": "1.0.1",
+        "d": "Platform-safe burn-in captions from word or sentence timings — Devanagari-safe line breaking (never inside a word, so conjuncts and matras stay intact), max 2 lines, per-platform safe areas (Reels/TikTok/Shorts/Facebook/YouTube), auto font-size fit, punctuation-aware breaks, orphan avoidance, cue duration bounds and gap merging, karaoke word highlight — emitted as ASS (libass shapes Devanagari with HarfBuzz, unlike drawtext), SRT, VTT, the ffmpeg subtitles filter string, and an @lacspace/montage drawtext fallback. Pairs with @lacspace/speakable word timings. Zero deps, deterministic.",
         "kw": ["captions", "subtitles", "ass", "srt", "vtt", "karaoke", "libass", "ffmpeg", "devanagari", "reels", "shorts", "newsroom"],
         "deps": 0
       },
@@ -1494,8 +1662,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "quizpoll",
-        "v": "1.0.0",
-        "d": "Quiz + poll items from an article (en/ne), no LLM: fill-in-the-blank on figures (distractors scale the number as written — Devanagari digits, लाख/करोड, decimals kept) and on names (distractors from the article), true/false incl. a perturbed figure, opinion polls from safe templates, did-you-know cards; seeded deterministic shuffle with answer index; per-platform fit (IG poll 2 / quiz 4, YouTube 5, X 4).",
+        "v": "1.2.0",
+        "d": "Quiz and poll items from a news article without an LLM — English or Nepali: fill-in-the-blank on figures (distractors by scaling the number exactly as written, keeping Devanagari digits, लाख/करोड scale words, decimals), fill-in-the-blank on names (distractors from the article itself), true/false (incl. a statement with a perturbed figure), opinion polls from safe templates, did-you-know cards; deterministic seeded shuffle with answer index; per-platform fit (Instagram poll 2 / quiz 4, YouTube 5, X 4, Facebook). Deterministic, no AI tokens.",
         "kw": ["quiz", "poll", "engagement", "instagram", "youtube", "nepali", "newsroom"],
         "deps": 1
       }
@@ -1557,8 +1725,8 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "keypool",
-        "v": "1.0.0",
-        "d": "Provider-agnostic API-key rotation and rate-limit accounting — pool N free keys per provider, track RPM/RPD/TPM/TPD windows (per model), round-robin among healthy keys, cool down on 429 via retry-after, quarantine invalid keys, and share state across processes via an adapter. pick(provider, model, estTokens) → key | null. Zero-dependency, isomorphic.",
+        "v": "1.4.0",
+        "d": "AI key pooling two ways. createAiChain: route-ordered multi-provider failover (Gemini, Groq, Cerebras, OpenAI, Anthropic, DeepSeek, OpenRouter, any OpenAI-compatible) that rests key+model pairs on 429 (Gemini daily quota until Pacific midnight), quarantines rejected keys (incl. Gemini's 400 'API key not valid'), cools down after N failures, shrinks Groq max_tokens to fit TPM, regrows empty reasoning replies, JSON mode with repair, per-purpose routes and caps, a call ledger hook, and a shared store (memory or Redis). createKeypool: RPM/RPD/TPM/TPD rotation and accounting. Built on @lacspace/ai.",
         "kw": [
           "api-key",
           "key-rotation",

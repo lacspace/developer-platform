@@ -1796,5 +1796,202 @@ export const DETAILS: Record<string, PkgDetail> = {
    "normalizeDigits"
   ],
   "usage": "import { extractPublishedDate, assessFreshness, bsToAd } from \"@lacspace/datecheck\";\n\nextractPublishedDate(html, url).publishedAt; // reads JSON-LD / meta / <time> / URL / byline, incl. Bikram Sambat\nassessFreshness({ html, text, url, feedDate, now: new Date(), maxAgeHours: 48 }).verdict; // \"fresh\" | \"stale\" | \"unknown\"\nbsToAd(2083, 6, 16); // → 2026-10-02 (AD)\n// fail-closed: no date + no signal = \"unknown\", never silently fresh"
+ },
+ "marketwrap": {
+  "exports": [
+   "NEPALI_NAMES",
+   "describe",
+   "groupSouthAsian",
+   "marketWrap",
+   "rupeesInWords",
+   "signedPct",
+   "toDevanagari"
+  ],
+  "usage": "import { marketWrap } from \"@lacspace/marketwrap\";\n\nconst w = marketWrap({\n  index: { name: \"NEPSE\", close: 2587.25, change: -11.9, pct: -0.45 },\n  breadth: { up: 95, down: 238, flat: 23 },\n  turnoverRs: 4293774181,\n  sectors: [{ name: \"Mutual Fund\", pct: 0.2 }, { name: \"Trading\", pct: -0.96 }],\n  gainers: [{ symbol: \"SBLD89\", pct: 8.8 }],\n  losers: [{ symbol: \"SINDU\", pct: -8.55 }],\n});\n\nw.en;\n// NEPSE fell 11.90 points (−0.45%) to 2,587.25. Decliners led 238 to 95. Turnover Rs 4.29 arba.\n// Mutual Fund was the best sector (+0.20%), Trading the weakest (−0.96%).\nw.ne;\n// नेप्से ११.९० अंक (−०.४५%) घटेर २,५८७.२५ मा बन्द भयो। २३८ कम्पनीको शेयरमूल्य घट्यो भने ९५ को बढ्यो र २३ को स्थिर रह्यो।\n// कारोबार रकम रु ४.२९ अर्ब रह्यो। उपसमूहतर्फ म्युचुअल फन्ड (+०.२०%) सबैभन्दा राम्रो र व्यापार (−०.९६%) सबैभन्दा कमजोर रह्यो।\nw.headline; // { en: \"NEPSE down 11.90 points\", ne: \"नेप्से ११.९० अंकले घट्यो\" }\nw.facts;    // direction, points, pct, breadth leader, turnover, best/worst sector, top movers"
+ },
+ "patterns": {
+  "exports": [
+   "atr",
+   "chartPatterns",
+   "describe",
+   "elliott",
+   "harmonics",
+   "kagi",
+   "pointFigure",
+   "rma",
+   "sessionVolumeProfiles",
+   "swings",
+   "tpoProfiles",
+   "trueRange",
+   "volumeProfile"
+  ],
+  "usage": "import { swings, chartPatterns, harmonics, elliott, tpoProfiles } from \"@lacspace/patterns\";\n\n// bars: { time (unix seconds), open, high, low, close, volume }[]\nswings(bars, 2);                // { piv: [{ i, p, hi }], tail, atr }: zigzag confirmed at k × ATR(14)\nchartPatterns(bars).found;      // [\"Double bottom\", \"Double bottom\", \"Range (rectangle)\"]\nharmonics(bars).hits;           // [{ name: \"Gartley\", bull, pts: [X,A,B,C,D], forming }]\nelliott(bars).paths;            // labelled impulse (0)…(5), then (a)(b)(c); wave-5 target zone\ntpoProfiles(bars, 24, 5);       // market profile per session: rows with letters, POC, 70% value area, initial balance"
+ },
+ "portfolio": {
+  "exports": [
+   "analyzePortfolio",
+   "beta",
+   "describe",
+   "hhi",
+   "maxDrawdown"
+  ],
+  "usage": "import { analyzePortfolio } from \"@lacspace/portfolio\";\n\nconst r = analyzePortfolio(\n  {\n    holdings: [{ symbol: \"NABIL\", qty: 100, wacc: 540 }, { symbol: \"UPPER\", qty: 200, wacc: 180 }],\n    prices: { NABIL: [{ date: \"2026-10-01\", close: 532 }, …], UPPER: [...] }, // daily closes\n    index: [{ date: \"2026-10-01\", close: 2587.25 }, …],                        // NEPSE, for beta\n    sectors: { NABIL: \"Banking\", UPPER: \"Hydropower\" },\n  },\n  { periodsPerYear: 240, riskFree: 0 },\n);\n\nr.holdings;      // [{ symbol, sector, qty, wacc, last, cost, value, weight, pnl, pnlPct }] by value\nr.totals;        // { cost, value, pnl, pnlPct }: unrealised P/L vs WACC\nr.hhi;           // concentration on market-value weights, 0–10,000 (10,000 = one stock)\nr.effectiveHoldings; // 10,000 / HHI\nr.sectorWeights; // [{ sector, value, weight }]\nr.history;       // [{ date, value }]: current holdings valued on past closes\nr.risk;          // { volatility, maxDrawdown, drawdownPeak, drawdownTrough, sharpe, sortino,\n                 //   beta, correlation, periodReturn, indexReturn, days, betaDays }"
+ },
+ "rules": {
+  "exports": [
+   "OPERAND_KINDS",
+   "OPS",
+   "STRATEGY_TEMPLATES",
+   "backtestRules",
+   "cleanRules",
+   "condToText",
+   "defaultOperand",
+   "describe",
+   "describeCond",
+   "describeOperand",
+   "describeRules",
+   "evaluate",
+   "operandSeries",
+   "operandToText",
+   "parseRules",
+   "rulesStrategy",
+   "rulesToText",
+   "runBacktest",
+   "screen"
+  ],
+  "usage": "import { cleanRules, evaluate, backtestRules, screen, describeRules } from \"@lacspace/rules\";\n\nconst rules = cleanRules({\n  name: \"EMA cross with RSI filter\",\n  entry: { mode: \"all\", conds: [\n    { a: { k: \"ema\", n: 20 }, op: \"crossAbove\", b: { k: \"ema\", n: 50 } },\n    { a: { k: \"rsi\", n: 14 }, op: \">\", b: { k: \"num\", v: 50 } },\n  ] },\n  exit: { mode: \"any\", conds: [{ a: { k: \"ema\", n: 20 }, op: \"crossBelow\", b: { k: \"ema\", n: 50 } }] },\n  stopAtr: 2,\n}); // → Rules | null (null when there's no valid entry condition)\n\ndescribeRules(rules!); // \"Buy when EMA 20 crosses above EMA 50 and RSI 14 is above 50; sell when …; stop 2 × ATR below entry.\"\nevaluate(rules!, bars); // { entry: boolean[], exit: boolean[], atr, need }, read on each candle's close"
+ },
+ "nepal-holidays": {
+  "exports": [
+   "YEARS_AVAILABLE",
+   "_printedSaturdays",
+   "_rows",
+   "adToBS",
+   "bsToAD",
+   "describe",
+   "holidays",
+   "holidaysOn",
+   "isHoliday",
+   "source",
+   "upcoming"
+  ],
+  "usage": "import { holidays, holidaysOn, isHoliday, upcoming } from \"@lacspace/nepal-holidays\";\n\nholidays(2083, { scope: \"national\" });\n// [{ id: \"new-year\", name: { en: \"Nepali New Year\", ne: \"नव वर्ष\" }, kind: \"public-holiday\", category: \"festival\",\n//    scope: \"national\", dateBS: \"2083-01-01\", dateAD: \"2026-04-14\", days: 1, section: \"2.1(क)\", source: {…} }, …]\n\nholidaysOn(\"2026-10-20\");            // [Dashain: 2083-06-31 → 2083-07-06, 17–23 Oct 2026, 7 days]\nisHoliday(\"2026-10-24\");             // { holiday: true, saturday: true, holidays: [] }\nupcoming(\"2026-10-05\", 3);           // Ghatasthapana, Dashain, Tihar\nholidays(2083, { district: \"Parsa\", scope: \"regional\" }); // Fagu Purnima on Chait 8 (Terai)"
+ },
+ "preeti": {
+  "exports": [
+   "describe",
+   "looksLikePreeti",
+   "preetiToUnicode",
+   "unicodeToPreeti"
+  ],
+  "usage": "import { preetiToUnicode, unicodeToPreeti, looksLikePreeti } from \"@lacspace/preeti\";\n\npreetiToUnicode(\"g]kfn ;/sf/sf k|wfgdGqLn] cfly{s ;'wf/sf] 3f]if0ff ug'{eof] .\");\n// \"नेपाल सरकारका प्रधानमन्त्रीले आर्थिक सुधारको घोषणा गर्नुभयो ।\"\n\nunicodeToPreeti(\"निर्माण\");    // \"lgdf{0f\"  (paste into a document set in Preeti)\nlooksLikePreeti(\"g]kfn\");     // true: offer to convert pasted legacy text"
+ },
+ "nepali-typing": {
+  "exports": [
+   "buildLexicon",
+   "createTyper",
+   "describe",
+   "devKey",
+   "latinKey",
+   "phonetic",
+   "suggest",
+   "toDevanagari"
+  ],
+  "usage": "import { suggest, toDevanagari, createTyper, buildLexicon } from \"@lacspace/nepali-typing\";\n\nsuggest(\"sarkar\");        // [\"सरकार\", \"सर्कर\", \"सरकारी\", …]\nsuggest(\"kathmandu\");     // [\"काठमाडौं\", …]\nsuggest(\"netaharulai\");   // [\"नेताहरूलाई\", …]  (typed case endings)\ntoDevanagari(\"NEPSE aaja 20 ankale badhyo\");  // \"NEPSE आज २० अंकले बढ्यो\"\ntoDevanagari(\"mero desh nepal ho.\");          // \"मेरो देश नेपाल हो।\""
+ },
+ "triage": {
+  "exports": [
+   "NOTICE_PATTERNS",
+   "SENSITIVE_DEFAULT",
+   "describe",
+   "registrableDomain",
+   "roundups",
+   "triage"
+  ],
+  "usage": "import { triage, roundups } from \"@lacspace/triage\";\n\nconst decisions = triage(candidates, {\n  now: Date.now(),\n  freshnessHours: { default: 48, weather: 12, nepse: 24 },\n  slots: { perHour: { en: 3, ne: 3 }, usedThisHour: { en: 1, ne: 0 } },\n  quotas: { sports: 1 },\n});\n// [{ id, action: \"write_now\" | \"queue\" | \"drop\", priority, reasons, roundup?, independentSources, expiresAt }]\n\nroundups(decisions); // { \"nepse-notices\": [\"bonus-1\", \"right-2\"] }"
+ },
+ "sensitivity": {
+  "exports": [
+   "CATEGORIES",
+   "classify",
+   "describe"
+  ],
+  "usage": "import { classify } from \"@lacspace/sensitivity\";\n\nclassify({ lang: \"en\", title: \"MP Ansari Highlights Irregularities at National Medical College\", text });\n// { categories: [\"named_individual\"], confidence: \"certain\", hits: [...], scores: {...}, reasons: [] }\n\nclassify({ lang: \"ne\", title: \"राष्ट्रपतिद्वारा संघीय संसदको चालू अधिवेशन अन्त्य\", text });\n// { categories: [], confidence: \"certain\", ... }  → skip the model\n\nclassify({ lang: \"en\", title: \"Supreme Court Orders Strict Enforcement of Plastic Bag Ban\", text });\n// { categories: [\"court\"], confidence: \"unsure\", reasons: [\"court: policy ruling or no case/charge words\"] }  → ask the model"
+ },
+ "packfix": {
+  "exports": [
+   "describe",
+   "fix",
+   "overlap",
+   "parseFailure",
+   "replaceSentence",
+   "sentences",
+   "splitSentences"
+  ],
+  "usage": "import { fix, replaceSentence } from \"@lacspace/packfix\";\n\nconst r = fix(pack, [\n  \"names: names not in sources or gazetteer: Provincial Traffic Police Office, Sagarmatha Sambaad\",\n  \"plagiarism: 8-gram overlap 8.27% (limit 3%)\",\n  \"tone: banned phrases: explosive\",\n], sources);\n\nr.pack;      // explosive knock → aggressive knock; entities cleaned\nr.fixed;     // ['names: \"Provincial Traffic Police Office\" is a descriptive phrase, not a name', 'tone: \"explosive\" replaced 1×', …]\nr.remaining; // ['names: names not in sources or gazetteer: Sagarmatha Sambaad', 'plagiarism: …']\nr.rewrite;   // [{ id: \"body.2.3\", reason: \"names\", text, detail }, { id: \"body.1.0\", reason: \"plagiarism\", … }]\n\n// one small model call per sentence, then put it back\nlet p = r.pack;\nfor (const w of r.rewrite) p = replaceSentence(p, w.id, await rewriteOneSentence(w));"
+ },
+ "datanews": {
+  "exports": [
+   "KINDS",
+   "describe",
+   "formatBigMoney",
+   "formatNumber",
+   "render",
+   "renderBoth",
+   "toDevanagari"
+  ],
+  "usage": "import { render, renderBoth } from \"@lacspace/datanews\";\n\nrender(\"gold_silver\", {\n  gold: { perTola: 294800, prev: 293300 },\n  silver: { perTola: 4425, prev: 4400 },\n}, { lang: \"en\", date: \"2026-10-04\" }).headline;\n// Gold rises Rs 1,500 to Rs 294,800 per tola; silver at Rs 4,425\n\nrender(\"gold_silver\", { gold: { perTola: 294800, prev: 293300 } }, { lang: \"ne\" }).headline;\n// सुनको भाउ तोलामा १,५०० रुपैयाँले बढेर २,९४,८०० रुपैयाँ पुग्यो\n\nconst { en, ne } = renderBoth(\"nepse_close\", {\n  index: 2683, change: -12.4, changePct: -0.46, turnover: 4123456789, volume: 9876543,\n  gainers: [{ symbol: \"SBLD89\", pct: 8.8 }], losers: [{ symbol: \"SINDU\", pct: -8.55 }],\n}, { date: \"2026-10-04\" });\nen.headline; // NEPSE falls 12.4 points to 2,683 as turnover crosses Rs 4 billion\nne.headline; // नेप्से १२.४ अंकले घटेर २,६८३ मा, कारोबार ४ अर्ब नाघ्यो\nen.body;     // [\"The Nepal Stock Exchange (NEPSE) index fell 12.4 points, or 0.46%, to close at 2,683 on 4 October 2026.\", ...]"
+ },
+ "conductor": {
+  "exports": [
+   "autoBind",
+   "catalogue",
+   "catalogueForPrompt",
+   "describe",
+   "execute",
+   "planPrompt",
+   "shortName",
+   "validate",
+   "validatePlan"
+  ],
+  "usage": ""
+ },
+ "quizpoll": {
+  "exports": [
+   "describe",
+   "numberDistractors",
+   "quizpoll",
+   "typedEntities"
+  ],
+  "usage": "import { quizpoll } from \"@lacspace/quizpoll\";\n\nconst q = quizpoll(articleText, { maxQuiz: 4, maxPolls: 2, seed: 42 });\nq.quiz[0]\n// { kind: \"number\", question: \"खाली ठाउँ भर्नुहोस्: बैंकहरूले कर्जामा लिने ब्याजदर ____ माथि लैजान पाउने छैनन्\",\n//   options: [{ text: \"१३ प्रतिशत\" }, { text: \"१२ प्रतिशत\", correct: true }, { text: \"११ प्रतिशत\" }, { text: \"१४ प्रतिशत\" }],\n//   answerIndex: 1, explanation: \"उत्तर: १२ प्रतिशत\", source: \"…\",\n//   fits: { \"instagram-poll\": false, \"instagram-quiz\": true, youtube: true, x: true, facebook: true, telegram: true } }\nq.polls        // opinion polls from safe templates (no claims): \"यसबारे तपाईंको धारणा के छ?\" राम्रो निर्णय / गलत निर्णय / थाहा छैन\nq.didYouKnow   // \"थाहा छ? …\" cards from the figure sentences"
+ },
+ "commentguard": {
+  "exports": [
+   "LEXICONS",
+   "PATTERNS",
+   "check",
+   "describe",
+   "moderate"
+  ],
+  "usage": "import { moderate } from \"@lacspace/commentguard\";\n\nmoderate(\"Join telegram group bit.ly/x, subscribe my channel\").action;   // \"hide\" (link-spam)\nmoderate(\"his number is 9812345678 call him\").categories.doxxing;         // > 0.6, pii.phones\nmoderate(\"great report, thank you!\").action;                              // \"allow\"\n\nmoderate(\"where can I read the full story?\", {\n  faqs: [{ match: [\"where\", \"kaha\", \"कहाँ\"], reply: { en: \"Link in bio.\", ne: \"बायोको लिंकमा।\" } }],\n  lang: \"en\",\n}).suggestedReply;  // \"Link in bio.\"  (suggested only for clean comments)"
+ },
+ "extractive": {
+  "exports": [
+   "AMBIGUOUS_OUTLETS",
+   "NE_CASE",
+   "OUTLETS",
+   "ROMAN_CASE",
+   "brief",
+   "describe",
+   "headlineCandidates",
+   "keyFacts",
+   "mentionsOutlet",
+   "scrubSources",
+   "splitSentences",
+   "summarize",
+   "textrank",
+   "tokenize"
+  ],
+  "usage": "import { brief, summarize, keyFacts } from \"@lacspace/extractive\";\n\nconst b = brief(longArticle);\n// → {\n//   summary: \"…3–4 central sentences…\",\n//   headlineCandidates: [\"…\", \"…\"],\n//   keyphrases: [\"policy rate\", \"inflation\", …],\n//   hashtags: [\"#policyrate\", …],\n//   keyFacts: { numbers, amounts, percentages, dates, entities },\n//   sentenceCount: 18\n// }\n// Feed `b` to your writer instead of the full text — same facts, tiny prompt.\n\nsummarize(article, { maxSentences: 3 }).summary;   // extractive summary\nkeyFacts(article).percentages;                      // the hard figures to preserve"
  }
 };
