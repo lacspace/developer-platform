@@ -1060,7 +1060,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "preeti",
-        "v": "1.0.0",
+        "v": "1.1.0",
         "d": "Preeti ⇄ Unicode for Nepali: convert legacy Preeti-font ASCII text (\"g]kfn\") to Unicode Devanagari (नेपाल) and back. Handles short-i and reph reordering, half letters, ra-kaar (| and «), conjunct keys (क्ष ज्ञ त्र श्र …), Preeti numerals, and looksLikePreeti() to detect pasted legacy text. Pure JS, zero dependencies, React Native safe.",
         "kw": [
           "preeti",

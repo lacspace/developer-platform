@@ -1879,6 +1879,7 @@ export const DETAILS: Record<string, PkgDetail> = {
  },
  "preeti": {
   "exports": [
+   "convertMixed",
    "describe",
    "looksLikePreeti",
    "preetiToUnicode",
