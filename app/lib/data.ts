@@ -106,6 +106,8 @@ export const KITS: Kit[] = [
       { name: "datanews", desc: "Bilingual stories straight from data — gold, forex, NEPSE, weather, fuel" },
       { name: "sensitivity", desc: "Zero-AI first pass for the sensitive-story gate, en + ne" },
       { name: "commentguard", desc: "Comment moderation — abuse, threats, personal data, spam" },
+      { name: "sourcewatch", desc: "Check official pages and PDFs still back your facts" },
+      { name: "gov-notices", desc: "Government & exam notice boards → dated items" },
     ],
   },
   {
@@ -137,6 +139,7 @@ export const KITS: Kit[] = [
     packages: [
       { name: "nepali-date", desc: "Bikram Sambat ⇄ Gregorian, formatting, fiscal years" },
       { name: "nepal-holidays", desc: "Official public holidays from the Home Ministry gazette" },
+      { name: "nepali-match", desc: "Name & keyword matching with postpositions (झापाको → Jhapa)" },
       { name: "nepali-typing", desc: "Romanised Nepali → Devanagari with candidates" },
       { name: "preeti", desc: "Preeti ⇄ Unicode for legacy Nepali text" },
       { name: "translit", desc: "Nepali ⇄ English name matching (Poudel / पौडेल)" },

@@ -1087,6 +1087,20 @@ export const CATALOG: Group[] = [
         "deps": 0
       },
       {
+        "n": "nepali-match",
+        "v": "1.0.0",
+        "d": "Nepali and English matching for names and keywords in running text: normaliseNe() folds spelling variants (chandrabindu → anusvara, half nasal + consonant → anusvara, long/short vowels, nukta/ZWJ/ZWNJ, NFC, Devanagari digits); whole-word matching that lets Nepali postpositions follow a word (झापाको → Jhapa, जिल्लाहरूमा, काठमाडौंबाटै) but no other letters (पर्वतारोही ≠ Parbat); English whole words with short all-caps acronyms kept exact-case (\"Come and see\" ≠ SEE); near() for two terms within N characters in the same sentence (। . ? ! newline), dotted abbreviations kept together; offsets into the original text; splitSuffix(); and districtTerms() for all 77 districts with real-world spellings. Pure JS, zero dependencies, React Native safe.",
+        "kw": [
+          "nepali",
+          "devanagari",
+          "nepal",
+          "text-matching",
+          "keyword-matching",
+          "whole-word"
+        ],
+        "deps": 0
+      },
+      {
         "n": "nepali-date",
         "v": "1.2.1",
         "d": "Bikram Sambat (BS) ↔ Gregorian (AD) date conversion — zero-dependency, isomorphic, with token formatting (Nepali digits & names), BS date arithmetic, parsing, calendar-month and fiscal-year helpers.",
@@ -1602,6 +1616,34 @@ export const CATALOG: Group[] = [
         "v": "1.2.0",
         "d": "Comment moderation for English, romanized Nepali and Devanagari — scores spam, abuse, hate, doxxing and link-spam and returns an allow / review / flag / hide action, with PII detection (Nepali phone, email, URLs/shorteners) and FAQ auto-reply suggestions. Deterministic rules + small, extendable lexicons; a borderline flag marks gray-zone comments for an optional AI second opinion. Exposes a describe() command schema. Zero dependencies.",
         "kw": ["moderation", "comment-moderation", "spam", "abuse", "doxxing", "pii", "nepali", "newsroom"],
+        "deps": 0
+      },
+      {
+        "n": "sourcewatch",
+        "v": "1.0.0",
+        "d": "Re-verify that official source pages still back the facts you published: fetch a URL (HTML, plain text or PDF), extract its visible text, normalise it (NFC, Devanagari digits to ASCII, zero-width and soft-hyphen removal, unified spaces and dashes) and check expected strings, whole numbers (\"1145\" never matches inside \"11450\") or RegExps. Pure-JS PDF text extraction (object streams, FlateDecode/LZW/ASCII85/ASCIIHex with PNG predictors, ToUnicode CMaps, Differences encodings, TJ kerning, page-tree order). Detects placeholder pages (\"this is test\", default server pages, coming soon, suspended accounts), classifies failures (timeout, tls with chain/expired/self_signed/hostname kind, dns, network, http_4xx, http_5xx, not_found_text, placeholder_page, too_large, unparseable), streams bodies with a byte cap, retries transient errors, hashes the normalised text for change detection, and runs batches with a concurrency limit and one-request-per-host politeness. check(), checkAll(), summarize(), pdfText(), extractText(), normalise(), isPlaceholder(). Injectable fetch, zero dependencies, isomorphic (Node 18+, browsers, edge).",
+        "kw": [
+          "source-verification",
+          "fact-check",
+          "link-checker",
+          "content-monitoring",
+          "change-detection",
+          "pdf"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "gov-notices",
+        "v": "1.0.0",
+        "d": "Parse Nepali government and university notice boards into clean, dated, tagged items for exam and results feeds. Site adapters for PSC (Lok Sewa), NEB, SEE (OCE Sanothimi), TSC, MEC, CTEVT, Nepal Engineering Council and DoTM, plus a generic notice-list finder for any other board. Each notice has a title, Devanagari-aware language flag, AD + Bikram Sambat dates (parses २०८२/०६/१८, 2082-06-18, २०८३ असोज १८, Asoj 18 2082, Sep 15 2026), absolute URL, typed PDF/image/doc attachments and auto tags (result, exam, schedule, admit-card, vacancy, syllabus). parseNotices(), fetchNotices() with conditional GET (ETag / Last-Modified), dedupe(), newSince() for 'results out' alerts, parseBsDate()/parseDate(). Polite: one request per call. Zero runtime dependencies, isomorphic, no AI, no keys.",
+        "kw": [
+          "nepal",
+          "notices",
+          "notice-board",
+          "government",
+          "exam-results",
+          "results"
+        ],
         "deps": 0
       },
       {

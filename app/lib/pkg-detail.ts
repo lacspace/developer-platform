@@ -1899,6 +1899,72 @@ export const DETAILS: Record<string, PkgDetail> = {
   ],
   "usage": "import { suggest, toDevanagari, createTyper, buildLexicon } from \"@lacspace/nepali-typing\";\n\nsuggest(\"sarkar\");        // [\"सरकार\", \"सर्कर\", \"सरकारी\", …]\nsuggest(\"kathmandu\");     // [\"काठमाडौं\", …]\nsuggest(\"netaharulai\");   // [\"नेताहरूलाई\", …]  (typed case endings)\ntoDevanagari(\"NEPSE aaja 20 ankale badhyo\");  // \"NEPSE आज २० अंकले बढ्यो\"\ntoDevanagari(\"mero desh nepal ho.\");          // \"मेरो देश नेपाल हो।\""
  },
+ "nepali-match": {
+  "exports": [
+   "POSTPOSITIONS",
+   "VERSION",
+   "contains",
+   "createMatcher",
+   "districtTerms",
+   "findTerms",
+   "near",
+   "normaliseNe",
+   "normalizeNe",
+   "sentenceSpans",
+   "splitSuffix"
+  ],
+  "usage": "import { createMatcher, districtTerms, near, normaliseNe } from \"@lacspace/nepali-match\";\n\nconst areas = createMatcher(districtTerms());\nareas.ids(\"चितवनमा बाढी, झापाको मेचीनगरमा पहिरो\");   // [\"chitwan\", \"jhapa\"]\nareas.test(\"दुई पर्वतारोही बेपत्ता\");                  // false\nareas.find(\"काठमाण्डौबाटै आएका\")[0];\n// { id: \"kathmandu\", term: \"काठमाण्डौ\", lang: \"ne\", index: 0, end: 13, text: \"काठमाण्डौबाटै\", suffix: \"बाटै\" }\n\nconst exam = [\"परीक्षा\", \"नतिजा\", \"विज्ञापन\", \"exam\", \"result\"];\nnear(\"लोकसेवा आयोगले निजामती विधेयकमा राय दियो\", \"लोकसेवा\", exam, 60);   // null: not exam news\nnear(\"लोकसेवा आयोगको खरिदार परीक्षाको नतिजा\", \"लोकसेवा\", exam, 60);    // { a, b, gap }\n\ncreateMatcher([{ id: \"see\", en: \"SEE\", ne: \"एसईई\" }]).test(\"Come and see\");   // false\nnormaliseNe(\"काठमाडौँ\") === normaliseNe(\"काठमाडौं\");                          // true"
+ },
+ "sourcewatch": {
+  "exports": [
+   "DEFAULT_USER_AGENT",
+   "check",
+   "checkAll",
+   "classifyError",
+   "decodeEntities",
+   "extractText",
+   "fnv1a64",
+   "htmlToText",
+   "isPdf",
+   "isPlaceholder",
+   "matchExpect",
+   "normalise",
+   "pdfText",
+   "placeholderReason",
+   "summarize",
+   "tlsKindOf"
+  ],
+  "usage": "import { check, checkAll, summarize } from \"@lacspace/sourcewatch\";\n\nconst r = await check({ id: \"water-helpline\", url: \"https://nwc.gov.np\", expect: \"1145\" });\n// { ok: true, status: 200, kind: \"html\", found: true, matched: [\"1145\"], missing: [],\n//   snippet: \"…प्रेष विज्ञप्ति 1145 मा सम्पर्कका लागि अनुरोध…\", contentHash: \"590bd7c96affa346\", ms: 1222, … }\n\nconst results = await checkAll([\n  { id: \"short-codes\", url: \"https://nta.gov.np/uploads/contents/National%20Numbering%20Allocation%20Plan.pdf\", expect: [\"100\", \"101\", \"102\"] },\n  { id: \"eoc\", url: \"http://neoc.gov.np\", expect: \"1149\" },                       // → placeholder_page (\"this is test\")\n  { id: \"results\", url: \"https://neb.gov.np\", expect: /results?/i, prevHash: lastRun.results },\n], { concurrency: 4 });\n\nsummarize(results); // { total: 3, ok: 2, failed: 1, changed: 0, byError: { placeholder_page: 1 } }"
+ },
+ "gov-notices": {
+  "exports": [
+   "ADAPTERS",
+   "DEFAULT_USER_AGENT",
+   "SOURCES",
+   "VERSION",
+   "adapterFor",
+   "attachmentType",
+   "cleanTitle",
+   "conditional",
+   "dedupe",
+   "fetchNotices",
+   "genericParse",
+   "getSource",
+   "hashId",
+   "isResult",
+   "newSince",
+   "parseBsDate",
+   "parseDate",
+   "parseHTML",
+   "parseNotices",
+   "queryAll",
+   "queryOne",
+   "tag",
+   "titleLang",
+   "toAsciiDigits"
+  ],
+  "usage": "import { fetchNotices, newSince, isResult } from \"@lacspace/gov-notices\";\n\n// Load these from your store. Use an empty set on the first run.\nconst seen: Set<string> = await loadSeenIds();\nconst prev = await loadValidators(\"neb\"); // { etag?, lastModified?, contentHash? }\n\nconst r = await fetchNotices(\"neb\", { etag: prev.etag, lastModified: prev.lastModified });\nif (!r.notModified && r.contentHash !== prev.contentHash) {\n  for (const n of newSince(r.notices, seen)) {\n    if (isResult(n)) await alert(`Results out: ${n.title} (${n.dateBs}) ${n.url}`);\n    seen.add(n.id);\n  }\n}\nawait saveValidators(\"neb\", { etag: r.etag, lastModified: r.lastModified, contentHash: r.contentHash });\nawait saveSeenIds(seen);"
+ },
  "triage": {
   "exports": [
    "NOTICE_PATTERNS",
