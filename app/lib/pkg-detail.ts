@@ -1920,6 +1920,7 @@ export const DETAILS: Record<string, PkgDetail> = {
  "sourcewatch": {
   "exports": [
    "DEFAULT_USER_AGENT",
+   "botBlockReason",
    "check",
    "checkAll",
    "classifyError",
@@ -1929,8 +1930,12 @@ export const DETAILS: Record<string, PkgDetail> = {
    "htmlToText",
    "isPdf",
    "isPlaceholder",
+   "jsAppReason",
+   "legacyFontFamily",
    "matchExpect",
    "normalise",
+   "pdfFonts",
+   "pdfInfo",
    "pdfText",
    "placeholderReason",
    "summarize",
