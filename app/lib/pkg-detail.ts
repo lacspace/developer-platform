@@ -1910,6 +1910,7 @@ export const DETAILS: Record<string, PkgDetail> = {
    "near",
    "normaliseNe",
    "normalizeNe",
+   "prepare",
    "sentenceSpans",
    "splitSuffix"
   ],
