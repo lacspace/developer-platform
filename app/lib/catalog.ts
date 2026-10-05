@@ -1634,7 +1634,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "gov-notices",
-        "v": "1.0.0",
+        "v": "1.1.0",
         "d": "Parse Nepali government and university notice boards into clean, dated, tagged items for exam and results feeds. Site adapters for PSC (Lok Sewa), NEB, SEE (OCE Sanothimi), TSC, MEC, CTEVT, Nepal Engineering Council and DoTM, plus a generic notice-list finder for any other board. Each notice has a title, Devanagari-aware language flag, AD + Bikram Sambat dates (parses २०८२/०६/१८, 2082-06-18, २०८३ असोज १८, Asoj 18 2082, Sep 15 2026), absolute URL, typed PDF/image/doc attachments and auto tags (result, exam, schedule, admit-card, vacancy, syllabus). parseNotices(), fetchNotices() with conditional GET (ETag / Last-Modified), dedupe(), newSince() for 'results out' alerts, parseBsDate()/parseDate(). Polite: one request per call. Zero runtime dependencies, isomorphic, no AI, no keys.",
         "kw": [
           "nepal",
