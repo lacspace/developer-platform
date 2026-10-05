@@ -1530,7 +1530,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "montage",
-        "v": "1.1.1",
+        "v": "1.1.2",
         "d": "Compile a list of clips and stills into a platform-ready social video: an ffmpeg timeline builder with per-platform presets and safe areas (Reels/TikTok/Shorts 9:16, FB 4:5 and 1:1, YouTube 16:9), Ken Burns on stills, xfade transitions (crossfade/slide/zoom-punch/whip), Devanagari-shaped kinetic captions, lower-thirds, logo bug and progress bar. Pure deterministic command builder plus an optional low-CPU runner (nice + thread cap + ulimit -c 0). Bring your own ffmpeg; zero third-party dependencies, isomorphic. 1.1 adds plan() — a render-time estimator with a cost breakdown and cheaper alternatives — a fast quality mode (ultrafast, 24 fps, lighter Ken Burns), 720p renditions reused across cuts, libass ASS captions (correct Devanagari shaping via @lacspace/captionsync), and one-process multi-cut: en/ne/square/reels outputs from a single decode.",
         "kw": ["ffmpeg", "video", "montage", "reels", "tiktok", "ken-burns", "captions", "devanagari", "libass", "multi-cut", "newsroom"],
         "deps": 0
@@ -1564,7 +1564,7 @@ export const CATALOG: Group[] = [
     "items": [
       {
         "n": "conductor",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Drive every describe()-capable @lacspace package through one interface — merge descriptors into a single command catalogue, render it token-light for an LLM prompt, validate an AI-written plan against the command schemas (unknown commands, required inputs, types/enums, forward references, duplicate ids), and execute it step by step with $steps.<id>.output references, parallel groups, per-step timeouts, a whole-plan budget, optional steps, when-conditions and a dry run. The AI decides; the packages do the work. Zero deps.",
         "kw": [
           "orchestration",

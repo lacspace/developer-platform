@@ -1954,7 +1954,7 @@ export const DETAILS: Record<string, PkgDetail> = {
    "validate",
    "validatePlan"
   ],
-  "usage": ""
+  "usage": "import * as quizpoll from \"@lacspace/quizpoll\";\nimport * as hookwriter from \"@lacspace/hookwriter\";\nimport { catalogue, planPrompt, validatePlan, execute, autoBind } from \"@lacspace/conductor\";\n\nconst cat = catalogue([quizpoll, hookwriter]);           // merge every describe()\nconst prompt = planPrompt(\"Make a quiz and an Instagram caption for this story\", cat, { maxChars: 4000 });\nconst plan = JSON.parse(await llm(prompt));              // your model, any provider\n\nconst errors = validatePlan(plan, cat);                  // unknown commands, missing inputs, bad refs\u2026\nif (errors.length) throw new Error(errors.map((e) => e.message).join(\"; \"));\n\nconst run = await execute(plan, {\n  catalogue: cat,\n  handlers: { ...autoBind(quizpoll, quizpoll.describe()), ...autoBind(hookwriter, hookwriter.describe()) },\n  timeoutMs: 10_000,\n  budgetMs: 60_000,\n});\nrun.outputs; // { \"<step id>\": output, \u2026 }"
  },
  "quizpoll": {
   "exports": [
