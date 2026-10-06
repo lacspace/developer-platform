@@ -690,7 +690,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "id",
-        "v": "1.1.1",
+        "v": "1.1.2",
         "d": "Every ID kind you need — UUID v4/v7, ULID, cuid2, Snowflake, Nano-ID, base62/base58 and Stripe-style prefixed ids. Custom alphabets with unbiased sampling, time-sortable ids with decodeTime. Cryptographically random (Web Crypto), zero-dependency, isomorphic.",
         "kw": [
           "uuid",
