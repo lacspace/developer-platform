@@ -732,6 +732,24 @@ export const DETAILS: Record<string, PkgDetail> = {
   ],
   "usage": "import { generateSecret, keyuri } from \"@lacspace/otp\";\n\nconst secret = generateSecret();            // store this (encrypted) against the user\nconst uri = keyuri({ secret, label: \"user@lacspace.com\", issuer: \"Lacspace\" });\n// otpauth://totp/Lacspace:user@lacspace.com?secret=…&issuer=Lacspace&algorithm=SHA1&digits=6&period=30\n// → render `uri` as a QR code for the user to scan"
  },
+ "nepse-ipo": {
+  "exports": [
+   "NPT_OFFSET_MINUTES",
+   "SEBON_IPO_PIPELINE_URL",
+   "decodeEntities",
+   "eligibilityOf",
+   "isArchivable",
+   "issueTypeOf",
+   "lastRelevant",
+   "nptDate",
+   "parseNepaliPaisaIpos",
+   "parseSebonPipeline",
+   "readTables",
+   "resolveUrl",
+   "toNumber"
+  ],
+  "usage": "import { parseNepaliPaisaIpos, parseSebonPipeline, nptDate, isArchivable } from \"@lacspace/nepse-ipo\";\n\nconst res = await fetch(\n  \"https://nepalipaisa.com/api/GetIpos?stockSymbol=&pageNo=1&itemsPerPage=50&pagePerDisplay=5\",\n);\nconst issues = parseNepaliPaisaIpos(await res.json());\n// [{ symbol: \"ABCL\", companyName: \"ABC Hydropower Limited\", type: \"ipo\", eligibility: \"general\",\n//    units: 1000000, pricePerUnit: 100, openDate: 2026-09-07T04:15:00Z, closeDate: 2026-09-10T11:15:00Z, ... }]\n\nconst html = await (await fetch(\"https://www.sebon.gov.np/ipo-pipeline\")).text();\nparseSebonPipeline(html);\n// { title: \"List of Application for IPO (2083-06-20)\", date: \"2026-10-06\",\n//   url: \"https://www.sebon.gov.np/uploads/2026/10/06/....pdf\" }\n\nnptDate(\"2026-09-10\", \"5:00 PM\")?.toISOString(); // \"2026-09-10T11:15:00.000Z\"\nisArchivable(issues[0]!, Date.now(), 30);        // true once 30 days have passed since the last relevant date"
+ },
  "paper-trade": {
   "exports": [
    "PaperAccount"

@@ -1185,6 +1185,20 @@ export const CATALOG: Group[] = [
           "portfolio"
         ],
         "deps": 0
+      },
+      {
+        "n": "nepse-ipo",
+        "v": "1.0.0",
+        "d": "Pure parsers for Nepal (NEPSE) IPO data, with no fetching inside. Turns the nepalipaisa.com GetIpos JSON into clean Issue objects: ordinary/local/migrant-worker tranches mapped to general/locals/foreign_employment eligibility, mutual-fund detection by sector or name (Fund, Yojana, Scheme), one issue per symbol and opening date (ordinary tranche preferred), and open/close/extended-close times converted from Nepal Time (UTC+05:45) to UTC by hand. Also reads the latest row of the SEBON IPO pipeline page (title, date, absolute English PDF link) with a small tolerant HTML table reader, and has archive helpers (lastRelevant, isArchivable). Zero dependencies, Hermes/React Native safe (no Intl time zones, no DOM, no node: imports, no lookbehind regex).",
+        "kw": [
+          "nepse",
+          "ipo",
+          "nepal",
+          "sebon",
+          "nepalipaisa",
+          "share-market"
+        ],
+        "deps": 0
       }
     ]
   },

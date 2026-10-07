@@ -276,6 +276,7 @@ export const KITS: Kit[] = [
       { name: "market", desc: "P&L, returns, CAGR, XIRR, tick rounding" },
       { name: "market-clock", desc: "Holiday-aware NSE/BSE trading clock" },
       { name: "paper-trade", desc: "Headless paper-trading engine" },
+      { name: "nepse-ipo", desc: "Nepal IPO parsers: open issues, SEBON pipeline, NPT dates" },
     ],
   },
   {
