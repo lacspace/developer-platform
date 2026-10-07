@@ -246,9 +246,12 @@ export const KITS: Kit[] = [
   {
     name: "Mail Kit",
     icon: "✉️",
-    blurb: "Send and validate email from a Node backend — no third-party SDK.",
+    blurb: "Send, read, parse and safely render email — SMTP, IMAP, MIME and a webmail-grade sanitizer, no third-party SDK.",
     packages: [
       { name: "mailer", desc: "Zero-dependency SMTP client over net/tls" },
+      { name: "imap", desc: "IMAP client — folders, search, streaming fetch, IDLE" },
+      { name: "mime", desc: "Parse and build MIME messages, BODYSTRUCTURE helpers" },
+      { name: "mail-sanitize", desc: "Safe email-HTML rendering, image blocking, trackers" },
       { name: "email-templates", desc: "Responsive, dark-mode-aware HTML emails" },
       { name: "email-validate", desc: "Syntax + disposable / role detection" },
       { name: "email-verify", desc: "MX lookup + best-effort deliverability" },

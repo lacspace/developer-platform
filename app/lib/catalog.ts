@@ -885,6 +885,48 @@ export const CATALOG: Group[] = [
           "hostinger"
         ],
         "deps": 0
+      },
+      {
+        "n": "imap",
+        "v": "1.0.0",
+        "d": "Zero-dependency IMAP4rev1 client for Node (RFC 3501 + IDLE, MOVE, UIDPLUS, CONDSTORE, SPECIAL-USE, LIST-EXTENDED, LITERAL+, SASL-IR, QUOTA, ID). Implicit TLS and STARTTLS with verification on, LOGIN / PLAIN / XOAUTH2 / OAUTHBEARER, streaming byte-accurate parser, async-iterable FETCH, envelopes with RFC 2047 decoding, BODYSTRUCTURE trees shared with @lacspace/mime, modified UTF-7 mailbox names, special-use detection (incl. Gmail XLIST and localised names), IDLE with NOOP fallback. Works with Hostinger (Dovecot), Gmail, Outlook/Exchange, GoDaddy.",
+        "kw": [
+          "imap",
+          "imap-client",
+          "email",
+          "mail",
+          "webmail",
+          "idle"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "mime",
+        "v": "1.0.0",
+        "d": "Isomorphic RFC 5322 / RFC 2045-2049 MIME parser and builder for webmail. parseMime() turns raw mail (string or bytes) into from/to/cc/subject/date/text/html/attachments/inline cid images/priority/List-Unsubscribe one-click and the part tree; handles nested multipart (mixed, alternative, related, report, signed), message/rfc822 forwards, base64 and quoted-printable (tolerant), RFC 2047 encoded words (split multibyte, adjacent whitespace), RFC 2231 parameters, 30+ charsets and malformed input without ever throwing. parseBodyStructure() parses IMAP BODYSTRUCTURE (literals, extension data) into the same tree with IMAP partIds, plus findTextParts / listAttachments / decodePart for lazy fetching. buildMime() writes CRLF messages with encoded-word headers, QP/base64 bodies, mixed/alternative/related nesting, Message-ID generation and header-injection guards; replyHeaders() / forwardSubject() for threading. Pairs with @lacspace/imap and @lacspace/mailer. Zero dependencies; Node 18+, edge runtimes and browsers.",
+        "kw": [
+          "mime",
+          "email",
+          "mail",
+          "rfc5322",
+          "rfc2045",
+          "rfc2047"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "mail-sanitize",
+        "v": "1.0.0",
+        "d": "Isomorphic email-HTML sanitizer for webmail. Allowlist-based tags and attributes, URL scheme filtering (entity/tab/case tricks decoded), remote images blocked behind placeholders with data-lac-src for a \"Load images\" button, tracking pixels removed and listed, cid: images mapped to your attachment URLs, optional image proxy, <style> rules scoped under your container, class/id prefixing against DOM clobbering, linear-time hand-rolled tokenizer. Plus htmlToText, textToHtml (linkify + quote blocks) and snippet. Zero dependencies, no DOM; Node 18+, edge and browser.",
+        "kw": [
+          "email",
+          "html",
+          "sanitize",
+          "sanitizer",
+          "xss",
+          "webmail"
+        ],
+        "deps": 0
       }
     ]
   },
