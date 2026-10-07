@@ -2160,6 +2160,98 @@ export const DETAILS: Record<string, PkgDetail> = {
   ],
   "usage": "import { generateRecords, checkDomain, explain } from \"@lacspace/mail-dns\";\n\nconst setup = {\n  domain: \"acme.com\",\n  mailHost: \"mx1.mail.lacspace.com\",\n  spfInclude: [\"_spf.mail.lacspace.com\"],\n  dkim: { selector: \"lac1\", publicKey: \"MIIBIjANBgkq...\" },   // base64, PEM, or a full v=DKIM1 value\n  dmarc: { policy: \"none\", rua: [\"dmarc@acme.com\"] },\n  mtaSts: { mode: \"testing\", policyHost: \"mta-sts.mail.lacspace.com\" },\n  tlsRpt: { rua: [\"tls@acme.com\"] },\n};\n\nconst { records, mtaStsPolicyFile, notes } = generateRecords(setup);\n// [{ type: \"MX\",  name: \"@\", fqdn: \"acme.com\", value: \"mx1.mail.lacspace.com\", priority: 10, ttl: 3600, required: true, purpose: \"Delivers email for acme.com to ...\" },\n//  { type: \"TXT\", name: \"@\", value: \"v=spf1 include:_spf.mail.lacspace.com ~all\", ... },\n//  { type: \"TXT\", name: \"lac1._domainkey\", value: \"v=DKIM1; k=rsa; p=MIIB...\", chunks: [/* ≤255-char strings */] },\n//  { type: \"TXT\", name: \"_dmarc\", value: \"v=DMARC1; p=none; rua=mailto:dmarc@acme.com\" },\n//  { type: \"TXT\", name: \"_mta-sts\", value: \"v=STSv1; id=1f3a9c...\" }, { type: \"CNAME\", name: \"mta-sts\", ... },\n//  { type: \"TXT\", name: \"_smtp._tls\", value: \"v=TLSRPTv1; rua=mailto:tls@acme.com\" }]\n\nconst report = await checkDomain(\"acme.com\", { expect: setup });\nreport.ok;      // true when MX, SPF, DKIM and DMARC all work\nreport.score;   // 0–100\nreport.fixes;   // [\"Add an MX record at @ pointing to mx1.mail.lacspace.com with priority 10.\", ...]\nexplain(report.checks.spf);\n// Allowed senders (SPF): Broken: this needs fixing.\n// - Your SPF record has 12 DNS lookups; the limit is 10, so receivers will treat it as broken. ..."
  },
+ "bounce": {
+  "exports": [
+   "categoryFromText",
+   "classifyStatus",
+   "extractAddress",
+   "findBasicCode",
+   "findEnhancedStatus",
+   "isAutoReply",
+   "isBounce",
+   "isBounceSender",
+   "parseBounce"
+  ],
+  "usage": "import { parseBounce, isBounce, isAutoReply, isBounceSender, classifyStatus } from \"@lacspace/bounce\";\n\n// A whole raw message (string or Uint8Array)…\nconst report = parseBounce(rawEmail);\n\n// …or the pieces your mail parser already decoded.\nconst report2 = parseBounce({\n  headers: message.headerBlock,          // the full header block as text\n  text: message.text,\n  html: message.html,\n  parts: [{ contentType: \"message/delivery-status\", body: \"…\" }],\n});\n\n// {\n//   kind: \"hard\",\n//   category: \"mailbox_unknown\",\n//   recipients: [{ address: \"ghost@gmail.com\", action: \"failed\", status: \"5.1.1\",\n//                  diagnostic: \"550-5.1.1 The email account that you tried to reach does not exist…\",\n//                  remoteMta: \"gmail-smtp-in.l.google.com\" }],\n//   reportingMta: \"mx.google.com\",\n//   originalMessageId: \"<camp-42@shop.example>\",\n//   originalSubject: \"October deals\",\n//   confidence: 0.95,\n//   reason: \"The mailbox ghost@gmail.com does not exist or has been disabled (status 5.1.1). Stop sending to this address.\"\n// }\n\nif (report?.kind === \"hard\" || report?.kind === \"complaint\") {\n  for (const r of report.recipients) suppress(r.address);\n}"
+ },
+ "mail-merge": {
+  "exports": [
+   "BUILTIN_ALIASES",
+   "FILTERS",
+   "ROLE_LOCAL_PARTS",
+   "compileTemplate",
+   "escapeHtml",
+   "findVariables",
+   "isValidEmail",
+   "merge",
+   "mergeAll",
+   "normalizeKey",
+   "parseCsv",
+   "parseRows",
+   "render"
+  ],
+  "usage": "import { parseCsv, merge } from \"@lacspace/mail-merge\";\n\nconst csv = `﻿E-mail;First Name;Surname;Company\nram@example.com;Ram;Thapa;Himal Tea\nsita@example.com;Sita;;\nRAM@example.com;Ram;Thapa;Himal Tea\ninfo@example.org;;;`;\n\nconst { rows, errors } = parseCsv(csv); // Excel \";\" export, BOM stripped\n\nconst { messages, report } = merge(\n  {\n    subject: \"Hi {{firstName | there}}, your invite\",\n    html: \"<p>Dear {{first name|friend}},</p>{{#if company}}<p>Team {{company}} is welcome.</p>{{/if}}\",\n    text: \"Dear {{firstName|friend}}\",\n  },\n  rows,\n  { suppress: [\"@blocked.example\"], extra: (row) => ({ unsubscribeUrl: `https://example.com/u?e=${row[\"E-mail\"]}` }) },\n);\n\nmessages[0];\n// { to: { name: \"Ram Thapa\", address: \"ram@example.com\" }, subject: \"Hi Ram, your invite\",\n//   html: \"<p>Dear Ram,</p><p>Team Himal Tea is welcome.</p>\", text: \"Dear Ram\", row, rowIndex: 0, warnings: [] }\n\nreport;\n// { total: 4, ok: 3,\n//   skipped: [{ row: 2, code: \"duplicate\", reason: \"RAM@example.com already appears in an earlier row\" }],\n//   missingVars: {} }\n// messages[2].warnings → [\"info@example.org is a role address (info@); it may not reach a person\"]"
+ },
+ "sequence": {
+  "exports": [
+   "DEFAULT_STOP_ON",
+   "MAX_CONSECUTIVE_FAILURES",
+   "advance",
+   "due",
+   "hash32",
+   "isTerminalStatus",
+   "isValidTimeZone",
+   "jitterMs",
+   "nextAction",
+   "nextRun",
+   "normalizeWindow",
+   "offsetMs",
+   "parseClock",
+   "previewTimeline",
+   "scheduleStep",
+   "validateSequence",
+   "zonedParts",
+   "zonedToUtc"
+  ],
+  "usage": "import { advance, due, validateSequence, type Enrollment, type Sequence } from \"@lacspace/sequence\";\n\nconst followUp: Sequence = {\n  id: \"demo-follow-up\",\n  steps: [\n    { id: \"intro\", templateId: \"tpl_intro\" },\n    { id: \"bump\", delay: { businessDays: 2 }, templateId: \"tpl_bump\", threadWith: \"previous\" },\n    { id: \"last\", delay: { days: 4 }, templateId: \"tpl_last\", condition: \"no_open\" },\n  ],\n  window: { start: \"09:00\", end: \"17:00\", weekdaysOnly: true },\n  // default stopOn: reply, bounce, unsubscribe, complaint, manual\n};\n\nvalidateSequence(followUp); // { ok: true, errors: [] }\n\nlet enrollment: Enrollment = {\n  id: \"enr_1\",\n  sequenceId: \"demo-follow-up\",\n  contact: \"sam@example.com\",\n  timezone: \"America/New_York\",\n  enrolledAt: new Date().toISOString(),\n  history: [],\n  events: [],\n};\n\n// Every minute, in your scheduler:\nconst now = new Date();\nconst tick = due([enrollment], { [followUp.id]: followUp }, now, {\n  perHour: 50, perDay: 400, sentThisHour: 0, sentToday: 0,\n});\n\nfor (const { enrollmentId, action } of tick.send) {\n  // send with action.step.templateId; set In-Reply-To/References from action.threadWith\n  enrollment = advance(enrollment, { type: \"sent\", stepId: action.step.id, messageId: \"<id@mail>\", at: now.toISOString() });\n  // on error: advance(enrollment, { type: \"failed\", stepId: action.step.id, error: String(err), at: now.toISOString() })\n}\nfor (const { stepId } of tick.skip) {\n  enrollment = advance(enrollment, { type: \"skipped\", stepId, at: now.toISOString() });\n}\nfor (const { enrollmentId, reason } of tick.stop) {\n  // set the enrollment's status yourself, e.g. \"replied\", \"done\", \"unsubscribed\"\n}\n\n// From your inbound mail / tracking webhooks:\nenrollment = advance(enrollment, { type: \"reply\", at: new Date().toISOString() });"
+ },
+ "email-lint": {
+  "exports": [
+   "RULES",
+   "SPAM_PHRASES",
+   "lint",
+   "lintEmail",
+   "spamPhrases"
+  ],
+  "usage": "import { lintEmail } from \"@lacspace/email-lint\";\n\nconst result = lintEmail(\n  {\n    subject: \"Your October product update\",\n    preheader: \"Faster search, calmer inbox, new shortcuts.\",\n    from: \"Lacspace <news@lacspace.com>\",\n    html: campaignHtml,\n    text: campaignText,\n    headers: {\n      \"List-Unsubscribe\": \"<https://lacspace.com/u/abc>, <mailto:unsub@lacspace.com>\",\n      \"List-Unsubscribe-Post\": \"List-Unsubscribe=One-Click\",\n    },\n    bulk: true,\n  },\n  { rules: { \"links.http_insecure\": \"off\" } },\n);\n\nresult.score;  // 92\nresult.grade;  // \"good\"\nresult.issues; // [{ id: \"images.missing_alt\", severity: \"warn\", count: 1,\n               //    message: \"1 image has no alt text, so readers with images off ...\",\n               //    fix: \"Add an alt attribute describing each image. ...\" }]\nresult.stats;  // { sizeBytes, imageCount, linkCount, textToImageRatio, textChars, wordCount }"
+ },
+ "email-builder": {
+  "exports": [
+   "ALLOWED_TAGS",
+   "DEFAULT_FONT",
+   "DEFAULT_WIDTH",
+   "SIZE_WARN_BYTES",
+   "VAR_RE",
+   "blockSchema",
+   "blockToText",
+   "contrastRatio",
+   "defaultBrand",
+   "docToText",
+   "escapeAttr",
+   "escapeHtml",
+   "htmlToText",
+   "isColor",
+   "isSafeUrl",
+   "luminance",
+   "parseColor",
+   "render",
+   "sanitizeRichText",
+   "starterTemplates",
+   "toHex",
+   "validate"
+  ],
+  "usage": "import { render, validate, defaultBrand, type Brand } from \"@lacspace/email-builder\";\n\nconst brand: Brand = {\n  ...defaultBrand,\n  name: \"Acme\",\n  logoUrl: \"https://cdn.acme.test/logo.png\",\n  colors: { primary: \"#0f766e\", text: \"#1f2937\", muted: \"#6b7280\", background: \"#f3f4f6\", surface: \"#ffffff\" },\n  address: \"1 Main Street, Springfield\",\n};\n\nconst doc = {\n  brand,\n  preheader: \"Your invoice {{invoiceNumber}} is ready\",\n  blocks: [\n    { id: \"h\", type: \"header\", props: {} },\n    { id: \"t\", type: \"text\", props: { variant: \"h1\", content: \"Hi {{firstName|there}}\" } },\n    { id: \"p\", type: \"text\", props: { content: \"<p>Your invoice is ready. <b>Thank you</b> for your business.</p>\" } },\n    { id: \"b\", type: \"button\", props: { text: \"View invoice\", url: \"{{invoiceUrl}}\" } },\n    { id: \"f\", type: \"footer\", props: {} },\n  ],\n} as const;\n\nconst check = validate(doc);           // { ok, errors: [{ blockId, message }] }\nconst { html, text, warnings, size } = render(doc, { darkMode: \"auto\" });"
+ },
  "mail-auth": {
   "exports": [
    "FREE_MAIL_DOMAINS",
@@ -2169,10 +2261,12 @@ export const DETAILS: Record<string, PkgDetail> = {
    "decodePunycode",
    "editDistance",
    "hasMixedScript",
+   "inferAuthservIds",
    "isFreeMail",
    "isWholeScriptConfusable",
    "lookalikeOf",
    "parseAuthenticationResults",
+   "receivingServer",
    "registrableDomain",
    "skeleton",
    "toUnicodeDomain"

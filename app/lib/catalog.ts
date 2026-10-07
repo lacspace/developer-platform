@@ -958,7 +958,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "mail-auth",
-        "v": "1.0.0",
+        "v": "1.1.1",
         "d": "Email authentication-result parsing and phishing/impersonation heuristics for webmail warning banners. RFC 8601 Authentication-Results parser (SPF, DKIM, DMARC, ARC, Received-SPF fallback, trusted authserv-id selection so forged lower headers are ignored) plus assessRisk(): DMARC/SPF/DKIM failures, reply-to mismatch, display-name address tricks, known-contact impersonation, lookalike domains (edit distance, homoglyph skeletons, punycode, mixed scripts, subdomain/hyphen/TLD tricks), free-mail brand claims, payment-change and credential-lure wording in English and Nepali, deceptive links. Plain-English reasons, 0-100 score, none/low/high level. Zero dependencies, isomorphic.",
         "kw": [
           "email",
@@ -995,6 +995,76 @@ export const CATALOG: Group[] = [
           "rfc5545",
           "rfc5546",
           "itip"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "bounce",
+        "v": "1.0.0",
+        "d": "Bounce, complaint and auto-reply classifier for email campaigns and webmail: parses RFC 3464 delivery status notifications (Reporting-MTA, Final-Recipient, Action, Status, Diagnostic-Code, Remote-MTA), RFC 5965 ARF spam complaints and RFC 3834 auto-replies (Auto-Submitted, X-Autoreply, Precedence, out-of-office subjects). Also reads plain-text vendor bounces with no DSN part (Gmail, Outlook/Microsoft 365, Zoho, Hostinger/Titan, Postfix, Exim, qmail). Maps RFC 3463 enhanced codes, SMTP reply codes and diagnostic text to hard/soft plus a category (mailbox_unknown, mailbox_full, domain_unknown, blocked_spam, blocked_policy, auth_failed, message_too_large, rate_limited, temporary, challenge) with a confidence score and a plain-English reason. Includes a small built-in MIME splitter for raw messages. Zero dependencies, isomorphic.",
+        "kw": [
+          "bounce",
+          "bounces",
+          "dsn",
+          "rfc3464",
+          "rfc3463",
+          "rfc5965"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "mail-merge",
+        "v": "1.0.0",
+        "d": "Mail merge for webmail and email campaigns: turn a CSV or spreadsheet of recipients plus a subject/HTML/text template into one personalised message per recipient, with a validation report before anything is sent. Own RFC 4180 CSV parser (quotes, embedded newlines, BOM, comma/semicolon/tab auto-detect for Excel), built-in column aliases (First Name, e-mail, surname...), {{var|fallback}}, filters (upper, lower, title, capitalize, trim, first), {{#if}}/{{else}}/{{#unless}} blocks with no code execution, HTML escaping, email validation, case-insensitive dedupe, suppression by address or @domain, missing-variable counts, role-address warnings and a max cap. Zero dependencies, isomorphic.",
+        "kw": [
+          "mail-merge",
+          "mailmerge",
+          "email",
+          "csv",
+          "csv-parser",
+          "template"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "sequence",
+        "v": "1.0.0",
+        "d": "Multi-step follow-up email sequences as a pure state machine: no I/O, no timers, no storage. Given a sequence, a plain-JSON enrollment and `now`, nextAction() says send / wait (with the exact next time) / skip / stop / paused. Delays in days, hours, minutes and business days; send windows (days of week, HH:MM or fractional hours, holidays) in the recipient's IANA timezone, DST-correct via Intl (Asia/Kathmandu +05:45 included); stop on reply, bounce, unsubscribe, complaint, click, meeting booked or manual stop; step conditions (no_reply, opened, no_open, clicked, no_click); pause/resume; 3-strike failure stop with retry delay; reply threading; seeded deterministic jitter; due() scheduler tick with per-hour and per-day send budgets; previewTimeline() and validateSequence(). Zero dependencies, isomorphic.",
+        "kw": [
+          "email",
+          "sequence",
+          "drip",
+          "follow-up",
+          "cadence",
+          "outreach"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "email-lint",
+        "v": "1.0.0",
+        "d": "Pre-send email linter for webmail and campaign tools: tells you in plain English what will hurt deliverability or render badly before you hit send. 41 stable rules covering Gmail clipping (~102KB), risky and oversized attachments, image-only mail, missing alt text, link-text/href domain mismatch, URL shorteners, IP and javascript: links, spammy subjects and phrases (English + Nepali), ALL CAPS, hidden text, scripts, external stylesheets, Outlook-unsupported CSS, forms, embeds, inline SVG, base64 images, malformed HTML, and Gmail/Yahoo bulk-sender rules (List-Unsubscribe, RFC 8058 one-click). Returns a 0-100 score, good/fair/poor grade, issues with fixes, and stats. Nepali messages for the key rules. Heuristic; does not render. Zero dependencies, isomorphic, tolerant HTML tokenizer built in.",
+        "kw": [
+          "email",
+          "email-lint",
+          "deliverability",
+          "spam",
+          "spam-score",
+          "pre-send"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "email-builder",
+        "v": "1.0.0",
+        "d": "Block-based email template builder: a JSON document of blocks (header, text, image, button, divider, spacer, columns, social, footer, html, quote, list, table) renders to bulletproof table-based responsive email HTML for Outlook desktop, Gmail, Apple Mail and mobile. Inline styles, MSO conditional wrapper, VML buttons, ghost-table columns that stack on mobile, hidden preheader, optional dark mode, brand theming, safe rich-text sanitizer, {{mail-merge}} variables passed through untouched, plain-text alternative, WCAG contrast and Gmail-clipping warnings, a validator, a block schema for editor forms and 9 starter templates. Zero dependencies, isomorphic.",
+        "kw": [
+          "email",
+          "email-builder",
+          "email-template",
+          "html-email",
+          "responsive-email",
+          "outlook"
         ],
         "deps": 0
       }
