@@ -874,7 +874,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "mailer",
-        "v": "1.2.1",
+        "v": "1.3.0",
         "d": "A tiny zero-dependency SMTP client for Node — send email over raw net/tls with STARTTLS & AUTH, plus a fluent MIME builder (inline images, attachments, alternatives), RFC 5322 address + RFC 2047 helpers, batch send with retry, and no-network test transports. Provider presets (Hostinger, Gmail, Outlook, Zoho…) make setup one line.",
         "kw": [
           "smtp",
@@ -925,6 +925,34 @@ export const CATALOG: Group[] = [
           "sanitizer",
           "xss",
           "webmail"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "dkim",
+        "v": "1.0.0",
+        "d": "DKIM signing and verification for email: RFC 6376 (rsa-sha256, simple/relaxed canonicalization, l=, x=, t=, oversigned From), RFC 8463 Ed25519 (ed25519-sha256) and RFC 8301 (rsa-sha1 and keys under 1024 bits rejected). signMessage(), verifyMessage() with multiple signatures, From alignment, revoked/missing keys and injectable DNS. Key generation and ready-to-paste DNS TXT records split into 255-character strings. Pure WebCrypto, zero dependencies, isomorphic.",
+        "kw": [
+          "dkim",
+          "email",
+          "mail",
+          "smtp",
+          "rfc6376",
+          "rfc8463"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "mail-dns",
+        "v": "1.0.0",
+        "d": "Generate and verify a domain's email DNS records: MX, SPF, DKIM, DMARC, MTA-STS, TLS-RPT and BIMI. generateRecords() gives the exact records to add; checkDomain() looks them up, scores the domain 0-100 and explains every failure in plain English. Recursive SPF lookup counting (10-lookup limit, void lookups, cycles), SPF evaluation for an IP, DKIM key size, DMARC report authorization, MTA-STS policy fetch and MX coverage, provider presets (Hostinger, Google Workspace, Microsoft 365, Zoho, GoDaddy, Amazon SES, SendGrid, Mailgun, Brevo). Injectable resolver, DNS-over-HTTPS for edge runtimes, zero dependencies.",
+        "kw": [
+          "email",
+          "dns",
+          "spf",
+          "dkim",
+          "dmarc",
+          "mta-sts"
         ],
         "deps": 0
       }

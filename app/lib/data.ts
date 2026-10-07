@@ -252,6 +252,8 @@ export const KITS: Kit[] = [
       { name: "imap", desc: "IMAP client — folders, search, streaming fetch, IDLE" },
       { name: "mime", desc: "Parse and build MIME messages, BODYSTRUCTURE helpers" },
       { name: "mail-sanitize", desc: "Safe email-HTML rendering, image blocking, trackers" },
+      { name: "dkim", desc: "DKIM sign + verify (RSA, Ed25519), key + DNS record" },
+      { name: "mail-dns", desc: "Generate + check MX/SPF/DKIM/DMARC with plain fixes" },
       { name: "email-templates", desc: "Responsive, dark-mode-aware HTML emails" },
       { name: "email-validate", desc: "Syntax + disposable / role detection" },
       { name: "email-verify", desc: "MX lookup + best-effort deliverability" },
