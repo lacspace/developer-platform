@@ -2270,6 +2270,140 @@ export const DETAILS: Record<string, PkgDetail> = {
   ],
   "usage": "import { render, validate, defaultBrand, type Brand } from \"@lacspace/email-builder\";\n\nconst brand: Brand = {\n  ...defaultBrand,\n  name: \"Acme\",\n  logoUrl: \"https://cdn.acme.test/logo.png\",\n  colors: { primary: \"#0f766e\", text: \"#1f2937\", muted: \"#6b7280\", background: \"#f3f4f6\", surface: \"#ffffff\" },\n  address: \"1 Main Street, Springfield\",\n};\n\nconst doc = {\n  brand,\n  preheader: \"Your invoice {{invoiceNumber}} is ready\",\n  blocks: [\n    { id: \"h\", type: \"header\", props: {} },\n    { id: \"t\", type: \"text\", props: { variant: \"h1\", content: \"Hi {{firstName|there}}\" } },\n    { id: \"p\", type: \"text\", props: { content: \"<p>Your invoice is ready. <b>Thank you</b> for your business.</p>\" } },\n    { id: \"b\", type: \"button\", props: { text: \"View invoice\", url: \"{{invoiceUrl}}\" } },\n    { id: \"f\", type: \"footer\", props: {} },\n  ],\n} as const;\n\nconst check = validate(doc);           // { ok, errors: [{ blockId, message }] }\nconst { html, text, warnings, size } = render(doc, { darkMode: \"auto\" });"
  },
+ "track": {
+  "exports": [
+   "PIXEL_GIF",
+   "classifyClick",
+   "classifyOpen",
+   "createTracker",
+   "findTrackableLinks"
+  ],
+  "usage": "import { createTracker, classifyOpen, classifyClick, PIXEL_GIF } from \"@lacspace/track\";\n\nconst tracker = createTracker(process.env.TRACK_SECRET!, { ttlDays: 180 });\n\n// When sending\nconst html = await tracker.injectHtml(campaignHtml, {\n  campaignId: \"dashain-2026\",\n  recipient: \"sita@example.com\",\n  messageId: \"<a1b2@mail.lacspace.com>\",\n}, \"https://t.lacspace.com\", { unsubscribeUrls: [\"https://lists.lacspace.com/u/9f8e\"] });\n\n// GET /o/:token  (open pixel)\nconst open = await tracker.verify(token);           // null if forged, tampered or expired\nif (open?.kind === \"open\") {\n  const c = classifyOpen({ userAgent: req.headers[\"user-agent\"], ip, at: new Date(), sentAt });\n  // record { ...open, ...c }\n}\n// always answer with the GIF, even for bad tokens\nres.type(\"image/gif\").send(PIXEL_GIF);\n\n// GET /c/:token  (click redirect)\nconst url = await tracker.resolveClick(token);      // only a signed http(s) URL, else null\nif (!url) return res.status(404).end();\nres.redirect(302, url);"
+ },
+ "booking": {
+  "exports": [
+   "escapeText",
+   "foldLine",
+   "freeSlots",
+   "fromLocal",
+   "icsDate",
+   "invite",
+   "isValidTimeZone",
+   "mergeIntervals",
+   "offsetMinutes",
+   "proposeText",
+   "resolveLocale",
+   "toLocal",
+   "zoneLabel"
+  ],
+  "usage": "import { freeSlots, proposeText, invite } from \"@lacspace/booking\";\n\nconst slots = freeSlots({\n  busy: [{ start: \"2026-10-13T05:00:00Z\", end: \"2026-10-13T06:00:00Z\" }],\n  from: \"2026-10-12T00:00:00Z\",\n  to: \"2026-10-16T00:00:00Z\",\n  durationMinutes: 30,\n  hours: { start: \"10:00\", end: \"17:00\", days: [0, 1, 2, 3, 4, 5] }, // Sun–Fri\n  timezone: \"Asia/Kathmandu\",\n  buffer: 15,\n  minNoticeMinutes: 120,\n  holidays: [\"2026-10-14\"],\n});\n// [{ start: \"2026-10-12T04:15:00.000Z\", end: \"2026-10-12T04:45:00.000Z\" }, …]\n\nproposeText(slots, { timezone: \"Asia/Kathmandu\" });\n// \"Mon 12 Oct, 10:00–10:30 (NPT)\\nMon 12 Oct, 10:30–11:00 (NPT)\\nMon 12 Oct, 11:00–11:30 (NPT)\"\n\nproposeText(slots, { timezone: \"Asia/Kathmandu\", style: \"sentence\", limit: 2 });\n// \"Mon 12 Oct 10:00–10:30 or Mon 12 Oct 10:30–11:00 (NPT)\"\n\nconst { ics, method } = invite(slots[0], {\n  title: \"Intro call\",\n  organizer: { name: \"Lacspace Sales\", email: \"sales@lacspace.com\" },\n  attendees: [{ name: \"Sita Sharma\", email: \"sita@example.com\" }],\n  url: \"https://meet.example.com/abc\",\n  timezone: \"Asia/Kathmandu\",\n});\n// Attach as text/calendar; method=REQUEST"
+ },
+ "mail-extract": {
+  "exports": [
+   "asciiDigits",
+   "currencyCode",
+   "extract",
+   "findCommerce",
+   "findFlights",
+   "findMoney",
+   "findOtp",
+   "findShipment",
+   "findTotal",
+   "htmlToText",
+   "jsonLdBlocks",
+   "merchantFrom",
+   "microdataItems",
+   "normaliseStructured",
+   "parseAmount",
+   "stripQuotedHtml",
+   "stripQuotedText"
+  ],
+  "usage": "import { extract } from \"@lacspace/mail-extract\";\n\nextract({\n  subject: \"One Time Password for your transaction\",\n  text: \"Your OTP for the transaction of NPR 15,000.00 is 482913. It is valid for 5 minutes.\",\n  from: \"Nabil Bank <alerts@nabilbank.com>\",\n});\n// [{ type: \"otp\", fields: { code: \"482913\", expiresInMinutes: 5 }, confidence: 0.9, source: \"heuristic\" }]\n\nextract({ subject: \"Your Daraz order #208471923456 has been confirmed\", html, from: \"Daraz <no-reply@daraz.com.np>\" });\n// [{ type: \"order\", fields: { orderNumber: \"208471923456\", total: { amount: 4099, currency: \"NPR\" },\n//    merchant: \"Daraz\", date: \"2026-10-05\" }, confidence: 0.75, source: \"heuristic\" }]"
+ },
+ "mail-classify": {
+  "exports": [
+   "AUTOMATED",
+   "CALENDAR",
+   "CALENDAR_ICS",
+   "CALENDAR_SUBJECT",
+   "CATEGORIES",
+   "CATEGORY_META",
+   "DEFAULT_PATTERNS",
+   "FINANCE",
+   "FINANCE_SNIPPET_CONFIRM",
+   "FOCUSED",
+   "FREE_MAIL",
+   "NEWSLETTER",
+   "NOREPLY_LOCAL",
+   "NOTIF_DOM",
+   "PROMO",
+   "QUESTION",
+   "RECRUIT",
+   "RECRUIT_SNIPPET_CONFIRM",
+   "SOCIAL_DOM",
+   "URGENT",
+   "categoryMeta",
+   "classify",
+   "createClassifier",
+   "getHeader",
+   "isCategory",
+   "parseAddress",
+   "splitAddressList"
+  ],
+  "usage": "import { classify, CATEGORY_META } from \"@lacspace/mail-classify\";\n\nconst r = classify({\n  from: \"Raj Patel <raj@partnerco.com>\",\n  to: [\"me@acme.com\"],\n  subject: \"Urgent: can you review the quote?\",\n  snippet: \"Attached is the revised estimate…\",\n  mailboxAddress: \"me@acme.com\",\n});\n// {\n//   category: \"finance\",\n//   priority: \"high\",\n//   score: 7,\n//   reasons: [\"finance:subject\", \"+2 focused category\", \"+1 sent directly to me\",\n//             \"+2 urgent words\", \"+1 question\", \"+1 finance\"]\n// }\n\nCATEGORY_META[r.category]; // { label: \"Finance\", color: \"#16a34a\", hint: \"Invoices, receipts, payments, quotes\" }"
+ },
+ "mail-search": {
+  "exports": [
+   "HAS_VALUES",
+   "IS_VALUES",
+   "OPERATORS",
+   "SEARCH_HELP",
+   "clauseToString",
+   "defaultAccessor",
+   "matchesAst",
+   "parseDay",
+   "parseSearch",
+   "parseSize",
+   "subtractPeriod",
+   "toQueryString"
+  ],
+  "usage": "import { parseSearch, toQueryString, matchesAst } from \"@lacspace/mail-search\";\n\nconst ast = parseSearch('invoice from:anita has:attachment is:unread after:2026-09-01 -label:done', {\n  now: new Date(),\n});\n// {\n//   text: \"invoice\",\n//   clauses: [\n//     { field: \"text\",  op: \"contains\", value: \"invoice\", negated: false },\n//     { field: \"from\",  op: \"contains\", value: \"anita\", negated: false, operator: \"from\" },\n//     { field: \"has\",   op: \"has\", value: \"attachment\", negated: false, operator: \"has\" },\n//     { field: \"is\",    op: \"is\", value: \"unread\", negated: false, operator: \"is\" },\n//     { field: \"date\",  op: \"after\", value: Date(2026-09-01T00:00Z), negated: false, operator: \"after\", raw: \"2026-09-01\" },\n//     { field: \"label\", op: \"eq\", value: \"done\", negated: true, operator: \"label\" }\n//   ],\n//   orGroups: [],\n//   errors: []\n// }\n\ntoQueryString(ast); // 'invoice from:anita has:attachment is:unread after:2026-09-01 -label:done'"
+ },
+ "mail-providers": {
+  "exports": [
+   "DOMAIN_HINTS",
+   "MX_HINTS",
+   "PRESETS",
+   "PROVIDER_KEYS",
+   "domainOf",
+   "isProviderKey",
+   "normalizeMx",
+   "presetFor",
+   "providerFromDomain",
+   "providerFromMx",
+   "providerFromMxHost",
+   "serverCandidates"
+  ],
+  "usage": "import { promises as dns } from \"node:dns\";\nimport { providerFromMx, serverCandidates } from \"@lacspace/mail-providers\";\n\nconst mx = await dns.resolveMx(\"acme.com\").catch(() => []); // [{ exchange, priority }, …]\n\nproviderFromMx(mx); // \"gmail\"\n\nserverCandidates(\"anita@acme.com\", mx);\n// [{\n//   provider: \"gmail\",\n//   name: \"Google Workspace / Gmail\",\n//   imap: { host: \"imap.gmail.com\", port: 993, secure: true, user: \"anita@acme.com\" },\n//   smtp: { host: \"smtp.gmail.com\", port: 465, secure: true, user: \"anita@acme.com\" },\n//   limits: { perHour: \"unknown\", perDay: \"unknown\" },\n//   reason: \"mx\"\n// }]"
+ },
+ "match": {
+  "exports": [
+   "DEFAULT_MAX_INPUT_LENGTH",
+   "DEFAULT_MAX_PATTERN_LENGTH",
+   "OPS",
+   "checkPattern",
+   "compare",
+   "compileSafe",
+   "evaluate",
+   "explain",
+   "getPath",
+   "isSafePath",
+   "splitPath",
+   "testCapped",
+   "validateConditions"
+  ],
+  "usage": "import { evaluate, explain, validateConditions } from \"@lacspace/match\";\n\nconst message = {\n  from: { name: \"Anita K\", address: \"anita@acme.com\" },\n  to: [{ address: \"me@lacspace.com\" }, { address: \"sales@lacspace.com\" }],\n  subject: \"Invoice #42 for September\",\n  size: 2048,\n  labels: [\"client\"],\n};\n\nconst conditions = [\n  { field: \"from.address\", op: \"endsWith\", value: \"@acme.com\" },\n  { field: \"to.address\", op: \"equals\", value: \"sales@lacspace.com\" }, // any recipient\n  { field: \"subject\", op: \"regex\", value: \"invoice #\\\\d+\" },\n] as const;\n\nvalidateConditions(conditions); // []\nevaluate([...conditions], message); // true\nevaluate([...conditions], message, { match: \"any\" }); // true\n\nexplain([{ field: \"size\", op: \"gt\", value: 4096 }], message);\n// { result: false, match: \"all\",\n//   conditions: [{ index: 0, field: \"size\", op: \"gt\", value: 4096, passed: false, actual: 2048 }] }"
+ },
  "mail-auth": {
   "exports": [
    "FREE_MAIL_DOMAINS",

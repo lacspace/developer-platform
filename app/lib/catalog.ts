@@ -1067,6 +1067,104 @@ export const CATALOG: Group[] = [
           "outlook"
         ],
         "deps": 0
+      },
+      {
+        "n": "track",
+        "v": "1.0.0",
+        "d": "Privacy-respecting open and click tracking for email campaigns: compact HMAC-SHA256 signed base64url tokens (WebCrypto) carrying campaign, message, a hashed recipient and issue time with TTL expiry; signed click redirects with the destination URL inside the token so there is no open redirect; constant-time verification; HTML injection of a 1x1 pixel and link rewriting that skips mailto/tel/anchors/unsubscribe/data-no-track/template links; plus open and click classification heuristics for Apple Mail Privacy Protection, Gmail image proxy and security-scanner bots. Zero dependencies, isomorphic.",
+        "kw": [
+          "email",
+          "tracking",
+          "open-tracking",
+          "click-tracking",
+          "pixel",
+          "campaign"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "booking",
+        "v": "1.0.0",
+        "d": "Meeting slot finder and calendar invites: free slots from busy intervals with working hours, IANA time zones via Intl (DST-correct, half/quarter-hour offsets like Asia/Kathmandu +05:45), buffers around busy times, minimum notice, holidays, custom work weeks (e.g. Nepal Sun-Fri); human-readable slot proposals in English or Nepali; and RFC 5545/5546 iTIP REQUEST invites (VEVENT with CRLF, 75-octet UTF-8-safe folding, escaping, DTSTAMP, UID). Zero dependencies, isomorphic.",
+        "kw": [
+          "booking",
+          "scheduling",
+          "calendar",
+          "meeting",
+          "free-busy",
+          "availability"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "mail-extract",
+        "v": "1.0.0",
+        "d": "Extract structured data from email bodies: schema.org JSON-LD and basic microdata (Order, Invoice, FlightReservation, LodgingReservation, FoodEstablishmentReservation, EventReservation, ParcelDelivery, Event) normalised to order numbers, totals with currency, merchants, items, flights, tracking numbers; plus heuristics for OTP codes (English and Nepali, with expiry), order/invoice numbers and totals (NPR/Rs./रु., INR ₹, $, €, £), parcel tracking numbers with carrier patterns and flight codes, ignoring quoted reply sections. Zero dependencies, isomorphic.",
+        "kw": [
+          "email",
+          "extract",
+          "parser",
+          "schema.org",
+          "json-ld",
+          "microdata"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "mail-classify",
+        "v": "1.0.0",
+        "d": "Fast, explainable email categoriser for webmail inboxes: tags a message with one of 10 categories (team, clients, personal, finance, calendar, newsletters, notifications, recruiting, social, promotions) and a high/normal/low priority from sender, recipients, subject, preview and optional List-*/Auto-Submitted/Precedence/Content-Type headers. No body fetch, no AI call, returns the reasons that fired. Every pattern and the category labels/colours are exported and overridable. Zero dependencies, isomorphic.",
+        "kw": [
+          "email",
+          "mail",
+          "classify",
+          "classifier",
+          "categorize",
+          "categorise"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "mail-search",
+        "v": "1.0.0",
+        "d": "Gmail-style mail search parser that returns a neutral AST instead of a database query: from:, to:, cc:, subject:, has:attachment, is:unread/read/starred/replied/suspicious/verified/list/important, in:, label:, category:, filename:, before:/after: (YYYY-MM-DD or YYYY/MM/DD), newer_than:/older_than: (d/w/m/y), larger:/smaller: (K/M/G), quoted phrases, - negation and OR groups. Unknown operators fall back to free text. Includes toQueryString() for round-trips and matchesAst() for in-memory filtering. Zero dependencies, isomorphic.",
+        "kw": [
+          "email",
+          "mail",
+          "search",
+          "query",
+          "parser",
+          "gmail"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "mail-providers",
+        "v": "1.0.0",
+        "d": "IMAP/SMTP server presets and MX-based provider detection for connecting mailboxes: Hostinger, Titan, GoDaddy, Google Workspace/Gmail, Microsoft 365/Outlook, Zoho, Yahoo and iCloud. providerFromMx() maps MX hosts to a provider, serverCandidates() returns ordered IMAP/SMTP settings to try (with imap./smtp./mail.<domain> fallbacks). Send limits are 'unknown' on purpose - apps set their own. No DNS calls, bring your own MX lookup. Zero dependencies, isomorphic.",
+        "kw": [
+          "email",
+          "mail",
+          "imap",
+          "smtp",
+          "mx",
+          "provider"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "match",
+        "v": "1.0.0",
+        "d": "Safe, generic condition evaluator for rules, filters and automations: evaluate a list of { field, op, value } conditions against any object with all/any matching, dotted paths, array fields (any element matches), case-insensitive strings, numbers and dates. 18 ops: equals, notEquals, is, isNot, contains, notContains, startsWith, endsWith, gt, gte, lt, lte, between, in, notIn, exists, notExists and a ReDoS-guarded regex (pattern length cap, nested quantifiers and backreferences rejected, input length cap). explain() gives per-condition pass/fail and validateConditions() reports errors. Zero dependencies, isomorphic.",
+        "kw": [
+          "match",
+          "rules",
+          "conditions",
+          "filter",
+          "predicate",
+          "evaluate"
+        ],
+        "deps": 0
       }
     ]
   },
