@@ -902,7 +902,7 @@ export const CATALOG: Group[] = [
       },
       {
         "n": "mime",
-        "v": "1.0.0",
+        "v": "1.0.1",
         "d": "Isomorphic RFC 5322 / RFC 2045-2049 MIME parser and builder for webmail. parseMime() turns raw mail (string or bytes) into from/to/cc/subject/date/text/html/attachments/inline cid images/priority/List-Unsubscribe one-click and the part tree; handles nested multipart (mixed, alternative, related, report, signed), message/rfc822 forwards, base64 and quoted-printable (tolerant), RFC 2047 encoded words (split multibyte, adjacent whitespace), RFC 2231 parameters, 30+ charsets and malformed input without ever throwing. parseBodyStructure() parses IMAP BODYSTRUCTURE (literals, extension data) into the same tree with IMAP partIds, plus findTextParts / listAttachments / decodePart for lazy fetching. buildMime() writes CRLF messages with encoded-word headers, QP/base64 bodies, mixed/alternative/related nesting, Message-ID generation and header-injection guards; replyHeaders() / forwardSubject() for threading. Pairs with @lacspace/imap and @lacspace/mailer. Zero dependencies; Node 18+, edge runtimes and browsers.",
         "kw": [
           "mime",
@@ -953,6 +953,48 @@ export const CATALOG: Group[] = [
           "dkim",
           "dmarc",
           "mta-sts"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "mail-auth",
+        "v": "1.0.0",
+        "d": "Email authentication-result parsing and phishing/impersonation heuristics for webmail warning banners. RFC 8601 Authentication-Results parser (SPF, DKIM, DMARC, ARC, Received-SPF fallback, trusted authserv-id selection so forged lower headers are ignored) plus assessRisk(): DMARC/SPF/DKIM failures, reply-to mismatch, display-name address tricks, known-contact impersonation, lookalike domains (edit distance, homoglyph skeletons, punycode, mixed scripts, subdomain/hyphen/TLD tricks), free-mail brand claims, payment-change and credential-lure wording in English and Nepali, deceptive links. Plain-English reasons, 0-100 score, none/low/high level. Zero dependencies, isomorphic.",
+        "kw": [
+          "email",
+          "authentication-results",
+          "rfc8601",
+          "spf",
+          "dkim",
+          "dmarc"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "unsubscribe",
+        "v": "1.0.0",
+        "d": "Mailing-list unsubscribe for webmail: RFC 2369 List-* header parsing (List-Unsubscribe, List-Help, List-Subscribe, List-Post, List-Owner, List-Archive), RFC 2919 List-Id, and RFC 8058 one-click unsubscribe POST with an SSRF guard (private/loopback/link-local/CGNAT/ULA IPs, localhost, .local/.internal/.lan, userinfo), no cookies, https-only redirects. Picks the best method for an Unsubscribe button: one-click > mailto > https > none. Zero dependencies, isomorphic (global fetch).",
+        "kw": [
+          "unsubscribe",
+          "list-unsubscribe",
+          "one-click",
+          "rfc8058",
+          "rfc2369",
+          "rfc2919"
+        ],
+        "deps": 0
+      },
+      {
+        "n": "ics",
+        "v": "1.0.0",
+        "d": "Small, correct iCalendar (RFC 5545) + iTIP (RFC 5546) parser and builder for webmail meeting invites. parseIcs() reads Google Calendar, Outlook/Exchange and Apple invites: line unfolding (byte-level, so folds that split UTF-8 characters survive), quoted parameters, text escaping, DATE vs DATE-TIME, UTC/floating/TZID times converted to UTC via Intl (IANA names, 60+ Windows zone names like \"Nepal Standard Time\", custom VTIMEZONE rules), DST gaps/overlaps per RFC 5545, DURATION, attendees, organizer, VALARM, RRULE/EXDATE/RDATE passthrough, RECURRENCE-ID overrides, Google Meet/Teams links. buildIcs() writes CRLF calendars folded at 75 octets (never splitting a multibyte character) with optional TZID + VTIMEZONE. buildReplyIcs() / replyEmail() produce RFC 5546 METHOD:REPLY RSVPs (Accept/Decline/Tentative); buildCancelIcs() cancels. Never throws on malformed input. Zero dependencies; Node 18+, edge runtimes and browsers.",
+        "kw": [
+          "ics",
+          "icalendar",
+          "ical",
+          "rfc5545",
+          "rfc5546",
+          "itip"
         ],
         "deps": 0
       }

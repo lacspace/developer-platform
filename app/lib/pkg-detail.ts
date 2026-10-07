@@ -2160,6 +2160,68 @@ export const DETAILS: Record<string, PkgDetail> = {
   ],
   "usage": "import { generateRecords, checkDomain, explain } from \"@lacspace/mail-dns\";\n\nconst setup = {\n  domain: \"acme.com\",\n  mailHost: \"mx1.mail.lacspace.com\",\n  spfInclude: [\"_spf.mail.lacspace.com\"],\n  dkim: { selector: \"lac1\", publicKey: \"MIIBIjANBgkq...\" },   // base64, PEM, or a full v=DKIM1 value\n  dmarc: { policy: \"none\", rua: [\"dmarc@acme.com\"] },\n  mtaSts: { mode: \"testing\", policyHost: \"mta-sts.mail.lacspace.com\" },\n  tlsRpt: { rua: [\"tls@acme.com\"] },\n};\n\nconst { records, mtaStsPolicyFile, notes } = generateRecords(setup);\n// [{ type: \"MX\",  name: \"@\", fqdn: \"acme.com\", value: \"mx1.mail.lacspace.com\", priority: 10, ttl: 3600, required: true, purpose: \"Delivers email for acme.com to ...\" },\n//  { type: \"TXT\", name: \"@\", value: \"v=spf1 include:_spf.mail.lacspace.com ~all\", ... },\n//  { type: \"TXT\", name: \"lac1._domainkey\", value: \"v=DKIM1; k=rsa; p=MIIB...\", chunks: [/* ≤255-char strings */] },\n//  { type: \"TXT\", name: \"_dmarc\", value: \"v=DMARC1; p=none; rua=mailto:dmarc@acme.com\" },\n//  { type: \"TXT\", name: \"_mta-sts\", value: \"v=STSv1; id=1f3a9c...\" }, { type: \"CNAME\", name: \"mta-sts\", ... },\n//  { type: \"TXT\", name: \"_smtp._tls\", value: \"v=TLSRPTv1; rua=mailto:tls@acme.com\" }]\n\nconst report = await checkDomain(\"acme.com\", { expect: setup });\nreport.ok;      // true when MX, SPF, DKIM and DMARC all work\nreport.score;   // 0–100\nreport.fixes;   // [\"Add an MX record at @ pointing to mx1.mail.lacspace.com with priority 10.\", ...]\nexplain(report.checks.spf);\n// Allowed senders (SPF): Broken: this needs fixing.\n// - Your SPF record has 12 DNS lookups; the limit is 10, so receivers will treat it as broken. ..."
  },
+ "mail-auth": {
+  "exports": [
+   "FREE_MAIL_DOMAINS",
+   "RISK_THRESHOLDS",
+   "SIGNAL_WEIGHTS",
+   "assessRisk",
+   "decodePunycode",
+   "editDistance",
+   "hasMixedScript",
+   "isFreeMail",
+   "isWholeScriptConfusable",
+   "lookalikeOf",
+   "parseAuthenticationResults",
+   "registrableDomain",
+   "skeleton",
+   "toUnicodeDomain"
+  ],
+  "usage": "import { parseAuthenticationResults, assessRisk } from \"@lacspace/mail-auth\";\n\nconst auth = parseAuthenticationResults(\n  { authenticationResults: headers.getAll(\"Authentication-Results\"), receivedSpf: headers.getAll(\"Received-SPF\") },\n  { trustedAuthservIds: [\"mx1.yourmail.com\"] }, // only YOUR server's header\n);\n// { spf: \"pass\", dkim: \"pass\", dmarc: \"fail\", dmarcPolicy: \"reject\", headerFrom: \"lacsp4ce.com\", authservId: \"mx1.yourmail.com\", … }\n\nconst risk = assessRisk({\n  from: { name: \"Lacspace Billing\", address: \"billing@lacsp4ce.com\" },\n  replyTo: [{ address: \"lacspace.billing@gmail.com\" }],\n  subject: \"[EXTERNAL] Updated bank details\",\n  snippet: \"Our bank details have changed, please pay the attached invoice urgently.\",\n  auth,\n  recipientDomain: \"lacspace.com\",\n  knownContacts: addressBook,             // [{ name, address }]\n  links,                                  // [{ href, text }] from your HTML sanitizer\n});\n// { level: \"high\", score: 100, reasons: [\n//   \"The sender's address (billing@lacsp4ce.com) looks like lacspace.com but is a different domain.\",\n//   \"It failed lacsp4ce.com's anti-forgery check (DMARC), so it may not really be from them.\",\n//   \"It urgently asks for a payment or new bank details. Confirm with the sender by phone before paying.\",\n//   … ], signals: [{ code: \"lookalike.from\", weight: 50, detail: \"lacspace.com\" }, …] }"
+ },
+ "unsubscribe": {
+  "exports": [
+   "ONE_CLICK_BODY",
+   "decodeEncodedWords",
+   "getHeader",
+   "isOneClickPost",
+   "isPrivateHost",
+   "isPrivateIPv4",
+   "isPrivateIPv6",
+   "isPrivateIp",
+   "mailtoUnsubscribe",
+   "oneClickUnsubscribe",
+   "parseListHeaders",
+   "parseListId",
+   "parseListUnsubscribe",
+   "parseListUrls",
+   "parseMailto",
+   "unsubscribeOptions"
+  ],
+  "usage": "import { unsubscribeOptions, oneClickUnsubscribe, parseListUnsubscribe, parseListId } from \"@lacspace/unsubscribe\";\n\nparseListUnsubscribe(\n  \"<mailto:leave@news.example.com?subject=unsubscribe>, <https://news.example.com/u/abc>\",\n  \"List-Unsubscribe=One-Click\",\n);\n// { https: [\"https://news.example.com/u/abc\"], http: [],\n//   mailto: [{ to: \"leave@news.example.com\", subject: \"unsubscribe\" }], oneClick: true, raw: \"…\" }\n\nparseListId(\"Weekly Digest <digest.example.com>\"); // { name: \"Weekly Digest\", id: \"digest.example.com\" }\n\nunsubscribeOptions(message.headers);\n// { method: \"one-click\", url: \"https://news.example.com/u/abc\", listId: {…}, listUnsubscribe: {…} }\n\nawait oneClickUnsubscribe(\"https://news.example.com/u/abc\"); // { ok: true, status: 200 }"
+ },
+ "ics": {
+  "exports": [
+   "DEFAULT_PRODID",
+   "WINDOWS_TIMEZONES",
+   "buildCancelIcs",
+   "buildIcs",
+   "buildReplyIcs",
+   "buildVTimezone",
+   "escapeText",
+   "fold",
+   "parseContentLine",
+   "parseDateTime",
+   "parseDuration",
+   "parseIcs",
+   "parseIcsEvent",
+   "replyEmail",
+   "resolveZone",
+   "unescapeText",
+   "unfold"
+  ],
+  "usage": "import { parseIcsEvent, replyEmail, buildIcs } from \"@lacspace/ics\";\n\nconst ev = parseIcsEvent(icsText);\n// { uid: \"040000008200E…\", sequence: 2, summary: \"Sprint review\",\n//   start: \"2026-10-20T08:15:00Z\", end: \"2026-10-20T09:15:00Z\", allDay: false,\n//   startTzid: \"Nepal Standard Time\", organizer: { name: \"Shrestha, Anil\", address: \"anil@contoso.com\" },\n//   attendees: [{ name: \"Sita Rai\", address: \"sita@contoso.com\", role: \"REQ-PARTICIPANT\", partstat: \"NEEDS-ACTION\", rsvp: true }],\n//   conference: \"https://teams.microsoft.com/l/meetup-join/…\", alarms: [{ action: \"DISPLAY\", trigger: \"-PT15M\" }], … }\n\nconst rsvp = replyEmail(ev!, { address: \"sita@contoso.com\" }, \"ACCEPTED\");\n// { subject: \"Accepted: Sprint review\", to: \"anil@contoso.com\", text, ics,\n//   contentType: \"text/calendar; method=REPLY; charset=UTF-8\", filename: \"invite.ics\" }"
+ },
  "triage": {
   "exports": [
    "NOTICE_PATTERNS",
